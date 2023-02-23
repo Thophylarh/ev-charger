@@ -2,10 +2,11 @@ import React from "react";
 import Arrow from "../../assets/svg/arrow.svg";
 import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
+import listOfChargers from "../listOfChargers/listOfChargers";
 
 const index = () => {
   return (
-    <div className="w-full h-screen py-2 px-4">
+    <div className="w-full h-screen py-2 px-4 ">
       <div>
         <div className="flex justify-between items-center">
           <div className=" font-bold font-2xl">
@@ -23,6 +24,8 @@ const index = () => {
          <Hero/>
         </div>
         <ChargerStat/>
+        <listOfChargers/>
+        
       </div>
     </div>
   );
