@@ -7,6 +7,7 @@ import listOfChargers from "../listOfChargers/listOfChargers";
 const index = () => {
   return (
     <div className="w-full h-screen py-2 px-4 ">
+    <div className="w-full h-screen py-2 px-4 overflow-y-scroll">
       <div>
         <div className="flex justify-between items-center">
           <div className=" font-bold font-2xl">
@@ -27,6 +28,7 @@ const index = () => {
         <listOfChargers/>
         
       </div>
+    </div>
     </div>
   );
 };
