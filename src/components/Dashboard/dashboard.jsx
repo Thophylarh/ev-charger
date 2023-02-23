@@ -2,7 +2,7 @@ import React from "react";
 import Arrow from "../../assets/svg/arrow.svg";
 import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
-import listOfChargers from "../listOfChargers/listOfChargers";
+import ListOfChargers from "../listOfChargers/listOfChargers";
 
 const index = () => {
   return (
@@ -25,9 +25,9 @@ const index = () => {
          <Hero/>
         </div>
         <ChargerStat/>
-        <listOfChargers/>
-        
+        <ListOfChargers/>
       </div>
+      
     </div>
     </div>
   );
