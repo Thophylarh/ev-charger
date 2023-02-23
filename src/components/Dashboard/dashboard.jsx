@@ -1,6 +1,7 @@
 import React from "react";
 import Arrow from "../../assets/svg/arrow.svg";
-import RevenueFrame from "../../assets/svg/Revenue-frame.svg";
+import Hero from "../Hero/hero"
+import ChargerStat from "../chargerStat/charger"
 
 const index = () => {
   return (
@@ -19,8 +20,9 @@ const index = () => {
         </div>
         <p className="text-gray-400 font-thin font-sm pb-2">Explore your station dashboard here</p>
         <div>
-          <img className="w-[1300px]" src={RevenueFrame} alt="" />
+         <Hero/>
         </div>
+        <ChargerStat/>
       </div>
     </div>
   );
