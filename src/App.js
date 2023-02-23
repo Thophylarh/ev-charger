@@ -7,12 +7,14 @@ import './App.css';
 
 function App() {
   return (
+    
     <BrowserRouter>
       <Routes>
       <Route path="/layout" element={<Layout/>} />
-      <Route path="/login" element={<Login/> } />
+      <Route path="/" element={<Login/> } />
       </Routes>
     </BrowserRouter>
+    
   );
 }
 
