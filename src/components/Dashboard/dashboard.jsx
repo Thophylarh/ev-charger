@@ -3,6 +3,7 @@ import Arrow from "../../assets/svg/arrow.svg";
 import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
 import ListOfChargers from "../listOfChargers/listOfChargers";
+import Transactions from "../last10Transactions/transactions";
 
 const index = () => {
   return (
@@ -26,6 +27,7 @@ const index = () => {
         </div>
         <ChargerStat/>
         <ListOfChargers/>
+        <Transactions/>
       </div>
       
     </div>
