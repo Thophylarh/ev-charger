@@ -44,13 +44,11 @@ const sidebar = () => {
               <div>
                 <img className="w-[14px] mr-3" src={Sales} alt="" />
               </div>
-              <div
-                className="flex justify-between items-center"
-              >
+              <div className="flex justify-between items-center w-[10rem]">
                 <p className="text-white text-sm">Sales</p>
-                <div>
+                
                   <img className="w-[14px] mr-3 " src={Arrow} alt="" />
-                </div>
+                
               </div>
             </div>
           </Link>

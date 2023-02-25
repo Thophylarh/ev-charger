@@ -1,5 +1,6 @@
 import React from "react";
 import checkbox from "antd";
+import nextArrow from "../../assets/svg/next-arrow.svg";
 
 
 const transactions = () => {
@@ -10,7 +11,7 @@ const transactions = () => {
         {/* table */}
         <div className="bg-white py-[0.5rem]  px-[1.5rem] ">
             <table className=" text-left ">
-                <tr className="w-[72rem] h-[1.25rem] bg-gray-50 border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
+                <tr className="w-[72rem] h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
                     <th className="w-[3rem] py-[1.25rem] "> <input className="" type="checkbox" disabled="disabled" checked="checked"></input> </th>
                     
                     <th className="w-[5rem]">#</th>
@@ -112,9 +113,12 @@ const transactions = () => {
                 </tr>
             </table>
 
-            <div className="flex justify-between">
+            <div className="flex justify-between py-[4rem]">
             <p>1-50 of 2,500</p>
-            <p>1-10 </p>
+           
+            <p className="pl-[52rem]">1-10 </p>
+            <img className="" src={nextArrow} />
+           
             </div>
         </div>
     </div> );

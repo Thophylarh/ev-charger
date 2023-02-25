@@ -14,12 +14,11 @@ const index = () => {
           <div className=" font-bold font-2xl">
             <h1>Hello, Akinromade</h1>
           </div>
-          <div className="flex justify-between items-center bg-black rounded-md  px-5 py-1">
+          <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
             <p className=" text-white font-light font-sm ">This month</p>
-            <div>
-            <img className="w-[14px] " src={Arrow} alt="" />
-            </div>
+            <img className="" src={Arrow} alt="" />
           </div>
+          
         </div>
         <p className="text-gray-400 font-thin font-sm pb-2">Explore your station dashboard here</p>
         <div>

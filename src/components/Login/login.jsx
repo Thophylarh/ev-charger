@@ -1,6 +1,9 @@
 import React from "react";
 import StationCharge from "../../assets/images/station-charge.png";
-import Star from "../../assets/svg/star.svg"
+import Star from "../../assets/svg/star.svg";
+import Padlock from "../../assets/svg/padlock.svg";
+import Email from "../../assets/svg/email.svg";
+
 
 function login() {
   return (
@@ -71,6 +74,7 @@ function login() {
                        w-96 rounded-md sm:text-sm 
                         focus:ring-1"
                 />
+               
               </div>
             </div>
 
