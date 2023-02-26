@@ -27,7 +27,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-green-500 px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -36,7 +36,7 @@ const transactions = () => {
                     <td>Electric keke Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-green-500 px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -45,7 +45,7 @@ const transactions = () => {
                     <td>Innoson Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Incomplete</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -54,7 +54,7 @@ const transactions = () => {
                     <td>Range rover Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Cancelled</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -63,7 +63,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -72,7 +72,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -81,7 +81,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -90,7 +90,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -99,7 +99,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
@@ -108,7 +108,7 @@ const transactions = () => {
                     <td>Tesla-Charger</td>
                     <td>$500.00</td>
                     <td>500Kw</td>
-                    <td>0ctober 30 2017</td>
+                    <td>0ctober 30, 2017</td>
                     <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
                 </tr>
             </table>
