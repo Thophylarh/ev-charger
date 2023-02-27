@@ -1,6 +1,7 @@
 import React from 'react'
 import Sidebar from '../Sidebar/sidebar'
 import Dashboard from '../Dashboard/dashboard'
+import { Outlet } from "react-router-dom";
 
 const index = () => {
   return (
@@ -12,11 +13,9 @@ const index = () => {
     </div>
     <div className="mx-2 h-screen w-[85%] overflow-y- 
      scroll">
-      <Dashboard />
+     <Dashboard/>
     </div>
-    {/* <div className="w-[25%] h-[100%]  bg-[#f1f2f7] overflow-y-scroll">
-      <Rightbar />
-    </div> */}
+
   </div>
   
   )

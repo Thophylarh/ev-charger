@@ -3,14 +3,14 @@ import Dshboard from "../../assets/svg/dshboard.svg";
 import Document from "../../assets/svg/document.png";
 import Sales from "../../assets/svg/sales.svg";
 import Arrow from "../../assets/svg/arrow.svg";
-import { Link } from "react-router-dom";
+import { Link,Outlet } from "react-router-dom";
 
 const sidebar = () => {
   return (
     <div>
       <div className="link-cover mt-[6rem]">
         <div>
-          <Link to="#" className="">
+          <Link to="/" className="">
             <div className="flex items-center m-4 ">
               <div>
                 <img className="w-[14px] mr-3" src={Dshboard} alt="" />
@@ -27,7 +27,7 @@ const sidebar = () => {
           </Link>
         </div>
         <div>
-          <Link to="#" className="">
+          <Link to="/evChargers" className="">
             <div className="flex items-center m-4 ">
               <div>
                 <img className="w-[14px] mr-3" src={Document} alt="" />
