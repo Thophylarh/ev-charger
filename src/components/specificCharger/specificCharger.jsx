@@ -7,7 +7,7 @@ import Doughnut  from "../../assets/images/Doughnut.png";
 import Transactions from "../last10Transactions/transactions";
 
 
-const evChargers = () => {
+const specificCharger = () => {
     return (<div className="w-full h-screen overflow-y-scroll">
         <div className="flex justify-between pt-[1.75rem] pr-[1.5rem] pl-[2rem] ">
             <div className="flex ">
@@ -24,7 +24,7 @@ const evChargers = () => {
 
         <div className="flex justify-between pl-[1.5rem] pt-[1.5rem]" >
             <div className="bg-white h-full py-[2rem] pl-[2.5rem] pr-[1.25rem]">
-                <div className="h-[18.25rem] w-[45.938rem] ">
+                <div className="h-[18.25rem] w-[45.938rem]">
                     <p className="text-gray-400 text-sm font-normal">Charger Revenue Summary</p>
                     <Chart/>
                 </div>
@@ -46,4 +46,4 @@ const evChargers = () => {
 }
 
 
-export default evChargers
+export default specificCharger

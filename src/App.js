@@ -2,9 +2,10 @@ import React from 'react';
 import Login from './components/Login/login'
 import Sidebar from './components/Sidebar/sidebar'
 
-import Layout from './components/Layout/layout'
+
 import Dashboard from "./components/Dashboard/dashboard";
-import EvChargers from './components/ev-chargers/ev-chargers';
+import SpecificCharger from './components/specificCharger/specificCharger';
+import EvCharger from "./components/evChargers/evCharger";
 
 import {Outlet, Routes, Route} from 'react-router-dom';
 
@@ -16,9 +17,12 @@ function App() {
         <Route path='/' element={<LayoutsWithNavbar/>}>
         
         <Route path='/' element={<Dashboard/>}></Route>
-        <Route path='/evChargers' element={<EvChargers/>}></Route>
+        <Route path='/evChargers' element={<EvCharger/>}></Route>
+        
+        
         </Route>
         <Route path='/login' element={<Login/>}></Route>
+        <Route path='/chargerDetails' element={<SpecificCharger/>}></Route>
       </Routes>
     </div>
   )
