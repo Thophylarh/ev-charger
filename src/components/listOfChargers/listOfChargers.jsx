@@ -9,7 +9,7 @@ import Station from "../../assets/images/charging-station.png";
 
 const listOfChargers = () => {
     return (<div>
-        <div className="flex justify-between pt-4">
+        <div className="flex justify-between pt-6">
             <p className="text-gray-600  font-sm font-semibold">List of chargers</p>
             <div className="flex justify-between">
             <img className="pr-8" src={Prev}/>
@@ -17,7 +17,7 @@ const listOfChargers = () => {
             </div>
         </div>
 
-        <div className=" flex justify-between bg-white mt-4 p-[4rem] text-Grey-700">
+        <div className=" flex justify-between bg-white mt-6 p-[4rem] text-Grey-700">
             <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-4">
             <div className="flex justify-between ">
                 <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Tesla Charger 1</h3>
@@ -72,7 +72,7 @@ const listOfChargers = () => {
             <div className="flex justify-between">
                 <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Keke Charger </h3>
                 {/* <div className="flex justify-between w-[6rem]  rounded-full py-[0.25rem]  bg-rose-100 px-[0.5rem] font-semibold text-rose-700 text-xs "><img className="" src={RedDot}/> Disconnected</div> */}
-                <div className="flex justify-between w-24 rounded-full py-1  bg-green-100 px-3 font-semibold text-green-700"><img className="" src={Dot}/> Active</div>
+                <div className="flex justify-between w-24 rounded-full py-1  bg-green-100 px-3 font-semibold text-green-700"><img className="" src={Dot}/> Disconnected</div>
             </div>
             <div  className="flex justify-center py-[5rem]">
                <img src={Station}></img>
