@@ -1,13 +1,15 @@
 import React from "react";
 import StationCharge from "../../assets/images/station-charge.png";
 import Star from "../../assets/svg/star.svg";
-import Padlock from "../../assets/svg/padlock.svg";
-import Email from "../../assets/svg/email.svg";
+import Padlock from "../../assets/svg/padlock.svg"
+import Email from "../../assets/svg/email.svg"
+import "./style.css"
+
 
 
 function login() {
   return (
-    <div className="w-full h-screen py-[10rem] px-4">
+    <div className="w-full h-screen py-[10rem] px-4 begin">
       
       <div className="max-w-[1240px] mx-auto grid 
         md:grid-cols-2 relative">
@@ -37,7 +39,8 @@ function login() {
                 Email
               </label>
               <div className="flex flex-col items- 
-               start">
+               start input-icons ">
+                <img className="w-[1rem] icon" src={Email}></img>
                 <input
                   type="email"
                   name="email"
@@ -48,7 +51,7 @@ function login() {
                      focus:outline-none focus:border- 
                       sky-500 focus:ring-sky-500 block 
                        w-96 rounded-md sm:text-sm 
-                        focus:ring-1 "
+                        focus:ring-1 input-field"
                       
                 />
                 
@@ -63,7 +66,8 @@ function login() {
                 Password
               </label>
               <div className="flex flex-col items- 
-               start">
+               start input-icons">
+                <img className="w-[1rem] icon" src={Padlock}></img>
                 <input
                   type="password"
                   name="password"
@@ -74,7 +78,7 @@ function login() {
                      focus:outline-none focus:border- 
                       sky-500 focus:ring-sky-500 block 
                        w-96 rounded-md sm:text-sm 
-                        focus:ring-1"
+                        focus:ring-1 input-field"
                 />
                
               </div>

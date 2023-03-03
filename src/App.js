@@ -14,15 +14,15 @@ function App() {
   return(
     <div>
       <Routes>
-        <Route path='/' element={<LayoutsWithNavbar/>}>
+      <Route path='/' element={<Login/>}></Route>
+        <Route path='/dash' element={<LayoutsWithNavbar/>}>
         
-        <Route path='/' element={<Dashboard/>}></Route>
-        <Route path='/evChargers' element={<EvCharger/>}></Route>
-        
-        
+        <Route path='/dash' element={<Dashboard/>}></Route>
+        <Route path='/dash/evChargers' element={<EvCharger/>}></Route>
+        <Route path='/dash/chargerDetails' element={<SpecificCharger/>}></Route>
         </Route>
-        <Route path='/login' element={<Login/>}></Route>
-        <Route path='/chargerDetails' element={<SpecificCharger/>}></Route>
+       
+       
       </Routes>
     </div>
   )

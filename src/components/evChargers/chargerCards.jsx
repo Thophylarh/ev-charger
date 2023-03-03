@@ -2,6 +2,7 @@ import React from "react";
 import Dot from "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg";
 import Station from "../../assets/images/charging-station.png";
+import { Link } from "react-router-dom";
 
 export const IsActiveTag = ({isActive}) => {
 
@@ -46,10 +47,11 @@ const chargerCard = () => {
           </div>
         </div>
 
+        <Link to="/dash/chargerDetails" className="">
         <div className="button flex justify-center pb-[2rem]">
             <button className="border rounded border-[#EFF2FA] border-solid border-1 w-[16rem] p-[0.75rem] text-[#1DB954]" type="button">View Details</button>
         </div>
-
+        </Link>
       </div>
     </div>
   );

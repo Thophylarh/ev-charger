@@ -10,7 +10,7 @@ const sidebar = () => {
     <div>
       <div className="link-cover mt-[6rem]">
         <div>
-          <Link to="/" className="">
+          <Link to="/dash" className="">
             <div className="flex items-center m-4 ">
               <div>
                 <img className="w-[18px] h-[18px] mr-3" src={Dshboard} alt="" />
@@ -26,7 +26,7 @@ const sidebar = () => {
           </Link>
         </div>
         <div>
-          <Link to="/evChargers" className="">
+          <Link to="/dash/evChargers" className="">
             <div className="flex items-center mx-4 my-8">
               <div>
                 <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" />

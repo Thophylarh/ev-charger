@@ -1,0 +1,6 @@
+.check-box:checked{
+   border: solid;
+   border-color: black;
+   border-width: 1.5px;
+}
+
