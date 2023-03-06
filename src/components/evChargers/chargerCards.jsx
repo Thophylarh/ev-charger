@@ -7,27 +7,23 @@ import { Link } from "react-router-dom";
 export const IsActiveTag = ({isActive}) => {
 
   let activeTag = (
-    <div className="flex justify-between w-24 rounded-full py-1  bg-green-100 px-3 font-semibold text-green-700">
-      <img className="" src={Dot} /> Active
-    </div>
+    <div className="flex justify-between w-[5rem] rounded-full py-2  bg-green-100 px-3 font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot}/> Active</div>
   );
   let disconnected = (
-    <div className="flex justify-between w-24 rounded-full py-1  bg-green-100 px-3 font-semibold text-green-700">
-      <img className="" src={Dot} /> Disconnected
-    </div>
+    <div className="flex justify-between w-[8rem] rounded-full py-2  bg-[#FEF3F2] px-3 font-semibold text-[#B42318] text-xs mr-[0.25rem]"><img className="w-[0.5rem]" src={RedDot}/> Disconnected</div>
   );
   return <div>{isActive ? activeTag : disconnected}</div>;
 };
 
-const chargerCard = () => {
+const chargerCard = (props) => {
   return (
     <div>
       <div className=" bg-white p-[0.75rem] w-[21.25rem]  mr-4">
         <div className="flex justify-between ">
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
-            Tesla Charger 1
+            {props.charger}
           </h3>
-          <IsActiveTag isActive={true}/>
+        <IsActiveTag isActive={props.status}/>
         </div>
         <div className="flex justify-center pt-[3rem] pb-[1.5rem]">
           <img className="" src={Station}></img>

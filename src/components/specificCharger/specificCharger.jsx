@@ -13,7 +13,7 @@ const specificCharger = () => {
             <div className="flex ">
             <img className="pr-[1rem]" src={BackArrow}></img>
             <h4 className="font-bold text-2xl pr-[2rem]">Tesla Charger</h4>
-            <div className="flex justify-between w-24 rounded-full py-1  bg-green-100 px-3 font-semibold text-green-700"><img className="" src={Dot}/> Active</div>
+            <div className="flex justify-between w-[5rem] rounded-full py-2  bg-green-100 px-3 font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot}/> Active</div>
             </div>
 
             <div className="flex w-[10rem] justify-between items-center bg-white rounded-md  px-5 py-1">

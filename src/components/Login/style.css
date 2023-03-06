@@ -1,19 +1,23 @@
 .input-icons  {
     position: absolute;
+    width: 100%;
+    margin-bottom: 10px;
 }
   
 .input-icons {
-    width: 100%;
-    margin-bottom: 10px;
+  
+   
 }
   
 .icon {
     position: absolute;
     padding: 10px;
     min-width: 40px;
+    
+    
 }
   
 .input-field {
-    
     text-align: center;
+  
 }

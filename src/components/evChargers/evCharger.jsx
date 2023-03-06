@@ -22,9 +22,9 @@ const evChargers = () => {
 
         
         <div className="grid grid-cols-4 pt-4 px-[1.5rem]">
-            <div className="bg-white flex justify-between  py-[2.5rem] px-[2rem]">
+            <div className="bg-white flex justify-between px-[2rem]">
                 <div >
-                <img className="w-[2.5rem] h-[4rem]" src={Charger}/>
+                <img className="w-[2.5rem] h-[3.5rem] mt-[3.5rem] " src={Charger}/>
                 </div>
 
                 <div className="flex flex-col justify-center items-center">
@@ -34,8 +34,8 @@ const evChargers = () => {
 
             </div>
 
-            <div className="bg-white flex justify-between ml-[2rem]  py-[2.5rem] px-[2rem]">
-                <img className="w-[2.5rem] h-[4rem]" src={ActiveCharger}/>
+            <div className=" w-[14rem] bg-white flex justify-between ml-[2rem]  px-[2rem] ">
+                <img className="w-[2.5rem] h-[3.5rem] mt-[3.5rem] " src={ActiveCharger}/>
 
                 <div className="flex flex-col justify-center items-center ">
                     <p className="font-normal text-sm text-gray-400">Active chargers</p>
@@ -54,9 +54,9 @@ const evChargers = () => {
 
             </div>
 
-            <div className="bg-gray-900 flex justify-between ml-[2rem]   py-[2.5rem] px-[2rem]">
+            <div className=" w-[14rem] bg-gray-900 flex justify-between ml-[2rem]   py-[2.5rem] px-[2rem]">
 
-                <div className="flex flex-col justify-center items-center text-white">
+                <div className=" flex flex-col justify-center items-center text-white">
                     <p className="font-normal text-4xl">356.57Kw</p>
                     <p className="pt-[0.5rem]">Total energy consumption</p>
                 </div>
@@ -68,15 +68,15 @@ const evChargers = () => {
 
         <section className="pl-[1.5rem]">
         <div className="grid grid-cols-3 pb-[2rem]">
-            <ChargerCard/>
-            <ChargerCard/>
-            <ChargerCard/>
+            <ChargerCard status={true} charger="Tesla charger" />
+            <ChargerCard status={true} charger="Meta charger"/>
+            <ChargerCard status={false} charger="Innoson charger"/>
         </div>
 
         <div className="grid grid-cols-3">
-            <ChargerCard/>
-            <ChargerCard/>
-            <ChargerCard/>
+            <ChargerCard status={true} charger="Tesla charger"/>
+            <ChargerCard status={true} charger="Meta charger"/>
+            <ChargerCard status={false} charger="Innoson charger"/>
         </div>
         </section>
         
