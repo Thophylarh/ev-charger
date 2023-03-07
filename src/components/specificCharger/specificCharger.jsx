@@ -11,14 +11,14 @@ const specificCharger = () => {
     return (<div className="w-full h-screen overflow-y-scroll">
         <div className="flex justify-between pt-[1.75rem] pr-[1.5rem] pl-[2rem] ">
             <div className="flex ">
-            <img className="pr-[1rem]" src={BackArrow}></img>
+            <img className="pr-[1rem]" src={BackArrow} alt=""></img>
             <h4 className="font-bold text-2xl pr-[2rem]">Tesla Charger</h4>
-            <div className="flex justify-between w-[5rem] rounded-full py-2  bg-green-100 px-3 font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot}/> Active</div>
+            <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
             </div>
 
-            <div className="flex w-[10rem] justify-between items-center bg-white rounded-md  px-5 py-1">
+            <div className="flex w-[10rem] justify-between items-center bg-white rounded-md  px-[1.25rem] py-[0.25rem]">
             <p className=" text-black font-light font-sm ">This month</p>
-            <img src={dropDown}/>
+            <img src={dropDown} alt=""/>
            </div>
         </div>
 
@@ -31,11 +31,11 @@ const specificCharger = () => {
             </div>
             <div className="px-[2rem] ">
                 <div className=" bg-[#101828] text-white flex flex-col justify-center items-center  ">
-                    <h3 className="font-normal text-4xl pt-[40px] mx-[3.5rem] ">356.67Kw</h3>
-                    <p className="font-normal text-sm pb-[48px]">Total energy consumption</p>
+                    <h3 className="font-normal text-4xl pt-[2.5rem] mx-[3.5rem]">356.67Kw</h3>
+                    <p className="font-normal text-sm pb-[3rem]">Total energy consumption</p>
                 </div>
                 <div  className="pt-[0.75rem] ">
-                    <img className="bg-white px-[3.5rem] py-[0.5rem]" src={Doughnut}/>
+                    <img className="bg-white px-[3.5rem] py-[0.5rem]" src={Doughnut} alt=""/>
                 </div>
             </div>
         </div>

@@ -17,21 +17,21 @@ function charger() {
         <div className="col-span-2 flex justify-between items-center bg-white p-12">
           <div className=" border border-gray-50 border-1 rounded-md p-8 flex flex-col justify-center items-center">
             <div className="pb-8">
-              <img className="w-[40px] self-center" src={Charger} alt="" />
+              <img className="w-[2.5rem] self-center" src={Charger} alt="" />
             </div>
             <div className="text-gray-400 text-base font-normal">Number of chargers</div>
             <h4 className="pt-2  text-gray-900 text-2xl font-bold">50</h4>
           </div>
           <div className=" p-8  border border-gray-50 border-1 rounded-md flex flex-col justify-center items-center">
             <div className="pb-8">
-              <img className="w-[40px]" src={ActiveCharger} alt="" />
+              <img className="w-[2.5rem]" src={ActiveCharger} alt="" />
             </div>
             <div className="text-gray-400 text-base font-normal">Active Chargers</div>
             <h4 className="pt-2  text-gray-900 text-2xl font-bold">48</h4>
           </div>
           <div className=" border border-gray-50 border-1 rounded-md p-8  flex flex-col justify-center items-center">
             <div className="pb-8">
-              <img className="w-[40px]" src={OfflineCharger} alt="" />
+              <img className="w-[2.5rem]" src={OfflineCharger} alt="" />
             </div>
             <div className="text-gray-400  text-base font-normal">Offline Chargers</div> 
             <h4 className="pt-2 text-gray-900 text-2xl font-bold">2</h4>
