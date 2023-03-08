@@ -9,17 +9,17 @@ const transactions = () => {
         <p>Last 10 Transactions</p>
         </div>
         {/* table */}
-        <div className="bg-white py-[0.5rem]  px-[1.5rem] ">
-            <table className=" text-left ">
-                <tr className="w-[72rem] h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
-                    <th className="pr-[2rem] py-[1.25rem] "> <input className="check-box" type="checkbox" disabled="true" checked="checked"></input> </th>
+        <div className="bg-white py-[0.5rem]  px-[1.5rem]  ">
+            <table className=" text-left  w-[100%] ">
+                <tr className=" h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
+                    <th className="w-[5%] py-[1.25rem] "> <input className="check-box" type="checkbox" disabled="true" checked="checked"></input> </th>
                     
-                    <th className="pr-[4rem]">#</th>
-                    <th className="pr-[10rem]">Charger</th>
-                    <th  className="pr-[6rem]">Amount</th>
-                    <th  className="pr-[6rem]">Energy</th>
-                    <th  className="pr-[10rem]">Date</th>
-                    <th  className="pr-[8rem]">Status</th>
+                    <th className="w-[10%]">#</th>
+                    <th className="w-[20%]">Charger</th>
+                    <th  className="w-[12%]">Amount</th>
+                    <th  className="w-[12%]">Energy</th>
+                    <th  className="w-[20%]">Date</th>
+                    <th  className="w-[15%]">Status</th>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} disabled="disabled" checked="checked"/></th>

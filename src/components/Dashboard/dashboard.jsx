@@ -21,8 +21,8 @@ const index = () => {
           </div>
           
         </div>
-        <p className="text-gray-400 font-normal text-sm pb-2">Explore your station dashboard here</p>
-        <div>
+        <p className="text-gray-400 font-normal text-sm  ">Explore your station dashboard here</p>
+        <div className="mt-[1rem]">
          <Hero/>
         </div>
         <ChargerStat/>

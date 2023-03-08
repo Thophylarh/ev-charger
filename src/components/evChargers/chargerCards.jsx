@@ -18,7 +18,7 @@ export const IsActiveTag = ({isActive}) => {
 const chargerCard = (props) => {
   return (
     <div>
-      <div className=" bg-white p-[0.75rem] w-[21.25rem]  mr-[1rem]">
+      <div className=" bg-white p-[0.75rem] w-[95%] ">
         <div className="flex justify-between">
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
             {props.charger}
