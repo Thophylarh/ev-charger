@@ -3,7 +3,7 @@ import Prev from "../../assets/svg/prev.svg";
 import Next from "../../assets/svg/next.svg";
 import Dot from  "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg"
-import Station from "../../assets/images/charging-station.svg";
+import Station from "../../assets/images/charge-station.svg";
 
 
 

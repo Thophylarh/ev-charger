@@ -1,6 +1,8 @@
 import React, {useState} from "react";
-import Dshboard from "../../assets/svg/dshboard.svg";
+import Dshboard from "../../assets/svg/dshboardA.svg";
+import DshboardB from "../../assets/svg/dshboardb.svg";
 import Document from "../../assets/svg/document.png";
+import DocumentB from "../../assets/svg/documentB.svg"
 import Sales from "../../assets/svg/sales.svg";
 import Arrow from "../../assets/svg/arrow.svg";
 import { NavLink } from "react-router-dom";
@@ -19,7 +21,10 @@ const Sidebar = () => {
         {({isActive}) => (
            <div className="flex items-center m-4"  >
            <div>
-             <img className="w-[18px] h-[18px] mr-3 fill-white" src={Dshboard} alt="" />
+            {isActive ? <img className="w-[18px] h-[18px] mr-3 " src={Dshboard} alt="" /> : <img className="w-[18px] h-[18px] mr-3 " src={DshboardB} alt="" /> }
+             
+
+             
            </div>
            <div>
            
@@ -38,7 +43,8 @@ const Sidebar = () => {
         {({isActive}) => (
             <div className="flex items-center mx-4 my-8 text-white" >
               <div>
-                <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" />
+               
+                {isActive ?  <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" />:  <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> }
               </div>
               <div>
               
