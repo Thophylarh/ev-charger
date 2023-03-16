@@ -18,7 +18,7 @@ export const IsActiveTag = ({isActive}) => {
 const chargerCard = (props) => {
   return (
     <div>
-      <div className=" bg-white p-[0.75rem] w-[95%] ">
+      <div className=" bg-white p-[0.75rem] 2xl:p-[2rem] w-[95%] ">
         <div className="flex justify-between">
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
             {props.charger}
@@ -45,7 +45,7 @@ const chargerCard = (props) => {
 
         <Link to="/dash/chargerDetails" className="">
         <div className="button flex justify-center pb-[2rem]">
-            <button className="border rounded border-[#EFF2FA] border-solid border-1 w-[16rem] p-[0.75rem] text-[#1DB954]" type="button">View Details</button>
+            <button className="border rounded border-[#EFF2FA] border-solid border-1 w-[16rem] 2xl:w-[18rem] p-[0.75rem] text-[#1DB954]" type="button">View Details</button>
         </div>
         </Link>
       </div>
