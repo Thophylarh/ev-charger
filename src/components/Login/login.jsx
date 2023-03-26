@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import StationCharge from "../../assets/images/station-charge.png";
 import Star from "../../assets/svg/star.svg";
 import Padlock from "../../assets/svg/padlock.svg";
@@ -6,8 +6,65 @@ import Email from "../../assets/svg/email.svg";
 import Dot from "../../assets/svg/activeDot.svg";
 import GreyDot from "../../assets/svg/greyDot.svg";
 import "./style.css";
+import axios from "axios";
+import { useNavigate } from "react-router";
 
-const login = () => {
+const Login = () => {
+  const Navigate = useNavigate();
+  const [emailAddress, setEmail] = useState("");
+  const [password, setPassWord] = useState("");
+  const [user, setUser] = useState("");
+  const [inputType, setInputType] = useState("password");
+
+  // toggle password
+  const toggle = () => {
+    if (inputType === "password") {
+      setInputType("text");
+    } else if (inputType === "text") {
+      setInputType("password");
+    }
+  };
+
+  // login function
+  const url = "http://evapi.estations.com";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axios
+      .post(
+        url +
+          "/Companies/login?emailAddress=" +
+          emailAddress +
+          "&password=" +
+          password,
+        {},
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: false,
+        }
+      )
+      .then((res) => {
+        const response = res.data;
+        window.localStorage.setItem("token", res.data.token);
+        window.localStorage.setItem("id", res.data.id);
+        setEmail("");
+        setPassWord("");
+        Navigate("/dash");
+        
+      })
+      .catch((err)=>{
+        console.log(err.response.data.status)
+        if(err.response.data.status === 400){
+          alert("Missing username or password")
+        }else if (err.response.data.status === 401){
+          alert("Wrong username or password entered")
+        }
+      })
+      ;
+  };
+  //end of login function
+
   return (
     <div className="overflow-hidden flex">
       {/* login side */}
@@ -23,7 +80,7 @@ const login = () => {
           </p>
         </div>
 
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mt-[3.5rem]">
             <label
               htmlFor="email"
@@ -48,6 +105,10 @@ const login = () => {
                       sky-500 focus:ring-sky-500 block 
                        w-96 rounded-md sm:text-sm 
                         focus:ring-1 input-field"
+                value={emailAddress}
+                onChange={(event) => {
+                  setEmail(event.target.value);
+                }}
               />
             </div>
           </div>
@@ -65,7 +126,7 @@ const login = () => {
             >
               <img className="w-[1rem] icon" src={Padlock}></img>
               <input
-                type="password"
+                type={inputType}
                 name="password"
                 placeholder="enter your password"
                 className="mt-1 p-3 bg-white border 
@@ -75,10 +136,22 @@ const login = () => {
                       sky-500 focus:ring-sky-500 block 
                        w-96 rounded-md sm:text-sm 
                         focus:ring-1 input-field"
+                onChange={(event) => {
+                  setPassWord(event.target.value);
+                }}
+                value={password}
               />
             </div>
           </div>
-
+          {/* //toggle checkbox */}
+          <div
+            className="mt-[3.5rem] ml-[3rem] flex items-center 
+                 justify-center text-sm text-gray-400  
+                  hover:text-gray-900"
+          >
+            <input type="Checkbox" onClick={toggle} />
+            <label>show password</label>
+          </div>
           <div className="">
             <a
               className="mt-[3.5rem] ml-[3rem] flex items-center 
@@ -136,4 +209,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

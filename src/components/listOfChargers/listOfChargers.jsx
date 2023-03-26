@@ -24,7 +24,7 @@ const listOfChargers = () => {
                 <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
             </div>
             <div  className="flex justify-center py-[5rem]">
-               <img src={Station} alt=""></img>
+               <img src={Station} className="w-[60px]" alt=""></img>
             </div>
             <div className="text-sm font-normal ">
                 <div className="flex justify-between pb-[1rem]">
@@ -35,7 +35,7 @@ const listOfChargers = () => {
                 <p>Revenue: </p>
                 <p>$560,000.00</p>
                 </div>
-                <div className="flex justify-between pb-[1rem]">
+                <div className="flex justify-between pb-[1rem] ">
                 <p>Last Charge: </p>
                 <p>18mins ago</p>
                 </div>
@@ -49,7 +49,7 @@ const listOfChargers = () => {
                 <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
             </div>
             <div  className="flex justify-center py-[5rem]">
-               <img src={Station} alt=""></img>
+               <img className="w-[60px]" src={Station} alt=""></img>
             </div>
             <div className="text-sm font-normal">
                 <div className="flex justify-between pb-[1rem]">
@@ -74,7 +74,7 @@ const listOfChargers = () => {
                 <div className="flex justify-between w-[8rem] rounded-full py-[0.5rem]  bg-[#FEF3F2] px-[0.75rem] font-semibold text-[#B42318] text-xs mr-[0.25rem]"><img className="w-[0.5rem]" src={RedDot}/> Disconnected</div>
             </div>
             <div  className="flex justify-center py-[5rem]">
-               <img src={Station} alt=""></img>
+               <img src={Station} className="w-[60px]"  alt=""></img>
             </div>
             <div className="text-sm font-normal">
                 <div className="flex justify-between pb-[1rem]">

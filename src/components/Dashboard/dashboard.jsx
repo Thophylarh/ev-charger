@@ -1,11 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Arrow from "../../assets/svg/arrow.svg";
 import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
 import ListOfChargers from "../listOfChargers/listOfChargers";
 import Transactions from "../last10Transactions/transactions";
+import axios from "axios"
 
-const index = () => {
+const Index = () => {
+//base url  
+const url = "http://evapi.estations.com"
+const [data, setData] = useState("")
+
+const token = localStorage.getItem("token")
+const id = localStorage.getItem("id")
+
+const getData = ( ) =>{
+  axios.get(url + "/Companies/get-company-by-id?id="+id,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    console.log(res)
+   
+  })
+} 
+ 
+useEffect(()=>{
+  getData()
+}, [])
+
+
   return (
     <div className="w-full h-screen py-2 px-4 ">
     <div className="w-full h-screen py-2 px-4 overflow-y-scroll">
@@ -35,4 +56,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

@@ -5,13 +5,14 @@ import BackArrow from "../../assets/svg/backArrow.svg";
 import Chart from "../Chart/lineChart";
 import Doughnut  from "../../assets/images/Doughnut.png";
 import Transactions from "../last10Transactions/transactions";
+import { NavLink, Link } from "react-router-dom";
 
 
 const specificCharger = () => {
     return (<div className="w-full h-screen overflow-y-scroll">
         <div className="flex justify-between pt-[1.75rem] pr-[1.5rem] pl-[2rem] ">
             <div className="flex ">
-            <img className="pr-[1rem]" src={BackArrow} alt=""></img>
+           <Link to="/dash/evChargers"> <img className="pr-[1rem] mt-[0.75rem]" src={BackArrow} alt=""></img> </Link>
             <h4 className="font-bold text-2xl pr-[2rem]">Tesla Charger</h4>
             <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
             </div>

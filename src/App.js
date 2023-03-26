@@ -8,6 +8,7 @@ import SpecificCharger from './components/specificCharger/specificCharger';
 import EvCharger from "./components/evChargers/evCharger";
 
 import {Outlet, Routes, Route} from 'react-router-dom';
+import Protected  from './protected';
 
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
       <Route path='/' element={<Login/>}></Route>
         <Route path='/dash' element={<LayoutsWithNavbar/>}>
         
-        <Route path='/dash' element={<Dashboard/>}></Route>
+        <Route path='/dash' element={<Protected>	<Dashboard /> </Protected>}></Route>
         <Route path='/dash/evChargers' element={<EvCharger/>}></Route>
         <Route path='/dash/chargerDetails' element={<SpecificCharger/>}></Route>
         </Route>
