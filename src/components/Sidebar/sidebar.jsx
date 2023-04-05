@@ -18,43 +18,70 @@ const Sidebar = () => {
       <div className="link-cover mt-[6rem] ">
         <div>
         <NavLink to="/dash"  end> 
-        {({isActive}) => (
-           <div className="flex items-center m-4"  >
-           <div>
-            {isActive ? <img className="w-[18px] h-[18px] mr-3 " src={Dshboard} alt="" /> : <img className="w-[18px] h-[18px] mr-3 " src={DshboardB} alt="" /> }
-             
-
-             
-           </div>
-           <div>
+        {({isActive}) => 
+          (isActive ? 
+            <div className="flex items-center m-4 bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"  >
+            <div>
+             <img className="w-[18px] h-[18px] mr-3 " src={Dshboard} alt="" /> 
+              
+            </div>
+            <div>
+            
+              <p className= "text-[#1DB954] text-sm" >
+                Overview
+              </p>
+            
+            </div>
+          </div>
+          : 
+          <div className="flex items-center m-4"  >
+          <div>
+            <img className="w-[18px] h-[18px] mr-3 " src={DshboardB} alt="" /> 
+            
+          </div>
+          <div>
+            <p className= "text-sm text-white" >
+              Overview
+            </p>
+          
+          </div>
+        </div>
+          
+          
            
-             <p className={isActive ? "text-[#1DB954] text-sm": "text-sm text-white"} >
-               Overview
-             </p>
-           
-           </div>
-         </div>
-        )}
-           
+          )
+      }  
        </NavLink>
         </div>
         <div>
         <NavLink to="/dash/evChargers"  end>
         {({isActive}) => (
 
-         
+         isActive ?
           
-            <div className="flex items-center mx-4 my-8 text-white" >
+            <div className="flex items-center mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl" >
               <div>
                
-                {isActive ? <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" /> :  <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> }
+                <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" />
               </div>
               <div>
               
-                <p className={isActive ? "text-[#1DB954] text-sm": "text-sm text-white"}  >Ev Chargers</p>
+                <p className="text-[#1DB954] text-sm"  >Ev Chargers</p>
                
               </div>
             </div>
+            : 
+            <div className="flex items-center mx-4 my-8 text-white" >
+            <div>
+             
+              <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> 
+            </div>
+            <div>
+            
+              <p className= "text-sm text-white">Ev Chargers</p>
+             
+            </div>
+          </div>
         )}
             </NavLink>
         </div>

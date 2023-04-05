@@ -34,6 +34,7 @@ const LineChart = () => {
             // borderWidth: 2,
             pointBorderWidth: 4,
             tension: 0.4,
+            
           },
           {
             type: "line",
