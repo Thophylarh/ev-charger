@@ -15,10 +15,10 @@ const token = localStorage.getItem("token")
 const id = localStorage.getItem("id")
 
 const getData = ( ) =>{
-  axios.get(url + "/Companies/get-company-by-id?id="+id,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  axios.get(url + "/Companies/get-company-by-id/"+id,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
-    console.log(res)
-   
+    setData(res.data)
+    console.log(data)
   })
 } 
  
@@ -33,7 +33,7 @@ useEffect(()=>{
       <div>
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="font-bold text-2xl">Hello, Akinromade</h1>
+            <h1 className="font-bold text-2xl">Hello, {data.companyName}</h1>
           </div>
           <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
             <p className=" text-white font-light text-base ">This month</p>
@@ -42,7 +42,7 @@ useEffect(()=>{
           </div>
           
         </div>
-        <p className="text-gray-400 font-normal text-sm  ">Explore your station dashboard here</p>
+        <p className="text-gray-400 font-normal text-sm">Explore your station dashboard here</p>
         <div className="mt-[1rem]">
          <Hero/>
         </div>

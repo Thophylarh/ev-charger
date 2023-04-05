@@ -15,7 +15,7 @@ const Sidebar = () => {
  
   return (
     <div>
-      <div className="link-cover mt-[6rem]">
+      <div className="link-cover mt-[6rem] ">
         <div>
         <NavLink to="/dash"  end> 
         {({isActive}) => (
@@ -41,10 +41,13 @@ const Sidebar = () => {
         <div>
         <NavLink to="/dash/evChargers"  end>
         {({isActive}) => (
+
+         
+          
             <div className="flex items-center mx-4 my-8 text-white" >
               <div>
                
-                {isActive ?  <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" />:  <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> }
+                {isActive ? <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" /> :  <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> }
               </div>
               <div>
               
@@ -122,6 +125,7 @@ const Sidebar = () => {
           </NavLink>
         </div>
       </div>
+      
     </div>
   );
 };

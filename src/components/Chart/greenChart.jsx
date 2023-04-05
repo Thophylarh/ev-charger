@@ -23,33 +23,33 @@ const LineChart = () => {
           {
             type: "line",
             label: "Revenue by time",
-            fill: "",
-            backgroundColor: "#FFDF90",
-            data: Array.from(Array(12)).map(
-              (i) => Math.floor(Math.random() * 100) + 1
-            ),
-            borderColor: "#FFDF90",
-            hoverBackgroundColor: ["#e2f5ef"],
-            radius: 1,
-            // borderWidth: 2,
-            pointBorderWidth: 4,
-            tension: 0.4,
-          },
-          {
-            type: "line",
-            label: "Revenue by energy",
             fill: "start",
-            backgroundColor: "#EDFFF3",
+            backgroundColor: "#C5FBD8",
             data: Array.from(Array(12)).map(
               (i) => Math.floor(Math.random() * 100) + 1
             ),
             borderColor: "#1DB954",
-            hoverBackgroundColor: [""],
-            radius: 2,
+            hoverBackgroundColor: ["#e2f5ef"],
+            radius: 0,
             // borderWidth: 2,
             pointBorderWidth: 4,
             tension: 0.4,
           },
+        //   {
+        //     type: "line",
+        //     label: "Revenue by energy",
+        //     fill: false,
+        //     backgroundColor: "#FFDF90",
+        //     data: Array.from(Array(12)).map(
+        //       (i) => Math.floor(Math.random() * 100) + 1
+        //     ),
+        //     borderColor: "#FFDF90",
+        //     hoverBackgroundColor: ["#e2f5ef"],
+        //     radius: 2,
+        //     // borderWidth: 2,
+        //     pointBorderWidth: 4,
+        //     tension: 0.4,
+        //   },
         ],
       }}
       options={{
@@ -57,27 +57,26 @@ const LineChart = () => {
         responsive: true,
         plugins: {
           legend: {
-            display: true,
+            display: false,
             position:"bottom",
            
             labels: {
               usePointStyle: true, 
               pointStyle: "circle",
-              boxWidth: 40,
-              padding: 10,
-              
+              boxWidth: 1,
+              padding: 10
              
             },
           },
           title: {
-            display: true,
+            display: false,
           },
         },
         scales: {
           x: {
-            display: true,
+            display: false,
             grid: {
-              display: true,
+              display: false,
               color: "#eee",
               borderDash: [2, 4],
             },
@@ -86,7 +85,7 @@ const LineChart = () => {
           }, 
           },
           y: {
-            display: true,
+            display: false,
             min: 0, 
               max: 240,
             grid: {
@@ -99,9 +98,9 @@ const LineChart = () => {
               stepSize: 40,
              
               autoSkip: false,
-                callback: function (value) {
-                  return value + "k";
-                },
+              //   callback: function (value) {
+              //     return value + "kg";
+              //   },
             },
           },
         },

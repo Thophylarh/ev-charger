@@ -46,11 +46,17 @@ const Login = () => {
       )
       .then((res) => {
         const response = res.data;
+        console.log(response)
         window.localStorage.setItem("token", res.data.token);
         window.localStorage.setItem("id", res.data.id);
+        const passwordFirstLoginStatus = res.data.passwordFirstLoginStatus
         setEmail("");
         setPassWord("");
-        Navigate("/dash");
+        if (passwordFirstLoginStatus == 0){
+          Navigate("/changePassword")
+        }else{
+        Navigate("/dash")
+      }
         
       })
       .catch((err)=>{
@@ -68,20 +74,20 @@ const Login = () => {
   return (
     <div className="overflow-hidden flex">
       {/* login side */}
-      <section className="w-[50%] pt-[4rem] bg-white pl-[5rem]">
+      <section className="w-[50%] pt-[2rem] bg-white pl-[5rem]">
         <div>
           <img src={Star} alt=""></img>
-          <h3 className="text-black font-medium text-4xl mt-[3rem] pb-[0.75rem]">
+          <h3 className="text-black font-medium text-3xl mt-[2.5rem] pb-[0.75rem]">
             Welcome back!
           </h3>
-          <p className="w-[80%] font-normal text-lg text-gray-500">
+          <p className="w-[80%] font-normal text-base text-gray-500">
             Log in to your account to access all of your charging station data
             and manage your settings
           </p>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mt-[3.5rem]">
+          <div className="mt-[2.5rem]">
             <label
               htmlFor="email"
               className="block text-sm font-medium 
@@ -144,14 +150,14 @@ const Login = () => {
             </div>
           </div>
           {/* //toggle checkbox */}
-          <div
+          {/* <div
             className="mt-[3.5rem] ml-[3rem] flex items-center 
                  justify-center text-sm text-gray-400  
                   hover:text-gray-900"
           >
             <input type="Checkbox" onClick={toggle} />
             <label>show password</label>
-          </div>
+          </div> */}
           <div className="">
             <a
               className="mt-[3.5rem] ml-[3rem] flex items-center 
@@ -168,7 +174,7 @@ const Login = () => {
                   normal text-xs 
                   font-semibold tracking-widest text- 
                    white uppercase transition ease-in- 
-                    out bg-gray-900 border border- 
+                    out bg-black border border- 
                      transparent active:bg-gray-900 
                       false justify-center 
                        hover:scale-105 duration-300"
@@ -180,26 +186,26 @@ const Login = () => {
       </section>
 
       {/* image side */}
-      <section className="w-[50%] bg-[#FCFCFD]">
-        <div>
+      <section className="w-[50%] bg-[#101828]">
+        <div className="stationCharge h-[21.5rem] ml-[6rem]">
           <img
-            className="mt-[4rem] mb-[4rem] px-[10rem]"
+            className="mt-[4rem] pt-[1.5rem] mb-[4rem] px-[9rem] w-[40rem]"
             src={StationCharge}
             alt=""
           />
         </div>
-        <div className="pl-[6rem] pr-[0.5rem]">
-          <h3 className="font-semibold text-2xl text-gray-900 text-center">
+        <div className="pl-[6rem] pr-[0.5rem] pt-[1.5rem]">
+          <h3 className="font-semibold text-lg text-white text-center">
             Monitor your station charge
           </h3>
-          <p className="font-normal text-base text-grey-700 text-center pt-[0.75rem] pb-[3rem]">
+          <p className="font-normal text-sm text-white text-center pt-[0.75rem] pb-[3rem]">
             Manage and monitor your EV charging stations from one central
             location. Get real-time data on charging usage, set pricing and
             payment options, and customize user settings to fit your unique
             needs.{" "}
           </p>
         </div>
-        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-gray-100 mb-[1rem] mx-[20rem]">
+        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-[#344054]  mx-[20rem]">
           <img className="w-[0.5rem]" src={Dot}></img>
           <img className="" src={GreyDot}></img>
           <img src={GreyDot}></img>

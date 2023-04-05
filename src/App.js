@@ -1,3 +1,4 @@
+
 import React from 'react';
 import Login from './components/Login/login'
 import Sidebar from './components/Sidebar/sidebar'
@@ -6,7 +7,8 @@ import Sidebar from './components/Sidebar/sidebar'
 import Dashboard from "./components/Dashboard/dashboard";
 import SpecificCharger from './components/specificCharger/specificCharger';
 import EvCharger from "./components/evChargers/evCharger";
-
+import ChangePassword from './components/changePassword/changePassword';
+import Station from './components/station/station';
 import {Outlet, Routes, Route} from 'react-router-dom';
 import Protected  from './protected';
 
@@ -16,6 +18,8 @@ function App() {
     <div>
       <Routes>
       <Route path='/' element={<Login/>}></Route>
+      <Route path='/station' element={<Station/>}></Route>
+      <Route path='/changePassword' element={<ChangePassword/>}></Route>
         <Route path='/dash' element={<LayoutsWithNavbar/>}>
         
         <Route path='/dash' element={<Protected>	<Dashboard /> </Protected>}></Route>

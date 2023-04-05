@@ -19,3 +19,8 @@
     padding-left: 50px;
   
 }
+
+.stationCharge{
+    background-image: url("../../assets/svg/rings.svg");
+    background-size: 36rem;
+}

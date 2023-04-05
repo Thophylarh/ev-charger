@@ -28,7 +28,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-green-500 px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Completed</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></th>
@@ -37,7 +37,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-green-500 px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Completed</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></th>
@@ -46,7 +46,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Incomplete</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"}/></th>
@@ -55,7 +55,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Cancelled</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E1EFFE]  border border-solid border-1 border-[#1E429F] rounded-xl text-[#1E429F] font-semibold text-xs leading-5">In progress</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <td className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></td>
@@ -64,7 +64,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <td className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></td>
@@ -73,7 +73,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E1EFFE]  border border-solid border-1 border-[#1E429F] rounded-xl text-[#1E429F] font-semibold text-xs leading-5">In progress</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <td className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></td>
@@ -82,7 +82,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E1EFFE]  border border-solid border-1 border-[#1E429F] rounded-xl text-[#1E429F] font-semibold text-xs leading-5">In progress</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></th>
@@ -91,7 +91,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></th>
@@ -100,7 +100,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
                 <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                 <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} /></th>
@@ -109,7 +109,7 @@ const transactions = () => {
                     <td>$500.00</td>
                     <td>500Kw</td>
                     <td>0ctober 30, 2017</td>
-                    <td><button className="bg-black px-[0.75rem] py-[0.25rem] text-white text-small rounded-xl">Overdue</button></td>
+                    <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                 </tr>
             </table>
 

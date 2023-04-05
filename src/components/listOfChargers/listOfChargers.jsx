@@ -1,13 +1,31 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Prev from "../../assets/svg/prev.svg";
 import Next from "../../assets/svg/next.svg";
 import Dot from  "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg"
 import Station from "../../assets/images/charge-station.svg";
+import axios from "axios";
 
 
 
-const listOfChargers = () => {
+const ListOfChargers = () => {
+
+    const url = "http://evapi.estations.com"
+    const token = localStorage.getItem("token")
+    const id = localStorage.getItem("id")
+
+    const listChargers = ()=>{
+        axios.get(url + "/Chargers",  { headers:{ 'Authorization': `Bearer ${token}`}})
+        .then((res)=>{
+            console.log(res)
+        })
+    }
+
+    useEffect(()=>{
+        listChargers()
+      }, [])
+      
+
     return (<div>
         <div className="flex justify-between pt-[1.5rem]">
             <p className="text-gray-600  text-base font-semibold">List of chargers</p>
@@ -96,5 +114,5 @@ const listOfChargers = () => {
     </div>  );
 }
  
-export default listOfChargers;
+export default ListOfChargers;
 

@@ -22,7 +22,7 @@ const evChargers = () => {
 
         
         <div className="grid grid-cols-4 pt-[1rem] px-[1.5rem]">
-            <div className="w-[95%] bg-white flex justify-between px-[2rem]">
+            <div className="w-[95%] bg-white flex justify-between px-[2rem] border border-gray-200 rounded-xl border-1">
                 <div >
                 <img className="w-[2.5rem] h-[3.5rem] mt-[3rem]" src={Charger} alt=""/>
                 </div>
@@ -34,7 +34,7 @@ const evChargers = () => {
 
             </div>
 
-            <div className="w-[95%] bg-white flex justify-between ml-[0.5rem]  px-[2rem] ">
+            <div className="w-[95%] bg-white flex justify-between ml-[0.5rem]  px-[2rem] border border-gray-200 rounded-xl border-1 ">
                 <img className="w-[2.5rem] h-[3.5rem] mt-[3rem]" src={ActiveCharger} alt=""/>
 
                 <div className="flex flex-col justify-center items-center ">
@@ -44,7 +44,7 @@ const evChargers = () => {
 
             </div>
 
-             <div className=" w-[95%] bg-white flex justify-between ml-[1rem] px-[2rem]">
+             <div className=" w-[95%] bg-white flex justify-between ml-[1rem] px-[2rem] border border-gray-200 rounded-xl border-1">
                 <img className="w-[2.5rem] h-[3.5rem] mt-[3rem]" src={OfflineCharger} alt=""/>
 
                 <div className="flex flex-col justify-center items-center">
@@ -54,7 +54,7 @@ const evChargers = () => {
 
             </div>
 
-            <div className="w-[92%] bg-gray-900 flex justify-between ml-[1.5rem] py-[2.5rem] px-[1rem]">
+            <div className="w-[92%] bg-gray-900 flex justify-between ml-[1.5rem] py-[2.5rem] px-[1rem] border border-gray-100 rounded-xl border-1">
 
                 <div className=" flex flex-col justify-center items-center text-white">
                     <p className="font-normal text-4xl">356.57Kw</p>
