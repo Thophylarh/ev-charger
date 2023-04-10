@@ -55,7 +55,7 @@ const Login = () => {
         if (passwordFirstLoginStatus == 0){
           Navigate("/changePassword")
         }else{
-        Navigate("/dash")
+        Navigate("/companyDash")
       }
         
       })
@@ -200,7 +200,9 @@ const Login = () => {
             alt=""
           />
         </div>
-        <div className="pl-[6rem] pr-[0.5rem] pt-[1.5rem]">
+        <div >
+        <div className="pt-[1.5rem] flex justify-center align-center">
+          <div className="pl-[6rem] pr-[0.5rem]">
           <h3 className="font-semibold text-lg text-white text-center">
             Monitor your station charge
           </h3>
@@ -208,13 +210,17 @@ const Login = () => {
             Manage and monitor your EV charging stations from one central
             location. Get real-time data on charging usage, set pricing and
             payment options, and customize user settings to fit your unique
-            needs.{" "}
+            needs.
           </p>
+          </div>
         </div>
-        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-[#344054]  mx-[20rem] mb-[1.5rem]">
+        <div className="flex justify-center align-center pl-[3rem]">
+        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-[#344054]    mb-[1.5rem]">
           <img className="w-[0.5rem]" src={Dot}></img>
           <img className="" src={GreyDot}></img>
           <img src={GreyDot}></img>
+        </div>
+        </div>
         </div>
       </section>
     </div>
