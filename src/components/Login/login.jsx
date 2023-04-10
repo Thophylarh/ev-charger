@@ -72,12 +72,12 @@ const Login = () => {
   //end of login function
 
   return (
-    <div className="overflow-hidden flex">
+    <div className="overflow-hidden flex h-[100vh] w-[100%]">
       {/* login side */}
-      <section className="w-[50%] pt-[2rem] bg-white pl-[5rem]">
+      <section className="w-[50%] h-[100%] pt-[2rem] bg-white pl-[5rem]">
         <div>
           <img src={Star} alt=""></img>
-          <h3 className="text-black font-medium text-3xl mt-[2.5rem] pb-[0.75rem]">
+          <h3 className="text-black font-medium text-3xl mt-[2rem] pb-[0.75rem]">
             Welcome back!
           </h3>
           <p className="w-[80%] font-normal text-base text-gray-500">
@@ -87,7 +87,7 @@ const Login = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="mt-[2.5rem]">
+          <div className="mt-[2rem]">
             <label
               htmlFor="email"
               className="block text-sm font-medium 
@@ -103,7 +103,7 @@ const Login = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="akinromade@example.com"
+                placeholder="example@address.com"
                 className="mt-1 mb-4 p-3 bg-white 
                    border shadow-sm border-slate-300 
                     placeholder-slate-400 
@@ -154,22 +154,27 @@ const Login = () => {
             className="mt-[3.5rem] ml-[3rem] flex items-center 
                  justify-center text-sm text-gray-400  
                   hover:text-gray-900"
-          >
+          > mt-[3.5rem] ml-[3rem] flex items-center 
+                 justify-center
             <input type="Checkbox" onClick={toggle} />
             <label>show password</label>
+            mt-[3.5rem] ml-[3rem] flex items-center 
+                 justify-center
           </div> */}
-          <div className="">
+          <div className=" ">
+            <div className="h-[30px] w-[380px] mt-[3.5rem]  flex items-right justify-end">
             <a
-              className="mt-[3.5rem] ml-[3rem] flex items-center 
-                 justify-center text-sm text-gray-400  
+              className=" text-sm text-gray-400  
                   hover:text-gray-900"
               href="#"
             >
               Forgot password?
             </a>
+            </div>
+            <div>
             <button
               type="submit"
-              className="mt-8 p-4 flex w-96 text- 
+              className="mt-5 p-4 flex w-96 text- 
                  center text-white rounded-md text- 
                   normal text-xs 
                   font-semibold tracking-widest text- 
@@ -181,13 +186,14 @@ const Login = () => {
             >
               Login
             </button>
+            </div>
           </div>
         </form>
       </section>
 
       {/* image side */}
       <section className="w-[50%] bg-[#101828]">
-        <div className="stationCharge h-[21.5rem] ml-[6rem]">
+        <div className="stationCharge h-[20rem] ml-[3rem]">
           <img
             className="mt-[4rem] pt-[1.5rem] mb-[4rem] px-[9rem] w-[40rem]"
             src={StationCharge}
@@ -205,7 +211,7 @@ const Login = () => {
             needs.{" "}
           </p>
         </div>
-        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-[#344054]  mx-[20rem]">
+        <div className=" w-[8rem] py-[0.75rem] px-[2.5rem] rounded-2xl flex justify-between bg-[#344054]  mx-[20rem] mb-[1.5rem]">
           <img className="w-[0.5rem]" src={Dot}></img>
           <img className="" src={GreyDot}></img>
           <img src={GreyDot}></img>

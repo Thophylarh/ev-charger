@@ -6,21 +6,7 @@ import GreenChart from "../Chart/greenChart";
 import OrangeChart from "../Chart/orangeChart";
 
 function Hero() {
-  const url = "http://evapi.estations.com";
-  const token = localStorage.getItem("token");
-  const id = localStorage.getItem("id");
-
-  const getStations = () => {
-    axios
-      .get(url + "/Stations/get-station-count/" + id, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => console.log(res));
-  };
-
-  useEffect(() => {
-    getStations();
-  }, []);
+ 
 
   return (
     <div>
@@ -88,7 +74,7 @@ function Hero() {
           <div className="text-sm text-gray-400 font-normal">
             <p>Revenue Summary</p>
           </div>
-          <div className="h-[22rem]">
+          <div id="chart" className="h-[22rem]">
             <LineChart />
           </div>
         </div>

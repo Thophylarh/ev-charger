@@ -29,7 +29,6 @@ const SpecificCharger = () => {
   };
 
   const handleClose = () => {
-    
     setBillingModal(false);
   };
 
@@ -64,9 +63,9 @@ const SpecificCharger = () => {
         </p>
       </div>
 
-      <div className="mt-[1rem] ml-[1.5rem] flex">
+      <div className="mt-[1rem] ml-[1.5rem] flex ">
         {/* div one */}
-        <div className="border border-gray-200 border-1 border-solid bg-white w-[16rem] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl mr-[1.25rem]">
+        <div className="border border-gray-200 border-1 border-solid bg-white w-[25%] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl mr-[1.25rem]">
           <div className="flex justify-between pb-[1.25rem]">
             <p className="text-sm font-semibold text-gray-600 leading-5">
               Charger status
@@ -89,7 +88,7 @@ const SpecificCharger = () => {
         </div>
 
         {/* div two */}
-        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[16rem] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
+        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[25%] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
           <div className="flex justify-between pb-[1.25rem]">
             <p className="text-sm font-semibold text-gray-600 leading-5">
               Operation hours
@@ -103,13 +102,13 @@ const SpecificCharger = () => {
               Default Operation
             </div>
             <div onClick={changeHours}>
-              <p className="text-xs font-bold text-[#007EF2] leading-5">Edit</p>
+              <p className="text-xs font-bold text-[#007EF2] leading-5 cursor-pointer">Edit</p>
             </div>
           </div>
         </div>
 
         {/* div three */}
-        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[16rem] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
+        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[25%] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
           <div className="flex justify-between pb-[1.25rem]">
             <p className="text-sm font-semibold text-gray-600 leading-5">
               Billing Type
@@ -124,7 +123,7 @@ const SpecificCharger = () => {
             </div>
             <div>
               <a
-                className="text-xs font-bold text-[#007EF2] leading-5"
+                className="text-xs font-bold text-[#007EF2] leading-5 cursor-pointer"
                 onClick={changeBilling}
               >
                 Edit
@@ -134,7 +133,7 @@ const SpecificCharger = () => {
         </div>
 
         {/* div four */}
-        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[16rem] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
+        <div className="mr-[1.25rem] border border-gray-200 border-1 border-solid bg-white w-[25%] h-[10rem] py-[1.25rem] pl-[1.5rem] pr-[1.25rem] rounded-xl ">
           <div className="flex justify-between pb-[1.25rem]">
             <p className="text-sm font-semibold text-gray-600 leading-5">
               Charger activity
@@ -153,8 +152,9 @@ const SpecificCharger = () => {
         </div>
       </div>
 
+    <div className="">
       <div className="flex justify-between pl-[1.5rem] pt-[1.5rem]">
-        <div className="bg-white h-full py-[2rem] pl-[2.5rem] pr-[1.25rem]">
+        <div className="bg-white h-full py-[2rem] pl-[2.5rem] pr-[1.25rem] w-[70%]">
           <div className="h-[18.25rem] w-[42rem]">
             <p className="text-gray-400 text-sm font-normal">
               Charger Revenue Summary
@@ -162,7 +162,7 @@ const SpecificCharger = () => {
             <Chart />
           </div>
         </div>
-        <div className="px-[1rem] ">
+        <div className="px-[1rem] w-[35%] ">
           <div className=" bg-[#101828] text-white flex flex-col justify-center items-center  ">
             <h3 className="font-normal text-4xl pt-[2.5rem] mx-[3.5rem]">
               356.67Kw
@@ -171,7 +171,7 @@ const SpecificCharger = () => {
               Total energy consumption
             </p>
           </div>
-          <div className="bg-white grid place-items-center w-[22rem] mt-[0.75rem]">
+          <div className="bg-white grid place-items-center  mt-[0.75rem]">
             <div className="pt-[0.75rem] w-[8rem] h-[8rem]  ">
               <DoughnutChart />
             </div>
@@ -196,9 +196,13 @@ const SpecificCharger = () => {
           </div>
         </div>
       </div>
+      </div>
       <div className="px-[1.5rem]">
         <Transactions />
       </div>
+      
+
+      {/* //modals */}
       {operationModal && (
         <Modal closeModal={setOperationModal}>
           <OperationHour />

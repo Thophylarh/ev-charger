@@ -1,14 +1,67 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import dropDown from "../../assets/svg/dropDownArrow.svg";
 import Charger from "../../assets/images/charger.png";
 import ActiveCharger from "../../assets/images/active-charger.png"
 import OfflineCharger from "../../assets/images/offline-charger.png"
 import ChargerCard from "./chargerCards";
+import axios from "axios";
 
 
-const evChargers = () => {
+const EvChargers = () => {
+
+    const [totalChargers, setTotalChargers] = useState("")
+    const [noOfActiveChargers, setNoActiveChargers] = useState("")
+    const [noOfflineChargers, setNoOfflineChargers] = useState("")
+    const [totalEnergy, setTotalEnergy] = useState("")
+  
+    const url = "http://evapi.estations.com";
+  
+      const token = localStorage.getItem("token");
+      const companyId = localStorage.getItem("id");
+      const stationId = localStorage.getItem("stationId");
+  
+    //total number of station chargers
+    const GetstationChargers = () =>{
+      axios.get(url + `/Chargers/get-total-station-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}})
+      .then((res) =>{
+        
+        setTotalChargers(res.data)
+      })
+    }
+  
+    //total number of active chargers 
+    const GetactiveChargers = () =>{
+      axios.get(url + `/Chargers/get-station-active-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+      .then((res)=>{
+        setNoActiveChargers(res.data)
+      })
+    }
+  
+    //total number of offline chargers 
+    const GetofflineChargers = () =>{
+      axios.get(url + `/Chargers/get-station-offline-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+      .then((res)=>{
+        setNoOfflineChargers(res.data)
+      })
+    }
+  
+    //total energy consumed
+    const GetTotalEnergy= () =>{
+      axios.get(url + `/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+      .then((res)=>{
+        setTotalEnergy(res.data)
+      })
+    }
+    
+    useEffect(()=>{
+      GetstationChargers();
+      GetofflineChargers();
+      GetTotalEnergy();
+      GetactiveChargers();
+    }, [])
+
     return ( 
-    <div className=" overflow-y-scroll h-screen pb-[2rem]">
+    <div className=" overflow-y-scroll h-screen w-full pb-[2rem]">
         <div className="flex justify-between pt-[1.75rem] pr-[1.5rem] pl-[1.5rem] ">
             <div className="flex">
             <h4 className="font-bold text-2xl ">Ev Chargers</h4>
@@ -29,7 +82,7 @@ const evChargers = () => {
 
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-normal text-sm text-gray-400 ">Number of chargers</p>
-                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">50</p>
+                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">{totalChargers}</p>
                 </div>
 
             </div>
@@ -39,7 +92,7 @@ const evChargers = () => {
 
                 <div className="flex flex-col justify-center items-center ">
                     <p className="font-normal text-sm text-gray-400">Active chargers</p>
-                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">50</p>
+                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">{noOfActiveChargers}</p>
                 </div>
 
             </div>
@@ -49,15 +102,15 @@ const evChargers = () => {
 
                 <div className="flex flex-col justify-center items-center">
                     <p className="font-normal text-sm text-gray-400">Offline chargers</p>
-                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">50</p>
+                    <p className="font-normal text-4xl text-gray-900 pt-[1rem]">{noOfflineChargers}</p>
                 </div>
 
             </div>
 
-            <div className="w-[92%] bg-gray-900 flex justify-between ml-[1.5rem] py-[2.5rem] px-[1rem] border border-gray-100 rounded-xl border-1">
+            <div className="w-[92%] bg-gray-900 flex justify-center items-center ml-[1.5rem] py-[2.5rem] px-[1rem] border border-gray-100 rounded-xl border-1">
 
-                <div className=" flex flex-col justify-center items-center text-white">
-                    <p className="font-normal text-4xl">356.57Kw</p>
+                <div className="text-center text-white">
+                    <p className="font-normal text-4xl">{totalEnergy}Kw</p>
                     <p className="pt-[0.5rem]">Total energy consumption</p>
                 </div>
 
@@ -84,4 +137,4 @@ const evChargers = () => {
      );
 }
  
-export default evChargers;
+export default EvChargers;

@@ -39,7 +39,7 @@ const LineChart = () => {
             type: "line",
             label: "Revenue by energy",
             fill: "start",
-            backgroundColor: "#F8DD9C",
+            backgroundColor: "rgb(251,236,201)",
             data: Array.from(Array(12)).map(
               (i) => Math.floor(Math.random() * 100) + 1
             ),

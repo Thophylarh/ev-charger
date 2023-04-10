@@ -2,6 +2,7 @@ import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
 const LineChart = () => {
+  
   return (
     <Line
       data={{
@@ -40,7 +41,7 @@ const LineChart = () => {
             type: "line",
             label: "Revenue by energy",
             fill: "start",
-            backgroundColor: "#EDFFF3",
+            backgroundColor: "rgb(246,255,249)",
             data: Array.from(Array(12)).map(
               (i) => Math.floor(Math.random() * 100) + 1
             ),

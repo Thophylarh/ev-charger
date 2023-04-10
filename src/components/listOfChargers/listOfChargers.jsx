@@ -12,12 +12,13 @@ const ListOfChargers = () => {
 
     const url = "http://evapi.estations.com"
     const token = localStorage.getItem("token")
-    const id = localStorage.getItem("id")
+    const companyId = localStorage.getItem("id");
+    const stationId = localStorage.getItem("stationId");
 
     const listChargers = ()=>{
-        axios.get(url + "/Chargers",  { headers:{ 'Authorization': `Bearer ${token}`}})
+        axios.get(url +`/Chargers/get-list-station-charger/${companyId}/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
         .then((res)=>{
-            console.log(res)
+            console.log(res )
         })
     }
 

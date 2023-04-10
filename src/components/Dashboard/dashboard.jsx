@@ -18,7 +18,7 @@ const getData = ( ) =>{
   axios.get(url + "/Companies/get-company-by-id/"+id,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     setData(res.data)
-    console.log(data)
+    // console.log(data)
   })
 } 
  
@@ -28,7 +28,7 @@ useEffect(()=>{
 
 
   return (
-    <div className="w-full h-screen py-2 px-4 ">
+    <div className="w-full h-[100vh]  py-2 px-4 ">
     <div className="w-full h-screen py-2 px-4 overflow-y-scroll">
       <div>
         <div className="flex justify-between items-center">
