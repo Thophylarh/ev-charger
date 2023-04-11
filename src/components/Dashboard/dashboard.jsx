@@ -14,8 +14,11 @@ const [data, setData] = useState("")
   const [noOfActiveChargers, setNoActiveChargers] = useState("")
   const [noOfflineChargers, setNoOfflineChargers] = useState("")
   const [totalEnergy, setTotalEnergy] = useState("")
+  const [stationChargerList, setStationChargerList] = useState([])
 
 const token = localStorage.getItem("token")
+
+
 const id = localStorage.getItem("stationId")
    const companyId = localStorage.getItem("id");
     const stationId = localStorage.getItem("stationId");
@@ -62,6 +65,16 @@ const getStationDetails = () =>{
     })
   }
 
+   //get list of chargers in station
+   const getListOfChargers= () =>{
+    axios.get(url + `/Chargers/get-list-station-charger/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+    .then((res)=>{
+      console.log(res)
+      setStationChargerList(res.data)
+     
+    })
+  }
+
 
 useEffect(()=>{
   getStationDetails ();
@@ -69,6 +82,7 @@ useEffect(()=>{
   GetactiveChargers();
   GetofflineChargers();
   GetTotalEnergy();
+  getListOfChargers();
 }, [])
 
 
@@ -92,7 +106,7 @@ useEffect(()=>{
          <Hero/>
         </div>
         <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
-        <ListOfChargers/>
+        <ListOfChargers chargers={stationChargerList}/>
         <Transactions/>
       </div>
       

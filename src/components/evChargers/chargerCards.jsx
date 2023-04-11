@@ -16,14 +16,15 @@ export const IsActiveTag = ({isActive}) => {
 };
 
 const chargerCard = (props) => {
+  const charger = props.charger;
   return (
     <div>
       <div className=" bg-white p-[0.75rem] 2xl:p-[2rem] w-[95%] ">
         <div className="flex justify-between">
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
-            {props.charger}
+            {charger.chargerName}
           </h3>
-        <IsActiveTag isActive={props.status}/>
+        <IsActiveTag isActive={true}/>
         </div>
         <div className="flex justify-center pt-[3rem] pb-[1.5rem]">
           <img className="" src={Station} alt=""></img>
@@ -31,15 +32,15 @@ const chargerCard = (props) => {
         <div className="text-sm font-normal ">
           <div className="flex justify-between pb-[1rem]">
             <p>Energy Consumed:</p>
-            <p>560Kw</p>
+            <p>{charger.energyConsumed}Kw</p>
           </div>
           <div className="flex justify-between pb-[1rem]">
             <p>Revenue: </p>
-            <p>$560,000.00</p>
+            <p>N{charger.revenue}</p>
           </div>
           <div className="flex justify-between pb-[2.5rem]">
             <p>Last Charge: </p>
-            <p>18mins ago</p>
+            <p>{charger.lastCharged}</p>
           </div>
         </div>
 

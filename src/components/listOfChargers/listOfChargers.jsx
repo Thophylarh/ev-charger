@@ -8,24 +8,25 @@ import axios from "axios";
 
 
 
-const ListOfChargers = () => {
+const ListOfChargers = (props) => {
 
     const url = "http://evapi.estations.com"
     const token = localStorage.getItem("token")
     const companyId = localStorage.getItem("id");
     const stationId = localStorage.getItem("stationId");
 
-    const listChargers = ()=>{
-        axios.get(url +`/Chargers/get-list-station-charger/${companyId}/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
-        .then((res)=>{
-            console.log(res )
-        })
-    }
+    // const listChargers = ()=>{
+    //     axios.get(url +`/Chargers/get-list-station-charger/${companyId}/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    //     .then((res)=>{
+    //         console.log(res )
+    //     })
+    // }
 
-    useEffect(()=>{
-        listChargers()
-      }, [])
+    // useEffect(()=>{
+    //     listChargers()
+    //   }, [])
       
+    const chargers = props.chargers
 
     return (<div>
         <div className="flex justify-between pt-[1.5rem]">
@@ -37,32 +38,35 @@ const ListOfChargers = () => {
         </div>
 
         <div className=" flex justify-between bg-white mt-[1.5rem] p-[4rem] text-Grey-700">
-            <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-[1rem]">
-            <div className="flex justify-between ">
-                <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Tesla Charger 1</h3>
-                <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
-            </div>
-            <div  className="flex justify-center py-[5rem]">
-               <img src={Station} className="w-[60px]" alt=""></img>
-            </div>
-            <div className="text-sm font-normal ">
-                <div className="flex justify-between pb-[1rem]">
-                <p >Energy Consumed:</p>
-                <p>560Kw</p>
+            {chargers.map((charger)=>(
+                <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-[1rem]" key={charger.id}>
+                <div className="flex justify-between ">
+                    <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">{charger.chargerName}</h3>
+                    <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
                 </div>
-                <div className="flex justify-between pb-[1rem]">
-                <p>Revenue: </p>
-                <p>$560,000.00</p>
+                <div  className="flex justify-center py-[5rem]">
+                   <img src={Station} className="w-[60px]" alt=""></img>
                 </div>
-                <div className="flex justify-between pb-[1rem] ">
-                <p>Last Charge: </p>
-                <p>18mins ago</p>
+                <div className="text-sm font-normal ">
+                    <div className="flex justify-between pb-[1rem]">
+                    <p >Energy Consumed:</p>
+                    <p>{charger.energyConsumed}Kw</p>
+                    </div>
+                    <div className="flex justify-between pb-[1rem]">
+                    <p>Revenue: </p>
+                    <p>N{charger.revenue}</p>
+                    </div>
+                    <div className="flex justify-between pb-[1rem] ">
+                    <p>Last Charge: </p>
+                    <p>{charger.lastCharged}</p>
+                    </div>
                 </div>
-            </div>
-            </div>
+                </div>
+            ))}
+           
 
             {/* 2 */}
-            <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem]  mr-4">
+            {/* <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem]  mr-4">
             <div className="flex justify-between">
                 <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Meta Charger </h3>
                 <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
@@ -84,10 +88,10 @@ const ListOfChargers = () => {
                 <p>18mins ago</p>
                 </div>
             </div>
-            </div>
+            </div> */}
 
             {/* 3 */}
-            <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] ">
+            {/* <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] ">
             <div className="flex justify-between">
                 <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Keke Charger </h3>
                 <div className="flex justify-between w-[8rem] rounded-full py-[0.5rem]  bg-[#FEF3F2] px-[0.75rem] font-semibold text-[#B42318] text-xs mr-[0.25rem]"><img className="w-[0.5rem]" src={RedDot}/> Disconnected</div>
@@ -107,9 +111,9 @@ const ListOfChargers = () => {
                 <div className="flex justify-between pb-[1rem]">
                 <p>Last Charge: </p>
                 <p>18mins ago</p>
-                </div>
-            </div>
-            </div>
+                </div> */}
+            {/* </div> */}
+            {/* </div> */}
         </div>
         
     </div>  );

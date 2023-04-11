@@ -12,16 +12,13 @@ const Index = () => {
   const [companyActiveChargers, setActiveChargers] = useState("")
   const [OfflineCharger, setOfflineChargers] = useState("")
   const [companyEnergy, setCompanyEnergy] = useState("")
-  const [chargerList, setChargerList] = useState("")
+  const [chargerList, setChargerList] = useState([])
 
   //base url
   const url = "http://evapi.estations.com"
 
 // berarer token from local storage
 const token = localStorage.getItem("token")
-
-
-
 
 //company id
 const id = localStorage.getItem("id")
@@ -78,6 +75,7 @@ const GetOfflineChargers = () =>{
   const getListOfChargers= () =>{
     axios.get(url + `/Chargers/get-list-company-chargers/${id}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
     .then((res)=>{
+      console.log(res.data)
       setChargerList(res.data)
       console.log(chargerList)
     })
@@ -117,7 +115,7 @@ useEffect(()=>{
          <Hero/>
         </div>
         <ChargerStat total={totalCompanyChargers } ActiveChargers={companyActiveChargers} OfflineChargers={OfflineCharger} TotalEnergy={companyEnergy}/>
-        <ListOfChargers/>
+        <ListOfChargers chargers={chargerList}/>
         <Transactions/>
       </div>
       

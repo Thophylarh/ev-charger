@@ -13,6 +13,7 @@ const EvChargers = () => {
     const [noOfActiveChargers, setNoActiveChargers] = useState("")
     const [noOfflineChargers, setNoOfflineChargers] = useState("")
     const [totalEnergy, setTotalEnergy] = useState("")
+    const [stationChargerList, setStationChargerList] = useState([])
   
     const url = "http://evapi.estations.com";
   
@@ -52,12 +53,24 @@ const EvChargers = () => {
         setTotalEnergy(res.data)
       })
     }
+
+    //get list of chargers
+    const getListOfChargers= () =>{
+      axios.get(url + `/Chargers/get-list-station-charger/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+      .then((res)=>{
+        console.log(res)
+        setStationChargerList(res.data)
+       
+      })
+    }
+
     
     useEffect(()=>{
       GetstationChargers();
       GetofflineChargers();
       GetTotalEnergy();
       GetactiveChargers();
+      getListOfChargers();
     }, [])
 
     return ( 
@@ -121,16 +134,14 @@ const EvChargers = () => {
 
         <section className="pl-[1.5rem]">
         <div className="grid grid-cols-3 pb-[2rem]">
-            <ChargerCard status={true} charger="Tesla charger" />
-            <ChargerCard status={true} charger="Meta charger"/>
-            <ChargerCard status={false} charger="Innoson charger"/>
+          {stationChargerList.map((charger)=>(
+            <ChargerCard status={true} charger={charger} />
+          ))}
+            
+            
         </div>
 
-        <div className="grid grid-cols-3">
-            <ChargerCard status={true} charger="Tesla charger"/>
-            <ChargerCard status={true} charger="Meta charger"/>
-            <ChargerCard status={false} charger="Innoson charger"/>
-        </div>
+       
         </section>
         
     </div>
