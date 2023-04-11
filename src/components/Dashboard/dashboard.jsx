@@ -10,20 +10,65 @@ const Index = () => {
 //base url  
 const url = "http://evapi.estations.com"
 const [data, setData] = useState("")
+ const [totalChargers, setTotalChargers] = useState("")
+  const [noOfActiveChargers, setNoActiveChargers] = useState("")
+  const [noOfflineChargers, setNoOfflineChargers] = useState("")
+  const [totalEnergy, setTotalEnergy] = useState("")
 
 const token = localStorage.getItem("token")
-const id = localStorage.getItem("id")
+const id = localStorage.getItem("stationId")
+   const companyId = localStorage.getItem("id");
+    const stationId = localStorage.getItem("stationId");
 
-const getData = ( ) =>{
-  axios.get(url + "/Companies/get-company-by-id/"+id,  { headers:{ 'Authorization': `Bearer ${token}`}})
+//get station details
+const getStationDetails = () =>{
+  axios.get(url +"/Stations/get-station-by-id/" + id, { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     setData(res.data)
-    // console.log(data)
+    console.log(res.data)
   })
-} 
- 
+}
+
+  //total number of station chargers
+  const GetstationChargers = () =>{
+    axios.get(url + `/Chargers/get-total-station-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res) =>{
+      
+      setTotalChargers(res.data)
+    })
+  }
+
+   //total number of active chargers 
+  const GetactiveChargers = () =>{
+    axios.get(url + `/Chargers/get-station-active-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+    .then((res)=>{
+      setNoActiveChargers(res.data)
+    })
+  }
+
+    // //total number of offline chargers 
+  const GetofflineChargers = () =>{
+    axios.get(url + `/Chargers/get-station-offline-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+    .then((res)=>{
+      setNoOfflineChargers(res.data)
+    })
+  }
+
+    // //total energy consumed
+  const GetTotalEnergy= () =>{
+    axios.get(url + `/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
+    .then((res)=>{
+      setTotalEnergy(res.data)
+    })
+  }
+
+
 useEffect(()=>{
-  getData()
+  getStationDetails ();
+  GetstationChargers();
+  GetactiveChargers();
+  GetofflineChargers();
+  GetTotalEnergy();
 }, [])
 
 
@@ -33,7 +78,7 @@ useEffect(()=>{
       <div>
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="font-bold text-2xl">Hello, {data.companyName}</h1>
+            <h1 className="font-bold text-2xl">Hello, {data.stationName} </h1>
           </div>
           <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
             <p className=" text-white font-light text-base ">This month</p>
@@ -46,7 +91,7 @@ useEffect(()=>{
         <div className="mt-[1rem]">
          <Hero/>
         </div>
-        <ChargerStat/>
+        <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
         <ListOfChargers/>
         <Transactions/>
       </div>

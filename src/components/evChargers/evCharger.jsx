@@ -28,7 +28,7 @@ const EvChargers = () => {
         setTotalChargers(res.data)
       })
     }
-  
+    
     //total number of active chargers 
     const GetactiveChargers = () =>{
       axios.get(url + `/Chargers/get-station-active-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )

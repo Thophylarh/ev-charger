@@ -1,8 +1,43 @@
 import dropDown from "../../assets/svg/dropDownArrow.svg";
 import nextArrow from "../../assets/svg/next-arrow.svg";
+import {useState, useEffect} from "react"
+import axios from "axios"
+import { useNavigate } from "react-router";
 
 
 const ListOfStations = () => {
+    const Navigate = useNavigate();
+    const [stations, setStations] = useState([])
+
+    //base url
+    const url = "http://evapi.estations.com";
+
+    //bearer token
+    const token = localStorage.getItem("token");
+
+    //company id
+    const companyId = localStorage.getItem("id");
+
+    //get stations under a company 
+    const getData = ( ) =>{
+        axios.get(url + "/Stations/get-station-by-company/" + companyId,  { headers:{ 'Authorization': `Bearer ${token}`}})
+        .then((res)=>{
+        //   console.log(res.data, "this is the data")
+          setStations(res.data)
+          console.log(stations,"//stations")
+        })
+      }
+     
+     
+      useEffect(()=>{
+        getData()
+      }, [])
+
+      const viewStations = (id, e) =>{
+        window.localStorage.setItem("stationId", id);
+        Navigate("/dash")
+      }
+
     return ( <div className="py-[1.5rem] px-[1.5rem] ">
         <div className="flex justify-between items-center">
           <div>
@@ -29,33 +64,23 @@ const ListOfStations = () => {
                     <th className="w-[10rem]"></th>
                 </thead>
 
-                <tr className=" border-b-2 border-solid border-[#47546] " >
-                    <td className="py-[1rem]">1</td>
-                    <td>illupeju station</td>
-                    <td>NGN 500,000.00</td>
-                    <td>500kw</td>
-                    <td>Lagos</td>
-                    <td>3</td>
-                    <td><button className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]">View station</button></td>
-                </tr>
-                <tr className=" border-b-2 border-solid border-[#47546] ">
-                    <td className="py-[1rem]">1</td>
-                    <td>illupeju station</td>
-                    <td>NGN 500,000.00</td>
-                    <td>500kw</td>
-                    <td>Lagos</td>
-                    <td>3</td>
-                    <td><button className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]">View station</button></td>
-                </tr>
-                <tr className=" border-b-2 border-solid border-[#47546] ">
-                    <td className="py-[1rem]">1</td>
-                    <td>illupeju station</td>
-                    <td>NGN 500,000.00</td>
-                    <td>500kw</td>
-                    <td>Lagos</td>
-                    <td>3</td>
-                    <td><button className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]">View station</button></td>
-                </tr>
+                
+                {stations.map((station) =>(
+                    <tr key={station.id} className=" border-b-2 border-solid border-[#47546] ">
+                        <td className="py-[1rem]">{station.id}</td>
+                        <td>{station.stationName}</td>
+                        <td>NGN 500,000.00</td>
+                        <td>500kw</td>
+                        <td>Lagos</td>
+                        <td>3</td>
+                        <td><button  onClick={(e)=>{viewStations(station.id, e)}}
+                        className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]" 
+                        >View station</button></td>
+                    </tr>
+                ))}
+               
+              
+               
             </table>
             <div className="flex justify-between py-[4rem]">
             <p>1-50 of 2,500</p>

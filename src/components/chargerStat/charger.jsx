@@ -5,57 +5,27 @@ import OfflineCharger from "../../assets/images/offline-charger.png"
 import Battery from "../../assets/images/battery.png"
 import axios from "axios";
 
-function Charger() {
-  const [totalChargers, setTotalChargers] = useState("")
-  const [noOfActiveChargers, setNoActiveChargers] = useState("")
-  const [noOfflineChargers, setNoOfflineChargers] = useState("")
-  const [totalEnergy, setTotalEnergy] = useState("")
+function Charger(props) {
+ 
 
-  const url = "http://evapi.estations.com";
+  // const url = "http://evapi.estations.com";
 
-    const token = localStorage.getItem("token");
-    const companyId = localStorage.getItem("id");
-    const stationId = localStorage.getItem("stationId");
+  //   const token = localStorage.getItem("token");
+ 
 
-  //total number of station chargers
-  const GetstationChargers = () =>{
-    axios.get(url + `/Chargers/get-total-station-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}})
-    .then((res) =>{
-      
-      setTotalChargers(res.data)
-    })
-  }
 
-  //total number of active chargers 
-  const GetactiveChargers = () =>{
-    axios.get(url + `/Chargers/get-station-active-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setNoActiveChargers(res.data)
-    })
-  }
 
-  //total number of offline chargers 
-  const GetofflineChargers = () =>{
-    axios.get(url + `/Chargers/get-station-offline-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setNoOfflineChargers(res.data)
-    })
-  }
+ 
 
-  //total energy consumed
-  const GetTotalEnergy= () =>{
-    axios.get(url + `/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setTotalEnergy(res.data)
-    })
-  }
+
+
   
-  useEffect(()=>{
-    GetstationChargers();
-    GetofflineChargers();
-    GetTotalEnergy();
-    GetactiveChargers();
-  }, [])
+  // useEffect(()=>{
+  //   GetstationChargers();
+  //   GetofflineChargers();
+  //   GetTotalEnergy();
+  //   GetactiveChargers();
+  // }, [])
 
   return (
     <div>
@@ -72,21 +42,21 @@ function Charger() {
               <img className="w-[2.5rem] self-center" src={Chargers} alt="" />
             </div>
             <div className="text-gray-400 text-base font-normal">Number of chargers</div>
-            <h4 className="pt-2  text-gray-900 text-2xl font-bold">{totalChargers}</h4>
+            <h4 className="pt-2  text-gray-900 text-2xl font-bold">{props.total}</h4>
           </div>
           <div className=" p-8  border border-gray-50 border-1 rounded-md flex flex-col justify-center items-center">
             <div className="pb-8">
               <img className="w-[2.5rem]" src={ActiveCharger} alt="" />
             </div>
             <div className="text-gray-400 text-base font-normal">Active Chargers</div>
-            <h4 className="pt-2  text-gray-900 text-2xl font-bold">{noOfActiveChargers}</h4>
+            <h4 className="pt-2  text-gray-900 text-2xl font-bold">{props.ActiveChargers}</h4>
           </div>
           <div className=" border border-gray-50 border-1 rounded-md p-8  flex flex-col justify-center items-center">
             <div className="pb-8">
               <img className="w-[2.5rem]" src={OfflineCharger} alt="" />
             </div>
             <div className="text-gray-400  text-base font-normal">Offline Chargers</div> 
-            <h4 className="pt-2 text-gray-900 text-2xl font-bold">{noOfflineChargers}</h4>
+            <h4 className="pt-2 text-gray-900 text-2xl font-bold">{props.OfflineChargers}</h4>
           </div>
         </div>
         <div className="col-span-1">
@@ -94,7 +64,7 @@ function Charger() {
                 <div className="flex flex-col justify-center items-center">
                     <img className="h-[8rem] mt-12" src={Battery} alt="" />
                     <div className="font-normal text-4xl text-white pt-[1.25rem]">
-                    <h1>{totalEnergy} kw</h1>
+                    <h1>{props.TotalEnergy} kw</h1>
                     </div>
                     <div className="text-gray-400 text-sm font-normal pt-[0.5rem]">
                     <p>Current consumption</p>
