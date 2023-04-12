@@ -1,12 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Profit from "../../assets/svg/profit.png";
 import LineChart from "../Chart/lineChart";
 import axios from "axios";
 import GreenChart from "../Chart/greenChart";
 import OrangeChart from "../Chart/orangeChart";
 
-function Hero() {
+function Hero(props) {
+
+  let revenue = props.revenue
+  let TotalRevenue = revenue.TotalRevenue
+  let graphData = props.graphData
+
+  let energyRevenue = graphData.map((data) =>{
+    return data.energyRevenue
+   
+  })
  
+  let TimeRevenue = graphData.map((data)=>{
+    return data.timeRevenue
+  })
 
   return (
     <div>
@@ -17,7 +29,7 @@ function Hero() {
               <p className="text-gray-400 font-normal text-sm">Total revenue</p>
             </div>
             <div className="pb-2">
-              <h1 className="font-bold text-2xl text-gray-900">$800,000.00</h1>
+              <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue}</h1>
             </div>
             <div className="flex items-center gap-2 pb-4">
               <div className="text-sm text-gray-600 font-normal">22%</div>
@@ -34,7 +46,7 @@ function Hero() {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                  $550,000.00
+                ₦{revenue.TimeRevenue}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -56,7 +68,7 @@ function Hero() {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                  $550,000.00
+                ₦{revenue.EnergyRevenue}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -75,7 +87,7 @@ function Hero() {
             <p>Revenue Summary</p>
           </div>
           <div id="chart" className="h-[22rem]">
-            <LineChart />
+            <LineChart energyRevenue={energyRevenue} timeRevenue={TimeRevenue}/>
           </div>
         </div>
       </div>

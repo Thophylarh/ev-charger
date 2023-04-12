@@ -3,6 +3,7 @@ import Dot from "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg";
 import Station from "../../assets/images/charging-station.png";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 
 export const IsActiveTag = ({isActive}) => {
 
@@ -15,14 +16,26 @@ export const IsActiveTag = ({isActive}) => {
   return <div>{isActive ? activeTag : disconnected}</div>;
 };
 
-const chargerCard = (props) => {
+
+const ChargerCard = (props) => {
+  const Navigate = useNavigate();
   const charger = props.charger;
+
+  const chargerDetails = () =>{
+      
+    window.localStorage.setItem("chargerid", charger.Id );
+    //navigate
+    Navigate("/dash/chargerDetails")
+  }
+
+  
+
   return (
-    <div>
-      <div className=" bg-white p-[0.75rem] 2xl:p-[2rem] w-[95%] ">
+    <div >
+      <div className=" bg-white p-[0.75rem] 2xl p-[2rem] w-[95%] ">
         <div className="flex justify-between">
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
-            {charger.chargerName}
+            {charger.ChargerName}
           </h3>
         <IsActiveTag isActive={true}/>
         </div>
@@ -32,26 +45,26 @@ const chargerCard = (props) => {
         <div className="text-sm font-normal ">
           <div className="flex justify-between pb-[1rem]">
             <p>Energy Consumed:</p>
-            <p>{charger.energyConsumed}Kw</p>
+            <p>{charger.EnergyConsumed}Kw</p>
           </div>
           <div className="flex justify-between pb-[1rem]">
             <p>Revenue: </p>
-            <p>N{charger.revenue}</p>
+            <p>N{charger.Revenue}</p>
           </div>
           <div className="flex justify-between pb-[2.5rem]">
             <p>Last Charge: </p>
-            <p>{charger.lastCharged}</p>
+            <p>{charger.LastCharged}</p>
           </div>
         </div>
 
-        <Link to="/dash/chargerDetails" className="">
+        
         <div className="button flex justify-center pb-[2rem]">
-            <button className="border rounded border-[#EFF2FA] border-solid border-1 w-[16rem] 2xl:w-[18rem] p-[0.75rem] text-[#1DB954]" type="button">View Details</button>
+            <button onClick={chargerDetails} className="border rounded border-[#EFF2FA] border-solid border-1 w-[16rem] 2xl:w-[18rem] p-[0.75rem] text-[#1DB954]" type="button">View Details</button>
         </div>
-        </Link>
+        
       </div>
     </div>
   );
 };
 
-export default chargerCard;
+export default ChargerCard;

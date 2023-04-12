@@ -4,30 +4,32 @@ import nextArrow from "../../assets/svg/next-arrow.svg";
 import axios from "axios"
 
 
-const Transactions = () => {
+const Transactions = (props) => {
 
-    const [companyTransactions, setCompanyTransactions] = useState([])
+//     const [companyTransactions, setCompanyTransactions] = useState([])
 
-     //base url
-  const url = "http://evapi.estations.com"
+//      //base url
+//   const url = "http://evapi.estations.com"
 
-  // berarer token from local storage
-  const token = localStorage.getItem("token")
+//   // berarer token from local storage
+//   const token = localStorage.getItem("token")
 
-  //company id
-  const companyId = localStorage.getItem("id");
+//   //company id
+//   const companyId = localStorage.getItem("id");
 
-    const transactions = () =>{
-        axios.get(url + "/Transactions/get-last10-transactions/" + companyId,  { headers:{ 'Authorization': `Bearer ${token}`}})
-        .then((res)=>{
-            console.log(res)
-          setCompanyTransactions(res.data)
-        })
-    }
+//     const transactions = () =>{
+//         axios.get(url + "/Transactions/get-last10-transactions/" + companyId,  { headers:{ 'Authorization': `Bearer ${token}`}})
+//         .then((res)=>{
+//             console.log(res)
+//           setCompanyTransactions(res.data)
+//         })
+//     }
 
-    useEffect(()=>{
-        transactions();
-      }, [])
+    // useEffect(()=>{
+    //     transactions();
+    //   }, [])
+    
+    const Transactions = props.transactions
 
     return ( <div >
         <div className="py-[1.5rem]">
@@ -40,21 +42,21 @@ const Transactions = () => {
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
                     
                     <th className="w-[10%]">#</th>
-                    <th className="w-[20%]">Charger</th>
+                    <th className="w-[20%]">Charger Id</th>
                     <th  className="w-[12%]">Amount</th>
                     <th  className="w-[12%]">Energy</th>
                     <th  className="w-[20%]">Date</th>
                     <th  className="w-[15%]">Status</th>
                 </tr>
                 
-                {companyTransactions.map((compTransaction)=>(
+                {Transactions.map((Transaction)=>(
                         <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                         <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} checked/></th>
-                            <td>{compTransaction.transactionId}</td>
-                            <td>charger X1</td>
-                            <td>{compTransaction.totalAmount}</td>
-                            <td>{compTransaction.kwCharged}Kw</td>
-                            <td>{compTransaction.dateOfTransaction}</td>
+                            <td>{Transaction.transactionId}</td>
+                            <td>{Transaction.chargerId}</td>
+                            <td>{Transaction.totalAmount}</td>
+                            <td>{Transaction.totalUnitCharged}Kw</td>
+                            <td>{Transaction.dateOfTransaction}</td>
                             <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                         </tr>
                 ))}

@@ -1,8 +1,10 @@
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
 
-const LineChart = () => {
-  
+const LineChart = (props) => {
+ let energyRevenue = props.energyRevenue
+ let timeRevenue = props.timeRevenue
+  // console.log(timeRevenue)
   return (
     <Line
       data={{
@@ -26,13 +28,14 @@ const LineChart = () => {
             label: "Revenue by time",
             fill: "",
             backgroundColor: "#FFDF90",
-            data: Array.from(Array(12)).map(
-              (i) => Math.floor(Math.random() * 100) + 1
-            ),
+            data: timeRevenue,
             borderColor: "#FFDF90",
             hoverBackgroundColor: ["#e2f5ef"],
             radius: 1,
             // borderWidth: 2,
+            // Array.from(Array(12)).map(
+            //   (i) => Math.floor(Math.random() * 100) + 1
+            // )
             pointBorderWidth: 4,
             tension: 0.4,
             
@@ -42,9 +45,7 @@ const LineChart = () => {
             label: "Revenue by energy",
             fill: "start",
             backgroundColor: "rgb(246,255,249)",
-            data: Array.from(Array(12)).map(
-              (i) => Math.floor(Math.random() * 100) + 1
-            ),
+            data: energyRevenue,
             borderColor: "#1DB954",
             hoverBackgroundColor: [""],
             radius: 2,
@@ -90,7 +91,7 @@ const LineChart = () => {
           y: {
             display: true,
             min: 0, 
-              max: 240,
+              max: 1000000,
             grid: {
               display: false,
               color: "#eee",
@@ -98,11 +99,11 @@ const LineChart = () => {
             },
             ticks: {
               
-              stepSize: 40,
+              stepSize: 100000,
              
               autoSkip: false,
                 callback: function (value) {
-                  return value + "k";
+                  return "N" + value ;
                 },
             },
           },

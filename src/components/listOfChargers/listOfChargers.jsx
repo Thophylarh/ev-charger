@@ -39,9 +39,9 @@ const ListOfChargers = (props) => {
 
         <div className=" flex justify-between bg-white mt-[1.5rem] p-[4rem] text-Grey-700">
             {chargers.map((charger)=>(
-                <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-[1rem]" key={charger.id}>
+                <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-[1rem]" key={charger.Id}>
                 <div className="flex justify-between ">
-                    <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">{charger.chargerName}</h3>
+                    <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">{charger.ChargerName}</h3>
                     <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
                 </div>
                 <div  className="flex justify-center py-[5rem]">
@@ -50,15 +50,15 @@ const ListOfChargers = (props) => {
                 <div className="text-sm font-normal ">
                     <div className="flex justify-between pb-[1rem]">
                     <p >Energy Consumed:</p>
-                    <p>{charger.energyConsumed}Kw</p>
+                    <p>{charger.EnergyConsumed}Kw</p>
                     </div>
                     <div className="flex justify-between pb-[1rem]">
                     <p>Revenue: </p>
-                    <p>N{charger.revenue}</p>
+                    <p>N{charger.Revenue}</p>
                     </div>
                     <div className="flex justify-between pb-[1rem] ">
                     <p>Last Charge: </p>
-                    <p>{charger.lastCharged}</p>
+                    <p>{charger.LastCharged}</p>
                     </div>
                 </div>
                 </div>

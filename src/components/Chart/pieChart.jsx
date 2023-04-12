@@ -7,7 +7,11 @@ import {
 } from "chart.js"
 import { type } from "@testing-library/user-event/dist/type";
 
-const DoughnutChart = () =>{
+const DoughnutChart = (props) =>{
+    const revenue = props.ChargerRevenue;
+
+    const energyRevenue = revenue.EnergyRevenue;
+    const timeRevenue = revenue.TimeRevenue;
   return(
     <Doughnut
     data={
@@ -17,7 +21,7 @@ const DoughnutChart = () =>{
                 {
                     type: "doughnut",
                     label: "",
-                    data: [3,7],
+                    data: [energyRevenue,timeRevenue],
                     backgroundColor: ["#1DB954", "#F4BE37"]
                 }
 

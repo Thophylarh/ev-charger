@@ -13,6 +13,9 @@ const Index = () => {
   const [OfflineCharger, setOfflineChargers] = useState("")
   const [companyEnergy, setCompanyEnergy] = useState("")
   const [chargerList, setChargerList] = useState([])
+  const [companyTransactions, setCompanyTransactions] = useState([])
+  const [revenue, setRevenue] = useState([])
+  const [graphData, setGraphData] = useState([])
 
   //base url
   const url = "http://evapi.estations.com"
@@ -75,11 +78,43 @@ const GetOfflineChargers = () =>{
   const getListOfChargers= () =>{
     axios.get(url + `/Chargers/get-list-company-chargers/${id}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
     .then((res)=>{
-      console.log(res.data)
+     
       setChargerList(res.data)
-      console.log(chargerList)
+      
     })
   }
+
+  //company last 10 transactions
+  const transactions = () =>{
+   const limit = 10;
+    axios.get(url +`/Transactions/get-last10-transactions/company/${id}/${limit}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+       
+      setCompanyTransactions(res.data)
+    })
+}
+
+//revenue for company 
+const Revenue = () =>{
+   
+  axios.get(url +`/Transactions/get-revenue/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    setRevenue(res.data)
+    
+  })
+}
+
+//graph data - revenue by month
+const revenuebymonth = () =>{
+   
+  axios.get(url +`/Transactions/get-group-transaction-by-month/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    // console.log(res)
+    setGraphData(res.data)
+    console.log(res)
+    
+  })
+}
 
 
 //on mount get data
@@ -90,6 +125,9 @@ useEffect(()=>{
   GetOfflineChargers();
   GetTotalEnergy();
   getListOfChargers();
+  transactions();
+  Revenue();
+  revenuebymonth();
 }, [])
 
 
@@ -112,11 +150,11 @@ useEffect(()=>{
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your company dashboard here</p>
         <div className="mt-[1rem]">
-         <Hero/>
+         <Hero revenue={revenue} graphData={graphData}/>
         </div>
         <ChargerStat total={totalCompanyChargers } ActiveChargers={companyActiveChargers} OfflineChargers={OfflineCharger} TotalEnergy={companyEnergy}/>
         <ListOfChargers chargers={chargerList}/>
-        <Transactions/>
+        <Transactions transactions={companyTransactions}/>
       </div>
       
     </div>

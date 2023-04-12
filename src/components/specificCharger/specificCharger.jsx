@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Dot from "../../assets/svg/activeDot.svg";
 import dropDown from "../../assets/svg/dropDownArrow.svg";
 import BackArrow from "../../assets/svg/backArrow.svg";
@@ -15,10 +15,15 @@ import OperationHour from "../modals/operationHours";
 import BillingTypeModal from "../modals/billingTypeModal";
 import DoughnutChart from "../Chart/pieChart";
 import Modal from "../Modal/modal";
+import axios from "axios"
 
 const SpecificCharger = () => {
   const [operationModal, setOperationModal] = useState(false);
   const [billingModal, setBillingModal] = useState(false);
+  const [chargerTransactions, setchargerTransactions] = useState([])
+  const [graphChargerData, setGraphChargerData] = useState([])
+  const [ChargerRevenue, setChargerRevenue] = useState([])
+  const [chargersDetails, setChargerDetails] = useState([])
 
   const changeHours = () => {
     setOperationModal(true);
@@ -31,6 +36,77 @@ const SpecificCharger = () => {
   const handleClose = () => {
     setBillingModal(false);
   };
+
+   //base url
+   const url = "http://evapi.estations.com"
+
+   // bearer token from local storage
+   const token = localStorage.getItem("token")
+
+   //charger id
+   const id = localStorage.getItem("chargerid")
+
+   //charger details
+   const GetChargerDetails = () =>{
+    axios.get(url +`/Chargers/get-charger-by-id/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+      console.log(res.data)
+      setChargerDetails(res.data[0])
+      
+    })
+  }
+
+   
+    // transactions for specific charger
+    const transactions = () =>{
+      const limit = 10;
+      axios.get(url +`/Transactions/get-last10-transactions/charger/${id}/${limit}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+      .then((res)=>{
+          
+        setchargerTransactions(res.data)
+      })
+  }
+
+  //graph data - revenue by month for charger
+  const revenuebymonth = () =>{
+   
+  axios.get(url +`/Transactions/get-group-transaction-by-month/charger/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    console.log(res.data)
+    setGraphChargerData(res.data)
+    
+    
+  })
+}
+  //set energy revenue
+    let energyRevenue = graphChargerData.map((data) =>{
+    return data.energyRevenue
+ 
+    });
+
+    //set time revenue 
+    let TimeRevenue = graphChargerData.map((data)=>{
+  return data.timeRevenue
+    });
+
+    //revenue for charger 
+  const Revenue = () =>{
+   
+  axios.get(url +`/Transactions/get-revenue/charger/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    console.log(res.data)
+    setChargerRevenue(res.data)
+    
+  })
+}
+   
+  useEffect(()=>{
+    transactions();
+    revenuebymonth();
+    Revenue();
+    GetChargerDetails();
+  }, [])
+
 
   return (
     <div className="w-full h-screen overflow-y-scroll">
@@ -45,11 +121,9 @@ const SpecificCharger = () => {
             ></img>{" "}
           </Link>
           <h6 className="font-bold text-lg pr-[2rem] text-[#101828] leading-6 mt-[0.25rem]">
-            Ev Chargers / Tesla Charger
+            {"Ev Chargers/" + chargersDetails.ChargerName}
           </h6>
-          <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs">
-            <img className="w-[0.5rem]" src={Dot} alt="" /> Active
-          </div>
+         
         </div>
 
         <div className="flex w-[10rem] justify-between items-center bg-white rounded-md  px-[1.25rem] py-[0.25rem]">
@@ -159,13 +233,13 @@ const SpecificCharger = () => {
             <p className="text-gray-400 text-sm font-normal">
               Charger Revenue Summary
             </p>
-            <Chart />
+            <Chart energyRevenue={energyRevenue} timeRevenue={TimeRevenue} />
           </div>
         </div>
         <div className="px-[1rem] w-[35%] ">
           <div className=" bg-[#101828] text-white flex flex-col justify-center items-center  ">
             <h3 className="font-normal text-4xl pt-[2.5rem] mx-[3.5rem]">
-              356.67Kw
+              {chargersDetails.EnergyConsumed}Kw 
             </h3>
             <p className="font-normal text-sm pb-[3rem]">
               Total energy consumption
@@ -173,7 +247,7 @@ const SpecificCharger = () => {
           </div>
           <div className="bg-white grid place-items-center  mt-[0.75rem]">
             <div className="pt-[0.75rem] w-[8rem] h-[8rem]  ">
-              <DoughnutChart />
+              <DoughnutChart ChargerRevenue={ChargerRevenue}/>
             </div>
             <div className="flex justify-between pb-[1.25rem]">
               <div className="pr-[4rem]">
@@ -181,7 +255,7 @@ const SpecificCharger = () => {
                   Revenue by time
                 </p>
                 <p className="text-xl font-bold text-[#101828] leading-7">
-                  $550,000.00
+                   {ChargerRevenue.TimeRevenue}
                 </p>
               </div>
               <div>
@@ -189,7 +263,7 @@ const SpecificCharger = () => {
                   Revenue by energy
                 </p>
                 <p className="text-xl font-bold text-[#101828] leading-7">
-                  $550,000.00
+                {ChargerRevenue.EnergyRevenue}
                 </p>
               </div>
             </div>
@@ -198,7 +272,7 @@ const SpecificCharger = () => {
       </div>
       </div>
       <div className="px-[1.5rem]">
-        <Transactions />
+        <Transactions  transactions={chargerTransactions}/>
       </div>
       
 

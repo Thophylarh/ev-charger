@@ -24,7 +24,7 @@ const ListOfStations = () => {
         .then((res)=>{
         //   console.log(res.data, "this is the data")
           setStations(res.data)
-          console.log(stations,"//stations")
+          console.log(stations)
         })
       }
      
@@ -34,6 +34,7 @@ const ListOfStations = () => {
       }, [])
 
       const viewStations = (id, e) =>{
+        console.log(id)
         window.localStorage.setItem("stationId", id);
         Navigate("/dash")
       }
@@ -66,14 +67,14 @@ const ListOfStations = () => {
 
                 
                 {stations.map((station) =>(
-                    <tr key={station.id} className=" border-b-2 border-solid border-[#47546] ">
-                        <td className="py-[1rem]">{station.id}</td>
-                        <td>{station.stationName}</td>
-                        <td>NGN 500,000.00</td>
-                        <td>500kw</td>
-                        <td>Lagos</td>
-                        <td>3</td>
-                        <td><button  onClick={(e)=>{viewStations(station.id, e)}}
+                    <tr key={station.Id} className=" border-b-2 border-solid border-[#47546] ">
+                        <td className="py-[1rem]">{station.Id}</td>
+                        <td>{station.StationName}</td>
+                        <td>N {station.Revenue}</td>
+                        <td>{station.EnergyConsumed}Kw</td>
+                        <td>{station.Location}</td>
+                        <td>{station.Chargers}</td>
+                        <td><button  onClick={(e)=>{viewStations(station.Id, e)}}
                         className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]" 
                         >View station</button></td>
                     </tr>

@@ -15,17 +15,20 @@ const [data, setData] = useState("")
   const [noOfflineChargers, setNoOfflineChargers] = useState("")
   const [totalEnergy, setTotalEnergy] = useState("")
   const [stationChargerList, setStationChargerList] = useState([])
+  const [stationTransactions, setStationTransactions] = useState([])
+  const [revenue, setRevenue] = useState([])
+  const [stationgraphData, setstationGraphData] = useState([])
 
 const token = localStorage.getItem("token")
 
 
-const id = localStorage.getItem("stationId")
+
    const companyId = localStorage.getItem("id");
     const stationId = localStorage.getItem("stationId");
 
 //get station details
 const getStationDetails = () =>{
-  axios.get(url +"/Stations/get-station-by-id/" + id, { headers:{ 'Authorization': `Bearer ${token}`}})
+  axios.get(url +"/Stations/get-station-by-id/" + stationId, { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     setData(res.data)
     console.log(res.data)
@@ -74,7 +77,38 @@ const getStationDetails = () =>{
      
     })
   }
+    const station = "station";
+  //station transactions
+  const transactions = () =>{
+    const limit = 10;
+    axios.get(url +`/Transactions/get-last10-transactions/station/${stationId}/${limit}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+        
+      setStationTransactions(res.data)
+    })
+}
 
+//revenue for station 
+const Revenue = () =>{
+  axios.get(url +`/Transactions/get-revenue/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    setRevenue(res.data)
+    
+    
+  })
+}
+
+//graph data - revenue by month for stations
+const revenuebymonth = () =>{
+   
+  axios.get(url +`/Transactions/get-group-transaction-by-month/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    // console.log(res)
+    setstationGraphData(res.data)
+    
+    
+  })
+}
 
 useEffect(()=>{
   getStationDetails ();
@@ -83,6 +117,9 @@ useEffect(()=>{
   GetofflineChargers();
   GetTotalEnergy();
   getListOfChargers();
+  transactions();
+  Revenue();
+  revenuebymonth();
 }, [])
 
 
@@ -103,11 +140,11 @@ useEffect(()=>{
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your station dashboard here</p>
         <div className="mt-[1rem]">
-         <Hero/>
+         <Hero revenue={revenue} graphData={stationgraphData}/>
         </div>
         <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
         <ListOfChargers chargers={stationChargerList}/>
-        <Transactions/>
+        <Transactions transactions={stationTransactions}/>
       </div>
       
     </div>
