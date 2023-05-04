@@ -1,27 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Profit from "../../assets/svg/profit.png";
-import LineChart from "../Chart/lineChart";
+import FLineChart from "../Chart/filteredLineChart";
 import axios from "axios";
 import GreenChart from "../Chart/greenChart";
 import OrangeChart from "../Chart/orangeChart";
 
 function Hero(props) {
 
-  let revenue = props.revenue
+  let revenue = props.fRevenue
   let TotalRevenue = revenue.TotalRevenue
   let graphData = props.graphData
 
-  let mappedGraph = graphData.map((data)=>{
+  let totalAmount = graphData.map((data) =>{
     return data.totalAmount
-  })
-  // let energyRevenue = graphData.map((data) =>{
-  //   return data.energyRevenue
    
-  // })
+  })
+
+  let month = graphData.map((data)=>{
+    return data.month
+  })
  
-  // let TimeRevenue = graphData.map((data)=>{
-  //   return data.timeRevenue
-  // })
+ 
 
   return (
     <div>
@@ -29,7 +28,7 @@ function Hero(props) {
         <div className="col-span-1 bg-[#fff] p-6 border-r">
           <div className=" border-b">
             <div className="pb-4">
-              <p className="text-gray-400 font-normal text-sm">Total revenue</p>
+              <p className="text-gray-400 font-normal text-sm"> filtered Total revenue</p>
             </div>
             <div className="pb-2">
               <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue?.toLocaleString()}</h1>
@@ -90,7 +89,7 @@ function Hero(props) {
             <p>Revenue Summary</p>
           </div>
           <div id="chart" className="h-[22rem]">
-            <LineChart revenue={mappedGraph}/>
+            <FLineChart totalAmount={totalAmount} month={month} />
           </div>
         </div>
       </div>

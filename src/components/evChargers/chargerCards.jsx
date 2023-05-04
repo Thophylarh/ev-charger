@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Dot from "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg";
 import Station from "../../assets/images/charging-station.png";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
+import moment from "moment/moment";
 
-export const IsActiveTag = ({isActive}) => {
+
+
 
   let activeTag = (
     <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
@@ -13,13 +15,22 @@ export const IsActiveTag = ({isActive}) => {
   let disconnected = (
     <div className="flex justify-between w-[8rem] rounded-full py-[0.5rem]  bg-[#FEF3F2] px-[0.75rem] font-semibold text-[#B42318] text-xs mr-[0.25rem]"><img className="w-[0.5rem]" src={RedDot} alt=""/> Disconnected</div>
   );
-  return <div>{isActive ? activeTag : disconnected}</div>;
-};
+ 
 
 
 const ChargerCard = (props) => {
   const Navigate = useNavigate();
   const charger = props.charger;
+  // console.log(charger.ActiveStatus)
+// const [isActive, setIsActive] = useState(true)
+
+  // const chargerActivity = () =>{
+  //   if( charger.ActiveStatus === 1) {
+  //       setIsActive(true)
+  //   }else if(charger.ActiveStatus === 0){
+  //     setIsActive(false)
+  //   }
+  // }
 
   const chargerDetails = () =>{
       
@@ -28,7 +39,11 @@ const ChargerCard = (props) => {
     Navigate("/dash/chargerDetails")
   }
 
-  
+   
+  // useEffect(()=>{
+  //   chargerActivity();
+  // }, [])
+
 
   return (
     <div >
@@ -37,7 +52,8 @@ const ChargerCard = (props) => {
           <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">
             {charger.ChargerName}
           </h3>
-        <IsActiveTag isActive={true}/>
+          
+        {charger.ActiveStatus=== "1" ? activeTag : disconnected}
         </div>
         <div className="flex justify-center pt-[3rem] pb-[1.5rem]">
           <img className="" src={Station} alt=""></img>
@@ -45,15 +61,15 @@ const ChargerCard = (props) => {
         <div className="text-sm font-normal ">
           <div className="flex justify-between pb-[1rem]">
             <p>Energy Consumed:</p>
-            <p>{charger.EnergyConsumed}Kw</p>
+            <p>{charger.EnergyConsumed?.toLocaleString()}kWh</p>
           </div>
           <div className="flex justify-between pb-[1rem]">
             <p>Revenue: </p>
-            <p>N{charger.Revenue}</p>
+            <p>N{charger.Revenue?.toLocaleString()}</p>
           </div>
           <div className="flex justify-between pb-[2.5rem]">
             <p>Last Charge: </p>
-            <p>{charger.LastCharged}</p>
+            <p>{  moment(new Date(charger.LastCharged)).fromNow()}</p>
           </div>
         </div>
 

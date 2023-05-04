@@ -2,31 +2,32 @@ import React, {useState,useEffect} from "react";
 import "./style.css"
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import axios from "axios"
-
+import moment from "moment";
 
 const Transactions = (props) => {
 
-//     const [companyTransactions, setCompanyTransactions] = useState([])
+    const [Cname, setName] = useState("")
 
-//      //base url
-//   const url = "http://evapi.estations.com"
+   //base url
+  const url = "http://evapi.estations.com"
 
-//   // berarer token from local storage
-//   const token = localStorage.getItem("token")
+  // berarer token from local storage
+  const token = localStorage.getItem("token")
 
-//   //company id
-//   const companyId = localStorage.getItem("id");
+  //company id
+  const companyId = localStorage.getItem("id");
 
-//     const transactions = () =>{
-//         axios.get(url + "/Transactions/get-last10-transactions/" + companyId,  { headers:{ 'Authorization': `Bearer ${token}`}})
-//         .then((res)=>{
-//             console.log(res)
-//           setCompanyTransactions(res.data)
-//         })
-//     }
+  const GetChargerName = (id) =>{
+    axios.get(url + "/Chargers/get-charger-by-id/" + id , { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+        console.log(res)
+        setName(res.data[0].ChargerName)
+    })
+  }
+
 
     // useEffect(()=>{
-    //     transactions();
+        
     //   }, [])
     
     const Transactions = props.transactions
@@ -42,7 +43,7 @@ const Transactions = (props) => {
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
                     
                     <th className="w-[10%]">#</th>
-                    <th className="w-[20%]">Charger Id</th>
+                    <th className="w-[20%]">Charger Name</th>
                     <th  className="w-[12%]">Amount</th>
                     <th  className="w-[12%]">Energy</th>
                     <th  className="w-[20%]">Date</th>
@@ -53,10 +54,11 @@ const Transactions = (props) => {
                         <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                         <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} checked/></th>
                             <td>{Transaction.transactionId}</td>
-                            <td>{Transaction.chargerId}</td>
-                            <td>{Transaction.totalAmount}</td>
-                            <td>{Transaction.totalUnitCharged}Kw</td>
-                            <td>{Transaction.dateOfTransaction}</td>
+                            {GetChargerName(Transaction.chargerId)}
+                            <td>{Cname}</td>
+                            <td>N{Transaction.totalAmount?.toLocaleString()}</td>
+                            <td>{Transaction.totalUnitChargedInEnergy}Kw</td>
+                            <td>{moment(Transaction.dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</td>
                             <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                         </tr>
                 ))}

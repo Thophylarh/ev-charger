@@ -4,7 +4,11 @@ import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
 import ListOfChargers from "../listOfChargers/listOfChargers";
 import Transactions from "../last10Transactions/transactions";
+import FilteredHero from "../filteredHero/filteredHero"
 import axios from "axios"
+import {DatePicker} from "antd"
+import moment from "moment";
+
 
 const Index = () => {
   const [totalCompanyChargers, setTotal] = useState("")
@@ -16,6 +20,11 @@ const Index = () => {
   const [companyTransactions, setCompanyTransactions] = useState([])
   const [revenue, setRevenue] = useState([])
   const [graphData, setGraphData] = useState([])
+  const [FgraphData, setFGraphData] = useState([])
+  const [fRevenue, setFRevenue] = useState([])
+  const [filtered, setfiltered] = useState(false)
+ 
+  
 
   //base url
   const url = "http://evapi.estations.com"
@@ -91,11 +100,12 @@ const GetOfflineChargers = () =>{
     .then((res)=>{
        
       setCompanyTransactions(res.data)
+      
     })
 }
 
 //revenue for company 
-const Revenue = () =>{
+const Revenue =  () => {
    
   axios.get(url +`/Transactions/get-revenue/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
@@ -111,10 +121,36 @@ const revenuebymonth = () =>{
   .then((res)=>{
     // console.log(res)
     setGraphData(res.data)
-    console.log(res)
+    
     
   })
 }
+
+// on select date
+const  onSelectDate = async (date, dateString) =>{
+
+  const month = moment(dateString).format("M")
+  const year = moment(dateString).format("Y")
+ 
+  axios.get(url +`/Transactions/get-revenue-by-month-year/company/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    
+  setFRevenue(res.data)
+  setfiltered(true)
+ })
+
+ //filter graph 
+ axios.get(url +`/Transactions/get-transaction-by-month-year/company/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+   console.log(res) 
+   setFGraphData(res.data)
+  
+ })
+
+ }
+
+
+
 
 
 //on mount get data
@@ -141,16 +177,23 @@ useEffect(()=>{
           <div>
             <h1 className="font-bold text-2xl">Hello, {data.companyName} </h1>
           </div>
-          <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
+          {/* <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
             <p className=" text-white font-light text-base ">This month</p>
             <img className="" src={Arrow} alt="" /> 
             
+          </div> */}
+           <div>
+            <DatePicker  picker="month"   onChange={onSelectDate}/>
+           
           </div>
+        
           
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your company dashboard here</p>
         <div className="mt-[1rem]">
-         <Hero revenue={revenue} graphData={graphData}/>
+          {filtered? <FilteredHero fRevenue={fRevenue} graphData={FgraphData}/>:  <Hero revenue={revenue} graphData={graphData}/>  }
+        
+         
         </div>
         <ChargerStat total={totalCompanyChargers } ActiveChargers={companyActiveChargers} OfflineChargers={OfflineCharger} TotalEnergy={companyEnergy}/>
         <ListOfChargers chargers={chargerList}/>

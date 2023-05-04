@@ -86,33 +86,8 @@ const CompanySidebar = () => {
             </NavLink>
         </div>
         <div>
-          <NavLink to="#">
-          {({isActive}) => (
-            <div className="flex items-center mx-4 mt-6  text-white">
-              <div>
-                <img className="w-[18px] h-[18px] mr-3" src={Sales} alt="" />
-              </div>
-              <div className="flex justify-between items-center w-[10rem]">
-                <p className="text-white text-sm">Sales</p>
-                
-                  <img className="w-[14px] mr-3 " src={Arrow} alt="" />
-                
-              </div>
-            </div>
-          )}
-          </NavLink>
-          <NavLink to="#" >
-          {({isActive}) => (
-            <div className="flex items-center mx-4  mt-6">
-              <div
-                className="flex justify-between ml-6 
-         items-center"
-              >
-                <p className="text-white text-sm">Product List</p>
-              </div>
-            </div>
-          )}
-          </NavLink>
+         
+          
           <NavLink to="#" >
           {({isActive}) => (
             <div className="flex items-center m-4 mt-6 ">
@@ -133,7 +108,7 @@ const CompanySidebar = () => {
                 className="flex justify-between ml-6 
          items-center"
               >
-                <p className="text-white text-sm">Invoice</p>
+                <p className="text-white text-sm">Report</p>
               </div>
             </div>
           )}

@@ -37,7 +37,7 @@ function Charger(props) {
       </div>
       <div className="grid grid-cols-3 gap-4 ">
         <div className="col-span-2 flex justify-between items-center bg-white p-12">
-          <div className=" border border-gray-50 border-1 rounded-md p-8 flex flex-col justify-center items-center">
+          <div className="border border-gray-50 border-1 rounded-md flex flex-col justify-center items-center">
             <div className="pb-8">
               <img className="w-[2.5rem] self-center" src={Chargers} alt="" />
             </div>

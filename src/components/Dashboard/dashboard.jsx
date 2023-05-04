@@ -4,11 +4,14 @@ import Hero from "../Hero/hero"
 import ChargerStat from "../chargerStat/charger"
 import ListOfChargers from "../listOfChargers/listOfChargers";
 import Transactions from "../last10Transactions/transactions";
+import FilteredHero from "../filteredHero/filteredHero"
 import axios from "axios"
+import {DatePicker} from "antd"
+import moment from "moment";
+
 
 const Index = () => {
-//base url  
-const url = "http://evapi.estations.com"
+
 const [data, setData] = useState("")
  const [totalChargers, setTotalChargers] = useState("")
   const [noOfActiveChargers, setNoActiveChargers] = useState("")
@@ -18,10 +21,16 @@ const [data, setData] = useState("")
   const [stationTransactions, setStationTransactions] = useState([])
   const [revenue, setRevenue] = useState([])
   const [stationgraphData, setstationGraphData] = useState([])
+  const [fRevenue, setFRevenue] = useState([])
+  const [filtered, setfiltered] = useState(false)
 
+
+
+  //base url  
+const url = "http://evapi.estations.com"
+
+//TOKEN
 const token = localStorage.getItem("token")
-
-
 
    const companyId = localStorage.getItem("id");
     const stationId = localStorage.getItem("stationId");
@@ -30,8 +39,8 @@ const token = localStorage.getItem("token")
 const getStationDetails = () =>{
   axios.get(url +"/Stations/get-station-by-id/" + stationId, { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
-    setData(res.data)
-    console.log(res.data)
+    setData(res.data[0])
+    // console.log(res.data)
   })
 }
 
@@ -41,6 +50,7 @@ const getStationDetails = () =>{
     .then((res) =>{
       
       setTotalChargers(res.data)
+
     })
   }
 
@@ -72,13 +82,15 @@ const getStationDetails = () =>{
    const getListOfChargers= () =>{
     axios.get(url + `/Chargers/get-list-station-charger/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
     .then((res)=>{
-      console.log(res)
+      // console.log(res)
       setStationChargerList(res.data)
      
     })
   }
+
+ //station transactions
     const station = "station";
-  //station transactions
+ 
   const transactions = () =>{
     const limit = 10;
     axios.get(url +`/Transactions/get-last10-transactions/station/${stationId}/${limit}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
@@ -103,12 +115,39 @@ const revenuebymonth = () =>{
    
   axios.get(url +`/Transactions/get-group-transaction-by-month/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
-    // console.log(res)
+    console.log(res)
     setstationGraphData(res.data)
+
     
     
   })
 }
+
+//on select date filter 
+const  onSelectDate = async (date, dateString) =>{
+
+ const month = moment(dateString).format("M")
+ const year = moment(dateString).format("Y")
+
+ axios.get(url +`/Transactions/get-revenue-by-month-year/station/${stationId}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+ .then((res)=>{
+   
+ setFRevenue(res.data)
+ setfiltered(true)
+})
+
+axios.get(url +`/Transactions/get-transaction-by-month-year/station/${stationId}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+.then((res)=>{
+  
+console.log(res)
+})
+}
+   
+ 
+ 
+
+    
+ 
 
 useEffect(()=>{
   getStationDetails ();
@@ -129,18 +168,21 @@ useEffect(()=>{
       <div>
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="font-bold text-2xl">Hello, {data.stationName} </h1>
+          <h1 className="font-bold text-2xl">Hello, {data.StationName} </h1>
+           
           </div>
-          <div className="flex w-[10rem] justify-between items-center bg-black rounded-md  px-5 py-1">
-            <p className=" text-white font-light text-base ">This month</p>
-            <img className="" src={Arrow} alt="" /> 
-            
+         
+
+          <div>
+          <DatePicker  picker="month" onChange={onSelectDate} />
+          
           </div>
+        
           
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your station dashboard here</p>
         <div className="mt-[1rem]">
-         <Hero revenue={revenue} graphData={stationgraphData}/>
+        {filtered? <FilteredHero fRevenue={fRevenue} graphData={stationgraphData}/>:  <Hero revenue={revenue} graphData={stationgraphData}/>  }
         </div>
         <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
         <ListOfChargers chargers={stationChargerList}/>

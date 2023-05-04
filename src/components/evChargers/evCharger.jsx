@@ -124,7 +124,7 @@ const EvChargers = () => {
             <div className="w-[92%] bg-gray-900 flex justify-center items-center ml-[1.5rem] py-[2.5rem] px-[1rem] border border-gray-100 rounded-xl border-1">
 
                 <div className="text-center text-white">
-                    <p className="font-normal text-4xl">{totalEnergy}Kw</p>
+                    <p className="font-normal text-4xl">{totalEnergy?.toLocaleString()}kWh</p>
                     <p className="pt-[0.5rem]">Total energy consumption</p>
                 </div>
 

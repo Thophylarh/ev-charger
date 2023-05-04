@@ -5,6 +5,7 @@ import Dot from  "../../assets/svg/activeDot.svg";
 import RedDot from "../../assets/svg/red-dot.svg"
 import Station from "../../assets/images/charge-station.svg";
 import axios from "axios";
+import moment from "moment/moment";
 
 
 
@@ -54,11 +55,11 @@ const ListOfChargers = (props) => {
                     </div>
                     <div className="flex justify-between pb-[1rem]">
                     <p>Revenue: </p>
-                    <p>N{charger.Revenue}</p>
+                    <p>N{charger.Revenue?.toLocaleString()}</p>
                     </div>
                     <div className="flex justify-between pb-[1rem] ">
                     <p>Last Charge: </p>
-                    <p>{charger.LastCharged}</p>
+                    <p>{ moment(charger.LastCharged).fromNow() }</p>
                     </div>
                 </div>
                 </div>
