@@ -8,7 +8,7 @@ const FLineChart = (props) => {
  let totalAmount = props.totalAmount
 //  console.log(totalAmount)
  let month = props.month
- let days = props.fDay
+ let days = props.filteredDate
 
     
 let fullMonth = moment(month, "M").format("MMM")
