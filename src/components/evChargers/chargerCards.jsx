@@ -61,11 +61,11 @@ const ChargerCard = (props) => {
         <div className="text-sm font-normal ">
           <div className="flex justify-between pb-[1rem]">
             <p>Energy Consumed:</p>
-            <p>{charger.EnergyConsumed?.toLocaleString()}kWh</p>
+            <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</p>
           </div>
           <div className="flex justify-between pb-[1rem]">
             <p>Revenue: </p>
-            <p>N{charger.Revenue?.toLocaleString()}</p>
+            <p>N{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
           </div>
           <div className="flex justify-between pb-[2.5rem]">
             <p>Last Charge: </p>

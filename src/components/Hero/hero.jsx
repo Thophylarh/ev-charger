@@ -4,6 +4,7 @@ import LineChart from "../Chart/lineChart";
 import axios from "axios";
 import GreenChart from "../Chart/greenChart";
 import OrangeChart from "../Chart/orangeChart";
+import moment from "moment";
 
 function Hero(props) {
 
@@ -14,14 +15,12 @@ function Hero(props) {
   let mappedGraph = graphData.map((data)=>{
     return data.totalAmount
   })
-  // let energyRevenue = graphData.map((data) =>{
-  //   return data.energyRevenue
+
+  let months = graphData.map((data)=>{
+   return( moment(data.month, "M").format("MMM"))
    
-  // })
- 
-  // let TimeRevenue = graphData.map((data)=>{
-  //   return data.timeRevenue
-  // })
+  })
+
 
   return (
     <div>
@@ -32,7 +31,7 @@ function Hero(props) {
               <p className="text-gray-400 font-normal text-sm">Total revenue</p>
             </div>
             <div className="pb-2">
-              <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue?.toLocaleString()}</h1>
+              <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             </div>
             <div className="flex items-center gap-2 pb-4">
               <div className="text-sm text-gray-600 font-normal">22%</div>
@@ -49,7 +48,7 @@ function Hero(props) {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                ₦{revenue.TimeRevenue?.toLocaleString()}
+                ₦{revenue.TimeRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -71,7 +70,7 @@ function Hero(props) {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                ₦{revenue.EnergyRevenue?.toLocaleString()}
+                ₦{revenue.EnergyRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -90,7 +89,7 @@ function Hero(props) {
             <p>Revenue Summary</p>
           </div>
           <div id="chart" className="h-[22rem]">
-            <LineChart revenue={mappedGraph}/>
+            <LineChart revenue={mappedGraph} months={months}/>
           </div>
         </div>
       </div>

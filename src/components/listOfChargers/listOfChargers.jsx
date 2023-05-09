@@ -51,11 +51,11 @@ const ListOfChargers = (props) => {
                 <div className="text-sm font-normal ">
                     <div className="flex justify-between pb-[1rem]">
                     <p >Energy Consumed:</p>
-                    <p>{charger.EnergyConsumed}Kw</p>
+                    <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</p>
                     </div>
                     <div className="flex justify-between pb-[1rem]">
                     <p>Revenue: </p>
-                    <p>N{charger.Revenue?.toLocaleString()}</p>
+                    <p>N{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                     <div className="flex justify-between pb-[1rem] ">
                     <p>Last Charge: </p>
@@ -64,57 +64,6 @@ const ListOfChargers = (props) => {
                 </div>
                 </div>
             ))}
-           
-
-            {/* 2 */}
-            {/* <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem]  mr-4">
-            <div className="flex justify-between">
-                <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Meta Charger </h3>
-                <div className="flex justify-between w-[5rem] rounded-full py-[0.5rem]  bg-green-100 px-[0.75rem] font-semibold text-green-700 text-xs"><img className="w-[0.5rem]" src={Dot} alt=""/> Active</div>
-            </div>
-            <div  className="flex justify-center py-[5rem]">
-               <img className="w-[60px]" src={Station} alt=""></img>
-            </div>
-            <div className="text-sm font-normal">
-                <div className="flex justify-between pb-[1rem]">
-                <p>Energy Consumed:</p>
-                <p>560Kw</p>
-                </div>
-                <div className="flex justify-between pb-[1rem]">
-                <p>Revenue: </p>
-                <p>$560,000.00</p>
-                </div>
-                <div className="flex justify-between pb-[1rem]">
-                <p>Last Charge: </p>
-                <p>18mins ago</p>
-                </div>
-            </div>
-            </div> */}
-
-            {/* 3 */}
-            {/* <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] ">
-            <div className="flex justify-between">
-                <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">Keke Charger </h3>
-                <div className="flex justify-between w-[8rem] rounded-full py-[0.5rem]  bg-[#FEF3F2] px-[0.75rem] font-semibold text-[#B42318] text-xs mr-[0.25rem]"><img className="w-[0.5rem]" src={RedDot}/> Disconnected</div>
-            </div>
-            <div  className="flex justify-center py-[5rem]">
-               <img src={Station} className="w-[60px]"  alt=""></img>
-            </div>
-            <div className="text-sm font-normal">
-                <div className="flex justify-between pb-[1rem]">
-                <p>Energy Consumed:</p>
-                <p>560Kw</p>
-                </div>
-                <div className="flex justify-between pb-[1rem]">
-                <p>Revenue: </p>
-                <p>$560,000.00</p>
-                </div>
-                <div className="flex justify-between pb-[1rem]">
-                <p>Last Charge: </p>
-                <p>18mins ago</p>
-                </div> */}
-            {/* </div> */}
-            {/* </div> */}
         </div>
         
     </div>  );

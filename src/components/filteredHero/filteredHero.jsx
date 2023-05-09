@@ -10,6 +10,9 @@ function Hero(props) {
   let revenue = props.fRevenue
   let TotalRevenue = revenue.TotalRevenue
   let graphData = props.graphData
+  let filterRes = props.empty
+
+  
 
   let totalAmount = graphData.map((data) =>{
     return data.totalAmount
@@ -18,20 +21,26 @@ function Hero(props) {
 
   let month = graphData.map((data)=>{
     return data.month
+    
   })
  
+  let fDay = graphData.map((data)=>{
+    return data.day
+   
+  }
+  )
  
 
   return (
     <div>
       <div className="grid grid-cols-3   ">
-        <div className="col-span-1 bg-[#fff] p-6 border-r">
+        <div className="col-span-1 bg-[#fff] py-6 px-3 border-r">
           <div className=" border-b">
             <div className="pb-4">
-              <p className="text-gray-400 font-normal text-sm"> filtered Total revenue</p>
+              <p className="text-gray-400 font-normal text-sm"> Total revenue</p>
             </div>
             <div className="pb-2">
-              <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue?.toLocaleString()}</h1>
+              <h1 className="font-bold text-2xl text-gray-900">₦{TotalRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</h1>
             </div>
             <div className="flex items-center gap-2 pb-4">
               <div className="text-sm text-gray-600 font-normal">22%</div>
@@ -48,7 +57,7 @@ function Hero(props) {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                ₦{revenue.TimeRevenue?.toLocaleString()}
+                ₦{revenue.TimeRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -70,7 +79,7 @@ function Hero(props) {
               </div>
               <div className="pb-2">
                 <h1 className="font-bold text-2xl text-gray-900">
-                ₦{revenue.EnergyRevenue?.toLocaleString()}
+                ₦{revenue.EnergyRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                 </h1>
               </div>
               <div className="flex items-center gap-2 pb-4">
@@ -89,7 +98,9 @@ function Hero(props) {
             <p>Revenue Summary</p>
           </div>
           <div id="chart" className="h-[22rem]">
-            <FLineChart totalAmount={totalAmount} month={month} />
+            {filterRes !== [] ? <FLineChart totalAmount={totalAmount} month={month} fDay={fDay} /> : <h3>No data</h3> }
+            
+           
           </div>
         </div>
       </div>

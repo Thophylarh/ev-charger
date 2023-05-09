@@ -3,6 +3,7 @@ import Dot from "../../assets/svg/activeDot.svg";
 import dropDown from "../../assets/svg/dropDownArrow.svg";
 import BackArrow from "../../assets/svg/backArrow.svg";
 import Chart from "../Chart/lineChart";
+import FChart from "../Chart/filteredLineChart"
 import Doughnut from "../../assets/images/Doughnut.png";
 import Transactions from "../last10Transactions/transactions";
 import QuestionMark from "../../assets/svg/questionMark.svg";
@@ -17,6 +18,8 @@ import DoughnutChart from "../Chart/pieChart";
 import Modal from "../Modal/modal";
 import axios from "axios";
 import AddNewShift from "../modals/addNewShift";
+import moment from "moment";
+import {DatePicker} from "antd"
 import RedDot from "../../assets/svg/red-dot.svg";
 import ClipLoader from "react-spinners/ClipLoader";
 
@@ -31,6 +34,10 @@ const SpecificCharger = () => {
   const [graphChargerData, setGraphChargerData] = useState([]);
   const [ChargerRevenue, setChargerRevenue] = useState([]);
   const [chargersDetails, setChargerDetails] = useState([]);
+  const [CGraph, setCGraph] = useState([])
+  const [fRevenue, setFRevenue] = useState([])
+  const [filtered, setfiltered] = useState(false)
+  const [fGraph, setFGraph] = useState([])
 
   const handleChange = (e) => {
     // e.preventDefault();
@@ -39,12 +46,7 @@ const SpecificCharger = () => {
     e.target.checked ? activateCharger() : deactivateCharger();
   };
 
-  // const handleChange = (e) =>{
-  //  let value = e.target.checked
-
-  //  setChecked(value)
-  // }
-
+  
   const changeHours = () => {
     setOperationModal(true);
   };
@@ -86,7 +88,7 @@ const SpecificCharger = () => {
         setToggleLoading(false);
 
         GetChargerDetails();
-        console.log(res.data);
+        // console.log(res.data);
       });
   };
 
@@ -100,7 +102,7 @@ const SpecificCharger = () => {
       .then((res) => {
         setToggleLoading(false);
         GetChargerDetails();
-        console.log(res.data);
+        // console.log(res.data);
       });
   };
 
@@ -148,20 +150,68 @@ const SpecificCharger = () => {
       });
   };
 
+  //charger graph 
+  const chargerGraph = () =>{
+   
+    axios.get(url +`/Transactions/get-group-transaction-by-month/charger/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+      // console.log(res)
+      setCGraph(res.data)
+     
+    })
+  }
+// unfiltered
+  let mappedGraph = CGraph.map((data)=>{
+    return data.totalAmount
+  })
+
+  let months = CGraph.map((data)=>{
+    return( moment(data.month, "M").format("MMM"))
+    
+   })
+
+   //filter
+   const  onSelectDate = (date, dateString) =>{
+    const month = moment(dateString).format("M")
+    const year = moment(dateString).format("Y")
+
+    axios.get(url +`/Transactions/get-revenue-by-month-year/charger/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+    .then((res)=>{
+      
+    setFRevenue(res.data)
+    setfiltered(true)
+   })
+
+   axios.get(url +`/Transactions/get-transaction-by-month-year/charger/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+  setFGraph(res.data)
+  // console.log(res)
+  })
+   }
+
+   //filtered
+   let mappedFilter = fGraph.map((data)=>{
+    return data.totalAmount
+   })
+
+   let FMonths = fGraph.map((data)=>{
+    return data.month
+   })
+
+   let fDay = fGraph.map((data)=>{
+    return  data.day
+ })
+
+
   useEffect(() => {
     transactions();
     revenuebymonth();
     Revenue();
     GetChargerDetails();
+    chargerGraph();
   }, []);
 
-  // useEffect(() => {
-  //   if (checked !== null) {
-  //     checked ? activateCharger() : deactivateCharger();
-  //   }
 
-  //   GetChargerDetails();
-  // }, [checked]);
 
   return (
     <>
@@ -193,9 +243,8 @@ const SpecificCharger = () => {
               </h6>
             </div>
 
-            <div className="flex w-[10rem] justify-between items-center bg-white rounded-md  px-[1.25rem] py-[0.25rem]">
-              <p className=" text-black font-light font-sm ">This month</p>
-              <img src={dropDown} alt="" />
+            <div className="">
+            <DatePicker  picker="month" onChange={onSelectDate} />
             </div>
           </div>
           <div className="ml-[1.5rem] mt-[1.25rem]">
@@ -321,16 +370,14 @@ const SpecificCharger = () => {
                   <p className="text-gray-400 text-sm font-normal">
                     Charger Revenue Summary
                   </p>
-                  <Chart
-                    energyRevenue={energyRevenue}
-                    timeRevenue={TimeRevenue}
-                  />
+                  
+                  {filtered? <FChart totalAmount={mappedFilter} month={FMonths} fDay={fDay}  /> : <Chart revenue={mappedGraph} months={months}/>}
                 </div>
               </div>
               <div className="px-[1rem] w-[35%] ">
                 <div className=" bg-[#101828] text-white flex flex-col justify-center items-center  ">
                   <h3 className="font-normal text-4xl pt-[2.5rem] mx-[3.5rem]">
-                    {chargersDetails.EnergyConsumed?.toLocaleString()}kWh
+                    {chargersDetails.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh
                   </h3>
                   <p className="font-normal text-sm pb-[3rem]">
                     Total energy consumption
@@ -346,7 +393,7 @@ const SpecificCharger = () => {
                         Revenue by time
                       </p>
                       <p className="text-xl font-bold text-[#101828] leading-7">
-                        ₦{ChargerRevenue.TimeRevenue?.toLocaleString()}
+                        ₦{ChargerRevenue.TimeRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                     </div>
                     <div>
@@ -354,7 +401,7 @@ const SpecificCharger = () => {
                         Revenue by energy
                       </p>
                       <p className="text-xl font-bold text-[#101828] leading-7">
-                        ₦{ChargerRevenue.EnergyRevenue?.toLocaleString()}
+                        ₦{ChargerRevenue.EnergyRevenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
                       </p>
                     </div>
                   </div>

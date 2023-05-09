@@ -1,31 +1,25 @@
 import Chart from "chart.js/auto";
+import { useState } from "react";
 import { Line } from "react-chartjs-2";
 import moment from "moment";
 
 const FLineChart = (props) => {
+  const [monthName, setMonthName] = useState("")
  let totalAmount = props.totalAmount
+//  console.log(totalAmount)
  let month = props.month
-    // console.log(month)
-    let fullMonth = moment(month, "M").format("MMM")
+ let days = props.fDay
+
+    
+let fullMonth = moment(month, "M").format("MMM")
+
+  
  
-  console.log(fullMonth)
+  // console.log(monthName)
   return (
     <Line
       data={{
-        labels: [
-        0,
-        1,
-        2,
-        3,
-         4,
-         5,
-         6,
-         7,
-         8,
-         9,
-         10,
-         11,12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
-        ],
+         labels: days ,
         datasets: [
           {
             type: "line",
@@ -44,19 +38,7 @@ const FLineChart = (props) => {
             tension: 0.4,
             
           },
-          // {
-          //   type: "line",
-          //   label: "Revenue by energy",
-          //   fill: "start",
-          //   backgroundColor: "rgb(246,255,249)",
-          //   data: energyRevenue,
-          //   borderColor: "#1DB954",
-          //   hoverBackgroundColor: [""],
-          //   radius: 2,
-          //   // borderWidth: 2,
-          //   pointBorderWidth: 4,
-          //   tension: 0.4,
-          // },
+         
         ],
       }}
       options={{
@@ -82,11 +64,10 @@ const FLineChart = (props) => {
         },
         scales: {
           x: {
-            beginAtZero: false,
+           
             display: true,
             grid: {
               display: true,
-             
               color: "#eee",
               borderDash: [2, 4],
             },
@@ -94,12 +75,20 @@ const FLineChart = (props) => {
               dash: [2,4],
           }, 
           ticks: {
-            
             autoSkip: false,
-            callback: function (value) {
-                return fullMonth + value ;
-              },
-          }
+            // callback: function (value) {
+
+            //     return fullMonth + days
+              
+            //   },
+          }, 
+          // tooltips:{
+          //   callbacks:{
+          //     labels: function (){
+          //       return days + fullMonth
+          //     }
+          //   } 
+          // }
           },
           y: {
             display: true,
@@ -113,7 +102,7 @@ const FLineChart = (props) => {
             ticks: {
               
               stepSize: 1000,
-             
+              
               autoSkip: false,
                 callback: function (value) {
                   return "N" + value ;

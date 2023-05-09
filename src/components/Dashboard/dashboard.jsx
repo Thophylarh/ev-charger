@@ -22,6 +22,7 @@ const [data, setData] = useState("")
   const [revenue, setRevenue] = useState([])
   const [stationgraphData, setstationGraphData] = useState([])
   const [fRevenue, setFRevenue] = useState([])
+  const [fGraph, setFGraph] = useState([])
   const [filtered, setfiltered] = useState(false)
 
 
@@ -138,8 +139,8 @@ const  onSelectDate = async (date, dateString) =>{
 
 axios.get(url +`/Transactions/get-transaction-by-month-year/station/${stationId}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
 .then((res)=>{
-  
-console.log(res)
+  setFGraph(res.data)
+  console.log(res)
 })
 }
    
@@ -182,7 +183,7 @@ useEffect(()=>{
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your station dashboard here</p>
         <div className="mt-[1rem]">
-        {filtered? <FilteredHero fRevenue={fRevenue} graphData={stationgraphData}/>:  <Hero revenue={revenue} graphData={stationgraphData}/>  }
+        {filtered? <FilteredHero fRevenue={fRevenue} graphData={fGraph}/>:  <Hero revenue={revenue} graphData={stationgraphData}/>  }
         </div>
         <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
         <ListOfChargers chargers={stationChargerList}/>

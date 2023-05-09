@@ -88,32 +88,50 @@ const CompanySidebar = () => {
         <div>
          
           
-          <NavLink to="#" >
+          <NavLink to="/companyDash/billing" >
           {({isActive}) => (
+            isActive?
             <div className="flex items-center m-4 mt-6 ">
               <div
-                className="flex justify-between ml-6 
-         items-center"
+               className="flex items-center mx-4 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"
               >
-                <p className="text-white text-sm">Billing</p>
+                <p className="text-[#1DB954] text-sm">Billing</p>
               </div>
             </div>
+            : 
+            <div className="flex items-center m-4 mt-6 ">
+            <div
+              className="flex justify-between ml-6  items-center" >
+              <p className="text-white text-sm">Billing</p>
+            </div>
+          </div>
           )}
           </NavLink>
         
-          <NavLink to="#" >
+
+          <NavLink to="/companyDash/report" >
           {({isActive}) => (
-            <div className="flex items-center m-4  mt-6">
+            isActive?
+            <div className="flex items-center m-4  ">
               <div
-                className="flex justify-between ml-6 
-         items-center"
+                className="flex items-center mx-4 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"
               >
-                <p className="text-white text-sm">Report</p>
+                <p className="text-[#1DB954] text-sm">Report</p>
               </div>
             </div>
+            :
+            <div className="flex items-center m-4  mt-6">
+            <div
+              className="flex justify-between ml-6 items-center" >
+              <p className="text-white text-sm">Report</p>
+            </div>
+          </div>
+            
+
           )}
           </NavLink>
          
+
         </div>
       </div>
       

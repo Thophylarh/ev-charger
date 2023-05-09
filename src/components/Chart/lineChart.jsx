@@ -3,31 +3,19 @@ import { Line } from "react-chartjs-2";
 
 const LineChart = (props) => {
 let revenue = props.revenue
-  // console.log(timeRevenue)
+let months = props.months
+  
   return (
     <Line
       data={{
-        labels: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep",
-          "Oct",
-          "Nov",
-          "Dec",
-        ],
+        labels: months,
         datasets: [
           {
             type: "line",
             label: "Revenue by time",
             fill: "",
             backgroundColor: "#FFDF90",
-            data: revenue,
+            data:  revenue,
             borderColor: "#FFDF90",
             hoverBackgroundColor: ["#e2f5ef"],
             radius: 1,
@@ -90,7 +78,7 @@ let revenue = props.revenue
           y: {
             display: true,
             min: 0, 
-              max: 1000000,
+              max: 100000,
             grid: {
               display: false,
               color: "#eee",
@@ -98,7 +86,7 @@ let revenue = props.revenue
             },
             ticks: {
               
-              stepSize: 100000,
+              stepSize: 10000,
              
               autoSkip: false,
                 callback: function (value) {

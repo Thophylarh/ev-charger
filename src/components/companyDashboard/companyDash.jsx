@@ -23,7 +23,8 @@ const Index = () => {
   const [FgraphData, setFGraphData] = useState([])
   const [fRevenue, setFRevenue] = useState([])
   const [filtered, setfiltered] = useState(false)
- 
+ const [empty, setempty] = useState([])
+
   
 
   //base url
@@ -149,6 +150,10 @@ const  onSelectDate = async (date, dateString) =>{
 
  }
 
+ //billing 
+
+
+
 
 
 
@@ -191,7 +196,7 @@ useEffect(()=>{
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your company dashboard here</p>
         <div className="mt-[1rem]">
-          {filtered? <FilteredHero fRevenue={fRevenue} graphData={FgraphData}/>:  <Hero revenue={revenue} graphData={graphData}/>  }
+          {filtered? <FilteredHero fRevenue={fRevenue} graphData={FgraphData} empty={empty}/>:  <Hero revenue={revenue} graphData={graphData}/>  }
         
          
         </div>
