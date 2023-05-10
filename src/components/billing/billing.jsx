@@ -4,7 +4,8 @@ import PriceCharge from "./priceCharge";
 import blueSunCircle from "../../assets/svg/blueSunCircle.svg"
 import Suncircle from "../../assets/svg/sunCircle.svg";
 import nextArrow from "../../assets/svg/next-arrow.svg";
-import axios from "axios";
+
+import axios from "../../utils/axiosInterceptor";
 import moment from "moment";
 
 
@@ -16,7 +17,7 @@ const Billing = () => {
     
 
      //base url
-  const url = "http://evapi.estations.com"
+  const url = ""
 
   // berarer token from local storage
   const token = localStorage.getItem("user-token")

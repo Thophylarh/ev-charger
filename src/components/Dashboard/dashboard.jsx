@@ -5,7 +5,8 @@ import ChargerStat from "../chargerStat/charger"
 import ListOfChargers from "../listOfChargers/listOfChargers";
 import Transactions from "../last10Transactions/transactions";
 import FilteredHero from "../filteredHero/filteredHero"
-import axios from "axios"
+
+import axios from "../../utils/axiosInterceptor";
 import {DatePicker} from "antd"
 import moment from "moment";
 
@@ -28,7 +29,7 @@ const [data, setData] = useState("")
 
 
   //base url  
-const url = "http://evapi.estations.com"
+const url = ""
 
 //TOKEN
 const token = localStorage.getItem("user-token")
