@@ -22,7 +22,7 @@ const ChangePassword = () => {
         }
     }
 
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("user-token")
     const id = localStorage.getItem("id")
     const url = "http://evapi.estations.com";
     
@@ -35,7 +35,7 @@ const ChangePassword = () => {
             withCredentials: false,
           }
         ).then(
-            Navigate("/dash")
+            Navigate("/station")
         ).catch((err) =>{
             console.log(err)
         }

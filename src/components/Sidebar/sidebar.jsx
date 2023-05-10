@@ -18,7 +18,7 @@ const Sidebar = () => {
     <div>
       <div className="link-cover mt-[6rem] ">
         <div>
-        <NavLink to="/dash"  end> 
+        <NavLink to="/station"  end> 
         {({isActive}) => 
           (isActive ? 
             <div className="flex items-center m-4 bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"  >
@@ -55,7 +55,7 @@ const Sidebar = () => {
        </NavLink>
         </div>
         <div>
-        <NavLink to="/dash/evChargers"  end>
+        <NavLink to="/station/evChargers"  end>
         {({isActive}) => (
 
          isActive ?
@@ -87,7 +87,7 @@ const Sidebar = () => {
             </NavLink>
         </div>
         <div>
-        {/* <NavLink to="/dash/billing"  end>
+        {/* <NavLink to="/station/billing"  end>
         {({isActive}) => (
 
          isActive ?
@@ -134,7 +134,7 @@ const Sidebar = () => {
             </div>
           )}
           </NavLink>
-          <NavLink to="/dash/sales" >
+          <NavLink to="/station/sales" >
           {({isActive}) => (
             isActive?
             <div className="flex items-center mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl">
@@ -154,7 +154,7 @@ const Sidebar = () => {
           </div>
           )}
           </NavLink>
-          <NavLink to="/dash/chargers" >
+          <NavLink to="/station/chargers" >
           {({isActive}) => (
             isActive?
             <div className="flex items-center mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl">
@@ -172,7 +172,7 @@ const Sidebar = () => {
           )}
           </NavLink>
         
-          <NavLink to="/dash/camera" >
+          <NavLink to="/station/camera" >
           {({isActive}) => (
             isActive?
             <div className="flex items-center mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl">

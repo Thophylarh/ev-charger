@@ -17,7 +17,7 @@ const Report = () =>{
   const url = "http://evapi.estations.com"
 
   // berarer token from local storage
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("user-token")
   
   //company id
   const id = localStorage.getItem("id")

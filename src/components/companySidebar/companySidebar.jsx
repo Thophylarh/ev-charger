@@ -17,7 +17,7 @@ const CompanySidebar = () => {
     <div>
       <div className="link-cover mt-[6rem] ">
         <div>
-        <NavLink to="/companyDash"  end> 
+        <NavLink to="/company"  end> 
         {({isActive}) => 
           (isActive ? 
             <div className="flex items-center m-4 bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"  >
@@ -54,7 +54,7 @@ const CompanySidebar = () => {
        </NavLink>
         </div>
         <div>
-        <NavLink to="/companyDash/myStations"  end>
+        <NavLink to="/company/myStations"  end>
         {({isActive}) => (
 
          isActive ?
@@ -88,7 +88,7 @@ const CompanySidebar = () => {
         <div>
          
           
-          <NavLink to="/companyDash/billing" >
+          <NavLink to="/company/billing" >
           {({isActive}) => (
             isActive?
             <div className="flex items-center m-4 mt-6 ">
@@ -109,7 +109,7 @@ const CompanySidebar = () => {
           </NavLink>
         
 
-          <NavLink to="/companyDash/report" >
+          <NavLink to="/company/report" >
           {({isActive}) => (
             isActive?
             <div className="flex items-center m-4  ">

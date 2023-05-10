@@ -20,7 +20,7 @@ const Sales = () =>{
   const url = "http://evapi.estations.com"
 
   // bearer token from local storage
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("user-token")
   
   //company id
   const id = localStorage.getItem("id")

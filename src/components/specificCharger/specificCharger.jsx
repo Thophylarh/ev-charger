@@ -59,7 +59,7 @@ const SpecificCharger = () => {
   const url = "http://evapi.estations.com";
 
   // bearer token from local storage
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("user-token");
 
   //charger id
   const id = localStorage.getItem("chargerid");
@@ -230,7 +230,7 @@ const SpecificCharger = () => {
           
           <div className="flex justify-between pt-[1.75rem] pr-[1.5rem] pl-[1.5rem] ">
             <div className="flex ">
-              <Link to="/dash/evChargers">
+              <Link to="/station/evChargers">
                 {" "}
                 <img
                   className="pr-[1rem] mt-[0.75rem]"

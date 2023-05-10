@@ -13,7 +13,7 @@ const Station = () => {
 
     const url = "http://evapi.estations.com";
 
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("user-token");
     const companyId = localStorage.getItem("id");
 
    
@@ -90,7 +90,7 @@ const Station = () => {
       // station details
       const getStationById = (id, e) =>{
         window.localStorage.setItem("stationId", id);
-        Navigate("/dash")
+        Navigate("/station")
       }
 
       //update station 

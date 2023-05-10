@@ -17,7 +17,7 @@ const EvChargers = () => {
   
     const url = "http://evapi.estations.com";
   
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("user-token");
       const companyId = localStorage.getItem("id");
       const stationId = localStorage.getItem("stationId");
   
