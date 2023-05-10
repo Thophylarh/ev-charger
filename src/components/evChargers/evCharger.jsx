@@ -4,7 +4,8 @@ import Charger from "../../assets/images/charger.png";
 import ActiveCharger from "../../assets/images/active-charger.png"
 import OfflineCharger from "../../assets/images/offline-charger.png"
 import ChargerCard from "./chargerCards";
-import axios from "axios";
+
+import axios from "../../utils/axiosInterceptor";
 
 
 const EvChargers = () => {
@@ -15,7 +16,7 @@ const EvChargers = () => {
     const [totalEnergy, setTotalEnergy] = useState("")
     const [stationChargerList, setStationChargerList] = useState([])
   
-    const url = "http://evapi.estations.com";
+    const url = "";
   
       const token = localStorage.getItem("user-token");
       const companyId = localStorage.getItem("id");

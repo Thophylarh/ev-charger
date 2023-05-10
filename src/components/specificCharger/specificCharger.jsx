@@ -16,7 +16,8 @@ import OperationHour from "../modals/operationHours";
 import BillingTypeModal from "../modals/billingTypeModal";
 import DoughnutChart from "../Chart/pieChart";
 import Modal from "../Modal/modal";
-import axios from "axios";
+
+import axios from "../../utils/axiosInterceptor";
 import AddNewShift from "../modals/addNewShift";
 import moment from "moment";
 import {DatePicker} from "antd"
@@ -56,7 +57,7 @@ const SpecificCharger = () => {
   };
 
   //base url
-  const url = "http://evapi.estations.com";
+  const url = "";
 
   // bearer token from local storage
   const token = localStorage.getItem("user-token");

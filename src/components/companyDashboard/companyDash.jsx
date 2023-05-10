@@ -5,7 +5,8 @@ import ChargerStat from "../chargerStat/charger";
 import ListOfChargers from "../listOfChargers/listOfChargers";
 import Transactions from "../last10Transactions/transactions";
 import FilteredHero from "../filteredHero/filteredHero";
-import axios from "axios";
+ import axios from "../../utils/axiosInterceptor"
+// import axios from 'axios'
 import { DatePicker } from "antd";
 import moment from "moment";
 
@@ -28,7 +29,8 @@ const Index = () => {
 	const [testGraph, setTestGraph] = useState([]);
 
 	//base url
-	const url = "http://evapi.estations.com";
+	// const url = "http://evapi.estations.com";
+  const url = ""
 
 	// berarer token from local storage
 	const token = localStorage.getItem("user-token");
@@ -44,7 +46,6 @@ const Index = () => {
 			})
 			.then((res) => {
 				setData(res.data);
-				// console.log(data)
 			});
 	};
 
@@ -132,8 +133,10 @@ const Index = () => {
 			.then((res) => {
 				setTestRevenue(res.data);
 				// setfiltered(true);
+        
 			});
 	};
+
 
 	const getRevenueGraph = async () => {
 		let finalUrl;
@@ -149,7 +152,6 @@ const Index = () => {
 			.get(finalUrl, { headers: { Authorization: `Bearer ${token}` } })
 			.then((res) => {
 				setTestGraph(res.data);
-				// setfiltered(true);
 			});
 	};
 
@@ -178,6 +180,7 @@ const Index = () => {
 		getRevenueOverview();
 		getRevenueGraph();
 	}, [newDate]);
+
 
 	return (
 		<div className="w-full h-[100vh]  py-2 px-4 ">
