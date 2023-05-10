@@ -7,7 +7,7 @@ const ChangePrice = () =>{
     const [password, setPassWord] = useState("")
 
     const url = "http://evapi.estations.com";
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("user-token");
 
     //company id
     const id = localStorage.getItem("id")

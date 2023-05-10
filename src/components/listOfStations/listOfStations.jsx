@@ -13,7 +13,7 @@ const ListOfStations = () => {
     const url = "http://evapi.estations.com";
 
     //bearer token
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem("user-token");
 
     //company id
     const companyId = localStorage.getItem("id");
@@ -36,7 +36,7 @@ const ListOfStations = () => {
       const viewStations = (id, e) =>{
         console.log(id)
         window.localStorage.setItem("stationId", id);
-        Navigate("/dash")
+        Navigate("/station")
       }
 
     return ( <div className="py-[1.5rem] px-[1.5rem] ">

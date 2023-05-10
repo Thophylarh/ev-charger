@@ -36,7 +36,7 @@ const ChargerCard = (props) => {
       
     window.localStorage.setItem("chargerid", charger.Id );
     //navigate
-    Navigate("/dash/chargerDetails")
+    Navigate("/station/chargerDetails")
   }
 
    
