@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react"
-import axios from "axios";
+
+import axios from "../../utils/axiosInterceptor";
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import moment from "moment";
 import {DatePicker} from "antd"
@@ -17,7 +18,7 @@ const Sales = () =>{
   const [stationgraphData, setstationGraphData] = useState([])
 
     //base url
-  const url = "http://evapi.estations.com"
+  const url = ""
 
   // bearer token from local storage
   const token = localStorage.getItem("user-token")

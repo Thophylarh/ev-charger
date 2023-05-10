@@ -9,16 +9,16 @@ import "./style.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { getToken } from "../../utils/getToken";
+import { ClipLoader } from "react-spinners";
 
 const Login = () => {
 	const Navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 	const [emailAddress, setEmail] = useState("");
 	const [password, setPassWord] = useState("");
 	const [user, setUser] = useState("");
 	const [inputType, setInputType] = useState("password");
 	let token = getToken();
-
-
 
 	// toggle password
 	const toggle = () => {
@@ -34,6 +34,7 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 
 		axios
 			.post(
@@ -49,6 +50,7 @@ const Login = () => {
 				}
 			)
 			.then((res) => {
+				setIsLoading(false);
 				const response = res.data;
 				console.log(response);
 				window.localStorage.setItem("user-token", res.data.token);
@@ -176,17 +178,20 @@ const Login = () => {
 						<div>
 							<button
 								type="submit"
-								className="mt-5 p-4 flex w-96 text- 
+								className={`mt-5 p-4 flex w-96 text- 
                  center text-white rounded-md text- 
                   normal text-xs 
                   font-semibold tracking-widest text- 
                    white uppercase transition ease-in- 
-                    out bg-black border border- 
+                    out  ${
+											isLoading ? "bg-slate-500 cursor-not-allowed" : "bg-black cursor-pointer"
+										} border border- 
                      transparent active:bg-gray-900 
                       false justify-center 
-                       hover:scale-105 duration-300"
+                       hover:scale-105 duration-300`}
+								disabled={isLoading ? true : false}
 							>
-								Login
+								{isLoading ? <ClipLoader color="white" size={15} /> : "Login"}
 							</button>
 						</div>
 					</div>

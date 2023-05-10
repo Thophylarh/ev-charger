@@ -1,7 +1,7 @@
 import dropDown from "../../assets/svg/dropDownArrow.svg";
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import {useState, useEffect} from "react"
-import axios from "axios"
+import axios from "../../utils/axiosInterceptor";
 import { useNavigate } from "react-router";
 
 
@@ -10,7 +10,7 @@ const ListOfStations = () => {
     const [stations, setStations] = useState([])
 
     //base url
-    const url = "http://evapi.estations.com";
+    const url = "";
 
     //bearer token
     const token = localStorage.getItem("user-token");
