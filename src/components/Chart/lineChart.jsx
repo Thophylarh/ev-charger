@@ -12,7 +12,7 @@ let months = props.months
         datasets: [
           {
             type: "line",
-            label: "Revenue by time",
+            label: "Revenue by energy",
             fill: "",
             backgroundColor: "#FFDF90",
             data:  revenue,
@@ -90,7 +90,7 @@ let months = props.months
              
               autoSkip: false,
                 callback: function (value) {
-                  return "N" + value ;
+                  return "₦" + value ;
                 },
             },
           },

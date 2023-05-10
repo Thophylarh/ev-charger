@@ -51,11 +51,11 @@ const ListOfChargers = (props) => {
                 <div className="text-sm font-normal ">
                     <div className="flex justify-between pb-[1rem]">
                     <p >Energy Consumed:</p>
-                    <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</p>
+                    <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</p>
                     </div>
                     <div className="flex justify-between pb-[1rem]">
                     <p>Revenue: </p>
-                    <p>N{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <p>₦{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                     <div className="flex justify-between pb-[1rem] ">
                     <p>Last Charge: </p>

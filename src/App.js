@@ -11,6 +11,7 @@ import CompanyDash from "./components/companyDashboard/companyDash"
 import CompanySideBar from "./components/companySidebar/companySidebar";
 import CompanyReport from "./components/companyReport/report";
 import Billing from "./components/billing/billing";
+import Cbilling from "./components/companyBilling/Cbilling";
 import StationBilling from "./components/stationBilling/stationBilling"
 import Chargers from "./components/Chargers/chargers";
 import Camera from "./components/liveCameraFeed/camera";
@@ -49,7 +50,8 @@ function App() {
         <Route path="/companyDash" element={<CompanyDash/>}></Route>
         <Route path="/companyDash/myStations" element={<ListOfStations />}></Route>
         <Route path="/companyDash/report" element={<CompanyReport/>}></Route>
-        <Route path="/companyDash/billing" element={<Billing/>}></Route>
+        <Route path="/companyDash/billing" element={<Cbilling/>}></Route>
+       
         </Route>
        
       </Routes>

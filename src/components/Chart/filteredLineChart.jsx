@@ -23,7 +23,7 @@ let fullMonth = moment(month, "M").format("MMM")
         datasets: [
           {
             type: "line",
-            label: "Revenue",
+            label: "Revenue by energy",
             fill: "",
             backgroundColor: "#FFDF90",
             data: totalAmount,
@@ -105,7 +105,7 @@ let fullMonth = moment(month, "M").format("MMM")
               
               autoSkip: false,
                 callback: function (value) {
-                  return "N" + value ;
+                  return "₦" + value ;
                 },
             },
           },

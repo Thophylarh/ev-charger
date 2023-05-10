@@ -106,34 +106,46 @@ const GetOfflineChargers = () =>{
 }
 
 //revenue for company 
-const Revenue =  () => {
+// const Revenue =  () => {
    
+  
+// }
+
+//graph data - revenue by month
+// const revenuebymonth = () =>{
+   
+
+// }
+
+//unfiltered data 
+const Unfiltered = () =>{
   axios.get(url +`/Transactions/get-revenue/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     setRevenue(res.data)
     
   })
-}
 
-//graph data - revenue by month
-const revenuebymonth = () =>{
-   
   axios.get(url +`/Transactions/get-group-transaction-by-month/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     // console.log(res)
     setGraphData(res.data)
-    
-    
+   
   })
+
 }
 
-// on select date
-const  onSelectDate = async (date, dateString) =>{
+// on select date - filtered data 
+const  onSelectDate =  (date, dateString) =>{
 
   const month = moment(dateString).format("M")
   const year = moment(dateString).format("Y")
- 
-  axios.get(url +`/Transactions/get-revenue-by-month-year/company/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  // console.log(date)
+
+
+    if(date === null){
+      setfiltered(false)
+    }else{
+       axios.get(url +`/Transactions/get-revenue-by-month-year/company/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
     
   setFRevenue(res.data)
@@ -143,18 +155,13 @@ const  onSelectDate = async (date, dateString) =>{
  //filter graph 
  axios.get(url +`/Transactions/get-transaction-by-month-year/company/${id}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
   .then((res)=>{
-   console.log(res) 
+  //  console.log(res) 
    setFGraphData(res.data)
   
  })
+    }
 
  }
-
- //billing 
-
-
-
-
 
 
 
@@ -167,8 +174,9 @@ useEffect(()=>{
   GetTotalEnergy();
   getListOfChargers();
   transactions();
-  Revenue();
-  revenuebymonth();
+  // Revenue();
+  // revenuebymonth();
+  Unfiltered();
 }, [])
 
 
@@ -188,7 +196,7 @@ useEffect(()=>{
             
           </div> */}
            <div>
-            <DatePicker  picker="month"   onChange={onSelectDate}/>
+            <DatePicker  picker="month"   onChange={onSelectDate} />
            
           </div>
         
@@ -196,8 +204,8 @@ useEffect(()=>{
         </div>
         <p className="text-gray-400 font-normal text-sm">Explore your company dashboard here</p>
         <div className="mt-[1rem]">
-          {filtered? <FilteredHero fRevenue={fRevenue} graphData={FgraphData} empty={empty}/>:  <Hero revenue={revenue} graphData={graphData}/>  }
-        
+          {/* {filtered? <FilteredHero fRevenue={fRevenue} graphData={FgraphData} empty={empty}/>:  <Hero revenue={revenue} graphData={graphData}/>  } */}
+        <Hero revenue={filtered? fRevenue : revenue}  graphData={graphData}/>
          
         </div>
         <ChargerStat total={totalCompanyChargers } ActiveChargers={companyActiveChargers} OfflineChargers={OfflineCharger} TotalEnergy={companyEnergy}/>
