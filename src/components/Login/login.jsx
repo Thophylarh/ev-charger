@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { getToken } from "../../utils/getToken";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Login = () => {
 	const Navigate = useNavigate();
@@ -34,6 +35,18 @@ const Login = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		if (!emailAddress) {
+			toast.error("Enter email address");
+			return;
+		}
+
+		if (!password) {
+			toast.error("Enter password");
+
+			return;
+		}
+
 		setIsLoading(true);
 
 		axios
@@ -51,6 +64,7 @@ const Login = () => {
 			)
 			.then((res) => {
 				setIsLoading(false);
+
 				const response = res.data;
 				console.log(response);
 				window.localStorage.setItem("user-token", res.data.token);
@@ -63,14 +77,18 @@ const Login = () => {
 				} else {
 					Navigate("/company");
 				}
+				toast.success("Welcome");
 			})
 			.catch((err) => {
-				console.log(err.response.data.status);
-				if (err.response.data.status === 400) {
-					alert("Missing username or password");
-				} else if (err.response.data.status === 401) {
-					alert("Wrong username or password entered");
-				}
+				console.log(err);
+
+				toast.error(err.message);
+				setIsLoading(false);
+				// if (err.response.data.status === 400) {
+
+				// } else if (err.response.data.status === 401) {
+				// 	alert("Wrong username or password entered");
+				// }
 			});
 	};
 	//end of login function
@@ -105,6 +123,7 @@ const Login = () => {
 						>
 							<img className=" icon" src={Email}></img>
 							<input
+								required
 								type="email"
 								name="email"
 								placeholder="example@address.com"
@@ -136,6 +155,7 @@ const Login = () => {
 						>
 							<img className="w-[1rem] icon" src={Padlock}></img>
 							<input
+								required
 								type={inputType}
 								name="password"
 								placeholder="enter your password"
@@ -168,8 +188,7 @@ const Login = () => {
 					<div className=" ">
 						<div className="h-[30px] w-[380px] mt-[3.5rem]  flex items-right justify-end">
 							<a
-								className=" text-sm text-gray-400  
-                  hover:text-gray-900"
+								className=" text-sm text-gray-400   hover:text-gray-900"
 								href="#"
 							>
 								Forgot password?
@@ -184,7 +203,9 @@ const Login = () => {
                   font-semibold tracking-widest text- 
                    white uppercase transition ease-in- 
                     out  ${
-											isLoading ? "bg-slate-500 cursor-not-allowed" : "bg-black cursor-pointer"
+											isLoading
+												? "bg-slate-500 cursor-not-allowed"
+												: "bg-black cursor-pointer"
 										} border border- 
                      transparent active:bg-gray-900 
                       false justify-center 
