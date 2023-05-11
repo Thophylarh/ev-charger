@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Profit from "../../assets/svg/profit.png";
-import LineChart from "../Chart/lineChart";
+import LineChart from "../../Graphs/Chart/lineChart";
 import axios from "axios";
-import GreenChart from "../Chart/greenChart";
-import OrangeChart from "../Chart/orangeChart";
+import GreenChart from "../../Graphs/Chart/greenChart";
+import OrangeChart from "../../Graphs/Chart/orangeChart";
 import moment from "moment";
 
 function Hero(props) {

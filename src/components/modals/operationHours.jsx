@@ -1,5 +1,5 @@
 import PlusInBox from "../../assets/svg/plusInBox.svg";
-import Modal from "../Modal/modal";
+import Modal from "./modal";
 
 const OperationHours = () => {
   return (
