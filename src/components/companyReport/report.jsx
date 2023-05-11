@@ -58,7 +58,7 @@ useEffect(()=>{
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
                     
                     <th className="w-[10%]">#</th>
-                    <th className="w-[20%]">Charger Name</th>
+                    {/* <th className="w-[20%]">Charger Name</th> */}
                     <th  className="w-[12%]">Amount</th>
                     <th  className="w-[12%]">Energy</th>
                     <th  className="w-[20%]">Date</th>
@@ -71,7 +71,7 @@ useEffect(()=>{
                         <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                         <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} checked/></th>
                             <td>{Transaction.transactionId}</td>
-                            <td></td>
+                            
                             <td>₦{Transaction.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                             <td>{Transaction.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kWh</td>
                             <td>{moment(Transaction.dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</td>
