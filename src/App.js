@@ -20,9 +20,16 @@ import { Outlet, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./utils/ProtectedRoutes";
 import AuthRoutes from "./utils/AuthRoutes";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function App() {
+
+	
+
 	return (
 		<div>
+			<ToastContainer />
 			<Routes>
 				<Route
 					path="/"
