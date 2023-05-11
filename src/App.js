@@ -20,8 +20,9 @@ import { Outlet, Routes, Route } from "react-router-dom";
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import CompanyLayout from "./layouts/Company/CompanyLayout";
 
 function App() {
 	return (
@@ -40,7 +41,7 @@ function App() {
 				{/* PROTECTED ROUTES */}
 				<Route element={<ProtectedRoutes />}>
 					{/* COMPANY ROUTES */}
-					<Route element={<LayoutsWithCompanyNavbar />} path="/company">
+					<Route element={<CompanyLayout />} path="/company">
 						<Route element={<CompanyDash />} path="" />
 						<Route element={<ListOfStations />} path="myStations" />
 						<Route path="report" element={<CompanyReport />} />

@@ -2,6 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+  --horizontalMargin : 2.5rem;
+  --bgGrey: #101828;
+  --greenTextColor:#1DB954;
+  --borderRadius :3.125rem;
+  --fontSize:0.75rem;
+  --navTextColor:#D0D5DD
+}
 body{
   font-family: "Plus Jakarta Sans";
 }
