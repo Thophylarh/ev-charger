@@ -4,6 +4,7 @@ import axios from "../../utils/axiosInterceptor";
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import moment from "moment";
 import {DatePicker} from "antd"
+import Hero from "../Hero/hero"
 
 
 
@@ -13,6 +14,8 @@ const Sales = () =>{
 
     const [sales, setSales] = useState([])
     const [Cname, setName] = useState("")
+    const [revenue, setRevenue] = useState([])
+  const [stationgraphData, setstationGraphData] = useState([])
 
     //base url
   const url = ""
@@ -31,18 +34,33 @@ const Sales = () =>{
    
     axios.get(url +`/Transactions/get-all-transactions/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
     .then((res)=>{
-    //   console.log(res)
+     
       setSales(res.data)
     })
   }
 
-  const GetChargerName = (id) =>{
-    axios.get(url + "/Chargers/get-charger-by-id/" + id , { headers:{ 'Authorization': `Bearer ${token}`}})
-    .then((res)=>{
-       
-        setName(res.data[0].ChargerName)
-    })
-  }
+  //graph data - revenue by month for stations
+const revenuebymonth = () =>{
+   
+  axios.get(url +`/Transactions/get-group-transaction-by-month/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+   
+    setstationGraphData(res.data)
+
+    
+    
+  })
+}
+//revenue for station 
+const Revenue = () =>{
+  axios.get(url +`/Transactions/get-revenue/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
+  .then((res)=>{
+    setRevenue(res.data)
+    
+    
+  })
+}
+ 
 
   
 //on mount get data
@@ -52,6 +70,7 @@ useEffect(()=>{
 
   return (
     <>
+   <div className="h-[100vh] overflow-y-scroll">
     <div className="flex justify-between m-4">
     <div>
     <h1>Station sales</h1>
@@ -61,6 +80,12 @@ useEffect(()=>{
     </div>
    
     </div>
+
+    <div className='pb-[3rem] px-[2rem]'>
+    <Hero revenue={revenue} graphData={stationgraphData}/>
+
+    </div>
+
     <div className="bg-white py-[0.5rem]  px-[1.5rem]  ">
             <table className=" text-left  w-[100%] ">
                 <tr className=" h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
@@ -80,12 +105,12 @@ useEffect(()=>{
                         <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                         <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} checked/></th>
                             <td>{sale.transactionId}</td>
-                            {GetChargerName(sale.chargerId)}
-                            <td>{Cname}</td>
-                            <td>N{sale.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                            
+                            <td></td>
+                            <td>₦{sale.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                             <td>{sale.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</td>
                             <td>{moment(sale.dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</td>
-                            <td>{ sale.totalUnitChargedInTime / 60 + " hours(s)"}</td>
+                            <td>{(sale.totalUnitChargedInTime / 60)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " hours(s)"}</td>
                             <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
                         </tr>
                 ))}
@@ -101,10 +126,10 @@ useEffect(()=>{
            
             </div>
         </div>
-    
+        </div>
     </>
     )
-}
+ }
 
 
 export default Sales;

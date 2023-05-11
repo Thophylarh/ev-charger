@@ -27,7 +27,7 @@ const Report = () =>{
    
     axios.get(url +`/Transactions/get-all-transactions/company/${id}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
     .then((res)=>{
-      // console.log(res)
+      console.log(res)
       setCompanyTransactions(res.data)
     })
   }
@@ -71,10 +71,9 @@ useEffect(()=>{
                         <tr className="border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 font-normal text-sm">
                         <th className="py-[0.75rem]"><input className="checkbox" type={"checkbox"} checked/></th>
                             <td>{Transaction.transactionId}</td>
-                           
                             <td></td>
-                            <td>N{Transaction.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                            <td>{Transaction.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</td>
+                            <td>₦{Transaction.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                            <td>{Transaction.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kWh</td>
                             <td>{moment(Transaction.dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</td>
                             <td>{ (Transaction.totalUnitChargedInTime / 60)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " hours(s)"}</td>
                             <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>

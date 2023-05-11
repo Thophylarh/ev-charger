@@ -70,8 +70,8 @@ const ListOfStations = () => {
                     <tr key={station.Id} className=" border-b-2 border-solid border-[#47546] ">
                         <td className="py-[1rem]">{station.Id}</td>
                         <td>{station.StationName}</td>
-                        <td>N {station.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                        <td>{station.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</td>
+                        <td>₦{station.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                        <td>{station.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</td>
                         <td>{station.Location}</td>
                         <td>{station.Chargers}</td>
                         <td><button  onClick={(e)=>{viewStations(station.Id, e)}}
