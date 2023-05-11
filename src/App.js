@@ -10,7 +10,7 @@ import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations"
 import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
 import CompanySideBar from "./components/Company/companySidebar/companySidebar";
 import CompanyReport from "./pages/CompanyDashboard/Report/report";
-import Billing from "./pages/CompanyDashboard/Billing/billing";
+import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 import StationBilling from "./components/stationBilling/stationBilling";
 // import Chargers from "./components/Chargers/chargers";
 import Camera from "./pages/Branch/LiveFeed/camera";
