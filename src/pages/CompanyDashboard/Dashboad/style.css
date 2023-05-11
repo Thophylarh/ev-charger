@@ -1,0 +1,38 @@
+.revenueBlock {
+	border-top: 1px solid #f2f4f7;
+	border-bottom: 1px solid #f2f4f7;
+	padding: 2.5rem 0;
+}
+
+.revenueBlock:not(:first-child) {
+	border-left: 1px solid #f2f4f7;
+
+	padding-left: 20px;
+}
+
+.revenueBlock h3,
+h5 {
+	margin-bottom: 1rem;
+}
+
+.revenueBlock p {
+	color: var(--grey600Text);
+	font-size: 0.875rem;
+	font-weight: 400;
+}
+
+.totalRevenueBlock {
+	background: black;
+	padding-top: 2.5rem;
+	border-radius: 10px;
+}
+
+.totalRevenueBlock h3, .totalRevenueBlock h5{
+	color: white !important;
+      margin-bottom: 1rem;
+}
+
+.totalRevenueBlock p{
+      color: #FCFCFD;
+      font-size: 0.875rem;
+}

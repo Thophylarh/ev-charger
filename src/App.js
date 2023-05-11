@@ -23,6 +23,7 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CompanyLayout from "./layouts/Company/CompanyLayout";
+import Dashboardd from "./pages/CompanyDashboard/Dashboad/dashboard";
 
 function App() {
 	return (
@@ -42,10 +43,11 @@ function App() {
 				<Route element={<ProtectedRoutes />}>
 					{/* COMPANY ROUTES */}
 					<Route element={<CompanyLayout />} path="/company">
-						<Route element={<CompanyDash />} path="" />
-						<Route element={<ListOfStations />} path="myStations" />
+					<Route element={<Dashboardd />} path="" />
+						{/* <Route element={<CompanyDash />} path="" /> */}
+						{/* <Route element={<ListOfStations />} path="myStations" />
 						<Route path="report" element={<CompanyReport />} />
-						<Route path="billing" element={<Billing />} />
+						<Route path="billing" element={<Billing />} /> */}
 					</Route>
 
 					{/* STATION ROUTES */}
