@@ -3,9 +3,10 @@ import "./style.css"
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import axios from "axios"
 import moment from "moment";
-import { Space, Table, Tag } from 'antd'
+import { Space, Table, Radio } from 'antd'
 
 const Transactions = (props) => {
+    
 
     const [Cname, setName] = useState("")
 
@@ -18,19 +19,13 @@ const Transactions = (props) => {
   //company id
   const companyId = localStorage.getItem("id");
 
-//   const GetChargerName = (id) =>{
-//     axios.get(url + "/Chargers/get-charger-by-id/" + id , { headers:{ 'Authorization': `Bearer ${token}`}})
-//     .then((res)=>{
-//         // console.log(res.data.chargerName)
-//         setName(res.data)
-//     })
-//   }
 
-
-   
+    
+    
     
     const Transactions = props.transactions
-    // console.log(Transactions)
+    console.log(Transactions)
+    
 
     const columns =[
         {
@@ -46,22 +41,33 @@ const Transactions = (props) => {
         {
             title: 'Amount', 
             dataIndex: 'totalAmount',
-            key: 'totalAmount'
+            key: 'totalAmount', 
+            render: (totalAmount)=>(<p>₦{totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>)
+            
         },
         {
             title: 'Energy', 
             dataIndex: 'totalUnitChargedInEnergy',
-            key: 'totalUnitChargedInEnergy'
+            key: 'totalUnitChargedInEnergy', 
+            render: (totalUnitChargedInEnergy) =>(<p>{totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</p>)
         },
         {
             title: 'Date',
             dataIndex: 'dateOfTransaction',
-            key:'dateOfTransaction'
+            key:'dateOfTransaction', 
+            render: (dateOfTransaction)=>(<p>{moment(dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</p>)
+        },
+        {
+            title: 'Charge Duration',
+            dataIndex: 'totalUnitChargedInTime',
+            key:'totalUnitChargedInTime', 
+            render: (totalUnitChargedInTime)=>(<p>{(totalUnitChargedInTime/60)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " hour(s)"}</p>)
         },
         {
             title: 'Status',
             dataIndex: 'transactionStatus',
-            key:'transactionStatus'
+            key:'transactionStatus', 
+            render: (transactionStatus)=>(<button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button>)
         },
     ]
     
@@ -72,7 +78,8 @@ const Transactions = (props) => {
         </div>
         {/* table */}
         <div className="bg-white py-[0.5rem]  px-[1.5rem]  ">
-        <Table columns={columns} dataSource={Transactions} />
+        
+        <Table  columns={columns} dataSource={Transactions} />
             {/* <table className=" text-left  w-[100%]">
                 <tr className=" h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
