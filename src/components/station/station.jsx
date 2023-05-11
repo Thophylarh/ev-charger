@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axios from "../../utils/axiosInterceptor";
+import axios from "../../lib/axiosInterceptor";
 import { useNavigate } from "react-router";
 
 const Station = () => {

@@ -1,32 +1,29 @@
 import React from "react";
-import Login from "./components/Login/login";
+import Login from "./pages/Login/login";
 import Sidebar from "./components/Sidebar/sidebar";
-import Dashboard from "./components/Dashboard/dashboard";
-import SpecificCharger from "./components/specificCharger/specificCharger";
-import EvCharger from "./components/evChargers/evCharger";
-import ChangePassword from "./components/changePassword/changePassword";
+import Dashboard from "./pages/Branch/Dashboard/dashboard";
+import SpecificCharger from "./pages/Branch/ChargerDetails/specificCharger";
+import EvCharger from "./pages/Branch/EvChargers/evCharger";
+import ChangePassword from "./pages/changePassword/changePassword";
 import Station from "./components/station/station";
-import ListOfStations from "./components/listOfStations/listOfStations";
-import CompanyDash from "./components/companyDashboard/companyDash";
-import CompanySideBar from "./components/companySidebar/companySidebar";
-import CompanyReport from "./components/companyReport/report";
-import Billing from "./components/billing/billing";
+import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations";
+import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
+import CompanySideBar from "./components/Company/companySidebar/companySidebar";
+import CompanyReport from "./pages/CompanyDashboard/Report/report";
+import Billing from "./pages/CompanyDashboard/Billing/billing";
 import StationBilling from "./components/stationBilling/stationBilling";
-import Chargers from "./components/Chargers/chargers";
-import Camera from "./components/liveCameraFeed/camera";
-import Sales from "./components/Sales/sales";
+// import Chargers from "./components/Chargers/chargers";
+import Camera from "./pages/Branch/LiveFeed/camera";
+import Sales from "./pages/Branch/Sales/sales";
 import { Outlet, Routes, Route } from "react-router-dom";
 
-import ProtectedRoutes from "./utils/ProtectedRoutes";
-import AuthRoutes from "./utils/AuthRoutes";
+import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
+import AuthRoutes from "./routeGuard/AuthRoutes";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
-	
-
 	return (
 		<div>
 			<ToastContainer />
@@ -59,7 +56,7 @@ function App() {
 						<Route path="chargerDetails" element={<SpecificCharger />} />
 						<Route path="billing" element={<StationBilling />} />
 						<Route path="sales" element={<Sales />} />
-						<Route path="chargers" element={<Chargers />} />
+						{/* <Route path="chargers" element={<Chargers />} /> */}
 						<Route path="camera" element={<Camera />} />
 					</Route>
 				</Route>
