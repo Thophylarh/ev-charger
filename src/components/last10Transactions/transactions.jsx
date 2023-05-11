@@ -3,6 +3,7 @@ import "./style.css"
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import axios from "axios"
 import moment from "moment";
+import { Space, Table, Tag } from 'antd'
 
 const Transactions = (props) => {
 
@@ -29,6 +30,40 @@ const Transactions = (props) => {
    
     
     const Transactions = props.transactions
+    // console.log(Transactions)
+
+    const columns =[
+        {
+            title: '#', 
+            dataIndex: 'transactionId',
+            key: 'transactionId'
+        },
+        {
+            title: 'Charger', 
+            dataIndex: 'charger',
+            key: 'charger'
+        },
+        {
+            title: 'Amount', 
+            dataIndex: 'totalAmount',
+            key: 'totalAmount'
+        },
+        {
+            title: 'Energy', 
+            dataIndex: 'totalUnitChargedInEnergy',
+            key: 'totalUnitChargedInEnergy'
+        },
+        {
+            title: 'Date',
+            dataIndex: 'dateOfTransaction',
+            key:'dateOfTransaction'
+        },
+        {
+            title: 'Status',
+            dataIndex: 'transactionStatus',
+            key:'transactionStatus'
+        },
+    ]
     
 
     return ( <div >
@@ -37,7 +72,8 @@ const Transactions = (props) => {
         </div>
         {/* table */}
         <div className="bg-white py-[0.5rem]  px-[1.5rem]  ">
-            <table className=" text-left  w-[100%]">
+        <Table columns={columns} dataSource={Transactions} />
+            {/* <table className=" text-left  w-[100%]">
                 <tr className=" h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
                     
@@ -65,15 +101,15 @@ const Transactions = (props) => {
                 ))}
                 
                 
-            </table>
+            </table> */}
 
-            <div className="flex justify-between py-[4rem]">
+            {/* <div className="flex justify-between py-[4rem]">
             <p>1-50 of 2,500</p>
            
             <p className="pl-[52rem]">1-10 </p>
             <img className="" src={nextArrow} />
            
-            </div>
+            </div> */}
         </div>
     </div> );
 }
