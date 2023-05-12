@@ -23,7 +23,7 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CompanyLayout from "./layouts/Station/StationLayout";
-import Dashboardd from "./pages/CompanyDashboard/Dashboad/dashboard";
+import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
 
 function App() {
