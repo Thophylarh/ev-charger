@@ -6,7 +6,7 @@ import moment from "moment/moment";
 
 export default function ChargersCard(props) {
 	let charger = props.charger
-	console.log(props)
+	
 	return (
 		<div className={`bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`}>
 			<div className="flex ">
@@ -39,6 +39,12 @@ export default function ChargersCard(props) {
 						</div>
 
 						<div className="flex justify-between items-center mb-[0.75rem] ">
+							<h3>Last charge: </h3>
+
+							<h5 className="text-[0.875rem]">{  moment(new Date(charger.LastCharged)).fromNow()}</h5>
+						</div>
+
+						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Energy consumed: </h3>
 
 							<h5 className="text-[0.875rem]">
@@ -49,11 +55,7 @@ export default function ChargersCard(props) {
 							</h5>
 						</div>
 
-						<div className="flex justify-between items-center mb-[0.75rem] ">
-							<h3>Last charge: </h3>
-
-							<h5 className="text-[0.875rem]">{  moment(new Date(charger.LastCharged)).fromNow()}</h5>
-						</div>
+		
 
 						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Type: </h3>

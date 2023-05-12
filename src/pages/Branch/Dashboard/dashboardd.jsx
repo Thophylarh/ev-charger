@@ -47,6 +47,7 @@ export default function Dashboardd() {
 	const getListOfChargers= () =>{
 		axios.get( `/Chargers/get-list-station-charger/${companyId}/${stationId}` )
 		.then((res)=>{
+			console.log(res.data)
 		
 		  setStationChargerList(res.data)
 		 
@@ -195,8 +196,8 @@ export default function Dashboardd() {
 				</div>
 
 				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-					{stationChargerList.map((charger)=>(
-						<ChargersCard charger={charger} key={charger.Id}/>
+					{stationChargerList.map((charger, index)=>(
+						<ChargersCard charger={charger} key={index}/>
 					))}
 					
 				</div>

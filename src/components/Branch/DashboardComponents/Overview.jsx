@@ -10,9 +10,8 @@ export default function StationDashboardOverview({ stationId }) {
 
 	const getStationRevenue = () => {
 		axios.get(`/Transactions/get-revenue/station/${stationId}`).then((res) => {
-			console.log(res.data);
 			let formatRevenue = res.data.TotalRevenue.toFixed(2).split(".");
-			console.log(formatRevenue);
+
 			setRevenue(formatRevenue);
 		});
 	};
