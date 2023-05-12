@@ -175,7 +175,7 @@ const Index = () => {
 
 	useEffect(() => {
 		getRevenueOverview();
-		getRevenueGraph();
+		// getRevenueGraph();
 	}, [newDate]);
 
 	return (
