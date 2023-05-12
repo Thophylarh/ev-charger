@@ -75,13 +75,23 @@ export default function Dashboardd() {
 				<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
 					<h3>STATION CHARGERS</h3>
 
-					<button>See all chargers</button>
+					<button className="border-2  border-gray-400 text-[0.75rem] p-[0.5rem] rounded-md text-[var(--grey700)]">See all chargers</button>
 				</div>
 
 				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
 				<ChargersCard />
 				<ChargersCard />
 				<ChargersCard />
+				</div>
+			</section>
+
+			<section className={`mb-[var(--marginBtwSection)]`}>
+				<div>
+					<h3>LAST 10 TRANSACTIONS</h3>
+				</div>
+
+				<div>
+					
 				</div>
 			</section>
 		</section>
