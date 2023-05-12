@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Profit from "../../assets/svg/profit.png";
 import LineChart from "../../Graphs/Chart/lineChart";
+import BarChart from "../../Graphs/Chart/barChart";
 import axios from "axios";
 import GreenChart from "../../Graphs/Chart/greenChart";
 import OrangeChart from "../../Graphs/Chart/orangeChart";
@@ -100,11 +101,13 @@ function Hero(props) {
 				</div>
 
 				<div className="col-span-2 bg-[#fff] p-6 ">
-					<div className="text-sm text-gray-400 font-normal">
-						<p>Revenue Summary</p>
+					<div className="text-sm text-gray-400 font-normal" >
+					<p >Revenue Breakdown</p>
 					</div>
-					<div id="chart" className="h-[22rem]">
+					<div id="chart" className="h-[22rem] ">
+					
 						<LineChart revenue={mappedGraph} months={months} />
+						
 					</div>
 				</div>
 			</div>

@@ -1,12 +1,13 @@
 import React, {useState} from 'react';
-import dropDown from "../../assets/svg/dropDownArrow.svg";
-import changeprice from "../../assets/svg/changePrice.svg"
-import grid from "../../assets/svg/grid.svg"
-import utility from "../../assets/svg/utility.svg"
-import nextArrow from "../../assets/svg/next-arrow.svg";
-import greenEnergy from "../../assets/svg/greenEnergy.svg"
-import Modal from "../../Modal/modal";
-import PriceModal from "../../modals/changePrice";
+
+import dropDown from "../../../assets/svg/dropDownArrow.svg";
+import changeprice from "../../../assets/svg/changePrice.svg"
+import grid from "../../../assets/svg/grid.svg"
+import utility from "../../../assets/svg/utility.svg"
+import nextArrow from "../../../assets/svg/next-arrow.svg";
+import greenEnergy from "../../../assets/svg/greenEnergy.svg"
+import Modal from "../../../components/modals/modal"
+import PriceModal from "../../../components/modals/changePrice";
 
  const Cbilling = () => {
     const [popUp, setpopup] = useState(false)

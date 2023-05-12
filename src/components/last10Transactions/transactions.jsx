@@ -33,11 +33,11 @@ const Transactions = (props) => {
             dataIndex: 'transactionId',
             key: 'transactionId'
         },
-        {
-            title: 'Charger', 
-            dataIndex: 'charger',
-            key: 'charger'
-        },
+        // {
+        //     title: 'Charger', 
+        //     dataIndex: 'charger',
+        //     key: 'charger'
+        // },
         {
             title: 'Amount', 
             dataIndex: 'totalAmount',

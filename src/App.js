@@ -10,7 +10,7 @@ import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations"
 import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
 import CompanySideBar from "./components/Company/companySidebar/companySidebar";
 import CompanyReport from "./pages/CompanyDashboard/Report/report";
-import Billing from "./pages/CompanyDashboard/Billing/billing";
+import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 import StationBilling from "./components/stationBilling/stationBilling";
 // import Chargers from "./components/Chargers/chargers";
 import Camera from "./pages/Branch/LiveFeed/camera";
@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CompanyLayout from "./layouts/Station/StationLayout";
 import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
+import EvChargers from "./pages/Branch/EvChargers/evchargers";
 
 function App() {
 	return (
@@ -56,6 +57,7 @@ function App() {
 
 					<Route path="/station" element={<StationLayout />}>
 						<Route element={<Dashboardd />} path="" />
+						<Route path="evChargers" element={<EvChargers />} />
 					</Route>
 
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
