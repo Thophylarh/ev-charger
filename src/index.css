@@ -4,15 +4,19 @@
 
 :root {
 	--horizontalMargin: 2.5rem;
-	--bgGrey: #101828;
-	--greenTextColor: #1db954;
+
 	--borderRadius: 3.125rem;
-	--fontSize: 0.75rem;
-	--navTextColor: #d0d5dd;
+
 	--marginBtwSection: 2.5rem;
-  --greyTextColor:#667085;
-  --blackTextColor:#101828;
-  --grey600Text:#475467;
+	
+	--grey300: #d0d5dd;
+	--grey500: #667085;
+	--grey600: #475467;
+	--grey700: #344054;
+	--grey900: #101828;
+
+	--primaryGreen500: #1db954;
+	--fontSize: 0.75rem;
 }
 body {
 	font-family: "Plus Jakarta Sans";
@@ -28,17 +32,17 @@ h4 {
 h3 {
 	font-weight: 600;
 	font-size: 0.75rem;
-  color:var(--greyTextColor) ;
+	color: var(--grey500);
 }
 
-h5{
-  font-weight: 700;
-font-size: 1.5rem;
-color:var(--blackTextColor) ;
+h5 {
+	font-weight: 700;
+	font-size: 1.5rem;
+	color: var(--grey900);
 }
 
 .subHeader {
 	font-weight: 400;
 	font-size: 1rem;
-	color:var(--greyTextColor) ;
+	color: var(--grey500);
 }

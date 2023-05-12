@@ -16,7 +16,7 @@ h5 {
 }
 
 .revenueBlock p {
-	color: var(--grey600Text);
+	color: var(--grey600);
 	font-size: 0.875rem;
 	font-weight: 400;
 }

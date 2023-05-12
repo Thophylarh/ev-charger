@@ -19,7 +19,7 @@ export default function Dashboardd() {
 				</div>
 			</section>
 
-			<section>
+			<section className={`mb-[var(--marginBtwSection)]`}>
 				<div className=" grid grid-cols-4  ">
 					<div className="revenueBlock">
 						<h3>BMS REVENUE</h3>
@@ -65,6 +65,14 @@ export default function Dashboardd() {
 					</div>
 				</div>
 			</section>
+
+                  <section className={`mb-[var(--marginBtwSection)]`}>
+                        <div className="flex justify-between items-center">
+					<h3>STATION CHARGERS</h3>
+
+					<button>See all chargers</button>
+				</div>
+                  </section>
 		</section>
 	);
 }
