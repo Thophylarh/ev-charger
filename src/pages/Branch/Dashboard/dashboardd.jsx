@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import axios from "../../../lib/axiosInterceptor";
 import "./style.css";
 
-import Profit from "../../../assets/svg/profit.png";
+
 
 import ActiveCharger from "../../../assets/svg/activeCharger.svg";
 import energyConsumed from "../../../assets/svg/energyConsumed.svg";
@@ -14,6 +14,7 @@ import { Table } from "antd";
 import moment from "moment";
 import { formatNumber } from "../../../utils/formatNumber";
 import BarChart from "../../../Graphs/Chart/barChart";
+import StationDashboardOverview from "../../../components/Branch/DashboardComponents/Overview";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
@@ -46,6 +47,7 @@ export default function Dashboardd() {
 	const getListOfChargers= () =>{
 		axios.get( `/Chargers/get-list-station-charger/${companyId}/${stationId}` )
 		.then((res)=>{
+			console.log(res.data)
 		
 		  setStationChargerList(res.data)
 		 
@@ -130,59 +132,11 @@ export default function Dashboardd() {
 				</div>
 			</section>
 
-			<section className={`mb-[var(--marginBtwSection)]`}>
-				<div className=" grid grid-cols-4  ">
-					<div className="revenueBlock">
-						<h3>BMS REVENUE</h3>
+			<StationDashboardOverview stationId={stationId}/>
 
-						<h5>
-							NGN 300,000.<sup>00</sup>{" "}
-						</h5>
 
-						<p>7,000.00 KW</p>
-					</div>
-
-					<div className="revenueBlock">
-						<h3>AC REVENUE</h3>
-
-						<h5>
-							NGN 300,000.<sup>00</sup>{" "}
-						</h5>
-
-						<p>7,000.00 KW</p>
-					</div>
-
-					<div className="revenueBlock">
-						<h3>DC REVENUE</h3>
-
-						<h5>
-							NGN 300,000.<sup>00</sup>{" "}
-						</h5>
-
-						<p>7,000.00 KW</p>
-					</div>
-
-					<div className="totalRevenueBlock text-white pl-[1.25rem]">
-						<h3>TOTAL REVENUE</h3>
-
-						<h5>
-							NGN 300,000.<sup>00</sup>{" "}
-						</h5>
-
-						<div className="flex items-center">
-							<img
-								src={Profit}
-								alt="profit indicator"
-								className="mr-[0.25rem] w-[0.6rem] h-[0.6875rem]"
-							/>
-							<p>22% since last month </p>
-						</div>
-					</div>
-				</div>
-			</section>
-
-			<section className={`mb-[var(--marginBtwSection)]`}>
-				<div className="grid grid-cols-12 gap-4 ">
+			<section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
+				<div className="grid grid-cols-12 gap-4 h-[100%]">
 					<div className="col-span-9">
 						<BarChart />
 					</div>
@@ -242,8 +196,8 @@ export default function Dashboardd() {
 				</div>
 
 				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-					{stationChargerList.map((charger)=>(
-						<ChargersCard charger={charger} key={charger.Id}/>
+					{stationChargerList.map((charger, index)=>(
+						<ChargersCard charger={charger} key={index}/>
 					))}
 					
 				</div>
