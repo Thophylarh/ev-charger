@@ -5,11 +5,15 @@ import axios from "../../../lib/axiosInterceptor";
 import "./style.css";
 
 import Profit from "../../../assets/svg/profit.png";
+
+import ActiveCharger from "../../../assets/svg/activeCharger.svg";
+import energyConsumed from "../../../assets/svg/energyConsumed.svg";
 import ChargersCard from "../../../components/Company/ChargersCard";
 
 import { Table } from "antd";
 import moment from "moment";
 import { formatNumber } from "../../../utils/formatNumber";
+import BarChart from "../../../Graphs/Chart/barChart";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
@@ -161,6 +165,57 @@ export default function Dashboardd() {
 			</section>
 
 			<section className={`mb-[var(--marginBtwSection)]`}>
+				<div className="grid grid-cols-12 gap-4 ">
+					<div className="col-span-9">
+						<BarChart />
+					</div>
+					<div className="col-span-3">
+						<div className={`mb-[var(--marginBtwElements)]`}>
+							<h3>CHARGERS SUMMARY</h3>
+						</div>
+
+						<div
+							className={`bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<h3 className="text-[0.875rem] mb-[1.25rem]">
+								Number of charges
+							</h3>
+
+							<h5>35</h5>
+						</div>
+
+						<div
+							className={` flex justify-between bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<div>
+								<h3 className="text-[0.875rem] mb-[1.25rem]">
+									Active chargers
+								</h3>
+
+								<h5 className=" text-[var(--primaryGreen500)]">30</h5>
+							</div>
+
+							<img src={ActiveCharger} alt="Disconnected Chargers" />
+						</div>
+
+						<div
+							className={`flex justify-between  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<div>
+								<h3 className="text-[0.875rem] mb-[1.25rem]">
+									Total energy consumed
+								</h3>
+
+								<h5>5000.00<sup>KW</sup></h5>
+							</div> 
+
+							<img src={energyConsumed} alt="Energy Consumed" />
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section className={`mb-[var(--marginBtwSection)]`}>
 				<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
 					<h3>STATION CHARGERS</h3>
 
@@ -182,7 +237,11 @@ export default function Dashboardd() {
 				</div>
 
 				<div>
-					<Table columns={columns} pagination={false} dataSource={transaction} />
+					<Table
+						columns={columns}
+						pagination={false}
+						dataSource={transaction}
+					/>
 				</div>
 			</section>
 		</section>
