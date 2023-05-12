@@ -185,7 +185,7 @@ export default function Dashboardd() {
 						</div>
 
 						<div
-							className={` flex justify-between bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+							className={` flex justify-between items-center bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
 						>
 							<div>
 								<h3 className="text-[0.875rem] mb-[1.25rem]">
@@ -195,21 +195,21 @@ export default function Dashboardd() {
 								<h5 className=" text-[var(--primaryGreen500)]">30</h5>
 							</div>
 
-							<img src={ActiveCharger} alt="Disconnected Chargers" />
+							<img src={ActiveCharger} alt="Active Chargers" className="h-[2.3rem] w-[1.8244rem}"  />
 						</div>
 
 						<div
-							className={`flex justify-between  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+							className={`flex justify-between items-center  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
 						>
 							<div>
 								<h3 className="text-[0.875rem] mb-[1.25rem]">
 									Total energy consumed
 								</h3>
 
-								<h5>5000.00<sup>KW</sup></h5>
+								<h5>5000.00<sup className="text-[0.75rem]">KW</sup></h5>
 							</div> 
 
-							<img src={energyConsumed} alt="Energy Consumed" />
+							<img src={energyConsumed} alt="Energy Consumed" className="h-[2.255rem] w-[1.8244rem}" />
 						</div>
 					</div>
 				</div>
