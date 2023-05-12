@@ -1,6 +1,7 @@
 import React from "react";
 import ActiveCharger from "../../../assets/svg/activeCharger.svg";
 import DisconnectedCharger from "../../../assets/svg/disconnectedCharger.svg";
+import ChargersCard from "../../../components/Company/ChargersCard";
 import "./style.css";
 
 export default function EvChargers() {
@@ -59,6 +60,16 @@ export default function EvChargers() {
             </h5>
           </div>
         </div>
+      </section>
+      <section>
+        <div>
+            <h3>LIST OF CHARGERS</h3>
+        </div>
+        <div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+					<ChargersCard />
+					<ChargersCard />
+					<ChargersCard />
+				</div>
       </section>
     </section>
   );

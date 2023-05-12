@@ -5,8 +5,8 @@ import activeStatusImg from "../../../assets/svg/activeStatus.svg";
 
 export default function ChargersCard() {
 	return (
-		<div className="bg-white py-[1.5rem] px-[1.75rem]">
-			<div className="flex">
+		<div className={`bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`}>
+			<div className="flex ">
 				<div className="mr-[1rem]">
 					<img
 						src={ChargerImg}
@@ -15,7 +15,7 @@ export default function ChargersCard() {
 					/>
 				</div>
 
-				<div className="w-full">
+				<div className="w-full ">
 					<div className="flex justify-between items-center mb-[1rem] border-b-[1px] border-grey-100 pb-[0.75rem]">
 						<h3>TESLA CHARGER</h3>
 
