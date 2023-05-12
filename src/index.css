@@ -8,7 +8,10 @@
 	--borderRadius: 3.125rem;
 
 	--marginBtwSection: 2.5rem;
-	
+	--marginBtwElements: 1.25rem;
+
+	--grey50:#F9FAFB;
+	--grey100: #F2F4F7;
 	--grey300: #d0d5dd;
 	--grey500: #667085;
 	--grey600: #475467;
