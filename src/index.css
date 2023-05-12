@@ -61,10 +61,10 @@ h5 {
 
     }
     ::-webkit-scrollbar-track {
-	background-color: black;
+	background-color: transparent;
     }
     ::-webkit-scrollbar-thumb {
-	background-color: white;
+	background-color: black;
 	border-radius: 2rem;
 	height: 1.25rem
     }
