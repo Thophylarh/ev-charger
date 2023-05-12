@@ -6,7 +6,7 @@ import DropdownIcon from "../../assets/svg/dropdown.svg";
 import blackDropdownIcon from "../../assets/svg/blackDropdown.svg";
 import CompanyLogo from "../../assets/svg/companyLogo.svg";
 
-export default function CompanyNavBar() {
+export default function StationNavBar() {
 	return (
 		<nav className={`bg-black h-[5rem]`}>
 			<div
