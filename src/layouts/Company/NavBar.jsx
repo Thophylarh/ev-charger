@@ -18,7 +18,7 @@ export default function CompanyNavBar() {
 					</div>
 
 					<div className="flex">
-						<div className="mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex items-center py-[0.5rem]  px-[0.75rem] bg-[var(--bgGrey)] text-[var(--greenTextColor)] rounded-[var(--borderRadius)]">
+						<div className="mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex items-center py-[0.5rem]  px-[0.75rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]">
 							<img
 								className="mr-[0.5rem] "
 								src={DshboardB}
@@ -27,7 +27,7 @@ export default function CompanyNavBar() {
 							<p className=""> Overview</p>
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--navTextColor)] rounded-[var(--borderRadius)] ">
+						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
 								src={DshboardB}
@@ -36,7 +36,7 @@ export default function CompanyNavBar() {
 							<p>EV chargers</p>
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--navTextColor)] rounded-[var(--borderRadius)] ">
+						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
 								src={DshboardB}
@@ -45,13 +45,13 @@ export default function CompanyNavBar() {
 							<p>Billing & pricing </p>
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--navTextColor)] rounded-[var(--borderRadius)] ">
+						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							<p className="mr-[0.5rem] ">Report </p>
 
 							<img src={DropdownIcon} alt="Dropdown Icon" />
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--navTextColor)] rounded-[var(--borderRadius)] ">
+						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
 								src={DshboardB}

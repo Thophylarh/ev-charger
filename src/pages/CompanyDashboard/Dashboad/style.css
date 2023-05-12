@@ -11,12 +11,12 @@
 }
 
 .revenueBlock h3,
-h5 {
+.revenueBlock h5 {
 	margin-bottom: 1rem;
 }
 
 .revenueBlock p {
-	color: var(--grey600Text);
+	color: var(--grey600);
 	font-size: 0.875rem;
 	font-weight: 400;
 }
