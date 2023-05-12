@@ -18,6 +18,8 @@ const ListOfStations = () => {
     //company id
     const companyId = localStorage.getItem("id");
 
+    
+
     //get stations under a company 
     const getData = ( ) =>{
         axios.get(url + "/Stations/get-station-by-company/" + companyId,  { headers:{ 'Authorization': `Bearer ${token}`}})
@@ -33,13 +35,16 @@ const ListOfStations = () => {
         getData()
       }, [])
 
+     
+
       const viewStations = (id, e) =>{
-       
-        // window.localStorage.setItem("stationId", id);
+      
+        window.localStorage.setItem("stationId", id);
+      
         // Navigate("/station")
         Navigate({
           pathname: '/station',
-          search: `?stationId=${id}`,
+          search: `?stationId=${id}&companyId=${companyId}`,
         });
       }
 

@@ -84,7 +84,7 @@ const getStationDetails = () =>{
    const getListOfChargers= () =>{
     axios.get(url + `/Chargers/get-list-station-charger/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
     .then((res)=>{
-      // console.log(res)
+    
       setStationChargerList(res.data)
      
     })

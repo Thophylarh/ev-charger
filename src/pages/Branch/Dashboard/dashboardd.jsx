@@ -17,11 +17,17 @@ import BarChart from "../../../Graphs/Chart/barChart";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
+	const [stationChargerList, setStationChargerList] = useState([]);
 
 	const [searchParams] = useSearchParams();
 
 	let stationId = searchParams.get("stationId");
 
+	let companyId = searchParams.get("companyId")
+
+	
+
+	//last 10 transactions
 	const getTransactions = async () => {
 		axios
 			.get(`/Transactions/get-last10-transactions/station/${stationId}/10`)
@@ -36,8 +42,19 @@ export default function Dashboardd() {
 			});
 	};
 
+	//get list of chargers in station
+	const getListOfChargers= () =>{
+		axios.get( `/Chargers/get-list-station-charger/${companyId}/${stationId}` )
+		.then((res)=>{
+		
+		  setStationChargerList(res.data)
+		 
+		})
+	  }
+
 	useEffect(() => {
 		getTransactions();
+		getListOfChargers();
 	}, []);
 
 	const columns = [
@@ -225,9 +242,10 @@ export default function Dashboardd() {
 				</div>
 
 				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-					<ChargersCard />
-					<ChargersCard />
-					<ChargersCard />
+					{stationChargerList.map((charger)=>(
+						<ChargersCard charger={charger} key={charger.Id}/>
+					))}
+					
 				</div>
 			</section>
 
