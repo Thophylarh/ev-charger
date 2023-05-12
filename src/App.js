@@ -22,8 +22,9 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import CompanyLayout from "./layouts/Company/CompanyLayout";
+import CompanyLayout from "./layouts/Station/StationLayout";
 import Dashboardd from "./pages/CompanyDashboard/Dashboad/dashboard";
+import StationLayout from "./layouts/Station/StationLayout";
 
 function App() {
 	return (
@@ -42,26 +43,30 @@ function App() {
 				{/* PROTECTED ROUTES */}
 				<Route element={<ProtectedRoutes />}>
 					{/* COMPANY ROUTES */}
-					<Route element={<CompanyLayout />} path="/company">
-					<Route element={<Dashboardd />} path="" />
-						{/* <Route element={<CompanyDash />} path="" /> */}
-						{/* <Route element={<ListOfStations />} path="myStations" />
+					<Route element={<LayoutsWithCompanyNavbar />} path="/company">
+						<Route element={<CompanyDash />} path="" />
+						<Route element={<ListOfStations />} path="myStations" />
 						<Route path="report" element={<CompanyReport />} />
-						<Route path="billing" element={<Billing />} /> */}
+						<Route path="billing" element={<Billing />} />
 					</Route>
 
 					{/* STATION ROUTES */}
 
-					<Route path="/station" element={<LayoutsWithNavbar />}>
+					{/* NEW */}
+
+					<Route path="/station" element={<StationLayout />}>
+						<Route element={<Dashboardd />} path="" />
+					</Route>
+
+					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
 						<Route path="" element={<Dashboard />} />
 
 						<Route path="evChargers" element={<EvCharger />} />
 						<Route path="chargerDetails" element={<SpecificCharger />} />
 						<Route path="billing" element={<StationBilling />} />
 						<Route path="sales" element={<Sales />} />
-						{/* <Route path="chargers" element={<Chargers />} /> */}
 						<Route path="camera" element={<Camera />} />
-					</Route>
+					</Route> */}
 				</Route>
 
 				<Route path="/station" element={<Station />}></Route>
