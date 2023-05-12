@@ -10,6 +10,7 @@ import ChargersCard from "../../../components/Company/ChargersCard";
 import { Table } from "antd";
 import moment from "moment";
 import { formatNumber } from "../../../utils/formatNumber";
+import BarChart from "../../../Graphs/Chart/barChart";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
@@ -161,6 +162,25 @@ export default function Dashboardd() {
 			</section>
 
 			<section className={`mb-[var(--marginBtwSection)]`}>
+				<div className="grid grid-cols-12 gap-4 ">
+					<div className="col-span-9">
+						<BarChart />
+					</div>
+					<div className="col-span-3">
+						<div>
+							<h3>CHARGERS SUMMARY</h3>
+						</div>
+
+						<div className={`bg-[var(--grey50)] py-[2.5rem] px-[1.25rem] rounded-lg`}>
+							<h3 className="text-[0.875rem] mb-[1.25rem]">Number of charges</h3>
+
+							<h5>35</h5>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section className={`mb-[var(--marginBtwSection)]`}>
 				<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
 					<h3>STATION CHARGERS</h3>
 
@@ -182,7 +202,11 @@ export default function Dashboardd() {
 				</div>
 
 				<div>
-					<Table columns={columns} pagination={false} dataSource={transaction} />
+					<Table
+						columns={columns}
+						pagination={false}
+						dataSource={transaction}
+					/>
 				</div>
 			</section>
 		</section>
