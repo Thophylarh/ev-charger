@@ -42,7 +42,7 @@ instance.interceptors.response.use(
 		}
 
 		if (error.response.status === 401) {
-			console.log("hiiiiiii");
+		
 			window.location.href = "/";
 			return Promise.reject(error);
 		}

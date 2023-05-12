@@ -24,7 +24,7 @@ const Transactions = (props) => {
     
     
     const Transactions = props.transactions
-    console.log(Transactions)
+   
     
 
     const columns =[

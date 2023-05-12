@@ -15,7 +15,7 @@ import StationBilling from "./components/stationBilling/stationBilling";
 // import Chargers from "./components/Chargers/chargers";
 import Camera from "./pages/Branch/LiveFeed/camera";
 import Sales from "./pages/Branch/Sales/sales";
-import { Outlet, Routes, Route } from "react-router-dom";
+import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
 
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
@@ -31,25 +31,39 @@ import Details from "./pages/Branch/ChargerDetails/chargerDetails";
 function App() {
 	return (
 		<div>
-			<ToastContainer />
-			<Routes>
-				<Route
-					path="/"
-					element={
-						<AuthRoutes>
-							<Login />{" "}
-						</AuthRoutes>
-					}
-				/>
+			<BrowserRouter>
+				<ToastContainer />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<AuthRoutes>
+								<Login />{" "}
+							</AuthRoutes>
+						}
+					/>
 
-				{/* PROTECTED ROUTES */}
-				<Route element={<ProtectedRoutes />}>
+					{/* PROTECTED ROUTES */}
+
 					{/* COMPANY ROUTES */}
-					<Route element={<LayoutsWithCompanyNavbar />} path="/company">
-						<Route element={<CompanyDash />} path="" />
-						<Route element={<ListOfStations />} path="myStations" />
-						<Route path="report" element={<CompanyReport />} />
-						<Route path="billing" element={<Billing />} />
+					<Route element={<LayoutsWithCompanyNavbar />}>
+						<Route element={<ProtectedRoutes />}>
+							<Route element={<CompanyDash />} path="/company" />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							<Route element={<ListOfStations />} path="/company/myStations" />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							{" "}
+							<Route element={<CompanyReport />} path="/company/report" />{" "}
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							{" "}
+							<Route element={<Billing />} path="/company/billing" />
+						</Route>
 					</Route>
 
 					{/* STATION ROUTES */}
@@ -57,9 +71,14 @@ function App() {
 					{/* NEW */}
 
 					<Route path="/station" element={<StationLayout />}>
-						<Route element={<Dashboardd />} path="" />
-						<Route path="evChargers" element={<EvChargers />} />
-						<Route path="chargerDetails" element={<Details />} />
+						<Route element={<ProtectedRoutes />}>
+							{" "}
+							<Route element={<Dashboardd />} path="" />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="evChargers" element={<EvChargers />} />
+							<Route path="chargerDetails" element={<Details />} />
+					</Route>
 					</Route>
 
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
@@ -71,13 +90,12 @@ function App() {
 						<Route path="sales" element={<Sales />} />
 						<Route path="camera" element={<Camera />} />
 					</Route> */}
-				</Route>
 
-				<Route path="/station" element={<Station />}></Route>
-				<Route path="/changePassword" element={<ChangePassword />}></Route>
+					<Route path="/station" element={<Station />}></Route>
+					<Route path="/changePassword" element={<ChangePassword />}></Route>
 
-				{/* station section */}
-				{/* <Route path="/station" element={<LayoutsWithNavbar />}>
+					{/* station section */}
+					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
 					<Route
 						path="/station"
 						element={
@@ -98,14 +116,15 @@ function App() {
 					<Route path="/station/camera" element={<Camera />}></Route>
 				</Route> */}
 
-				{/* //company side */}
-				{/* <Route path="/companyDash" element={<LayoutsWithCompanyNavbar/>}>
+					{/* //company side */}
+					{/* <Route path="/companyDash" element={<LayoutsWithCompanyNavbar/>}>
         <Route path="/companyDash" element={<CompanyDash/>}></Route>
         <Route path="/companyDash/myStations" element={<ListOfStations />}></Route>
         <Route path="/companyDash/report" element={<CompanyReport/>}></Route>
         <Route path="/companyDash/billing" element={<Billing/>}></Route>
         </Route> */}
-			</Routes>
+				</Routes>
+			</BrowserRouter>
 		</div>
 	);
 }
