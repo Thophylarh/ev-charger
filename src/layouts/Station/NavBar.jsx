@@ -5,8 +5,14 @@ import DshboardB from "../../assets/svg/dshboardb.svg";
 import DropdownIcon from "../../assets/svg/dropdown.svg";
 import blackDropdownIcon from "../../assets/svg/blackDropdown.svg";
 import CompanyLogo from "../../assets/svg/companyLogo.svg";
+import { NavLink } from "react-router-dom";
 
 export default function StationNavBar() {
+
+	const id = localStorage.getItem("stationId")
+	const compId = localStorage.getItem("id")
+	// console.log(compId)
+	
 	return (
 		<nav className={`bg-black h-[5rem] fixed w-full top-0 z-10  `}>
 			<div
@@ -27,6 +33,13 @@ export default function StationNavBar() {
 							<p className=""> Overview</p>
 						</div>
 
+						<NavLink 
+						to={{
+							pathname:'/station/evChargers',
+							search:`?stationId=${id}&companyId=${compId}`,
+						}}
+
+						>
 						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
@@ -35,6 +48,7 @@ export default function StationNavBar() {
 							/> */}
 							<p>EV chargers</p>
 						</div>
+						</NavLink>
 
 						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
