@@ -34,9 +34,13 @@ const ListOfStations = () => {
       }, [])
 
       const viewStations = (id, e) =>{
-        console.log(id)
-        window.localStorage.setItem("stationId", id);
-        Navigate("/station")
+       
+        // window.localStorage.setItem("stationId", id);
+        // Navigate("/station")
+        Navigate({
+          pathname: '/station',
+          search: `?stationId=${id}`,
+        });
       }
 
     return ( <div className="py-[1.5rem] px-[1.5rem] ">

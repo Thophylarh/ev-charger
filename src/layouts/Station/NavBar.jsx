@@ -8,7 +8,7 @@ import CompanyLogo from "../../assets/svg/companyLogo.svg";
 
 export default function StationNavBar() {
 	return (
-		<nav className={`bg-black h-[5rem]`}>
+		<nav className={`bg-black h-[5rem] fixed w-full top-0 z-10  `}>
 			<div
 				className={`w-[90%] m-auto py-[1rem] flex  items-center justify-between`}
 			>

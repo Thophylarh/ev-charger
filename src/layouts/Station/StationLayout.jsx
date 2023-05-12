@@ -6,7 +6,7 @@ export default function StationLayout() {
 	return (
 		<>
 			<StationNavBar />
-			<section className="w-[90%] mx-auto my-[2rem]">
+			<section className="w-[90%] mx-auto my-[7.5rem]">
 				<Outlet />
 			</section>
 		</>
