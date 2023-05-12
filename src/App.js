@@ -60,7 +60,7 @@ function App() {
 						</Route>
 
 						<Route element={<ProtectedRoutes />}>
-							{" "}
+						
 							<Route element={<Billing />} path="/company/billing" />
 						</Route>
 					</Route>
