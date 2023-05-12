@@ -25,6 +25,7 @@ import "react-toastify/dist/ReactToastify.css";
 import CompanyLayout from "./layouts/Station/StationLayout";
 import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
+import EvChargers from "./pages/Branch/EvChargers/evchargers";
 
 function App() {
 	return (
@@ -56,6 +57,7 @@ function App() {
 
 					<Route path="/station" element={<StationLayout />}>
 						<Route element={<Dashboardd />} path="" />
+						<Route path="evChargers" element={<EvChargers />} />
 					</Route>
 
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
