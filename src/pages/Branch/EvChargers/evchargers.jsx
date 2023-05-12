@@ -62,7 +62,7 @@ export default function EvChargers() {
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
-				// console.log(res.data)
+				console.log(res.data)
 				setStationChargerList(res.data);
 			});
 	};
@@ -123,14 +123,10 @@ export default function EvChargers() {
           </div>
 
           <div className="totalRevenueBlock">
-            <h3>TOTAL ENERGY CONSUMED</h3>
+            <h3>FAULT REPORT</h3>
 
-            <h5>
-              {totalEnergy?.toLocaleString(undefined, {
-								minimumFractionDigits: 2,
-								maximumFractionDigits: 2,
-							})}<sup>kw</sup>{" "}
-            </h5>
+            <h5>0</h5>
+
           </div>
         </div>
       </section>
