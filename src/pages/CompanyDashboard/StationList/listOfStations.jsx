@@ -35,7 +35,7 @@ const ListOfStations = () => {
 
       const viewStations = (id, e) =>{
        
-        // window.localStorage.setItem("stationId", id);
+        window.localStorage.setItem("stationId", id);
         // Navigate("/station")
         Navigate({
           pathname: '/station',
