@@ -5,6 +5,9 @@ import axios from "../../../lib/axiosInterceptor";
 import "./style.css";
 
 import Profit from "../../../assets/svg/profit.png";
+
+import ActiveCharger from "../../../assets/svg/activeCharger.svg";
+import energyConsumed from "../../../assets/svg/energyConsumed.svg";
 import ChargersCard from "../../../components/Company/ChargersCard";
 
 import { Table } from "antd";
@@ -167,14 +170,46 @@ export default function Dashboardd() {
 						<BarChart />
 					</div>
 					<div className="col-span-3">
-						<div>
+						<div className={`mb-[var(--marginBtwElements)]`}>
 							<h3>CHARGERS SUMMARY</h3>
 						</div>
 
-						<div className={`bg-[var(--grey50)] py-[2.5rem] px-[1.25rem] rounded-lg`}>
-							<h3 className="text-[0.875rem] mb-[1.25rem]">Number of charges</h3>
+						<div
+							className={`bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<h3 className="text-[0.875rem] mb-[1.25rem]">
+								Number of charges
+							</h3>
 
 							<h5>35</h5>
+						</div>
+
+						<div
+							className={` flex justify-between bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<div>
+								<h3 className="text-[0.875rem] mb-[1.25rem]">
+									Active chargers
+								</h3>
+
+								<h5 className=" text-[var(--primaryGreen500)]">30</h5>
+							</div>
+
+							<img src={ActiveCharger} alt="Disconnected Chargers" />
+						</div>
+
+						<div
+							className={`flex justify-between  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
+						>
+							<div>
+								<h3 className="text-[0.875rem] mb-[1.25rem]">
+									Total energy consumed
+								</h3>
+
+								<h5>5000.00<sup>KW</sup></h5>
+							</div> 
+
+							<img src={energyConsumed} alt="Energy Consumed" />
 						</div>
 					</div>
 				</div>
