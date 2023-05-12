@@ -33,7 +33,8 @@ export default function ChargersCard(props) {
 								NGN {charger.Revenue?.toLocaleString(undefined, {
 								minimumFractionDigits: 2,
 								maximumFractionDigits: 2,
-							})}.<sup>00</sup>
+							})}
+							{/* .<sup>00</sup> */}
 							</h5>
 						</div>
 
