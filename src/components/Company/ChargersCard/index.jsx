@@ -60,7 +60,7 @@ export default function ChargersCard(props) {
 						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Type: </h3>
 
-							<h5 className="text-[0.875rem]">BMS</h5>
+							<h5 className="text-[0.875rem]">CICE</h5>
 						</div>
 					</div>
 				</div>
