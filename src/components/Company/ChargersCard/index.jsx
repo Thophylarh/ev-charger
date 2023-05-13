@@ -42,7 +42,7 @@ export default function ChargersCard(props) {
 						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Revenue:</h3>
 
-							<h5 className="text-[0.875rem]">
+							<h5 className="text-sm">
 								NGN {charger.Revenue?.toLocaleString(undefined, {
 								minimumFractionDigits: 2,
 								maximumFractionDigits: 2,
@@ -54,13 +54,13 @@ export default function ChargersCard(props) {
 						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Last charge: </h3>
 
-							<h5 className="text-[0.875rem]">{  moment(new Date(charger.LastCharged)).fromNow()}</h5>
+							<h5 className="text-sm">{  moment(new Date(charger.LastCharged)).fromNow()}</h5>
 						</div>
 
 						<div className="flex justify-between items-center mb-[0.75rem] ">
 							<h3>Energy consumed: </h3>
 
-							<h5 className="text-[0.875rem]">
+							<h5 className="text-sm">
 								{charger.EnergyConsumed?.toLocaleString(undefined, {
 								minimumFractionDigits: 2,
 								maximumFractionDigits: 2,
