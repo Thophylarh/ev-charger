@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import logo from "../../assets/svg/logo.svg";
 
 import DshboardB from "../../assets/svg/dshboardb.svg";
 import DropdownIcon from "../../assets/svg/dropdown.svg";
 import blackDropdownIcon from "../../assets/svg/blackDropdown.svg";
 import CompanyLogo from "../../assets/svg/companyLogo.svg";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 
 export default function StationNavBar() {
+	const [path, setPath] = useState("");
+	const id = localStorage.getItem("stationId");
+	const compId = localStorage.getItem("id");
 
-	const id = localStorage.getItem("stationId")
-	const compId = localStorage.getItem("id")
+	const location = useLocation();
+
+	let activeLink =
+		" ease-in-out mr-[var(--horizontalMargin)] text-center text-sm  flex items-center py-[0.5rem]  px-[0.75rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]";
+
+	let notActive =
+		"ease-in-out mr-[var(--horizontalMargin)] text-center text-sm flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ";
+	useEffect(() => {
+		setPath(location.pathname);
+	}, [location]);
+
+	console.log(location);
 	// console.log(compId)
-	
+
 	return (
 		<nav className={`bg-black h-[5rem] fixed w-full top-0 z-10  `}>
 			<div
@@ -24,53 +37,75 @@ export default function StationNavBar() {
 					</div>
 
 					<div className="flex">
-						<div className="mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex items-center py-[0.5rem]  px-[0.75rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]">
-							<img
-								className="mr-[0.5rem] "
-								src={DshboardB}
-								alt="Dashboard Overview"
-							/>{" "}
-							<p className=""> Overview</p>
-						</div>
-
-						<NavLink 
-						to={{
-							pathname:'/station/evChargers',
-							search:`?stationId=${id}&companyId=${compId}`,
-						}}
-
+					<NavLink
+							to={{
+								pathname: "/station",
+								search: `?stationId=${id}&companyId=${compId}`,
+							}}
 						>
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
-							{/* <img
-								className="mr-[0.5rem] "
-								src={DshboardB}
-								alt="Dashboard Overview"
-							/> */}
-							<p>EV chargers</p>
+						<div className={` ${path === "/station" ? activeLink : notActive}`}>
+							{path === "/station" && (
+								<img
+									className="mr-[0.5rem] "
+									src={DshboardB}
+									alt="Dashboard Overview"
+								/>
+							)}
+
+							<p className=""> Overview</p>
 						</div>
 						</NavLink>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
-							{/* <img
-								className="mr-[0.5rem] "
-								src={DshboardB}
-								alt="Dashboard Overview"
-							/> */}
-							<p>Billing & pricing </p>
+						<NavLink
+							to={{
+								pathname: "/station/evChargers",
+								search: `?stationId=${id}&companyId=${compId}`,
+							}}
+						>
+							<div className={` ${path === "/station/evChargers" ? activeLink : notActive}`}>
+								{path === "/station/evChargers" && (
+									<img
+										className="mr-[0.5rem] "
+										src={DshboardB}
+										alt="Dashboard Overview"
+									/>
+								)}
+								<p>EV chargers</p>
+							</div>
+						</NavLink>
+
+						<NavLink
+							to={{
+								pathname: "/station/billing",
+								search: `?stationId=${id}&companyId=${compId}`,
+							}}
+						>
+							<div className={` ${path === "/station/billing" ? activeLink : notActive}`}>
+							{path === "/station/billing" && (
+									<img
+										className="mr-[0.5rem] "
+										src={DshboardB}
+										alt="Dashboard Overview"
+									/>
+								)}
+								<p>Billing & pricing </p>
+							</div>
+						</NavLink>
+
+					<div className={` ${path === "/station/report" ? activeLink : notActive}`}> 
+						<p className="mr-[0.5rem] ">Report </p>
+
+							<img src={DropdownIcon} alt="Dropdown Icon" className="w-[1rem] h-[1rem] mt-1" />
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
-							<p className="mr-[0.5rem] ">Report </p>
-
-							<img src={DropdownIcon} alt="Dropdown Icon" />
-						</div>
-
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
-							{/* <img
-								className="mr-[0.5rem] "
-								src={DshboardB}
-								alt="Dashboard Overview"
-							/> */}
+						<div className={` ${path === "/station/camera" ? activeLink : notActive}`}> 
+							{path === "/station/camera" && (
+								<img
+									className="mr-[0.5rem]  "
+									src={DshboardB}
+									alt="Dashboard Overview"
+								/>
+							)}
 							<p>Live Camera</p>
 						</div>
 					</div>
@@ -85,7 +120,7 @@ export default function StationNavBar() {
 							alt="Company logo"
 							className="w-[1.5rem] h-[1.5rem] mr-[0.75rem]"
 						/>
-						<p 	className=" mr-[0.75rem]">Sterling HQ</p>
+						<p className=" mr-[0.75rem]">Sterling HQ</p>
 						<img src={blackDropdownIcon} alt="Dropdown Icon" />
 					</div>
 				</div>

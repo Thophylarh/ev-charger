@@ -81,7 +81,7 @@ function App() {
 						</Route>
 
 						<Route element={<ProtectedRoutes />}>
-						<Route path="billing" element={<StationBilling />} />
+						<Route  path="billing" element={<StationBilling />} />
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="details" element={<Details />} />
