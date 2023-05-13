@@ -42,7 +42,7 @@ const BarChart = () => {
 					{
 						type: "bar",
 						data: [10000, 20000, 30000, 60000],
-						label: "BMS",
+						label: "CICE",
 						fill: "",
 						backgroundColor: "#EAECF0",
 						barThickness: "10",

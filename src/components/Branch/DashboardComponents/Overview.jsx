@@ -26,7 +26,7 @@ export default function StationDashboardOverview({ stationId }) {
 		<section className={`mb-[var(--marginBtwSection)]`}>
 			<div className=" grid grid-cols-4  ">
 				<div className="revenueBlock">
-					<h3>BMS REVENUE</h3>
+					<h3>CICE REVENUE</h3>
 
 					<h5>
 						NGN 300,000.<sup>00</sup>{" "}

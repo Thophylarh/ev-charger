@@ -12,6 +12,7 @@ import { formatNumber } from "../../../utils/formatNumber";
 
 import StationDashboardOverview from "../../../components/Branch/DashboardComponents/Overview";
 import ChartOverview from "../../../components/Branch/DashboardComponents/ChartOverview";
+import Column from "../../../utils/columns";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
@@ -54,63 +55,63 @@ export default function Dashboardd() {
 		getListOfChargers();
 	}, []);
 
-	const columns = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-		},
-		{
-			title: "Charger",
-			dataIndex: "chargerName",
-			key: "transactionId",
-		},
+	// const columns = [
+	// 	{
+	// 		title: "#",
+	// 		dataIndex: "index",
+	// 		key: "index",
+	// 	},
+	// 	{
+	// 		title: "Charger",
+	// 		dataIndex: "chargerName",
+	// 		key: "transactionId",
+	// 	},
 
-		{ title: "Charger Type", dataIndex: "chargerType", key: "Charger Type" },
-		{
-			title: "Amount",
-			dataIndex: "totalAmount",
-			key: "totalAmount",
-			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-		},
-		{
-			title: "Energy",
-			dataIndex: "totalUnitChargedInEnergy",
-			key: "totalUnitChargedInEnergy",
-			render: (totalUnitChargedInEnergy) => (
-				<p>
-					{formatNumber(totalUnitChargedInEnergy)}
-					kWh
-				</p>
-			),
-		},
-		{
-			title: "Date",
-			dataIndex: "dateOfTransaction",
-			key: "dateOfTransaction",
-			render: (dateOfTransaction) => (
-				<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
-			),
-		},
-		{
-			title: "Charge Duration",
-			dataIndex: "totalUnitChargedInTime",
-			key: "totalUnitChargedInTime",
-			render: (totalUnitChargedInTime) => (
-				<p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
-			),
-		},
-		{
-			title: "Status",
-			dataIndex: "transactionStatus",
-			key: "transactionStatus",
-			render: (transactionStatus) => (
-				<button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">
-					Completed
-				</button>
-			),
-		},
-	];
+	// 	{ title: "Charger Type", dataIndex: "chargerType", key: "Charger Type" },
+	// 	{
+	// 		title: "Amount",
+	// 		dataIndex: "totalAmount",
+	// 		key: "totalAmount",
+	// 		render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+	// 	},
+	// 	{
+	// 		title: "Energy",
+	// 		dataIndex: "totalUnitChargedInEnergy",
+	// 		key: "totalUnitChargedInEnergy",
+	// 		render: (totalUnitChargedInEnergy) => (
+	// 			<p>
+	// 				{formatNumber(totalUnitChargedInEnergy)}
+	// 				kWh
+	// 			</p>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "Date",
+	// 		dataIndex: "dateOfTransaction",
+	// 		key: "dateOfTransaction",
+	// 		render: (dateOfTransaction) => (
+	// 			<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "Charge Duration",
+	// 		dataIndex: "totalUnitChargedInTime",
+	// 		key: "totalUnitChargedInTime",
+	// 		render: (totalUnitChargedInTime) => (
+	// 			<p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "Status",
+	// 		dataIndex: "transactionStatus",
+	// 		key: "transactionStatus",
+	// 		render: (transactionStatus) => (
+	// 			<button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">
+	// 				Completed
+	// 			</button>
+	// 		),
+	// 	},
+	// ];
 
 	return (
 		<section>
@@ -154,7 +155,7 @@ export default function Dashboardd() {
 
 				<div>
 					<Table
-						columns={columns}
+						columns={Column}
 						pagination={false}
 						dataSource={transaction}
 					/>

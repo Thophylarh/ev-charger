@@ -27,6 +27,7 @@ import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
+import Details from "./pages/Branch/ChargerDetails/chargerDetails"
 
 function App() {
 	return (
@@ -81,6 +82,9 @@ function App() {
 
 						<Route element={<ProtectedRoutes />}>
 						<Route path="billing" element={<StationBilling />} />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="details" element={<Details />} />
 						</Route>
 					</Route>
 
