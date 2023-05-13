@@ -11,7 +11,7 @@ import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
 import CompanySideBar from "./components/Company/companySidebar/companySidebar";
 import CompanyReport from "./pages/CompanyDashboard/Report/report";
 import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
-import StationBilling from "./components/stationBilling/stationBilling";
+
 // import Chargers from "./components/Chargers/chargers";
 import Camera from "./pages/Branch/LiveFeed/camera";
 import Sales from "./pages/Branch/Sales/sales";
@@ -26,6 +26,7 @@ import CompanyLayout from "./layouts/Station/StationLayout";
 import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
+import StationBilling from "./pages/Branch/Billing";
 
 function App() {
 	return (
@@ -76,6 +77,10 @@ function App() {
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="evChargers" element={<EvChargers />} />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+						<Route path="billing" element={<StationBilling />} />
 						</Route>
 					</Route>
 
