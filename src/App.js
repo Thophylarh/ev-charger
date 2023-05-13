@@ -27,6 +27,7 @@ import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
 import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import Details from "./pages/Branch/ChargerDetails/chargerDetails"
+import ReportSales from "./pages/Branch/ReportSales/reportSales";
 
 function App() {
 	return (
@@ -80,6 +81,9 @@ function App() {
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="details" element={<Details />} />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="report" element={<ReportSales />} />
 						</Route>
 					</Route>
 

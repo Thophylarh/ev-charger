@@ -62,7 +62,7 @@ export default function EvChargers() {
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
-				console.log(res.data)
+				
 				setStationChargerList(res.data);
 			});
 	};
@@ -85,7 +85,7 @@ export default function EvChargers() {
       </section>
 
       <section className={`mb-[var(--marginBtwSection)]`}>
-        <div className="grid grid-cols-4">
+        <div className="grid grid-cols-4" >
           <div className="revenueBlock">
             <p>NUMBER OF CHARGERS</p>
 
@@ -134,9 +134,9 @@ export default function EvChargers() {
         <div>
             <h3>LIST OF CHARGERS</h3>
         </div>
-        <div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+        <div  className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
         {stationChargerList.map((charger) => (
-						<ChargersCard key={charger.Id} charger={charger} />
+						<ChargersCard  key={charger.Id} charger={charger}  />
 					))
           }
 					
