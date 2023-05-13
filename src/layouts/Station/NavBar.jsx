@@ -92,16 +92,16 @@ export default function StationNavBar() {
 							</div>
 						</NavLink>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
-							<p className="mr-[0.5rem] ">Report </p>
+					<div className={` ${path === "/station/report" ? activeLink : notActive}`}> 
+						<p className="mr-[0.5rem] ">Report </p>
 
-							<img src={DropdownIcon} alt="Dropdown Icon" />
+							<img src={DropdownIcon} alt="Dropdown Icon" className="w-[1rem] h-[1rem] mt-1" />
 						</div>
 
-						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
+						<div className={` ${path === "/station/camera" ? activeLink : notActive}`}> 
 							{path === "/station/camera" && (
 								<img
-									className="mr-[0.5rem] "
+									className="mr-[0.5rem]  "
 									src={DshboardB}
 									alt="Dashboard Overview"
 								/>
