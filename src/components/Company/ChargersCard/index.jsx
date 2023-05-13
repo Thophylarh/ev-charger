@@ -3,12 +3,25 @@ import ChargerImg from "../../../assets/svg/Charger.svg";
 
 import activeStatusImg from "../../../assets/svg/activeStatus.svg";
 import moment from "moment/moment";
+import { useNavigate } from "react-router";
 
 export default function ChargersCard(props) {
+	const Navigate = useNavigate();
 	let charger = props.charger
+
+	const viewCharger = (id, e) =>{
+      
+        // window.localStorage.setItem("stationId", id);
+      
+        // Navigate("/station")
+        Navigate({
+          pathname: '/station/details',
+          search: `?chargerId=${id}`,
+        });
+      }
 	
 	return (
-		<div className={`bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`}>
+		<div className={`bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`} onClick={(e)=>{viewCharger(charger.Id, e)}}>
 			<div className="flex ">
 				<div className="mr-[1rem]">
 					<img

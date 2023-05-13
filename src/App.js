@@ -28,6 +28,10 @@ import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
 import Details from "./pages/Branch/ChargerDetails/chargerDetails"
+import ReportSales from "./pages/Branch/ReportSales/reportSales";
+import SignUp from "./pages/customer/signup";
+import CarInfo from "./pages/customer/carInformation/carInfo";
+import Wallet from "./pages/customer/Wallet/wallet"
 
 function App() {
 	return (
@@ -86,6 +90,9 @@ function App() {
 						<Route element={<ProtectedRoutes />}>
 							<Route path="details" element={<Details />} />
 						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="report" element={<ReportSales />} />
+						</Route>
 					</Route>
 
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
@@ -97,9 +104,13 @@ function App() {
 						<Route path="sales" element={<Sales />} />
 						<Route path="camera" element={<Camera />} />
 					</Route> */}
-
+					
 					<Route path="/station" element={<Station />}></Route>
 					<Route path="/changePassword" element={<ChangePassword />}></Route>
+					
+					<Route path="/signup" element={<SignUp/>}></Route>
+					<Route path="/carInformation" element={<CarInfo/>}></Route>
+					<Route path="/wallet" element={<Wallet/>}></Route>
 
 					{/* station section */}
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
