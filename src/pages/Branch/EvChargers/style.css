@@ -16,6 +16,11 @@
 	margin-bottom: 1rem;
 }
 
+.revenueBlock button {
+	font-size: 0.875rem
+}
+
+
 .revenueBlock p {
 	color: var(--grey500);
 	font-size: 0.875rem;
