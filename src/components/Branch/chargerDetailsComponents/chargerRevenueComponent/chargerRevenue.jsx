@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import axios from "../../../../lib/axiosInterceptor";
 import { formatNumber } from "../../../../utils/formatNumber";
+import "./style.css"
 
 const ChargerRevenue = (props) =>{
     const [ChargerRevenue, setChargerRevenue] = useState([]);
@@ -25,23 +26,23 @@ const ChargerRevenue = (props) =>{
     <section className="mb-[var(--marginBtwSection)]">
     <div className="grid grid-cols-5 ">
         <div className="revenueBlock ">
-            <p>CHARGER REVENUE</p>
-            <h5>NGN {formatNumber(ChargerRevenue.TotalRevenue, true)}</h5>
+            <h3>CHARGER REVENUE</h3>
+            <h6>NGN {formatNumber(ChargerRevenue.TotalRevenue, true)}</h6>
         </div>
 
         <div className="revenueBlock">
-            <p>CHARGE COUNT</p>
-            <h5>16</h5>
+            <h3>CHARGE COUNT</h3>
+            <h6>16</h6>
         </div>
 
         <div className="revenueBlock ">
-            <p>LAST CHARGE</p>
-            <h5>20mins ago</h5>
+            <h3>LAST CHARGE</h3>
+            <h6>20mins ago</h6>
         </div>
 
         <div className="revenueBlock">
-            <p>CHARGER TYPE</p>
-            <h5>CICE</h5>
+            <h3>CHARGER TYPE</h3>
+            <h6>CICE</h6>
         </div>
 
         <div className="totalRevenueBlock ">

@@ -1,10 +1,13 @@
 import moment from "moment";
+
 import { formatNumber } from "./formatNumber";
 import activeDot from "../assets/svg/activeDot.svg"
 import eye from "../assets/svg/eye.svg"
 
 
-const columns =
+const Columns =
+
+
     
         [
             {
@@ -69,7 +72,7 @@ const columns =
                 dataIndex: "transactionStatus",
                 key: "transactionStatus",
                 render: (transactionStatus) => (
-                    <button className="flex justify-between ">
+                    <button className="flex justify-between" >
                        <img src={activeDot} className="pr-[0.25rem] mt-[6px]"/>
                        <p className="text-[#15833C] font-semibold text-xs leading-5">Completed</p>
                     </button>
@@ -80,7 +83,7 @@ const columns =
                 dataIndex: "",
                 key: "",
                 render: () => (
-                    <button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md ">
+                    <button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md">
                        <img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
                        <p>View details</p>
                     </button>
@@ -90,4 +93,4 @@ const columns =
     
 
 
-export default columns;
+export default Columns;
