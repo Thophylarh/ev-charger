@@ -171,7 +171,7 @@ export default function StationBilling() {
 
 								<div className={`flex justify-between items-center`}>
 									<div className="text-[var(--grey600)]">
-										<h6 className={` font-medium`}>NGN200.00kw</h6>
+										<h6 className={` font-medium text-base`}>NGN200.00kw</h6>
 										<p className={`text-xs`}>old price</p>
 									</div>
 
@@ -183,7 +183,7 @@ export default function StationBilling() {
 									</p>
 
 									<div className="text-[var(--primaryGreen500)]">
-										<h6 className={` font-medium`}>NGN210.50kw</h6>
+										<h6 className={` font-medium text-base`}>NGN210.50kw</h6>
 										<p className={`text-xs`}>new price</p>
 									</div>
 								</div>
@@ -203,7 +203,7 @@ export default function StationBilling() {
 
 								<div className={`flex justify-between items-center`}>
 									<div className="text-[var(--grey600)]">
-										<h6 className={` font-medium`}>NGN200.00kw</h6>
+										<h6 className={` font-medium text-base`}>NGN200.00kw</h6>
 										<p className={`text-xs`}>old price</p>
 									</div>
 
@@ -215,7 +215,7 @@ export default function StationBilling() {
 									</p>
 
 									<div className="text-[var(--primaryGreen500)]">
-										<h6 className={` font-medium`}>NGN250.00kw</h6>
+										<h6 className={` font-medium text-base`}>NGN250.00kw</h6>
 										<p className={`text-xs`}>new price</p>
 									</div>
 								</div>
