@@ -37,7 +37,7 @@ export default function StationNavBar() {
 						<img src={logo} alt="EVcharger logo" />
 					</div>
 
-					<div className="flex">
+					<div className="flex pt-1">
 						<NavLink
 							to={{
 								pathname: "/station",
