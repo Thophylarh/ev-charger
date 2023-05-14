@@ -16,6 +16,7 @@ import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 import Camera from "./pages/Branch/LiveFeed/camera";
 import Sales from "./pages/Branch/Sales/sales";
 import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
+import LiveCamera from "./pages/Branch/LiveFeed/camera"
 
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
@@ -92,6 +93,9 @@ function App() {
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="report" element={<ReportSales />} />
+						</Route>
+						<Route element={<ProtectedRoutes/>}>
+							<Route path="liveCamera" element={<LiveCamera/>}></Route>
 						</Route>
 					</Route>
 

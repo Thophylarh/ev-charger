@@ -24,6 +24,7 @@ export default function StationNavBar() {
 					</div>
 
 					<div className="flex">
+						<NavLink >
 						<div className="mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex items-center py-[0.5rem]  px-[0.75rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]">
 							<img
 								className="mr-[0.5rem] "
@@ -32,6 +33,7 @@ export default function StationNavBar() {
 							/>{" "}
 							<p className=""> Overview</p>
 						</div>
+						</NavLink>
 
 						<NavLink 
 						to={{
@@ -50,6 +52,7 @@ export default function StationNavBar() {
 						</div>
 						</NavLink>
 
+							<NavLink to="/station/billing">
 						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
@@ -58,13 +61,17 @@ export default function StationNavBar() {
 							/> */}
 							<p>Billing & pricing </p>
 						</div>
+						</NavLink>
 
+						<NavLink to="/station/report">
 						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							<p className="mr-[0.5rem] ">Report </p>
 
-							<img src={DropdownIcon} alt="Dropdown Icon" />
+							{/* <img src={DropdownIcon} alt="Dropdown Icon" /> */}
 						</div>
+						</NavLink>
 
+							<NavLink to="/station/liveCamera">
 						<div className=" mr-[var(--horizontalMargin)] text-center font-[var(--fontSize)] flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ">
 							{/* <img
 								className="mr-[0.5rem] "
@@ -73,8 +80,10 @@ export default function StationNavBar() {
 							/> */}
 							<p>Live Camera</p>
 						</div>
+						</NavLink>
 					</div>
 				</div>
+
 
 				<div>
 					<div
