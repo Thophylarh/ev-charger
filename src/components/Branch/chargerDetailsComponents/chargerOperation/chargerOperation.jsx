@@ -22,11 +22,11 @@ const ChargerOperation = () =>(
                 className={`flex justify-between bg-[var(--grey50)] py-[1.5rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
             >
                 <div>
-                <h3 className="text-[0.875rem] mb-[1rem]">
+                <h2 className="mb-[1rem]">
                     OPERATION HOURS
-                </h3>
+                </h2>
 
-                <h6 className="mb-[var(--marginBtwElements)]">12:00am - 8:00pm</h6>
+                <h4 className="mb-[var(--marginBtwElements)] ">12:00am - 8:00pm</h4>
 
                 <h3 className="text-[#007EF2]">EDIT</h3>
                 </div>
@@ -39,11 +39,11 @@ const ChargerOperation = () =>(
                 className={` flex justify-between items-center bg-[var(--grey50)] py-[1.5rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
             >
                 <div>
-                    <h3 className="text-[0.875rem] mb-[1.25rem]">
+                    <h2 className="text-[0.875rem] mb-[1.25rem]">
                     Billing type
-                    </h3>
+                    </h2>
 
-                    <h6 className="text-[var(--grey600)] text-2xl">Default (energy)</h6>
+                    <h4>Default (energy)</h4>
                 </div>
                 <div>
                 <img src={BillingType} alt="Billing Type" />
@@ -54,11 +54,11 @@ const ChargerOperation = () =>(
                 className={`flex justify-between items-center  bg-[var(--grey50)] py-[1.5rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
             >
                 <div>
-                    <h3 className="text-[0.875rem] mb-[1.25rem]">
+                    <h2 className="text-[0.875rem] mb-[1.25rem]">
                     Running time
-                    </h3>
+                    </h2>
 
-                    <h6 className="text-[var(--grey600)] text-2xl">21hrs</h6>
+                    <h4>21hrs</h4>
                 </div> 
 
                 <img src={RunningTime} alt="Running Time"  />

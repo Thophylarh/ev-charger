@@ -16,6 +16,7 @@ import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 import Camera from "./pages/Branch/LiveFeed/camera";
 import Sales from "./pages/Branch/Sales/sales";
 import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
+import LiveCamera from "./pages/Branch/LiveFeed/camera"
 
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
@@ -29,7 +30,7 @@ import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
 import Details from "./pages/Branch/ChargerDetails/chargerDetails"
 import ReportSales from "./pages/Branch/ReportSales/reportSales";
-import SignUp from "./pages/customer/signup";
+import SignUp from "./pages/customer/signup/signup";
 import CarInfo from "./pages/customer/carInformation/carInfo";
 import Wallet from "./pages/customer/Wallet/wallet"
 import CustomerList from "./pages/Branch/Customers";

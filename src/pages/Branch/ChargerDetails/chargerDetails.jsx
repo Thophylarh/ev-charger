@@ -47,7 +47,7 @@ export default function Details() {
               className="pr-[12px]"
             ></img>
 
-            <h4 className="pr-[12px]">{chargersDetails.ChargerName}</h4>
+            <h4 className="">{chargersDetails.ChargerName}</h4>
 
           </div>
 
@@ -56,10 +56,10 @@ export default function Details() {
             <button className="flex justify-between">
               <img src={PowerButton} alt="Power Button" />
 
-              <p className="pl-[4px] text-[var(--error500)]">Turn off charger</p>
+              <p className="pl-[4px] text-[var(--error500)] font-normal text-[16px]">Turn off charger</p>
             </button>
 
-            <button className="border border-[1px] border-solid border-[var(--grey900)] text--[var(--grey900)] ml-[1rem] px-[8px] rounded-lg">
+            <button className="border border-[1px] border-solid border-[var(--grey900)] text--[var(--grey900)] ml-[1rem] px-[12px]  rounded-lg">
               Charger settings
             </button>
 

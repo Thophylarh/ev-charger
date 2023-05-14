@@ -137,7 +137,7 @@ export default function StationBilling() {
 									</div>
 
 									<div className="revenueBlock">
-										<h3>WHEN ON GREEN ENRGY</h3>
+										<h3>WHEN ON GREEN ENERGY</h3>
 
 										<h5>NGN 243.02/KW</h5>
 
@@ -193,7 +193,7 @@ export default function StationBilling() {
 								className={`w-full h-[9rem] bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
 							>
 								<div className={`flex justify-between items-center mb-4`}>
-									<h6 className={`text-[var(--goldColor)] text-sm` }>BMS ON GREEN ENERGY</h6>
+									<h6 className={`text-[var(--goldColor)] text-sm` }>BMS ON GREEN ENRGY</h6>
 
 									<p className={`text-xs text-[var(--grey500)]`}>
 										{" "}
