@@ -116,15 +116,11 @@ export default function StationNavBar() {
 						>
 							<p className="mr-[0.5rem] ">Report </p>
 
-							<img
-								src={DropdownIcon}
-								alt="Dropdown Icon"
-								className="w-[1rem] h-[1rem] mt-1"
-							/>
+							
 						</div>
 						</NavLink>
 
-						</NavLink>
+						
 
 						<div className={` ${path === "/station/camera" ? activeLink : notActive}`}> 
 							{path === "/station/camera" && (
@@ -136,7 +132,7 @@ export default function StationNavBar() {
 							)}
 							<p>Live Camera</p>
 						</div>
-						</NavLink>
+						
 					</div>
 				</div>
 

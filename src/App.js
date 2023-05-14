@@ -30,7 +30,7 @@ import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
 import Details from "./pages/Branch/ChargerDetails/chargerDetails"
 import ReportSales from "./pages/Branch/ReportSales/reportSales";
-import SignUp from "./pages/customer/signup";
+import SignUp from "./pages/customer/signup/signup";
 import CarInfo from "./pages/customer/carInformation/carInfo";
 import Wallet from "./pages/customer/Wallet/wallet"
 
@@ -95,7 +95,7 @@ function App() {
 							<Route path="report" element={<ReportSales />} />
 						</Route>
 						<Route element={<ProtectedRoutes/>}>
-							<Route path="liveCamera" element={<LiveCamera/>}></Route>
+							<Route path="camera" element={<LiveCamera/>}></Route>
 						</Route>
 					</Route>
 

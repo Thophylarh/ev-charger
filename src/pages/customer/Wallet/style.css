@@ -1,0 +1,19 @@
+.desc{
+   font-size: 16px;
+    color: white;
+    
+ }
+
+ .fund{
+    font-size: 16px;
+    color: #475467;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+
+ }
+
+ .acctDetails{
+    color: #475467;
+    font-weight: 400;
+    font-size: 12px;
+ }
