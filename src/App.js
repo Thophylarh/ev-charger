@@ -32,6 +32,8 @@ import ReportSales from "./pages/Branch/ReportSales/reportSales";
 import SignUp from "./pages/customer/signup";
 import CarInfo from "./pages/customer/carInformation/carInfo";
 import Wallet from "./pages/customer/Wallet/wallet"
+import CustomerList from "./pages/Branch/Customers";
+import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
 
 function App() {
 	return (
@@ -92,6 +94,11 @@ function App() {
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="report" element={<ReportSales />} />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							<Route path="customers" element={<CustomerList />} />
+							<Route path="customer/details" element={<CustomerDetails />} />
 						</Route>
 					</Route>
 
