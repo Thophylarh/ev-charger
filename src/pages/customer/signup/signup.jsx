@@ -7,13 +7,15 @@ import { toast } from "react-toastify";
 import logo from "../../../assets/svg/logo.svg";
 import "../signup/style.css";
 import { ClipLoader } from "react-spinners";
+import { useNavigate } from "react-router";
 
 const SignUp = () => {
+	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
 	const [DOB, setDOB] = useState();
 
 	const onDateChange = async (date, dateString) => {
-        console.log(dateString)
+		console.log(dateString);
 		setDOB(dateString);
 	};
 
@@ -77,16 +79,20 @@ const SignUp = () => {
 				withCredentials: false,
 			})
 			.then((res) => {
-                console.log(res.data)
-		        setIsLoading(false);
-                toast.success("Account created successfully, please fill out the next form");
-
-		    })
+				console.log(res.data);
+				setIsLoading(false);
+				navigate({
+					pathname: "/posts",
+					search: "?cus=239092",
+				});
+				toast.success(
+					"Account created successfully, please fill out the next form"
+				);
+			})
 			.catch((err) => {
-		        setIsLoading(false);
+				setIsLoading(false);
 				console.log(err);
 				toast.error(err.message);
-
 			});
 	};
 
