@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import axios from "../../../../lib/axiosInterceptor";
 import { formatNumber } from "../../../../utils/formatNumber";
+import { lastCharged } from "../../../../utils/lastCharged";
+import {chargerType} from  "../../../../utils/chargerType";
 import "./style.css"
 
 const ChargerRevenue = ({chargerId, ChargerDetails}) =>{
@@ -27,7 +29,7 @@ const ChargerRevenue = ({chargerId, ChargerDetails}) =>{
     <div className="grid grid-cols-5 ">
         <div className="revenueBlock ">
             <h3>CHARGER REVENUE</h3>
-            <h6>NGN {formatNumber(ChargerRevenue.TotalRevenue, true)}</h6>
+            <h6>NGN {formatNumber(ChargerRevenue.TotalRevenue, false)}</h6>
         </div>
 
         <div className="revenueBlock">
@@ -37,17 +39,17 @@ const ChargerRevenue = ({chargerId, ChargerDetails}) =>{
 
         <div className="revenueBlock ">
             <h3>LAST CHARGE</h3>
-            <h6>{ChargerDetails.LastCharged}</h6>
+            <h6>{lastCharged(ChargerDetails.LastCharged) }</h6>
         </div>
 
         <div className="revenueBlock">
             <h3>CHARGER TYPE</h3>
-            <h6>{ChargerDetails.ChargerType}</h6>
+            <h6>{chargerType(ChargerDetails.ChargerType) }</h6>
         </div>
 
         <div className="totalRevenueBlock ">
             <h3>ENERGY CONSUMPTION</h3>
-            <h5>{ChargerDetails.EnergyConsumed}  <sup>kw</sup> </h5>
+            <h5>{formatNumber(ChargerDetails.EnergyConsumed, false ) }  <sup>kw</sup> </h5>
         </div>
 
     </div>

@@ -2,7 +2,10 @@ export const formatNumber = (number, naira) => {
 	let num = Number(number)
 	if (num) {
 		if (!naira) {
-			return num?.toLocaleString();
+			return num?.toLocaleString(undefined, {
+				minimumFractionDigits: 2,
+				maximumFractionDigits: 2,
+			})
 		} else {
 			return `₦${num?.toLocaleString(undefined, {
 				minimumFractionDigits: 2,

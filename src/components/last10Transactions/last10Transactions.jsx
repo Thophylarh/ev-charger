@@ -23,6 +23,12 @@ const Last10Transactions = (props) =>{
       .get(
          `/Transactions/get-last10-transactions/charger/${id}/${limit}`)
       .then((res) => {
+        let index = 0;
+
+				res.data.forEach((el) => {
+					el.index = ++index;
+				});
+                
         setchargerTransactions(res.data);
       });
   };
