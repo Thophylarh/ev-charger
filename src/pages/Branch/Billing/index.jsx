@@ -1,6 +1,10 @@
-import React from "react";
+import React, {useState} from "react";
+import EditPrice from "../../../components/modals/editPrice";
+import Modal from "../../../components/modals/modal";
 
 export default function StationBilling() {
+	const [priceModal, setPriceModal] = useState(false)
+
 	return (
 		<section>
 			<section className={`mb-[var(--marginBtwSection)]`}>
@@ -33,7 +37,7 @@ export default function StationBilling() {
 
 										<h5>NGN 252.00/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -44,7 +48,7 @@ export default function StationBilling() {
 
 										<h5>NGN 268.08/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -55,7 +59,7 @@ export default function StationBilling() {
 
 										<h5>NGN 243.02/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -77,7 +81,7 @@ export default function StationBilling() {
 
 										<h5>NGN 252.00/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -88,7 +92,7 @@ export default function StationBilling() {
 
 										<h5>NGN 268.08/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -99,7 +103,7 @@ export default function StationBilling() {
 
 										<h5>NGN 243.02/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -119,7 +123,7 @@ export default function StationBilling() {
 
 										<h5>NGN 252.00/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -130,7 +134,7 @@ export default function StationBilling() {
 
 										<h5>NGN 268.08/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -141,7 +145,7 @@ export default function StationBilling() {
 
 										<h5>NGN 243.02/KW</h5>
 
-										<button className="text-[var(--blueLink)]">
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -223,6 +227,10 @@ export default function StationBilling() {
 						</div>
 					</div>
 				</div>
+				{priceModal && ( <Modal closeModal={setPriceModal}>
+					<EditPrice/>
+        		</Modal>)
+      			}
 			</section>
 		</section>
 	);

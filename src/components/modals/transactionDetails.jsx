@@ -2,8 +2,8 @@ import check from "../../assets/svg/check.svg";
 const TDetails = () => {
   return (
     <>
-      <div>
-        <img src={check} />
+      <div className="mb-[1rem] ">
+        <img src={check}  />
         <h4 className="font-semibold text-lg text-[#101828]">
           Transaction Details
         </h4>
