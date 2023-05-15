@@ -5,6 +5,9 @@ import ChargersCard from "../../../components/Company/ChargersCard";
 import axios from "../../../lib/axiosInterceptor";
 import "./style.css";
 
+
+import Loader from "../../../components/Loader";
+import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
 
 export default function EvChargers() {
@@ -13,6 +16,7 @@ export default function EvChargers() {
 	const [noOfflineChargers, setNoOfflineChargers] = useState("");
 	const [totalEnergy, setTotalEnergy] = useState("");
 	const [stationChargerList, setStationChargerList] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const [searchParams] = useSearchParams();
 
@@ -54,17 +58,26 @@ export default function EvChargers() {
 			.get(	`/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`)
 			.then((res) => {
 				setTotalEnergy(res.data);
-			});
+       
+			})
 	};
 
   //get list of chargers
 	const getListOfChargers = () => {
+    setIsLoading(true)
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
 				
 				setStationChargerList(res.data);
-			});
+    
+        setTimeout(()=>{
+					setIsLoading(false)
+				},2000)
+			}).catch(err=>{
+				toast.error(err)
+				setIsLoading(false)
+			})
 	};
 
   useEffect(() => {
@@ -76,72 +89,86 @@ export default function EvChargers() {
 	}, []);
 
   return (
-    <section>
-      <section className={`mb-[var(--marginBtwSection)]`}>
-        <h4>Ev Chargers</h4>
-        <p className="subHeader">
-          Monitor your charger revenue, status, and energy consumption
-        </p>
-      </section>
-
-      <section className={`mb-[var(--marginBtwSection)]`}>
-        <div className="grid grid-cols-4" >
-          <div className="revenueBlock">
-            <p>NUMBER OF CHARGERS</p>
-
-            <h5>{totalChargers}</h5>
-          </div>
-
-          <div className="revenueBlock">
-            <div className="flex justify-between ">
-              <div>
-                <p>ACTIVE CHARGERS</p>
-
-                <h5>{noOfActiveChargers}</h5>
-              </div>
-
-              <div>
-                {" "}
-                <img src={ActiveCharger} alt="Active chargers" />
-              </div>
-            </div>
-          </div>
-
+    <>
+    
+    {isLoading && (
+				<section>
+					<Loader />
+				</section>
+			)}
+    
+    {
+      !isLoading && (
+        <section>
+        <section className={`mb-[var(--marginBtwSection)]`}>
+          <h4>Ev Chargers</h4>
+          <p className="subHeader">
+            Monitor your charger revenue, status, and energy consumption
+          </p>
+        </section>
+  
+        <section className={`mb-[var(--marginBtwSection)]`}>
+          <div className="grid grid-cols-4" >
             <div className="revenueBlock">
-          <div className="flex justify-between ">
-            <div className="">
-              <p>DISCONNECTED CHARGERS</p>
-
-              <h5>{noOfflineChargers}</h5>
+              <p>NUMBER OF CHARGERS</p>
+  
+              <h5>{totalChargers}</h5>
             </div>
-
-            <div>
-              <img src={DisconnectedCharger} alt="Disconnected Chargers" />
+  
+            <div className="revenueBlock">
+              <div className="flex justify-between ">
+                <div>
+                  <p>ACTIVE CHARGERS</p>
+  
+                  <h5>{noOfActiveChargers}</h5>
+                </div>
+  
+                <div>
+                  {" "}
+                  <img src={ActiveCharger} alt="Active chargers" />
+                </div>
+              </div>
             </div>
-
+  
+              <div className="revenueBlock">
+            <div className="flex justify-between ">
+              <div className="">
+                <p>DISCONNECTED CHARGERS</p>
+  
+                <h5>{noOfflineChargers}</h5>
+              </div>
+  
+              <div>
+                <img src={DisconnectedCharger} alt="Disconnected Chargers" />
+              </div>
+  
+            </div>
+            </div>
+  
+            <div className="totalRevenueBlock">
+              <h3>FAULT REPORT</h3>
+  
+              <h5>0</h5>
+  
+            </div>
           </div>
+        </section>
+        <section>
+          <div>
+              <h3>LIST OF CHARGERS</h3>
           </div>
-
-          <div className="totalRevenueBlock">
-            <h3>FAULT REPORT</h3>
-
-            <h5>0</h5>
-
+          <div  className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+          {stationChargerList.map((charger) => (
+              <ChargersCard  key={charger.Id} charger={charger}  />
+            ))
+            }
+            
           </div>
-        </div>
+        </section>
       </section>
-      <section>
-        <div>
-            <h3>LIST OF CHARGERS</h3>
-        </div>
-        <div  className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-        {stationChargerList.map((charger) => (
-						<ChargersCard  key={charger.Id} charger={charger}  />
-					))
-          }
-					
-				</div>
-      </section>
-    </section>
+      )
+    }
+    </>
+  
   );
 }

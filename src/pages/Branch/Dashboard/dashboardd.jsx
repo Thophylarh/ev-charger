@@ -18,13 +18,16 @@ import Column from "../../../utils/columns";
 
 import Modal from "../../../components/modals/modal";
 import TransactionDetails from "../../../components/modals/transactionDetails";
+import Loader from "../../../components/Loader";
+import { toast } from "react-toastify";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
 	const [stationChargerList, setStationChargerList] = useState([]);
 	const [TModal, setModal] = useState(false);
 	const [transactionIdd, setTransactionIdd] = useState();
-
+	const [newDate, setNewDate] = useState();
+	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams] = useSearchParams();
 
 	let stationId = searchParams.get("stationId");
@@ -50,16 +53,24 @@ export default function Dashboardd() {
 
 	//get list of chargers in station
 	const getListOfChargers = () => {
+		setIsLoading(true)
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
 				setStationChargerList(res.data);
-			});
+				setTimeout(()=>{
+					setIsLoading(false)
+				},2000)
+				
+			}).catch(err=>{
+				toast.error(err)
+				setIsLoading(false)
+			})
 	};
 
 	// CUSTOM FUNCTIONS
 	const onSelectDate = (date, dateString) => {
-		console.log(dateString);
+		setNewDate(dateString);
 	};
 
 	useEffect(() => {
@@ -163,67 +174,76 @@ export default function Dashboardd() {
 	];
 
 	return (
-		<section>
-			<section className={`mb-[var(--marginBtwSection)]`}>
-				<div className={`flex justify-between items-center `}>
-					<div>
-						<h4 className="mb-[8px]">Hello, Sterling HQ</h4>
-						<p className="subHeader">
-							Here is an overview and breakdown of your station energy revenue
-							and consumption.
-						</p>
-					</div>
-					<div>
-						<DatePicker onChange={onSelectDate} />
-					</div>
-				</div>
-			</section>
-
-			<StationDashboardOverview stationId={stationId} />
-
-			<ChartOverview />
-
-			<section className={`mb-[var(--marginBtwSection)]`}>
-				<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
-					<h3>STATION CHARGERS</h3>
-
-					<NavLink
-						to={{
-							pathname: "/station/evChargers",
-							search: `?stationId=${stationId}&companyId=${companyId}`,
-						}}
-					>
-						<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
-							See all chargers
-						</button>
-					</NavLink>
-				</div>
-
-				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-					{stationChargerList.map((charger, index) => (
-						<ChargersCard charger={charger} key={index} />
-					))}
-				</div>
-			</section>
-
-			<section className={`mb-[var(--marginBtwSection)]`}>
-				<div className={`mb-[var(--marginBtwElements)] `}>
-					<h3>LAST 10 TRANSACTIONS</h3>
-				</div>
-
-				<div>
-					<Table
-						columns={Columns}
-						pagination={false}
-						dataSource={transaction}
-					/>
-				</div>
-			</section>
-			{TModal && (
-				<Modal closeModal={setModal}>
-					<TransactionDetails transactionId={transactionIdd} />
-				</Modal>
+		<>
+			{isLoading && (
+				<section>
+					<Loader />
+				</section>
 			)}
-		</section>
+			{!isLoading && (
+				<section>
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div className={`flex justify-between items-center `}>
+							<div>
+								<h4 className="mb-[8px]">Hello, Sterling HQ</h4>
+								<p className="subHeader">
+									Here is an overview and breakdown of your station energy
+									revenue and consumption.
+								</p>
+							</div>
+							<div>
+								<DatePicker picker="month" onChange={onSelectDate} />
+							</div>
+						</div>
+					</section>
+
+					<StationDashboardOverview stationId={stationId} newDate={newDate} />
+
+					<ChartOverview newDate={newDate} />
+
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
+							<h3>STATION CHARGERS</h3>
+
+							<NavLink
+								to={{
+									pathname: "/station/evChargers",
+									search: `?stationId=${stationId}&companyId=${companyId}`,
+								}}
+							>
+								<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
+									See all chargers
+								</button>
+							</NavLink>
+						</div>
+
+						<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+							{stationChargerList.map((charger, index) => (
+								<ChargersCard charger={charger} key={index} />
+							))}
+						</div>
+					</section>
+
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div className={`mb-[var(--marginBtwElements)] `}>
+							<h3>LAST 10 TRANSACTIONS</h3>
+						</div>
+
+						<div>
+							<Table
+								columns={Columns}
+								pagination={false}
+								dataSource={transaction}
+							/>
+						</div>
+					</section>
+					{TModal && (
+						<Modal closeModal={setModal}>
+							<TransactionDetails transactionId={transactionIdd} />
+						</Modal>
+					)}
+				</section>
+			)}
+		</>
 	);
 }

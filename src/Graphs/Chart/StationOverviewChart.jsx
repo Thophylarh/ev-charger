@@ -2,28 +2,30 @@ import moment from "moment";
 import { Bar } from "react-chartjs-2";
 import { formatNumber } from "../../utils/formatNumber";
 
-const BarChart = ({details}) => {
+const BarChart = ({ details }) => {
+	let months = details.map((el) => {
+		if (el.day) {
+			return `${moment(el.month, "M").format("MMM")} ${el.day}`;
+		}
 
-	let months = details.map((el)=>moment(el.month, "M").format("MMM"))
+		return moment(el.month, "M").format("MMM");
+	});
 
+	let numbers = details.map((el) => {
+		return Math.max(el.acRevenue, el.dcRevenue, el.bmsRevenue);
+	});
 
-	let numbers = details.map((el)=>{
-		return Math.max(  el.acRevenue, el.dcRevenue, el.bmsRevenue)
-		
-	})
-	
-
-	let highestNumber = Math.ceil(Math.max(...numbers))
+	let highestNumber = Math.ceil(Math.max(...numbers));
 
 	return (
 		<Bar
 			className="w-full"
 			data={{
-				labels:months,
+				labels: months,
 				datasets: [
 					{
 						type: "bar",
-						data: details.map(el=>el.acRevenue),
+						data: details.map((el) => el.acRevenue),
 						label: "Ac",
 						fill: "",
 						backgroundColor: "#E9CD9E",
@@ -32,7 +34,7 @@ const BarChart = ({details}) => {
 					},
 					{
 						type: "bar",
-						data: details.map(el=>el.dcRevenue),
+						data: details.map((el) => el.dcRevenue),
 						label: "DC",
 						fill: "",
 						backgroundColor: "#E8F8EE",
@@ -41,7 +43,7 @@ const BarChart = ({details}) => {
 					},
 					{
 						type: "bar",
-						data: details.map(el=>el.bmsRevenue),
+						data: details.map((el) => el.bmsRevenue),
 						label: "CICE",
 						fill: "",
 						backgroundColor: "#EAECF0",
