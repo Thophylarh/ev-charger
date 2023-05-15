@@ -1,9 +1,36 @@
 import { Table } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CustomerDetailsCard from "../../../components/Branch/CustomerDetailsCard";
 import eye from "../../../assets/svg/eye.svg";
 import activeDot from "../../../assets/svg/activeDot.svg";
+
+import axios from "../../../lib/axiosInterceptor";
+
+import { useSearchParams } from "react-router-dom";
+import { formatNumber } from "../../../utils/formatNumber";
 export default function CustomerDetails() {
+	const [details, setDetails] = useState([]);
+
+	const [searchParams] = useSearchParams();
+
+	let cusId = searchParams.get("cus");
+
+	const getCustomerDetails = async () => {
+		axios.get(`customers/get-customer-by-id/${cusId}`).then((res) => {
+			let index = 0;
+
+			res.data.forEach((el) => {
+				el.index = ++index;
+			});
+
+			setDetails(res.data);
+		});
+	};
+
+	useEffect(() => {
+		getCustomerDetails();
+	}, []);
+
 	let column = [
 		{
 			title: "#",
@@ -12,63 +39,47 @@ export default function CustomerDetails() {
 		},
 
 		{
-			title: "Date",
-			dataIndex: "date",
-			key: "date",
+			title: "First name",
+			dataIndex: "firstname",
+			key: "firstname",
 		},
 
 		{
-			title: "Charger",
-			dataIndex: "charger",
-			key: "charger",
+			title: "Last name",
+			dataIndex: "lastname",
+			key: "lastname",
 		},
 
 		{
-			title: "Charger Type",
-			dataIndex: "chargerType",
-			key: "chargerType",
-		},
-		{
-			title: "Amount",
-			dataIndex: "amount",
-			key: "amount",
+			title: "Email address",
+			dataIndex: "emailAddress",
+			key: "emailAddress",
 		},
 
 		{
-			title: "Balance",
-			dataIndex: "balance",
-			key: "balance",
+			title: "Money  Spent",
+			dataIndex: "totalAmountSpent",
+			key: "totalAmountSpent",
 		},
 
 		{
-			title: "Energy",
-			dataIndex: "energy",
-			key: "energy",
+			title: "Phone number",
+			dataIndex: "phone",
+			key: "phone",
 		},
+
 		{
-			title: "Status",
-			dataIndex: "transactionStatus",
-			key: "transactionStatus",
-			render: (transactionStatus) => (
-				<button className="flex justify-between ">
-					<img src={activeDot} className="pr-[0.25rem] mt-[6px]" />
-					<p className="text-[#15833C] font-semibold text-xs leading-5">
-						Completed
-					</p>
-				</button>
-			),
+			title: "Number of Vehicles",
+			dataIndex: "numberOfVehiclesOnFile",
+			key: "numberOfVehiclesOnFile",
 		},
+
 		{
-			title: "",
-			dataIndex: "",
-			key: "",
-			render: () => (
-				<button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md ">
-					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-					<p>View details</p>
-				</button>
-			),
+			title: "Energy consumed",
+			dataIndex: "totalEnergyCharged",
+			key: "totalEnergyCharged",
 		},
+	
 	];
 
 	return (
@@ -140,7 +151,7 @@ export default function CustomerDetails() {
 								<h3>ENERGY CONSUMPTION</h3>
 
 								<h5>
-									500,000
+								{formatNumber(details?.TotalEnergyCharged)}
 									<sup>kw</sup>{" "}
 								</h5>
 							</div>
@@ -157,7 +168,7 @@ export default function CustomerDetails() {
 				</section>
 
 				<section className={`mb-[var(--marginBtwSection)]`}>
-					<Table columns={column} />
+					<Table columns={column} dataSource={details} />
 				</section>
 			</section>
 		</section>
