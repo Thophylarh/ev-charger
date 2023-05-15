@@ -21,7 +21,7 @@ export default function ChargersCard(props) {
       }
 	
 	return (
-		<div className={`bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`} onClick={(e)=>{viewCharger(charger.Id, e)}}>
+		<div className={`cursor-pointer bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`} onClick={(e)=>{viewCharger(charger.Id, e)}}>
 			<div className="flex ">
 				<div className="mr-[1rem]">
 					<img

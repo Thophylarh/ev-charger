@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 import axios from "../../../lib/axiosInterceptor";
 import "./style.css";
@@ -9,20 +9,21 @@ import ChargersCard from "../../../components/Company/ChargersCard";
 import { DatePicker, Table } from "antd";
 import moment from "moment";
 import { formatNumber } from "../../../utils/formatNumber";
-import activeDot from "../../../assets/svg/activeDot.svg"
-import eye from "../../../assets/svg/eye.svg"
+import activeDot from "../../../assets/svg/activeDot.svg";
+import eye from "../../../assets/svg/eye.svg";
 
 import StationDashboardOverview from "../../../components/Branch/DashboardComponents/Overview";
 import ChartOverview from "../../../components/Branch/DashboardComponents/ChartOverview";
 import Column from "../../../utils/columns";
 
-import Modal from "../../../components/modals/modal"
-import TransactionDetails from "../../../components/modals/transactionDetails"
+import Modal from "../../../components/modals/modal";
+import TransactionDetails from "../../../components/modals/transactionDetails";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
 	const [stationChargerList, setStationChargerList] = useState([]);
-	const [TModal, setModal] = useState(false)
+	const [TModal, setModal] = useState(false);
+	const [transactionIdd, setTransactionIdd] = useState();
 
 	const [searchParams] = useSearchParams();
 
@@ -52,112 +53,115 @@ export default function Dashboardd() {
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
-				
-
 				setStationChargerList(res.data);
 			});
 	};
 
-
 	// CUSTOM FUNCTIONS
-	const onSelectDate = (date, dateString)=>{
-console.log(dateString)
-	}
-
+	const onSelectDate = (date, dateString) => {
+		console.log(dateString);
+	};
 
 	useEffect(() => {
 		getTransactions();
 		getListOfChargers();
 	}, []);
 
-	//table columns 
-	const Columns =
+	//table columns
+	const Columns = [
+		{
+			title: "#",
+			dataIndex: "index",
+			key: "index",
+		},
+		{
+			title: "Date",
+			dataIndex: "dateOfTransaction",
+			key: "dateOfTransaction",
+			render: (dateOfTransaction) => (
+				<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+			),
+		},
+		{
+			title: "Charger",
+			dataIndex: "chargerName",
+			key: "transactionId",
+		},
 
+		{
+			title: "Charger Type",
+			dataIndex: "chargerType",
+			key: "Charger Type",
+			render: () => <p>CICE</p>,
+		},
+		{
+			title: "Amount",
+			dataIndex: "totalAmount",
+			key: "totalAmount",
+			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		},
+		{
+			title: "Balance",
+			dataIndex: "balance",
+			key: "balance",
+			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		},
+		{
+			title: "Energy",
+			dataIndex: "totalUnitChargedInEnergy",
+			key: "totalUnitChargedInEnergy",
+			render: (totalUnitChargedInEnergy) => (
+				<p>
+					{formatNumber(totalUnitChargedInEnergy)}
+					kWh
+				</p>
+			),
+		},
 
-    
-        [
-            {
-                title: "#",
-                dataIndex: "index",
-                key: "index",
-            },
-            {
-                title: "Date",
-                dataIndex: "dateOfTransaction",
-                key: "dateOfTransaction",
-                render: (dateOfTransaction) => (
-                    <p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
-                ),
-            },
-            {
-                title: "Charger",
-                dataIndex: "chargerName",
-                key: "transactionId",
-            },
-    
-            { 
-                title: "Charger Type",
-                 dataIndex: "chargerType", 
-                 key: "Charger Type",
-                 render: () =><p>CICE</p>
-             },
-            {
-                title: "Amount",
-                dataIndex: "totalAmount",
-                key: "totalAmount",
-                render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-            },
-            {
-                title: "Balance",
-                dataIndex: "balance",
-                key: "balance",
-                render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-            },
-            {
-                title: "Energy",
-                dataIndex: "totalUnitChargedInEnergy",
-                key: "totalUnitChargedInEnergy",
-                render: (totalUnitChargedInEnergy) => (
-                    <p>
-                        {formatNumber(totalUnitChargedInEnergy)}
-                        kWh
-                    </p>
-                ),
-            },
-          
-            // {
-            //     title: "Charge Duration",
-            //     dataIndex: "totalUnitChargedInTime",
-            //     key: "totalUnitChargedInTime",
-            //     render: (totalUnitChargedInTime) => (
-            //         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
-            //     ),
-            // },
-            {
-                title: "Status",
-                dataIndex: "transactionStatus",
-                key: "transactionStatus",
-                render: (transactionStatus) => (
-                    <button className="flex justify-between" >
-                       <img src={activeDot} className="pr-[0.25rem] mt-[6px]"/>
-                       <p className="text-[#15833C] font-semibold text-xs leading-5">Completed</p>
-                    </button>
-                ),
-            },
-            {
-                title: "",
-                dataIndex: "",
-                key: "",
-                render: () => (
-                    <button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md" onClick={(e)=>{setModal(true)}}>
-                       <img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-                       <p>View details</p>
-                    </button>
-                ),
-            },
-        ]
-
-
+		// {
+		//     title: "Charge Duration",
+		//     dataIndex: "totalUnitChargedInTime",
+		//     key: "totalUnitChargedInTime",
+		//     render: (totalUnitChargedInTime) => (
+		//         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
+		//     ),
+		// },
+		{
+			title: "Status",
+			dataIndex: "transactionStatus",
+			key: "transactionStatus",
+			render: (transactionStatus) => (
+				<button className="flex justify-between">
+					<img
+						src={activeDot}
+						alt="Transaction was completed"
+						className="pr-[0.25rem] mt-[6px]"
+					/>
+					<p className="text-[#15833C] font-semibold text-xs leading-5">
+						Completed
+					</p>
+				</button>
+			),
+		},
+		{
+			title: "",
+			dataIndex: "transactionId",
+			key: "",
+			render: (text,record) => (
+				<button
+					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+					onClick={(e) => {
+					
+						setModal(true);
+						setTransactionIdd(record.transactionId);
+					}}
+				>
+					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+					<p>View details</p>
+				</button>
+			),
+		},
+	];
 
 	return (
 		<section>
@@ -171,7 +175,7 @@ console.log(dateString)
 						</p>
 					</div>
 					<div>
-						<DatePicker  onChange={onSelectDate} />
+						<DatePicker onChange={onSelectDate} />
 					</div>
 				</div>
 			</section>
@@ -184,9 +188,16 @@ console.log(dateString)
 				<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
 					<h3>STATION CHARGERS</h3>
 
-					<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
-						See all chargers
-					</button>
+					<NavLink
+						to={{
+							pathname: "/station/evChargers",
+							search: `?stationId=${stationId}&companyId=${companyId}`,
+						}}
+					>
+						<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
+							See all chargers
+						</button>
+					</NavLink>
 				</div>
 
 				<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
@@ -209,10 +220,11 @@ console.log(dateString)
 					/>
 				</div>
 			</section>
-			{TModal && ( <Modal closeModal={setModal}>
-         <TransactionDetails />
-        </Modal>)
-      }
+			{TModal && (
+				<Modal closeModal={setModal}>
+					<TransactionDetails transactionId={transactionIdd} />
+				</Modal>
+			)}
 		</section>
 	);
 }
