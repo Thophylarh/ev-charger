@@ -33,16 +33,7 @@ instance.interceptors.response.use(
 	(error) => {
 		const originalRequest = error.config;
 
-		if (
-			originalRequest.url === "/Stations/get-station-by-company/null" &&
-			error.response.status === 400
-		) {
-			window.location.href = "/";
-			return Promise.reject(error);
-		}
-
 		if (error.response.status === 401) {
-		
 			window.location.href = "/";
 			return Promise.reject(error);
 		}
