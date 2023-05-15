@@ -76,9 +76,9 @@ export default function Details() {
 
       </section>
 
-        <ChargerRevenue chargerId={chargerId}/>
+        <ChargerRevenue chargerId={chargerId} ChargerDetails={chargersDetails}/>
 
-        <ChargerOperation/>
+        <ChargerOperation chargerId={chargerId}/>
 
         <Last10Transactions chargerId={chargerId}/>
 
