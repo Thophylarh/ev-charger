@@ -70,7 +70,7 @@ const ChargerOperation = ({chargerId, ChargerDetails}) =>{
 
                 <h4 className="mb-[var(--marginBtwElements)] ">12:00am - 8:00pm</h4>
 
-                <h3 className="text-[#007EF2]" onClick={(e)=>{setOModal(true)}}>EDIT</h3>
+                <h3 className="text-[#007EF2] cursor-pointer" onClick={(e)=>{setOModal(true)}}>EDIT</h3>
                 </div>
                 <div>
                     <img src={OperationHours} alt="Operation Hours" />
