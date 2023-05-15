@@ -1,12 +1,32 @@
 import { Table } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
+import axios from "../../../lib/axiosInterceptor";
 
 import eye from "../../../assets/svg/eye.svg"
 
 export default function CustomerList() {
 	const [enrolled, setEnrolled] = useState(true);
+	const [customers, setCustomers] = useState();
 
+	const getCustomers = async () => {
+		axios
+			.get(`/customers`)
+			.then((res) => {
+				let index = 0;
+
+				res.data.forEach((el) => {
+					el.index = ++index;
+				});
+
+				setCustomers(res.data);
+			});
+	};
+
+
+	useEffect(() => {
+		getCustomers();
+	}, []);
 
       let column =
       [

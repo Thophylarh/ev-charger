@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -7,6 +8,9 @@ import { toast } from "react-toastify";
 
 const CarInfo = () => {
 	const [isLoading, setIsLoading] = useState(false);
+	const [searchParams] = useSearchParams();
+
+	let customerCode = searchParams.get("cus");
 
 	const registerCar = (e) => {
 		e.preventDefault();
@@ -44,7 +48,7 @@ const CarInfo = () => {
 			vehicleName: carMake,
 			plateNumber: plateNumber,
 			vehicleType: carModel,
-			customerCode: "",
+			customerCode,
 		};
 
 		axios

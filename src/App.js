@@ -99,6 +99,9 @@ function App() {
 
 						<Route element={<ProtectedRoutes />}>
 							<Route path="customers" element={<CustomerList />} />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
 							<Route path="customer/details" element={<CustomerDetails />} />
 						</Route>
 

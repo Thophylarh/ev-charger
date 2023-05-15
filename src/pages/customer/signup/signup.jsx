@@ -44,16 +44,12 @@ const SignUp = () => {
 			setIsLoading(false);
 			return;
 		}
-		if (!email) {
-			toast.error("Enter your email");
-			setIsLoading(false);
-			return;
-		}
-		if (!phone) {
-			toast.error("Enter your phone number");
-			setIsLoading(false);
-			return;
-		}
+		
+		// if (!phone) {
+		// 	toast.error("Enter your phone number");
+		// 	setIsLoading(false);
+		// 	return;
+		// }
 		if (!password) {
 			toast.error("Enter password");
 			setIsLoading(false);
@@ -71,7 +67,7 @@ const SignUp = () => {
 			totalAmountSpent: 0,
 			totalEnergyCharged: 0,
 		};
-		console.log(data);
+		
 
 		axios
 			.post(`http://evapi.estations.com/Customers/create-customer`, data, {
@@ -82,8 +78,8 @@ const SignUp = () => {
 				console.log(res.data);
 				setIsLoading(false);
 				navigate({
-					pathname: "/posts",
-					search: "?cus=239092",
+					pathname: "/carInformation",
+					search: `?cus=${res.data.customerCode}`,
 				});
 				toast.success(
 					"Account created successfully, please fill out the next form"
@@ -92,7 +88,7 @@ const SignUp = () => {
 			.catch((err) => {
 				setIsLoading(false);
 				console.log(err);
-				toast.error(err.message);
+				toast.error(err.response.data);
 			});
 	};
 
@@ -154,7 +150,7 @@ const SignUp = () => {
 						></input>
 					</div>
 
-					<div className="mb-[20px]">
+					{/* <div className="mb-[20px]">
 						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
 							<p>Phone number</p> <p className="text-[#EB3540]">*</p>
 						</label>
@@ -165,7 +161,7 @@ const SignUp = () => {
 							placeholder="Phone number"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
-					</div>
+					</div> */}
 
 					<div className="mb-[20px]">
 						<label className="block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
