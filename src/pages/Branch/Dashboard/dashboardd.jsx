@@ -6,7 +6,7 @@ import "./style.css";
 
 import ChargersCard from "../../../components/Company/ChargersCard";
 
-import { Table } from "antd";
+import { DatePicker, Table } from "antd";
 import moment from "moment";
 import { formatNumber } from "../../../utils/formatNumber";
 
@@ -23,6 +23,8 @@ export default function Dashboardd() {
 	let stationId = searchParams.get("stationId");
 
 	let companyId = searchParams.get("companyId");
+
+	// API CALLS
 
 	//last 10 transactions
 	const getTransactions = async () => {
@@ -44,11 +46,18 @@ export default function Dashboardd() {
 		axios
 			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
 			.then((res) => {
-				console.log(res.data);
+				
 
 				setStationChargerList(res.data);
 			});
 	};
+
+
+	// CUSTOM FUNCTIONS
+	const onSelectDate = (date, dateString)=>{
+console.log(dateString)
+	}
+
 
 	useEffect(() => {
 		getTransactions();
@@ -68,7 +77,9 @@ export default function Dashboardd() {
 							and consumption.
 						</p>
 					</div>
-					<div>date</div>
+					<div>
+						<DatePicker  onChange={onSelectDate} />
+					</div>
 				</div>
 			</section>
 

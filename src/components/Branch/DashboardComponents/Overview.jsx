@@ -4,15 +4,22 @@ import axios from "../../../lib/axiosInterceptor";
 
 import Profit from "../../../assets/svg/profit.png";
 import { formatNumber } from "../../../utils/formatNumber";
+import { splitNumber } from "../../../utils/splitNumber";
 
 export default function StationDashboardOverview({ stationId }) {
 	const [revenue, setRevenue] = useState();
+	const [ACRevenue, setACRevenue] = useState();
+	const [DCRevenue, setDCRevenue] = useState();
+	const [CICERevenue, setCICERevenue] = useState();
 
 	const getStationRevenue = () => {
 		axios.get(`/Transactions/get-revenue/station/${stationId}`).then((res) => {
-			let formatRevenue = res.data.TotalRevenue.toFixed(2).split(".");
+			let formatRevenue = splitNumber(res.data.TotalRevenue);
 
 			setRevenue(formatRevenue);
+			setACRevenue(splitNumber(res.data.ACRevenue));
+			setDCRevenue(splitNumber(res.data.DCRevenue));
+			setCICERevenue(splitNumber(res.data.BMSRevenue));
 		});
 	};
 
@@ -29,7 +36,7 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>CICE REVENUE</h3>
 
 					<h5>
-						NGN 300,000.<sup>00</sup>{" "}
+					{formatNumber(CICERevenue?.[0], false)}.<sup>{CICERevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>7,000.00 KW</p>
@@ -39,7 +46,7 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>AC REVENUE</h3>
 
 					<h5>
-						NGN 300,000.<sup>00</sup>{" "}
+						{formatNumber(ACRevenue?.[0], false)}.<sup>{ACRevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>7,000.00 KW</p>
@@ -49,7 +56,7 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>DC REVENUE</h3>
 
 					<h5>
-						NGN 300,000.<sup>00</sup>{" "}
+					{formatNumber(DCRevenue?.[0], false)}.<sup>{DCRevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>7,000.00 KW</p>

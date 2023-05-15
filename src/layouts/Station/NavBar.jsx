@@ -23,9 +23,7 @@ export default function StationNavBar() {
 		setPath(location.pathname);
 	}, [location]);
 
-	console.log(location);
-
-	// console.log(compId)
+	
 
 	return (
 		<nav className={`bg-black h-[5rem] fixed w-full top-0 z-10  `}>
