@@ -6,12 +6,13 @@ import BillingType from "../../../../assets/svg/billingType.svg"
 import RunningTime from   "../../../../assets/svg/runningTime.svg";
 import OperationModal from "../../../modals/operationModal";
 import Modal from "../../../modals/modal"
+import { secondToHours } from "../../../../utils/secondtoHours";
 
 import axios from "../../../../lib/axiosInterceptor"
 import moment from "moment";
 
 
-const ChargerOperation = ({chargerId}) =>{
+const ChargerOperation = ({chargerId, ChargerDetails}) =>{
     const [OModal, setOModal] = useState(false)
     const [chartData, setChartData]= useState([])
 
@@ -84,7 +85,7 @@ const ChargerOperation = ({chargerId}) =>{
                     Billing type
                     </h2>
 
-                    <h4>Default (energy)</h4>
+                    <h4>{ChargerDetails.BillingType}</h4>
                 </div>
                 <div>
                 <img src={BillingType} alt="Billing Type" />
@@ -99,7 +100,7 @@ const ChargerOperation = ({chargerId}) =>{
                     Running time
                     </h2>
 
-                    <h4>21hrs</h4>
+                    <h4>{ secondToHours(ChargerDetails.TimeConsumed)}</h4>
                 </div> 
 
                 <img src={RunningTime} alt="Running Time"  />
