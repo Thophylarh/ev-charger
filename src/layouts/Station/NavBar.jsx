@@ -15,15 +15,13 @@ export default function StationNavBar() {
 	const location = useLocation();
 
 	let activeLink =
-		" ease-in-out mr-[var(--horizontalMargin)] text-center text-sm  flex items-center py-[0.5rem]  px-[1rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]";
+		" ease-in-out mr-[1.25rem] text-center text-sm  flex items-center py-[0.5rem]  px-[1rem] bg-[var(--grey900)] text-[var(--primaryGreen500)] rounded-[var(--borderRadius)]";
 
 	let notActive =
-		"ease-in-out mr-[var(--horizontalMargin)] text-center text-sm flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ";
+		"ease-in-out mr-[1.25rem] text-center text-sm flex align-middle py-[0.5rem]  px-[0.75rem] text-[var(--grey300)] rounded-[var(--borderRadius)] ";
 	useEffect(() => {
 		setPath(location.pathname);
 	}, [location]);
-
-	
 
 	return (
 		<nav className={`bg-black h-[5rem] fixed w-full top-0 z-10  `}>
@@ -31,9 +29,15 @@ export default function StationNavBar() {
 				className={`w-[90%] m-auto py-[1rem] flex  items-center justify-between`}
 			>
 				<div className={`flex `}>
-					<div className="mr-[var(--horizontalMargin)]">
-						<img src={logo} alt="EVcharger logo" />
-					</div>
+					<NavLink
+						to={{
+							pathname: "/company",
+						}}
+					>
+						<div className="mr-[1.5rem]">
+							<img src={logo} alt="EVcharger logo" />
+						</div>
+					</NavLink>
 
 					<div className="flex pt-1">
 						<NavLink
@@ -106,21 +110,35 @@ export default function StationNavBar() {
 								search: `?stationId=${id}&companyId=${compId}`,
 							}}
 						>
+							<div
+								className={` ${
+									path === "/station/report" ? activeLink : notActive
+								}`}
+							>
+								<p className="mr-[0.5rem] ">Report </p>
+							</div>
+						</NavLink>
+
+						<NavLink
+							to={{
+								pathname: "/station/customers",
+								search: `?stationId=${id}&companyId=${compId}`,
+							}}
+						>
+							<div
+								className={` ${
+									path === "/station/customers" ? activeLink : notActive
+								}`}
+							>
+								<p className="mr-[0.5rem] ">Customer </p>
+							</div>
+						</NavLink>
 
 						<div
 							className={` ${
-								path === "/station/report" ? activeLink : notActive
+								path === "/station/camera" ? activeLink : notActive
 							}`}
 						>
-							<p className="mr-[0.5rem] ">Report </p>
-
-							
-						</div>
-						</NavLink>
-
-						
-						
-						<div className={` ${path === "/station/camera" ? activeLink : notActive}`}> 
 							{path === "/station/camera" && (
 								<img
 									className="mr-[0.5rem]  "
@@ -130,11 +148,8 @@ export default function StationNavBar() {
 							)}
 							<p>Live Camera</p>
 						</div>
-						
-						
 					</div>
 				</div>
-
 
 				<div>
 					<div

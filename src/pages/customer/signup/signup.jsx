@@ -67,7 +67,7 @@ const SignUp = () => {
 			totalAmountSpent: 0,
 			totalEnergyCharged: 0,
 		};
-		console.log(data);
+		
 
 		axios
 			.post(`http://evapi.estations.com/Customers/create-customer`, data, {
@@ -78,8 +78,8 @@ const SignUp = () => {
 				console.log(res.data);
 				setIsLoading(false);
 				navigate({
-					pathname: "/posts",
-					search: "?cus=239092",
+					pathname: "/carInformation",
+					search: `?cus=${res.data.customerCode}`,
 				});
 				toast.success(
 					"Account created successfully, please fill out the next form"
@@ -88,7 +88,7 @@ const SignUp = () => {
 			.catch((err) => {
 				setIsLoading(false);
 				console.log(err);
-				toast.error(err.message);
+				toast.error(err.response.data);
 			});
 	};
 

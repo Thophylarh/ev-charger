@@ -97,13 +97,12 @@ const Login = () => {
 
 	const style = {
 		background: `linear-gradient(0deg, rgba(16, 24, 40, 0.89), rgba(16, 24, 40, 0.89)), url(${loginScreen})`,
-    
 	};
 	return (
 		<section className=" h-[100vh] flex " style={style}>
 			<div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
 				<div className=" flex flex-col justify-center">
-					<div className="text-center mb-[var(--marginBtwSection)] ">
+					<div className="text-center mb-[1.25rem] ">
 						<div className="flex justify-center w-[100%]">
 							<img src={Logo} alt="Logo" />
 						</div>
@@ -117,9 +116,9 @@ const Login = () => {
 						</p>
 					</div>
 
-					<div className="flex justify-center w-[100%] mb-[var(--marginBtwSection)] ">
+					<div className="flex justify-center w-[100%] mb-[1.25rem] ">
 						<form onSubmit={handleSubmit}>
-							<div className="mt-[2rem] mb-[6rem] ">
+							<div className="mt-[2rem] mb-[2.5rem] ">
 								<label
 									htmlFor="email"
 									className="block text-sm font-medium
@@ -127,17 +126,14 @@ const Login = () => {
 								>
 									Email
 								</label>
-								<div
-									className="flex flex-col items-
-         start input-icons "
-								>
-									<img className=" icon" src={Email}></img>
+								<div className="flex items-start  ">
+									<img className=" icon" src={Email} alt="enter email"></img>
 									<input
 										required
 										type="email"
 										name="email"
 										placeholder="example@address.com"
-										className="mt-1 mb-4 p-3 bg-white
+										className="mt-1 p-3 bg-white
              border shadow-sm border-slate-300
               placeholder-slate-400
                focus:outline-none focus:border-
@@ -152,7 +148,7 @@ const Login = () => {
 								</div>
 							</div>
 
-							<div className="">
+							<div className="mt-3">
 								<label
 									htmlFor="password"
 									className="block text-sm font-medium
@@ -161,8 +157,8 @@ const Login = () => {
 									Password
 								</label>
 								<div
-									className="flex flex-col items-
-         start input-icons"
+									className="flex  items-
+         start "
 								>
 									<img className="w-[1rem] icon" src={Padlock}></img>
 									<input
@@ -185,7 +181,7 @@ const Login = () => {
 								</div>
 							</div>
 							<div className=" ">
-								<div className="h-[30px] w-[380px] mt-[3.5rem]  flex items-right justify-end">
+								<div className="   flex items-right justify-end">
 									<a
 										className=" text-sm text-gray-400   hover:text-gray-900"
 										href="#"
