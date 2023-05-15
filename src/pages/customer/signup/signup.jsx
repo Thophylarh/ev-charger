@@ -44,16 +44,12 @@ const SignUp = () => {
 			setIsLoading(false);
 			return;
 		}
-		if (!email) {
-			toast.error("Enter your email");
-			setIsLoading(false);
-			return;
-		}
-		if (!phone) {
-			toast.error("Enter your phone number");
-			setIsLoading(false);
-			return;
-		}
+		
+		// if (!phone) {
+		// 	toast.error("Enter your phone number");
+		// 	setIsLoading(false);
+		// 	return;
+		// }
 		if (!password) {
 			toast.error("Enter password");
 			setIsLoading(false);
@@ -154,7 +150,7 @@ const SignUp = () => {
 						></input>
 					</div>
 
-					<div className="mb-[20px]">
+					{/* <div className="mb-[20px]">
 						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
 							<p>Phone number</p> <p className="text-[#EB3540]">*</p>
 						</label>
@@ -165,7 +161,7 @@ const SignUp = () => {
 							placeholder="Phone number"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
-					</div>
+					</div> */}
 
 					<div className="mb-[20px]">
 						<label className="block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">

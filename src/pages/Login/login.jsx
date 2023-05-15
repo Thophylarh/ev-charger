@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import StationCharge from "../../assets/images/station-charge.png";
 import Star from "../../assets/svg/star.svg";
 import Padlock from "../../assets/svg/padlock.svg";
+import loginScreen from "../../assets/svg/loginScreen.svg";
 import Email from "../../assets/svg/email.svg";
 import Dot from "../../assets/svg/activeDot.svg";
 import GreyDot from "../../assets/svg/greyDot.svg";
@@ -94,8 +95,12 @@ const Login = () => {
 	};
 	//end of login function
 
+	const style = {
+		background: `linear-gradient(0deg, rgba(16, 24, 40, 0.89), rgba(16, 24, 40, 0.89)), url(${loginScreen})`,
+    
+	};
 	return (
-		<section className="bg-[#1D2939] h-[100vh] flex ">
+		<section className=" h-[100vh] flex " style={style}>
 			<div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
 				<div className=" flex flex-col justify-center">
 					<div className="text-center mb-[var(--marginBtwSection)] ">
