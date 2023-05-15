@@ -1,6 +1,20 @@
+import React,{useState} from "react"
 import Warning from "../../assets/svg/warningSign.svg"
+import axios from "../../lib/axiosInterceptor"
 
-const ChargePower = () =>{
+const ChargePower = ({chargerId, closeModal, GetChargerDetails}) =>{
+    const [password, setPassWord] =useState("")
+
+     // deactivate charger
+  const deactivateCharger = (e) => {
+    e.preventDefault();
+    axios
+      .get( `/Chargers/deactivate/${chargerId}?password=${password}`)
+      .then((res) => {
+        GetChargerDetails();
+        closeModal(false)
+      });
+  };
 
     return(
         <>
@@ -17,12 +31,16 @@ const ChargePower = () =>{
             <label className="block text-[#344054] font-semibold text-[14px] mb-[8px]">PASSWORD</label>
             <input type="password" placeholder="Enter password to turn off charger" 
             className="w-[100%] p-[12px] border border-[#D0D5DD] rounded-lg"
+            value={password}
+            onChange={(event) => {
+                setPassWord(event.target.value);
+            }}
             />
             </div>
 
             <div className="flex justify-between">
-                <button className="border border-[#D0D5DD] py-[12px] px-[16px] rounded-lg">No, leave it active</button>
-                <button className="bg-black text-white py-[12px] px-[2rem] rounded-lg font-semibold">Yes turn it off</button>
+                <button className="border border-[#D0D5DD] py-[12px] px-[16px] rounded-lg" onClick={()=>{closeModal(false)}}>No, leave it active</button>
+                <button className="bg-black text-white py-[12px] px-[2rem] rounded-lg font-semibold" onClick={(e)=>{deactivateCharger(e)}}>Yes turn it off</button>
             </div>
         </form>
         </>

@@ -2,6 +2,7 @@ import React from "react";
 import ChargerImg from "../../../assets/svg/Charger.svg";
 
 import activeStatusImg from "../../../assets/svg/activeStatus.svg";
+import DeactivatedStatus from "../../../assets/svg/deactivatedStatus.svg"
 import moment from "moment/moment";
 import { useNavigate } from "react-router";
 
@@ -35,7 +36,12 @@ export default function ChargersCard(props) {
 					<div className="flex justify-between items-center mb-[1rem] border-b-[1px] border-grey-100 pb-[0.75rem]">
 						<h3> {charger.ChargerName?.toUpperCase()}</h3>
 
+						{charger.ActiveStatus === "1" ? 
 						<img src={activeStatusImg} alt="Charger is active" />
+						 : 
+						 <img src={DeactivatedStatus} alt="Charger is disconnected" />
+						 }
+						
 					</div>
 
 					<div>
