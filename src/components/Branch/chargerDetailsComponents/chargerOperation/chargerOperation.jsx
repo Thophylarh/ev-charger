@@ -1,13 +1,19 @@
-import React from "react";
+import React, {useState} from "react";
 import BarChart from "../../../../Graphs/Chart/barChart";
 // import ActiveCharger from "../../../assets/svg/activeCharger.svg";
 // import energyConsumed from "../../../assets/svg/energyConsumed.svg";
 import OperationHours from "../../../../assets/svg/operationHours.svg";
 import BillingType from "../../../../assets/svg/billingType.svg"
 import RunningTime from   "../../../../assets/svg/runningTime.svg";
+import OperationModal from "../../../modals/operationModal";
+import Modal from "../../../modals/modal"
+import TransactionDetails from "../../../modals/transactionDetails"
 
 
-const ChargerOperation = () =>(
+const ChargerOperation = () =>{
+    const [OModal, setOModal] = useState(false)
+
+    return(
     <section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
     <div className="grid grid-cols-12 gap-4 h-[100%]">
         <div className="col-span-9">
@@ -28,7 +34,7 @@ const ChargerOperation = () =>(
 
                 <h4 className="mb-[var(--marginBtwElements)] ">12:00am - 8:00pm</h4>
 
-                <h3 className="text-[#007EF2]">EDIT</h3>
+                <h3 className="text-[#007EF2]" onClick={(e)=>{setOModal(true)}}>EDIT</h3>
                 </div>
                 <div>
                     <img src={OperationHours} alt="Operation Hours" />
@@ -65,7 +71,13 @@ const ChargerOperation = () =>(
             </div>
         </div>
     </div>
+    {
+        OModal && <Modal closeModal={setOModal}>
+            <OperationModal/>
+        </Modal>
+    }
 </section>
-)
+    )
+}
 
 export default ChargerOperation
