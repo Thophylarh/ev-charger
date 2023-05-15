@@ -6,14 +6,27 @@ import Profit from "../../../assets/svg/profit.png";
 import { formatNumber } from "../../../utils/formatNumber";
 import { splitNumber } from "../../../utils/splitNumber";
 
-export default function StationDashboardOverview({ stationId }) {
+export default function StationDashboardOverview({ stationId, newDate }) {
 	const [revenue, setRevenue] = useState();
 	const [ACRevenue, setACRevenue] = useState();
 	const [DCRevenue, setDCRevenue] = useState();
 	const [CICERevenue, setCICERevenue] = useState();
 
+
+
 	const getStationRevenue = () => {
-		axios.get(`/Transactions/get-revenue/station/${stationId}`).then((res) => {
+		let url;
+
+		if (!newDate || newDate === " ") {
+			url = `/Transactions/get-revenue/station/${stationId}`;
+		} else {
+			let splitDate = newDate.split("-");
+			url = `/Transactions/get-revenue-by-month-year/station/${stationId}/${splitDate[1]}/${splitDate[0]}`;
+		}
+
+		
+
+		axios.get(url).then((res) => {
 			let formatRevenue = splitNumber(res.data.TotalRevenue);
 
 			setRevenue(formatRevenue);
@@ -27,7 +40,7 @@ export default function StationDashboardOverview({ stationId }) {
 		getStationRevenue();
 
 		return () => {};
-	}, []);
+	}, [newDate]);
 
 	return (
 		<section className={`mb-[var(--marginBtwSection)]`}>
@@ -36,7 +49,8 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>CICE REVENUE</h3>
 
 					<h5>
-					NGN {formatNumber(CICERevenue?.[0], false)}.<sup>{CICERevenue?.[1]}</sup>{" "}
+						NGN {formatNumber(CICERevenue?.[0], false)}.
+						<sup>{CICERevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>0.00 KW</p>
@@ -46,7 +60,8 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>AC REVENUE</h3>
 
 					<h5>
-					NGN	{formatNumber(ACRevenue?.[0], false)}.<sup>{ACRevenue?.[1]}</sup>{" "}
+						NGN {formatNumber(ACRevenue?.[0], false)}.
+						<sup>{ACRevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>0.00 KW</p>
@@ -56,7 +71,8 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>DC REVENUE</h3>
 
 					<h5>
-					NGN	{formatNumber(DCRevenue?.[0], false)}.<sup>{DCRevenue?.[1]}</sup>{" "}
+						NGN {formatNumber(DCRevenue?.[0], false)}.
+						<sup>{DCRevenue?.[1]}</sup>{" "}
 					</h5>
 
 					<p>0.00 KW</p>
