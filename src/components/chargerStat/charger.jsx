@@ -47,7 +47,7 @@ function Charger(props) {
                 <div className="flex flex-col justify-center items-center">
                     <img className="h-[8rem] mt-12" src={Battery} alt="" />
                     <div className="font-normal text-4xl text-white pt-[1.25rem]">
-                    <h1>{props.TotalEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kw</h1>
+                    <h1>{props.TotalEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kWh</h1>
                     </div>
                     <div className="text-gray-400 text-sm font-normal pt-[0.5rem]">
                     <p>Current consumption</p>

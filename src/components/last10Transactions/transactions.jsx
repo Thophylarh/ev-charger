@@ -3,8 +3,10 @@ import "./style.css"
 import nextArrow from "../../assets/svg/next-arrow.svg";
 import axios from "axios"
 import moment from "moment";
+import { Space, Table, Radio } from 'antd'
 
 const Transactions = (props) => {
+    
 
     const [Cname, setName] = useState("")
 
@@ -12,23 +14,62 @@ const Transactions = (props) => {
   const url = "http://evapi.estations.com"
 
   // bearer token from local storage
-  const token = localStorage.getItem("token")
+  const token = localStorage.getItem("user-token")
 
   //company id
   const companyId = localStorage.getItem("id");
 
-//   const GetChargerName = (id) =>{
-//     axios.get(url + "/Chargers/get-charger-by-id/" + id , { headers:{ 'Authorization': `Bearer ${token}`}})
-//     .then((res)=>{
-//         // console.log(res.data.chargerName)
-//         setName(res.data)
-//     })
-//   }
 
-
-   
+    
+    
     
     const Transactions = props.transactions
+   
+    
+
+    const columns =[
+        {
+            title: '#', 
+            dataIndex: 'transactionId',
+            key: 'transactionId'
+        },
+        // {
+        //     title: 'Charger', 
+        //     dataIndex: 'charger',
+        //     key: 'charger'
+        // },
+        {
+            title: 'Amount', 
+            dataIndex: 'totalAmount',
+            key: 'totalAmount', 
+            render: (totalAmount)=>(<p>₦{totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>)
+            
+        },
+        {
+            title: 'Energy', 
+            dataIndex: 'totalUnitChargedInEnergy',
+            key: 'totalUnitChargedInEnergy', 
+            render: (totalUnitChargedInEnergy) =>(<p>{totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</p>)
+        },
+        {
+            title: 'Date',
+            dataIndex: 'dateOfTransaction',
+            key:'dateOfTransaction', 
+            render: (dateOfTransaction)=>(<p>{moment(dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</p>)
+        },
+        {
+            title: 'Charge Duration',
+            dataIndex: 'totalUnitChargedInTime',
+            key:'totalUnitChargedInTime', 
+            render: (totalUnitChargedInTime)=>(<p>{(totalUnitChargedInTime/60)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " hour(s)"}</p>)
+        },
+        {
+            title: 'Status',
+            dataIndex: 'transactionStatus',
+            key:'transactionStatus', 
+            render: (transactionStatus)=>(<button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button>)
+        },
+    ]
     
 
     return ( <div >
@@ -37,7 +78,9 @@ const Transactions = (props) => {
         </div>
         {/* table */}
         <div className="bg-white py-[0.5rem]  px-[1.5rem]  ">
-            <table className=" text-left  w-[100%]">
+        
+        <Table  columns={columns} dataSource={Transactions} />
+            {/* <table className=" text-left  w-[100%]">
                 <tr className=" h-[1.25rem] bg-[#FCFCFD] border border-x-0 border-[0.5px] border-solid border-gray-200 text-gray-600 text-base font-semibold ">
                     <th className="w-[5%] py-[1.25rem] "> <input className="checkbox" type="checkbox" checked></input> </th>
                     
@@ -56,8 +99,8 @@ const Transactions = (props) => {
                             <td>{Transaction.transactionId}</td>
                             
                             <td>{Transaction.chargerId}</td>
-                            <td>N{Transaction.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
-                            <td>{Transaction.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</td>
+                            <td>₦{Transaction.totalAmount?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
+                            <td>{Transaction.totalUnitChargedInEnergy?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} kWh</td>
                             <td>{moment(Transaction.dateOfTransaction).format(' MMMM DD YYYY HH:mm')}</td>
                             <td>{ (Transaction.totalUnitChargedInTime/60)?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " hour(s)"}</td>
                             <td><button className="w-[6rem] px-[0.75rem] py-[0.25rem] bg-[#E8F8EE]  border border-solid border-1 border-[#68D08C] rounded-xl text-[#15833C] font-semibold text-xs leading-5">Completed</button></td>
@@ -65,15 +108,15 @@ const Transactions = (props) => {
                 ))}
                 
                 
-            </table>
+            </table> */}
 
-            <div className="flex justify-between py-[4rem]">
+            {/* <div className="flex justify-between py-[4rem]">
             <p>1-50 of 2,500</p>
            
             <p className="pl-[52rem]">1-10 </p>
             <img className="" src={nextArrow} />
            
-            </div>
+            </div> */}
         </div>
     </div> );
 }

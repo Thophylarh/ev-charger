@@ -1,104 +1,202 @@
 import React from "react";
-import Login from "./components/Login/login";
+import Login from "./pages/Login/login";
 import Sidebar from "./components/Sidebar/sidebar";
-import Dashboard from "./components/Dashboard/dashboard";
-import SpecificCharger from "./components/specificCharger/specificCharger";
-import EvCharger from "./components/evChargers/evCharger";
-import ChangePassword from "./components/changePassword/changePassword";
+import Dashboard from "./pages/Branch/Dashboard/dashboard";
+import SpecificCharger from "./pages/Branch/ChargerDetails/specificCharger";
+import EvCharger from "./pages/Branch/EvChargers/evCharger";
+import ChangePassword from "./pages/changePassword/changePassword";
 import Station from "./components/station/station";
-import ListOfStations from "./components/listOfStations/listOfStations";
-import CompanyDash from "./components/companyDashboard/companyDash"
-import CompanySideBar from "./components/companySidebar/companySidebar";
-import CompanyReport from "./components/companyReport/report";
-import Billing from "./components/billing/billing";
-import StationBilling from "./components/stationBilling/stationBilling"
-import Chargers from "./components/Chargers/chargers";
-import Camera from "./components/liveCameraFeed/camera";
-import Sales from "./components/Sales/sales";
-import { Outlet, Routes, Route } from "react-router-dom";
-import Protected from "./protected";
+import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations";
+import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
+import CompanySideBar from "./components/Company/companySidebar/companySidebar";
+import CompanyReport from "./pages/CompanyDashboard/Report/report";
+import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
+
+// import Chargers from "./components/Chargers/chargers";
+import Camera from "./pages/Branch/LiveFeed/camera";
+import Sales from "./pages/Branch/Sales/sales";
+import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
+import LiveCamera from "./pages/Branch/LiveFeed/camera"
+
+import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
+import AuthRoutes from "./routeGuard/AuthRoutes";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import CompanyLayout from "./layouts/Station/StationLayout";
+import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
+import StationLayout from "./layouts/Station/StationLayout";
+import EvChargers from "./pages/Branch/EvChargers/evchargers";
+import StationBilling from "./pages/Branch/Billing";
+import Details from "./pages/Branch/ChargerDetails/chargerDetails"
+import ReportSales from "./pages/Branch/ReportSales/reportSales";
+import SignUp from "./pages/customer/signup/signup";
+import CarInfo from "./pages/customer/carInformation/carInfo";
+import Wallet from "./pages/customer/Wallet/wallet"
+import CustomerList from "./pages/Branch/Customers";
+import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
 
 function App() {
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/station" element={<Station />}></Route>
-        <Route path="/changePassword" element={<ChangePassword />}></Route>
+	return (
+		<div>
+			<BrowserRouter>
+				<ToastContainer />
+				<Routes>
+					<Route
+						path="/"
+						element={
+							<AuthRoutes>
+								<Login />{" "}
+							</AuthRoutes>
+						}
+					/>
 
-        {/* station section */}
-        <Route path="/dash" element={<LayoutsWithNavbar />}>
-          <Route path="/dash" element={
-              <Protected>
-                <Dashboard />
-              </Protected>
-            }
-          ></Route>
-          
-          <Route path="/dash/evChargers" element={<EvCharger />}></Route>
-          <Route path="/dash/chargerDetails" element={<SpecificCharger />} ></Route>
-          <Route path="/dash/billing" element={<StationBilling/>}></Route>
-          <Route path="/dash/sales" element={<Sales/>}></Route>
-          <Route path="/dash/chargers" element={<Chargers/>}></Route>
-          <Route path="/dash/camera" element={<Camera/>}></Route>
-          
-        </Route>
+					{/* PROTECTED ROUTES */}
 
-        {/* //company side */}
-        <Route path="/companyDash" element={<LayoutsWithCompanyNavbar/>}>
+					{/* COMPANY ROUTES */}
+					<Route element={<LayoutsWithCompanyNavbar />}>
+						<Route element={<ProtectedRoutes />}>
+							<Route element={<CompanyDash />} path="/company" />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							<Route element={<ListOfStations />} path="/company/myStations" />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							{" "}
+							<Route element={<CompanyReport />} path="/company/report" />{" "}
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+						
+							<Route element={<Billing />} path="/company/billing" />
+						</Route>
+					</Route>
+
+					{/* STATION ROUTES */}
+
+					{/* NEW */}
+
+					<Route path="/station" element={<StationLayout />}>
+						<Route element={<ProtectedRoutes />}>
+							{" "}
+							<Route element={<Dashboardd />} path="" />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="evChargers" element={<EvChargers />} />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+						<Route  path="billing" element={<StationBilling />} />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="details" element={<Details />} />
+						</Route>
+						<Route element={<ProtectedRoutes />}>
+							<Route path="report" element={<ReportSales />} />
+						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							<Route path="customers" element={<CustomerList />} />
+							<Route path="customer/details" element={<CustomerDetails />} />
+						</Route>
+					</Route>
+
+					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
+						<Route path="" element={<Dashboard />} />
+
+						<Route path="evChargers" element={<EvCharger />} />
+						<Route path="chargerDetails" element={<SpecificCharger />} />
+						<Route path="billing" element={<StationBilling />} />
+						<Route path="sales" element={<Sales />} />
+						<Route path="camera" element={<Camera />} />
+					</Route> */}
+					
+					<Route path="/station" element={<Station />}></Route>
+					<Route path="/changePassword" element={<ChangePassword />}></Route>
+					
+					<Route path="/signup" element={<SignUp/>}></Route>
+					<Route path="/carInformation" element={<CarInfo/>}></Route>
+					<Route path="/wallet" element={<Wallet/>}></Route>
+
+					{/* station section */}
+					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
+					<Route
+						path="/station"
+						element={
+							<Protected>
+								<Dashboard />
+							</Protected>
+						}
+					></Route>
+
+					<Route path="/station/evChargers" element={<EvCharger />}></Route>
+					<Route
+						path="/station/chargerDetails"
+						element={<SpecificCharger />}
+					></Route>
+					<Route path="/station/billing" element={<StationBilling />}></Route>
+					<Route path="/station/sales" element={<Sales />}></Route>
+					<Route path="/station/chargers" element={<Chargers />}></Route>
+					<Route path="/station/camera" element={<Camera />}></Route>
+				</Route> */}
+
+					{/* //company side */}
+					{/* <Route path="/companyDash" element={<LayoutsWithCompanyNavbar/>}>
         <Route path="/companyDash" element={<CompanyDash/>}></Route>
         <Route path="/companyDash/myStations" element={<ListOfStations />}></Route>
         <Route path="/companyDash/report" element={<CompanyReport/>}></Route>
         <Route path="/companyDash/billing" element={<Billing/>}></Route>
-        </Route>
-       
-      </Routes>
-    </div>
-  );
+        </Route> */}
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 function LayoutsWithNavbar() {
-  return (
-    <div
-      className="flex flex-row bg-neutral-100 h- 
+	return (
+		<div
+			className="flex flex-row bg-neutral-100 h- 
     screen w-screen top-0 left-0 fixed "
-    >
-      <div
-        className="bg-black h-screen w-[15%]  left- 
+		>
+			<div
+				className="bg-black h-screen w-[15%]  left- 
     0 top-0 "
-      >
-        <Sidebar />
-      </div>
-      <div
-        className="mx-2 h-screen w-[85%] overflow-y- 
+			>
+				<Sidebar />
+			</div>
+			<div
+				className="mx-2 h-screen w-[85%] overflow-y- 
     scroll"
-      >
-        <Outlet />
-      </div>
-    </div>
-  );
+			>
+				<Outlet />
+			</div>
+		</div>
+	);
 }
 
 function LayoutsWithCompanyNavbar() {
-  return (
-    <div
-      className="flex flex-row bg-neutral-100 h- 
+	return (
+		<div
+			className="flex flex-row bg-neutral-100 h- 
     screen w-screen top-0 left-0 fixed "
-    >
-      <div
-        className="bg-black h-screen w-[15%]  left- 
+		>
+			<div
+				className="bg-black h-screen w-[15%]  left- 
     0 top-0 "
-      >
-        <CompanySideBar/>
-      </div>
-      <div
-        className="mx-2 h-screen w-[85%] overflow-y- 
+			>
+				<CompanySideBar />
+			</div>
+			<div
+				className="mx-2 h-screen w-[85%] overflow-y- 
     scroll"
-      >
-        <Outlet />
-      </div>
-    </div>
-  );
+			>
+				<Outlet />
+			</div>
+		</div>
+	);
 }
 
 export default App;

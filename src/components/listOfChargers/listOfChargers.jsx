@@ -12,7 +12,7 @@ import moment from "moment/moment";
 const ListOfChargers = (props) => {
 
     const url = "http://evapi.estations.com"
-    const token = localStorage.getItem("token")
+    const token = localStorage.getItem("user-token")
     const companyId = localStorage.getItem("id");
     const stationId = localStorage.getItem("stationId");
 
@@ -39,7 +39,7 @@ const ListOfChargers = (props) => {
         </div>
 
         <div className=" flex justify-between bg-white mt-[1.5rem] p-[4rem] text-Grey-700">
-            {chargers.map((charger)=>(
+            {/* {chargers?.map((charger)=>(
                 <div className="border rounded-lg p-[0.75rem] w-[21.25rem] h-[26.5rem] mr-[1rem]" key={charger.Id}>
                 <div className="flex justify-between ">
                     <h3 className="pt-[0.25rem] text-base font-semibold text-Gray-700">{charger.ChargerName}</h3>
@@ -51,11 +51,11 @@ const ListOfChargers = (props) => {
                 <div className="text-sm font-normal ">
                     <div className="flex justify-between pb-[1rem]">
                     <p >Energy Consumed:</p>
-                    <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}Kw</p>
+                    <p>{charger.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</p>
                     </div>
                     <div className="flex justify-between pb-[1rem]">
                     <p>Revenue: </p>
-                    <p>N{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                    <p>₦{charger.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                     </div>
                     <div className="flex justify-between pb-[1rem] ">
                     <p>Last Charge: </p>
@@ -63,7 +63,7 @@ const ListOfChargers = (props) => {
                     </div>
                 </div>
                 </div>
-            ))}
+            ))} */}
         </div>
         
     </div>  );
