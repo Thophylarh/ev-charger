@@ -9,7 +9,7 @@ import energyConsumed from "../../../assets/svg/energyConsumed.svg";
 import { useSearchParams } from "react-router-dom";
 import { formatNumber } from "../../../utils/formatNumber";
 
-export default function ChartOverview() {
+export default function ChartOverview({newDate}) {
 	const [totalChargers, setTotalChargers] = useState("");
 	const [noOfActiveChargers, setNoActiveChargers] = useState("");
 	const [totalEnergyConsumed, setTotalEnergyConsumed] = useState("");
@@ -55,8 +55,18 @@ export default function ChartOverview() {
 
 	//Charger Graph
 	const ChargerGraph = () => {
+
+		let url;
+
+		if (!newDate || newDate === " ") {
+			url = `/Transactions/get-group-transaction-by-month/station/${stationId}`;
+		} else {
+			let splitDate = newDate.split("-");
+			url = `/Transactions/get-transaction-by-month-year/station/${stationId}/${splitDate[1]}/${splitDate[0]}`;
+		}
+
 		axios
-			.get(`/Transactions/get-group-transaction-by-month/station/${stationId}`)
+			.get(url)
 			.then((res) => {
 				setGraphDetails(res.data);
 			});
@@ -68,6 +78,10 @@ export default function ChartOverview() {
 		GetTotalEnergyConsumed();
 		ChargerGraph();
 	}, []);
+
+	useEffect(() => {
+		ChargerGraph();
+	}, [newDate]);
 
 	return (
 		<section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
