@@ -36,30 +36,30 @@ export default function StationDashboardOverview({ stationId }) {
 					<h3>CICE REVENUE</h3>
 
 					<h5>
-					{formatNumber(CICERevenue?.[0], false)}.<sup>{CICERevenue?.[1]}</sup>{" "}
+					NGN {formatNumber(CICERevenue?.[0], false)}.<sup>{CICERevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>7,000.00 KW</p>
+					<p>0.00 KW</p>
 				</div>
 
 				<div className="revenueBlock">
 					<h3>AC REVENUE</h3>
 
 					<h5>
-						{formatNumber(ACRevenue?.[0], false)}.<sup>{ACRevenue?.[1]}</sup>{" "}
+					NGN	{formatNumber(ACRevenue?.[0], false)}.<sup>{ACRevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>7,000.00 KW</p>
+					<p>0.00 KW</p>
 				</div>
 
 				<div className="revenueBlock">
 					<h3>DC REVENUE</h3>
 
 					<h5>
-					{formatNumber(DCRevenue?.[0], false)}.<sup>{DCRevenue?.[1]}</sup>{" "}
+					NGN	{formatNumber(DCRevenue?.[0], false)}.<sup>{DCRevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>7,000.00 KW</p>
+					<p>0.00 KW</p>
 				</div>
 
 				<div className="totalRevenueBlock text-white pl-[1.25rem]">
