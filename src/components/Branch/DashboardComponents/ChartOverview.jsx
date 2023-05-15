@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import axios from "../../../lib/axiosInterceptor";
 
-import BarChart from "../../../Graphs/Chart/barChart";
+import BarChart from "../../../Graphs/Chart/StationOverviewChart";
 
 import ActiveCharger from "../../../assets/svg/activeCharger.svg";
 import energyConsumed from "../../../assets/svg/energyConsumed.svg";
@@ -13,6 +13,7 @@ export default function ChartOverview() {
 	const [totalChargers, setTotalChargers] = useState("");
 	const [noOfActiveChargers, setNoActiveChargers] = useState("");
 	const [totalEnergyConsumed, setTotalEnergyConsumed] = useState("");
+	const [graphDetails, setGraphDetails] = useState([]);
 
 	const [searchParams] = useSearchParams();
 
@@ -57,7 +58,7 @@ export default function ChartOverview() {
 		axios
 			.get(`/Transactions/get-group-transaction-by-month/station/${stationId}`)
 			.then((res) => {
-				console.log(res.data);
+				setGraphDetails(res.data);
 			});
 	};
 
@@ -72,7 +73,7 @@ export default function ChartOverview() {
 		<section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
 			<div className="grid grid-cols-12 gap-4 h-[100%]">
 				<div className="col-span-9">
-					<BarChart />
+					<BarChart details={graphDetails} />
 				</div>
 				<div className="col-span-3">
 					<div className={`mb-[var(--marginBtwElements)]`}>

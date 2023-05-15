@@ -1,29 +1,29 @@
+import moment from "moment";
 import { Bar } from "react-chartjs-2";
 import { formatNumber } from "../../utils/formatNumber";
 
-const BarChart = () => {
+const BarChart = ({details}) => {
+
+	let months = details.map((el)=>moment(el.month, "M").format("MMM"))
+
+
+	let numbers = details.map((el)=>{
+		return Math.max(  el.acRevenue, el.dcRevenue, el.bmsRevenue)
+		
+	})
+	
+
+	let highestNumber = Math.ceil(Math.max(...numbers))
+
 	return (
 		<Bar
 			className="w-full"
 			data={{
-				labels: [
-					"Jan",
-					"Feb",
-					"Mar",
-					"Apr",
-					"May",
-					"Jun",
-					"Jul",
-					"Aug",
-					"Sep",
-					"Oct",
-					"Nov",
-					"Dec",
-				],
+				labels:months,
 				datasets: [
 					{
 						type: "bar",
-						data: [10000, 20000, 50000, 40000],
+						data: details.map(el=>el.acRevenue),
 						label: "Ac",
 						fill: "",
 						backgroundColor: "#E9CD9E",
@@ -32,7 +32,7 @@ const BarChart = () => {
 					},
 					{
 						type: "bar",
-						data: [10000, 20000, 30000, 60000],
+						data: details.map(el=>el.dcRevenue),
 						label: "DC",
 						fill: "",
 						backgroundColor: "#E8F8EE",
@@ -41,7 +41,7 @@ const BarChart = () => {
 					},
 					{
 						type: "bar",
-						data: [10000, 20000, 30000, 60000],
+						data: details.map(el=>el.bmsRevenue),
 						label: "CICE",
 						fill: "",
 						backgroundColor: "#EAECF0",
@@ -83,7 +83,7 @@ const BarChart = () => {
 					y: {
 						display: true,
 						min: 0,
-						max: 100000,
+						max: highestNumber,
 						grid: {
 							display: false,
 							color: "#eee",

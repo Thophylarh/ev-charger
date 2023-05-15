@@ -147,11 +147,10 @@ export default function Dashboardd() {
 			title: "",
 			dataIndex: "transactionId",
 			key: "",
-			render: (text,record) => (
+			render: (text, record) => (
 				<button
 					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
 					onClick={(e) => {
-					
 						setModal(true);
 						setTransactionIdd(record.transactionId);
 					}}
