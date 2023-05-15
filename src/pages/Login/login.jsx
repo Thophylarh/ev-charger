@@ -96,9 +96,9 @@ const Login = () => {
 
   return (
     <section className="bg-[#1D2939] h-[100vh] flex ">
-      <div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
-        <div className="">
-          <img src={Logo} alt="Logo"></img>
+      <div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem]  ">
+        <div className="w-[100%] mx-auto ">
+          <img src={Logo} alt="Logo" ></img>
           <h3 className="text-black font-medium text-3xl mt-[2rem] pb-[0.75rem]">
             Welcome back!
           </h3>

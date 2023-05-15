@@ -101,6 +101,11 @@ function App() {
 							<Route path="customers" element={<CustomerList />} />
 							<Route path="customer/details" element={<CustomerDetails />} />
 						</Route>
+
+						<Route element={<ProtectedRoutes />}>
+							<Route path="camera" element={<Camera />} />
+						</Route>
+
 					</Route>
 
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
