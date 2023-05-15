@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import ForwardArrow from "../../../assets/svg/forwardArrow.svg";
 import PowerButton from "../../../assets/svg/power.svg";
+import PowerOnButton from "../../../assets/svg/powerOn.svg"
 import ChargerRevenue from "../../../components/Branch/chargerDetailsComponents/chargerRevenueComponent/chargerRevenue";
 import ChargerOperation from "../../../components/Branch/chargerDetailsComponents/chargerOperation/chargerOperation";
 import Last10Transactions from "../../../components/last10Transactions/last10Transactions";
@@ -10,6 +11,7 @@ import axios from "../../../lib/axiosInterceptor";
 import Modal from "../../../components/modals/modal"
 import ChargerPower from "../../../components/modals/powerOffCharger"
 import PowerOnCharger from "../../../components/modals/powerOnCharger"
+import Loader from "../../../components/Loader";
 
 
 
@@ -17,6 +19,7 @@ export default function Details() {
     const [chargersDetails, setChargerDetails] = useState([]);
     const [PowerModal, setPModal] = useState(false)
     const [powerOn, setPowerOn] = useState(false)
+    const [isLoading, setIsLoading] = useState(false);
 
     const [searchParams] = useSearchParams();
 
@@ -24,12 +27,16 @@ export default function Details() {
 
  //charger details
   const GetChargerDetails = () => {
+    setIsLoading(true)
     
     axios
       .get( `/Chargers/get-charger-by-id/${chargerId}`)
       .then((res) => {
         console.log(res)
         setChargerDetails(res.data[0]);
+        setTimeout(()=>{
+					setIsLoading(false)
+				},2000)
       
       });
   };
@@ -39,6 +46,14 @@ export default function Details() {
 }, []);
 
   return (
+   <>
+   {isLoading && (
+				<section>
+					<Loader />
+				</section>
+			)}
+
+{!isLoading && (
     <section>
 
       <section className="mb-[var(--marginBtwSection)]">
@@ -66,9 +81,9 @@ export default function Details() {
         </button>
         :
         <button className="flex justify-between" onClick={(e)=>{setPowerOn(true)}}>
-              <img src={PowerButton} alt="Power Button" />
+              <img src={PowerOnButton} alt="Power on Button" />
 
-              <p className="pl-[4px] text-[var(--error500)] font-normal text-[16px]">Turn on charger</p>
+              <p className="pl-[4px] text-[#1AA84C] font-normal text-[16px]">Turn on charger</p>
             </button> 
           }
 
@@ -103,5 +118,7 @@ export default function Details() {
         <PowerOnCharger closeModal={setPowerOn} chargerId={chargerId} GetChargerDetails={GetChargerDetails}/>
       </Modal>)}
     </section>
+    )}
+    </>
   );
 }
