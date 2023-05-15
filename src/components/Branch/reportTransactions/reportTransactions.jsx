@@ -100,7 +100,7 @@ const ReportTransactions = ({ stationId }) => {
 			key: "transactionStatus",
 			render: (transactionStatus) => (
 				<button className="flex justify-between">
-					<img src={activeDot} className="pr-[0.25rem] mt-[6px]" />
+					<img src={activeDot} alt="active" className="pr-[0.25rem] mt-[6px]" />
 					<p className="text-[#15833C] font-semibold text-xs leading-5">
 						Completed
 					</p>

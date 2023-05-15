@@ -41,12 +41,23 @@ export default function ChartOverview() {
 			});
 	};
 
-	 //total energy consumed
-	 const GetTotalEnergyConsumed = () => {
+	//total energy consumed
+	const GetTotalEnergyConsumed = () => {
 		axios
-			.get(	`/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`)
+			.get(
+				`/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`
+			)
 			.then((res) => {
 				setTotalEnergyConsumed(res.data);
+			});
+	};
+
+	//Charger Graph
+	const ChargerGraph = () => {
+		axios
+			.get(`/Transactions/get-group-transaction-by-month/station/${stationId}`)
+			.then((res) => {
+				console.log(res.data);
 			});
 	};
 
@@ -54,6 +65,7 @@ export default function ChartOverview() {
 		GetstationChargers();
 		GetactiveChargers();
 		GetTotalEnergyConsumed();
+		ChargerGraph();
 	}, []);
 
 	return (
@@ -97,12 +109,11 @@ export default function ChartOverview() {
 						className={`flex justify-between items-center  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
 					>
 						<div>
-							<h3 className="text-sm mb-[1.25rem]">
-								Total energy consumed
-							</h3>
+							<h3 className="text-sm mb-[1.25rem]">Total energy consumed</h3>
 
 							<h5>
-								{formatNumber(totalEnergyConsumed, false	)}<sup className="text-xs">KW</sup>
+								{formatNumber(totalEnergyConsumed, false)}
+								<sup className="text-xs">KW</sup>
 							</h5>
 						</div>
 
