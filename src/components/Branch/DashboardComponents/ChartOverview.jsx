@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import axios from "../../../lib/axiosInterceptor";
 
-import BarChart from "../../../Graphs/Chart/barChart";
+import BarChart from "../../../Graphs/Chart/StationOverviewChart";
 
 import ActiveCharger from "../../../assets/svg/activeCharger.svg";
 import energyConsumed from "../../../assets/svg/energyConsumed.svg";
@@ -13,6 +13,7 @@ export default function ChartOverview() {
 	const [totalChargers, setTotalChargers] = useState("");
 	const [noOfActiveChargers, setNoActiveChargers] = useState("");
 	const [totalEnergyConsumed, setTotalEnergyConsumed] = useState("");
+	const [graphDetails, setGraphDetails] = useState([]);
 
 	const [searchParams] = useSearchParams();
 
@@ -41,12 +42,23 @@ export default function ChartOverview() {
 			});
 	};
 
-	 //total energy consumed
-	 const GetTotalEnergyConsumed = () => {
+	//total energy consumed
+	const GetTotalEnergyConsumed = () => {
 		axios
-			.get(	`/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`)
+			.get(
+				`/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`
+			)
 			.then((res) => {
 				setTotalEnergyConsumed(res.data);
+			});
+	};
+
+	//Charger Graph
+	const ChargerGraph = () => {
+		axios
+			.get(`/Transactions/get-group-transaction-by-month/station/${stationId}`)
+			.then((res) => {
+				setGraphDetails(res.data);
 			});
 	};
 
@@ -54,13 +66,14 @@ export default function ChartOverview() {
 		GetstationChargers();
 		GetactiveChargers();
 		GetTotalEnergyConsumed();
+		ChargerGraph();
 	}, []);
 
 	return (
 		<section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
 			<div className="grid grid-cols-12 gap-4 h-[100%]">
 				<div className="col-span-9">
-					<BarChart />
+					<BarChart details={graphDetails} />
 				</div>
 				<div className="col-span-3">
 					<div className={`mb-[var(--marginBtwElements)]`}>
@@ -97,12 +110,11 @@ export default function ChartOverview() {
 						className={`flex justify-between items-center  bg-[var(--grey50)] py-[1.75rem] px-[1.25rem] rounded-lg mb-[var(--marginBtwElements)]`}
 					>
 						<div>
-							<h3 className="text-sm mb-[1.25rem]">
-								Total energy consumed
-							</h3>
+							<h3 className="text-sm mb-[1.25rem]">Total energy consumed</h3>
 
 							<h5>
-								{formatNumber(totalEnergyConsumed, false	)}<sup className="text-xs">KW</sup>
+								{formatNumber(totalEnergyConsumed, false)}
+								<sup className="text-xs">KW</sup>
 							</h5>
 						</div>
 

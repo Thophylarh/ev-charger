@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Profit from "../../assets/svg/profit.png";
 import LineChart from "../../Graphs/Chart/lineChart";
-import BarChart from "../../Graphs/Chart/barChart";
+import BarChart from "../../Graphs/Chart/StationOverviewChart";
 import axios from "axios";
 import GreenChart from "../../Graphs/Chart/greenChart";
 import OrangeChart from "../../Graphs/Chart/orangeChart";
