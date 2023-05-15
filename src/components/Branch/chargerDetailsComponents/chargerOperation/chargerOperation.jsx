@@ -1,23 +1,58 @@
-import React, {useState} from "react";
-import BarChart from "../../../../Graphs/Chart/barChart";
-// import ActiveCharger from "../../../assets/svg/activeCharger.svg";
-// import energyConsumed from "../../../assets/svg/energyConsumed.svg";
+import React, {useState, useEffect} from "react";
+import BarChart from "../../../../Graphs/Chart/detailsBarChart";
+
 import OperationHours from "../../../../assets/svg/operationHours.svg";
 import BillingType from "../../../../assets/svg/billingType.svg"
 import RunningTime from   "../../../../assets/svg/runningTime.svg";
 import OperationModal from "../../../modals/operationModal";
 import Modal from "../../../modals/modal"
-import TransactionDetails from "../../../modals/transactionDetails"
+
+import axios from "../../../../lib/axiosInterceptor"
+import moment from "moment";
 
 
-const ChargerOperation = () =>{
+const ChargerOperation = ({chargerId}) =>{
     const [OModal, setOModal] = useState(false)
+    const [chartData, setChartData]= useState([])
+
+     //charger graph 
+  const chargerGraph = () =>{
+   
+    axios.get(`/Transactions/get-group-transaction-by-month/charger/${chargerId}`)
+    .then((res)=>{
+  
+    setChartData(res.data)
+     
+    })
+  }
+
+  let month = chartData.map((data)=>{
+    return moment(data.month, "M").format("MMM")
+  })
+
+ let BmsData = chartData.map((data) =>{
+    return data.bmsRevenue
+ })
+  
+ let ACData = chartData.map((data) =>{
+    return data.acRevenue
+ })
+
+ let DcData = chartData.map((data) =>{
+    return data.dcRevenue
+
+ })
+
+
+  useEffect(() => {
+    chargerGraph();
+  }, []);
 
     return(
     <section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem]`}>
     <div className="grid grid-cols-12 gap-4 h-[100%]">
         <div className="col-span-9">
-            <BarChart />
+            <BarChart month={month} BmsData={BmsData} ACData={ACData} dcRevenue={DcData}/>
         </div>
         <div className="col-span-3">
             <div className={`mb-[var(--marginBtwElements)]`}>
