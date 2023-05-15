@@ -7,10 +7,14 @@ import Last10Transactions from "../../../components/last10Transactions/last10Tra
 import { useSearchParams } from "react-router-dom";
 import axios from "../../../lib/axiosInterceptor";
 
+import Modal from "../../../components/modals/modal"
+import ChargerPower from "../../../components/modals/ChargerPower"
+
 
 
 export default function Details() {
     const [chargersDetails, setChargerDetails] = useState([]);
+    const [PowerModal, setPModal] = useState(false)
 
     const [searchParams] = useSearchParams();
 
@@ -53,7 +57,7 @@ export default function Details() {
 
           <div className="flex justify-between">
 
-            <button className="flex justify-between">
+            <button className="flex justify-between" onClick={(e)=>{setPModal(true)}}>
               <img src={PowerButton} alt="Power Button" />
 
               <p className="pl-[4px] text-[var(--error500)] font-normal text-[16px]">Turn off charger</p>
@@ -77,6 +81,11 @@ export default function Details() {
         <ChargerOperation/>
 
         <Last10Transactions chargerId={chargerId}/>
+
+        { PowerModal && ( <Modal closeModal={setPModal}>
+         <ChargerPower/>
+        </Modal>)
+      }
 
     </section>
   );
