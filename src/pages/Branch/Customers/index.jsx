@@ -3,80 +3,99 @@ import React, { useEffect, useState } from "react";
 
 import axios from "../../../lib/axiosInterceptor";
 
-import eye from "../../../assets/svg/eye.svg"
+import eye from "../../../assets/svg/eye.svg";
+import { NavLink } from "react-router-dom";
 
 export default function CustomerList() {
 	const [enrolled, setEnrolled] = useState(true);
 	const [customers, setCustomers] = useState();
 
+	const id = localStorage.getItem("stationId");
+	const compId = localStorage.getItem("id");
+
 	const getCustomers = async () => {
-		axios
-			.get(`/customers`)
-			.then((res) => {
-				let index = 0;
+		axios.get(`/customers`).then((res) => {
+			let index = 0;
 
-				res.data.forEach((el) => {
-					el.index = ++index;
-				});
-
-				setCustomers(res.data);
+			res.data.forEach((el) => {
+				el.index = ++index;
 			});
-	};
 
+			setCustomers(res.data);
+		});
+	};
 
 	useEffect(() => {
 		getCustomers();
 	}, []);
 
-      let column =
-      [
-            {
-            title: '#',
-            dataIndex: 'index',
-            key: 'index',
-          },
+	let column = [
+		{
+			title: "#",
+			dataIndex: "index",
+			key: "index",
+		},
 
-          {
-            title: 'Email address',
-            dataIndex: 'email',
-            key: 'email',
-          },
+		{
+			title: "First name",
+			dataIndex: "firstname",
+			key: "firstname",
+		},
 
-          {
-            title: 'Money  Spent',
-            dataIndex: 'amount',
-            key: 'amount',
-          },
+		{
+			title: "Last name",
+			dataIndex: "lastname",
+			key: "lastname",
+		},
 
-          {
-            title: 'Phone number',
-            dataIndex: 'phone',
-            key: 'phone',
-          },
-      
-          {
-            title: 'Vehicles',
-            dataIndex: 'vehicles',
-            key: 'vehicles',
-          },
+		{
+			title: "Email address",
+			dataIndex: "emailAddress",
+			key: "emailAddress",
+		},
 
-          {
-            title: 'Energy consumed',
-            dataIndex: 'energy',
-            key: 'energy',
-          },
-          {
-            title: "",
-            dataIndex: "",
-            key: "",
-            render: () => (
-                <button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md ">
-                   <img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-                   <p>View details</p>
-                </button>
-            ),
-        },
-      ]
+		{
+			title: "Money  Spent",
+			dataIndex: "totalAmountSpent",
+			key: "totalAmountSpent",
+		},
+
+		{
+			title: "Phone number",
+			dataIndex: "phone",
+			key: "phone",
+		},
+
+		{
+			title: "Number of Vehicles",
+			dataIndex: "numberOfVehiclesOnFile",
+			key: "numberOfVehiclesOnFile",
+		},
+
+		{
+			title: "Energy consumed",
+			dataIndex: "totalEnergyCharged",
+			key: "totalEnergyCharged",
+		},
+		{
+			title: "",
+			dataIndex: "",
+			key: "",
+			render: (text,record) => (
+				<NavLink
+						to={{
+							pathname: "/station/customer/details",
+							search:`?cus=${record.id}&stationId=${id}&companyId=${compId}`
+						}}
+					>
+				<button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md ">
+					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+					<p>View details</p>
+				</button>
+				</NavLink>
+			),
+		},
+	];
 
 	return (
 		<section>
@@ -106,7 +125,7 @@ export default function CustomerList() {
 								? " border-b-4 border-black "
 								: " border-b-4 border-[#E2E2E2)]"
 						}  text-center font-semibold`}
-                                    onClick={()=>setEnrolled(true)}
+						onClick={() => setEnrolled(true)}
 					>
 						<h5
 							className={`text-sm pt-[1.25rem] ${
@@ -123,7 +142,7 @@ export default function CustomerList() {
 								? " border-b-4 border-black "
 								: " border-b-4 border-[#E2E2E2)]"
 						} text-center font-semibold`}
-                                    onClick={()=>setEnrolled(false)}
+						onClick={() => setEnrolled(false)}
 					>
 						<h5
 							className={`text-sm pt-[1.25rem] ${
@@ -135,7 +154,7 @@ export default function CustomerList() {
 					</div>
 				</div>
 
-                        <Table columns={column}/>
+				<Table columns={column} dataSource={customers} />
 			</section>
 		</section>
 	);
