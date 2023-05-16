@@ -28,7 +28,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 
 		axios.get(url).then((res) => {
 			let formatRevenue = splitNumber(res.data.TotalRevenue);
-
+				console.log(res)
 			setRevenue(formatRevenue);
 			setACRevenue(splitNumber(res.data.ACRevenue));
 			setDCRevenue(splitNumber(res.data.DCRevenue));
