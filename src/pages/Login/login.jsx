@@ -100,7 +100,7 @@ const Login = () => {
 	};
 	return (
 		<section className=" h-[100vh] flex " style={style}>
-			<div className="w-[40%] bg-white h-[100%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
+			<div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
 				<div className=" flex flex-col justify-center">
 					<div className="text-center mb-[1rem] ">
 						<div className="flex justify-center w-[100%]">

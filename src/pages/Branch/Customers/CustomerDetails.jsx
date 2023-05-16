@@ -8,8 +8,12 @@ import axios from "../../../lib/axiosInterceptor";
 
 import { useSearchParams } from "react-router-dom";
 import { formatNumber } from "../../../utils/formatNumber";
+import { splitNumber } from "../../../utils/splitNumber";
+import { convertTime } from "../../../utils/convertTime";
+import { lastCharged } from "../../../utils/lastCharged";
 export default function CustomerDetails() {
-	const [details, setDetails] = useState([]);
+	const [details, setDetails] = useState();
+	const [moneySpent, setMoneySpent] = useState("");
 
 	const [searchParams] = useSearchParams();
 
@@ -19,11 +23,13 @@ export default function CustomerDetails() {
 		axios.get(`customers/get-customer-by-id/${cusId}`).then((res) => {
 			let index = 0;
 
-			res.data.forEach((el) => {
+			res?.data?.forEach((el) => {
 				el.index = ++index;
 			});
+		console.log(res?.data);
+			setMoneySpent(res?.data[0]?.TotalAmountSpent);
 
-			setDetails(res.data);
+			setDetails(res?.data);
 		});
 	};
 
@@ -79,7 +85,6 @@ export default function CustomerDetails() {
 			dataIndex: "totalEnergyCharged",
 			key: "totalEnergyCharged",
 		},
-	
 	];
 
 	return (
@@ -122,21 +127,22 @@ export default function CustomerDetails() {
 									<h3>MONEY SPENT</h3>
 
 									<h5>
-										NGN 300,000.<sup>00</sup>{" "}
+									NGN  {moneySpent}
+									
 									</h5>
 								</div>
 								<div className="revenueBlock">
 									<h3>VEHICHLES</h3>
 
 									<h5>
-										NGN 300,000.<sup>00</sup>{" "}
+									 {details?.[0]?.NumberOfVehiclesOnFile} 
 									</h5>
 								</div>
 
 								<div className="revenueBlock">
 									<h3>LAST CHARGE</h3>
 
-									<h5>20mins ago</h5>
+									<h5>{lastCharged(details?.[0]?.LastTransactionDate)}</h5>
 								</div>
 								<div className="revenueBlock">
 									<h3>CHARGER TYPE</h3>
@@ -151,7 +157,7 @@ export default function CustomerDetails() {
 								<h3>ENERGY CONSUMPTION</h3>
 
 								<h5>
-								{formatNumber(details?.TotalEnergyCharged)}
+									{formatNumber(details?.TotalEnergyCharged)}
 									<sup>kw</sup>{" "}
 								</h5>
 							</div>
