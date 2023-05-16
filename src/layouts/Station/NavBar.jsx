@@ -185,23 +185,23 @@ export default function StationNavBar() {
 							<path
 								d="M20.791 10.1207H8.75"
 								stroke="white"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								d="M17.8633 7.20465L20.7913 10.1207L17.8633 13.0367"
 								stroke="white"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 							<path
 								d="M15.3594 5.62988C15.0294 2.04988 13.6894 0.749878 8.35938 0.749878C1.25838 0.749878 1.25838 3.05988 1.25838 9.99988C1.25838 16.9399 1.25838 19.2499 8.35938 19.2499C13.6894 19.2499 15.0294 17.9499 15.3594 14.3699"
 								stroke="white"
-								stroke-width="1.5"
-								stroke-linecap="round"
-								stroke-linejoin="round"
+								strokeWidth="1.5"
+								strokeLinecap="round"
+								strokeLinejoin="round"
 							/>
 						</svg>
 					</button>

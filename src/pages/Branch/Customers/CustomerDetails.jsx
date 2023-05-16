@@ -23,13 +23,13 @@ export default function CustomerDetails() {
 		axios.get(`customers/get-customer-by-id/${cusId}`).then((res) => {
 			let index = 0;
 
-			res.data.forEach((el) => {
+			res?.data?.forEach((el) => {
 				el.index = ++index;
 			});
-		console.log(res.data	);
-			setMoneySpent(res.data[0]?.TotalAmountSpent);
+		console.log(res?.data);
+			setMoneySpent(res?.data[0]?.TotalAmountSpent);
 
-			setDetails(res.data);
+			setDetails(res?.data);
 		});
 	};
 
@@ -135,14 +135,14 @@ export default function CustomerDetails() {
 									<h3>VEHICHLES</h3>
 
 									<h5>
-									 {details[0]?.NumberOfVehiclesOnFile} 
+									 {details?.[0]?.NumberOfVehiclesOnFile} 
 									</h5>
 								</div>
 
 								<div className="revenueBlock">
 									<h3>LAST CHARGE</h3>
 
-									<h5>{lastCharged(details[0]?.LastTransactionDate)}</h5>
+									<h5>{lastCharged(details?.[0]?.LastTransactionDate)}</h5>
 								</div>
 								<div className="revenueBlock">
 									<h3>CHARGER TYPE</h3>
