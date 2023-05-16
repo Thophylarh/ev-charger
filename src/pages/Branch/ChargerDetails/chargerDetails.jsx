@@ -90,9 +90,9 @@ export default function Details() {
 
             
 
-            <button className="border border-[1px] border-solid border-[var(--grey900)] text--[var(--grey900)] ml-[1rem] px-[12px]  rounded-lg">
+            {/* <button className="border border-[1px] border-solid border-[var(--grey900)] text--[var(--grey900)] ml-[1rem] px-[12px]  rounded-lg">
               Charger settings
-            </button>
+            </button> */}
 
           </div>
         </div>
