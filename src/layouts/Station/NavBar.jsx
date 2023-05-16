@@ -156,11 +156,11 @@ export default function StationNavBar() {
 					<div
 						className={`bg-white flex align-middle px-[1rem] py-[0.5rem] w-full  rounded-[var(--borderRadius)] mr-3`}
 					>
-						{/* <img
+						<img
 							src={CompanyLogo}
 							alt="Company logo"
 							className="w-[1.5rem] h-[1.5rem] mr-[0.75rem]"
-						/> */}
+						/>
 						<p className=" mr-[0.75rem]">Sterling HQ</p>
 						<img src={blackDropdownIcon} alt="Dropdown Icon" />
 					</div>
