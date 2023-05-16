@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 import axios from "axios";
 
@@ -9,8 +9,10 @@ import { toast } from "react-toastify";
 const CarInfo = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams] = useSearchParams();
+	const navigate = useNavigate();
 
 	let customerCode = searchParams.get("cus");
+	let carrCode = searchParams.get("vehicleCode");
 
 	const registerCar = (e) => {
 		e.preventDefault();
@@ -49,6 +51,7 @@ const CarInfo = () => {
 			plateNumber: plateNumber,
 			vehicleType: carModel,
 			customerCode,
+			vehicleCode: carrCode,
 		};
 
 		axios
@@ -59,7 +62,11 @@ const CarInfo = () => {
 			.then((res) => {
 				console.log(res.data);
 				setIsLoading(false);
-				//  toast.success("Account created successfully, please fill out the next form");
+				toast.success("Account created successfully");
+				navigate({
+					pathname: "/wallet",
+					// search: `?cus=&vehicleCode=abcdef12345`,
+				});
 			})
 			.catch((err) => {
 				setIsLoading(false);

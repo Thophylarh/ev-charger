@@ -62,6 +62,7 @@ const SignUp = () => {
 			emailAddress: email,
 			phonenumber: phone,
 			dateOfBirth: DOB,
+			phonenumber: phone,
 			password: password,
 			numberOfVehiclesOnFile: 0,
 			totalAmountSpent: 0,
@@ -77,13 +78,12 @@ const SignUp = () => {
 			.then((res) => {
 				console.log(res.data);
 				setIsLoading(false);
+				let cusCode =  res?.data?.customerCode
 				navigate({
-					pathname: "/carInformation",
-					search: `?cus=${res.data.customerCode}`,
-				});
-				toast.success(
-					"Account created successfully, please fill out the next form"
-				);
+					pathname: '/carInformation',
+					search: `?cus=${cusCode}&vehicleCode=abcdef12345`,
+				    });
+			
 			})
 			.catch((err) => {
 				setIsLoading(false);
@@ -150,7 +150,7 @@ const SignUp = () => {
 						></input>
 					</div>
 
-					{/* <div className="mb-[20px]">
+					<div className="mb-[20px]">
 						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
 							<p>Phone number</p> <p className="text-[#EB3540]">*</p>
 						</label>
@@ -161,7 +161,7 @@ const SignUp = () => {
 							placeholder="Phone number"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
-					</div> */}
+					</div>
 
 					<div className="mb-[20px]">
 						<label className="block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
