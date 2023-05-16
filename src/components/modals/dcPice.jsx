@@ -1,8 +1,9 @@
 import check from "../../assets/svg/check.svg"
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const EditPrice = ({closeModal, setDcGreen}) =>{
   const [price, setPrice] = useState(0)
+  const oldValue = useRef("")
 
   const handleSubmit = () =>{
     closeModal(false)
@@ -36,6 +37,7 @@ const EditPrice = ({closeModal, setDcGreen}) =>{
          value={price}
          onChange={(event) => {
           setPrice(event.target.value);
+          
       }}
         />
 

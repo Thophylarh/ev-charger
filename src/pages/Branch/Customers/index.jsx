@@ -34,48 +34,56 @@ export default function CustomerList() {
 			title: "#",
 			dataIndex: "index",
 			key: "index",
+			width: "2%",
 		},
 
 		{
 			title: "First name",
 			dataIndex: "firstname",
 			key: "firstname",
+			width: "10%"
 		},
 
 		{
 			title: "Last name",
 			dataIndex: "lastname",
 			key: "lastname",
+			width: "10%",
 		},
 
 		{
 			title: "Email address",
 			dataIndex: "emailAddress",
 			key: "emailAddress",
+			width: "10%"
 		},
 
 		{
 			title: "Money  Spent",
 			dataIndex: "totalAmountSpent",
 			key: "totalAmountSpent",
+			width:"15%"
 		},
 
 		{
 			title: "Phone number",
 			dataIndex: "phone",
 			key: "phone",
+			width: "15%"
 		},
 
 		{
 			title: "Number of Vehicles",
 			dataIndex: "numberOfVehiclesOnFile",
 			key: "numberOfVehiclesOnFile",
+			width: "10%"
 		},
 
 		{
 			title: "Energy consumed",
 			dataIndex: "totalEnergyCharged",
 			key: "totalEnergyCharged",
+			width: "10%"
 		},
 		{
 			title: "",
@@ -94,6 +102,7 @@ export default function CustomerList() {
 				</button>
 				</NavLink>
 			),
+			width: "20%"
 		},
 	];
 
