@@ -88,11 +88,11 @@ export default function CustomerList() {
 							Get a review of your customer consumption summary
 						</p>
 					</div>
-					<div>
+					{/* <div>
 						<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey900)]">
 							General price change{" "}
 						</button>
-					</div>
+					</div> */}
 				</div>
 			</section>
 

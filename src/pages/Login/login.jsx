@@ -99,10 +99,10 @@ const Login = () => {
 		background: `linear-gradient(0deg, rgba(16, 24, 40, 0.89), rgba(16, 24, 40, 0.89)), url(${loginScreen})`,
 	};
 	return (
-		<section className=" h-[100vh] flex " style={style}>
+		<section className=" h-[120vh] flex " style={style}>
 			<div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
 				<div className=" flex flex-col justify-center">
-					<div className="text-center mb-[1.25rem] ">
+					<div className="text-center mb-[1rem] ">
 						<div className="flex justify-center w-[100%]">
 							<img src={Logo} alt="Logo" />
 						</div>
@@ -116,7 +116,7 @@ const Login = () => {
 						</p>
 					</div>
 
-					<div className="flex justify-center w-[100%] mb-[1.25rem] ">
+					<div className="flex justify-center w-[100%] mb-[1rem] ">
 						<form onSubmit={handleSubmit}>
 							<div className="mt-[2rem] mb-[2.5rem] ">
 								<label

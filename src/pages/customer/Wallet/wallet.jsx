@@ -48,7 +48,7 @@ return (
                      </div>
                      <div className="flex justify-between mb-[1rem]"> 
                         <h3 className="acctDetails">Bank name:</h3>
-                        <h5 className="font-semibold text-[#475467] text-xs ">Providus bank</h5>
+                        <h5 className="font-semibold text-[#475467] text-xs ">Sterling bank</h5>
                      </div>
                      <div className="flex justify-between mb-[1rem]"> 
                         <h3 className="acctDetails">Account number:</h3>
