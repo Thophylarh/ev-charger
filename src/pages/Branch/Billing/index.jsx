@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import EditPrice from "../../../components/modals/editPrice";
 import Modal from "../../../components/modals/modal";
 import axios from "../../../lib/axiosInterceptor"
@@ -6,11 +6,13 @@ import { useSearchParams } from "react-router-dom";
 import { formatDate } from "../../../utils/formatDate";
 import ACPrice from "../../../components/modals/ACprice"
 import Dcprice from "../../../components/modals/dcPice"
+import BmsGrid from "../../../components/modals/bmsGrid"
 
 export default function StationBilling() {
 	const [priceModal, setPriceModal] = useState(false)
 	const [acModal, setAcModal] = useState(false)
 	const [DCModal, setDcModal] = useState(false)
+	const [bmsGridModal, setBmsGridModal] = useState(false)
 	const [changeHIstory, setChangeHistory] = useState([])
 	const [bmsGrid, setBmsGrid] = useState(0.00)
 	const [bmsGreen, setBmsGreen] = useState(0)
@@ -143,7 +145,7 @@ export default function StationBilling() {
 
 										<h5>NGN{bmsGrid}/KW</h5>
 
-										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setBmsGridModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -187,7 +189,7 @@ export default function StationBilling() {
 
 										<h5>NGN {acGrid}/KW</h5>
 
-										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setAcModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -198,7 +200,7 @@ export default function StationBilling() {
 
 										<h5>NGN {acUtility}/KW</h5>
 
-										<button className="text-[var(--blueLink)]" onClick={(e)=>setPriceModal(true)}>
+										<button className="text-[var(--blueLink)]" onClick={(e)=>setAcModal(true)}>
 											{" "}
 											Edit price{" "}
 										</button>
@@ -410,10 +412,14 @@ export default function StationBilling() {
 					<EditPrice closeModal={setPriceModal} setBmsGreen={setBmsGreen} setOldPrice={setOldPrice}/>
         		</Modal>)
       			}
+				{bmsGridModal && ( <Modal closeModal={setBmsGridModal}>
+					<BmsGrid closeModal={setBmsGridModal} setBmsGridModal={setBmsGridModal} setOldPrice={setOldPrice}/>
+        		</Modal>)
+      			}
 				{acModal &&  ( <Modal closeModal={setAcModal}>
 					<ACPrice closeModal={setAcModal} setACGreen={setACGreen} />
         		</Modal>)}
-				{DCModal &&  ( <Modal closeModal={setAcModal}>
+				{DCModal &&  ( <Modal closeModal={setDcModal}>
 					<Dcprice closeModal={setDcModal} setDcGreen={setDcGreen} />
         		</Modal>)}
 			</section>
