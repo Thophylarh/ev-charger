@@ -7,7 +7,6 @@ import Loader from "../../../components/Loader"
 
 import { useSearchParams } from "react-router-dom";
 
-
 const Report = () =>{
 	const [searchParams] = useSearchParams();
     const [isLoading, setIsLoading] = useState(false);

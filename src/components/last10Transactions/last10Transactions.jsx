@@ -8,6 +8,8 @@ import activeDot from "../../assets/svg/activeDot.svg";
 import eye from "../../assets/svg/eye.svg";
 import Modal from "../modals/modal";
 import TransactionDetails from "../modals/transactionDetails";
+import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx/xlsx.mjs";
 
 const Last10Transactions = (props) => {
 	const [chargerTransactions, setchargerTransactions] = useState([]);
@@ -35,6 +37,16 @@ const Last10Transactions = (props) => {
 	useEffect(() => {
 		transactions();
 	}, []);
+
+	  //excel export
+	  const handleExport = () => {
+		let wb = XLSX.utils.book_new();
+		let ws = XLSX.utils.json_to_sheet(chargerTransactions);
+	
+		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+	
+		XLSX.writeFile(wb, "chargerTransactions.xlsx");
+	  };
 
 	const Columns = [
 		{
@@ -128,8 +140,24 @@ const Last10Transactions = (props) => {
 
 	return (
 		<section>
-			<div className={`mb-[var(--marginBtwElements)] `}>
+			<div className={`mb-[var(--marginBtwElements)] flex justify-between `}>
 				<h3>LAST 10 TRANSACTIONS</h3>
+				<div className="flex justify-between">
+              <div className=" bg-black text-white p-[0.5rem] rounded-md">
+                <CSVLink
+                  data={chargerTransactions}
+                  // headers={headers}
+                  filename="chargerTransactions.csv"
+                  target="_blank"
+                >
+                  CSV Export
+                </CSVLink>
+              </div>
+              <div>
+                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md">Excel export</button>
+              </div>
+			  
+			  </div>
 			</div>
 
 			<div>
