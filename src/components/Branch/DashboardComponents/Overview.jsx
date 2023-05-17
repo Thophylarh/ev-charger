@@ -11,8 +11,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 	const [ACRevenue, setACRevenue] = useState();
 	const [DCRevenue, setDCRevenue] = useState();
 	const [CICERevenue, setCICERevenue] = useState();
-
-
+	const [percentage, setPercentage] = useState();
 
 	const getStationRevenue = () => {
 		let url;
@@ -24,11 +23,18 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 			url = `/Transactions/get-revenue-by-month-year/station/${stationId}/${splitDate[1]}/${splitDate[0]}`;
 		}
 
-		
-
 		axios.get(url).then((res) => {
+			if (res.data?.LastMonthRevenue && res.data?.PercentageDifference) {
+				setPercentage({
+					status: res.data.RevenueMargin,
+					percent: Math.floor(res.data.PercentageDifference),
+				});
+			} else {
+				setPercentage(null);
+			}
+
 			let formatRevenue = splitNumber(res.data.TotalRevenue);
-				console.log(res)
+
 			setRevenue(formatRevenue);
 			setACRevenue(splitNumber(res.data.ACRevenue));
 			setDCRevenue(splitNumber(res.data.DCRevenue));
@@ -85,14 +91,16 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 						NGN {formatNumber(revenue?.[0], false)}.<sup>{revenue?.[1]}</sup>{" "}
 					</h5>
 
-					<div className="flex items-center">
-						<img
-							src={Profit}
-							alt="profit indicator"
-							className="mr-[0.25rem] w-[0.6rem] h-[0.6875rem]"
-						/>
-						<p>22% since last month </p>
-					</div>
+					{percentage && (
+						<div className="flex items-center">
+							<img
+								src={Profit}
+								alt="profit indicator"
+								className="mr-[0.25rem] w-[0.6rem] h-[0.6875rem]"
+							/>
+							<p>{formatNumber(percentage?.percent)}% since last month </p>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>
