@@ -8,8 +8,8 @@ export default function SecondLoader() {
 
 	};
 	return (
-		<div class="pulse-wrapperr" style={style}>
-			<div class="pulse">
+		<div className="pulse-wrapperr" style={style}>
+			<div className="pulse">
 				<img src={logo} alt="EVcharger logo" />
 			</div>
 		</div>

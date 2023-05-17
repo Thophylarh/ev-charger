@@ -4,8 +4,8 @@ import logo from "../../assets/svg/logo.svg";
 
 export default function Loader() {
   return (
-      <div class="pulse-wrapper">
-      <div class="pulse">
+      <div className="pulse-wrapper">
+      <div className="pulse">
       <img src={logo} alt="EVcharger logo"  />
             </div>  
     </div>
