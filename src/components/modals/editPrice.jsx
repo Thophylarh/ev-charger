@@ -98,6 +98,7 @@ const EditPrice = ({ closeModal, details, setReloadPage }) => {
 					<input
 						name="price"
 						type="number"
+						step='any'
 						placeholder="Enter new price"
 						className="w-[100%] p-[0.875rem] border border-[#D0D5DD] rounded-lg mb-[20px]"
 						required
