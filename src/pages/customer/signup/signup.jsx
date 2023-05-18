@@ -112,7 +112,7 @@ const SignUp = () => {
 			<section className="bg-white h-[85%] rounded-3xl">
 				<form className="pt-[44px] mx-[28px]" onSubmit={customerSignUp}>
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>First Name </p> <p className="text-[#EB3540]">*</p>
 						</label>
 
@@ -125,7 +125,7 @@ const SignUp = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>Last Name</p> <p className="text-[#EB3540]">*</p>
 						</label>
 
@@ -138,7 +138,7 @@ const SignUp = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>Email address</p> <p className="text-[#EB3540]">*</p>
 						</label>
 
@@ -151,7 +151,7 @@ const SignUp = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>Phone number</p> <p className="text-[#EB3540]">*</p>
 						</label>
 
@@ -164,7 +164,7 @@ const SignUp = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							DOB
 						</label>
 
@@ -183,7 +183,7 @@ const SignUp = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							Password
 						</label>
 

@@ -4,7 +4,7 @@ import moment from "moment";
 
 export default function PriceChangeCard({history}) {
 
-	console.log(history)
+	
 	return (
 		<div
 			key={history.id}
@@ -28,7 +28,7 @@ export default function PriceChangeCard({history}) {
 						{" "}
 						NGN{history.previousCostPerUnitCharge}/kw
 					</h6>
-					<p className={`text-xs`}>old price</p>
+					<p className={`text-xs`}>CURRENT PRICE</p>
 				</div>
 
 				<p className={`text-[1.25rem] mt-[-1.5rem]  text-[var(--grey500)]`}>
