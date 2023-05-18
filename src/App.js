@@ -1,7 +1,6 @@
 import React from "react";
 import Login from "./pages/Login/login";
 import Sidebar from "./components/Sidebar/sidebar";
-import Dashboard from "./pages/Branch/Dashboard/dashboard";
 import SpecificCharger from "./pages/Branch/ChargerDetails/specificCharger";
 import EvCharger from "./pages/Branch/EvChargers/evCharger";
 import ChangePassword from "./pages/changePassword/changePassword";
@@ -24,7 +23,7 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CompanyLayout from "./layouts/Station/StationLayout";
-import Dashboardd from "./pages/Branch/Dashboard/dashboardd";
+import Dashboardd from "./pages/Branch/Dashboard/dashboard";
 import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
@@ -113,15 +112,7 @@ function App() {
 
 					</Route>
 
-					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
-						<Route path="" element={<Dashboard />} />
-
-						<Route path="evChargers" element={<EvCharger />} />
-						<Route path="chargerDetails" element={<SpecificCharger />} />
-						<Route path="billing" element={<StationBilling />} />
-						<Route path="sales" element={<Sales />} />
-						<Route path="camera" element={<Camera />} />
-					</Route> */}
+				
 					
 					<Route path="/station" element={<Station />}></Route>
 					<Route path="/changePassword" element={<ChangePassword />}></Route>

@@ -88,7 +88,7 @@ const CarInfo = () => {
 			<section className="bg-white h-[85%] rounded-3xl">
 				<form className="pt-[44px] mx-[28px]" onSubmit={registerCar}>
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>Vehicle Name </p> <p className="text-[#EB3540]">*</p>
 						</label>
 
@@ -102,7 +102,7 @@ const CarInfo = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className=" flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className=" flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							<p>Vehicle Model</p> <p className="text-[#EB3540]">*</p>{" "}
 						</label>
 
@@ -116,7 +116,7 @@ const CarInfo = () => {
 					</div>
 
 					<div className="mb-[20px]">
-						<label className="flex block text-[#344054] text-[14px] font-semibold mb-[0.25rem]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							Plate Number <p className="text-[#EB3540]">*</p>{" "}
 						</label>
 

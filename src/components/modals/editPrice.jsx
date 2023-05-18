@@ -7,7 +7,7 @@ import check from "../../assets/svg/check.svg";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 
-const EditPrice = ({ closeModal, details }) => {
+const EditPrice = ({ closeModal, details, setReloadPage }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams] = useSearchParams();
 
@@ -51,6 +51,7 @@ const EditPrice = ({ closeModal, details }) => {
 		}
 
 		setBilling(password, price);
+		setReloadPage(true);
 
 		// setBmsGreen(price);
 		// setOldPrice(0);
@@ -78,27 +79,43 @@ const EditPrice = ({ closeModal, details }) => {
 			</div>
 
 			<form onSubmit={handleSubmit}>
-				<label className="block font-semibold text-[#344054] text-[14px] mb-[8px]">
-					NEW PRICE
-				</label>
-				<input
-					name="price"
-					type="number"
-					placeholder="Enter new price"
-					className="w-[100%] p-[14px] border border-[#D0D5DD] rounded-lg mb-[20px]"
-					required
-				/>
+				<div>
+					<label className="block font-semibold text-[#344054] text-[0.875rem] mb-[8px]">
+						CURRENT PRICE
+					</label>
+					<input
+						defaultValue={details.prevPrice}
+						className="w-[100%] p-[0.875rem] border border-[#D0D5DD] rounded-lg mb-[20px]"
+						readOnly
+						disabled
+					/>
+				</div>
 
-				<label className="block font-semibold text-[#344054] text-[14px] mb-[8px]">
-					Password
-				</label>
-				<input
-					type="password"
-					name="password"
-					placeholder="Enter password"
-					className="w-[100%] p-[14px] border border-[#D0D5DD] rounded-lg mb-[20px]"
-					required
-				/>
+				<div>
+					<label className="block font-semibold text-[#344054] text-[0.875rem] mb-[8px]">
+						NEW PRICE
+					</label>
+					<input
+						name="price"
+						type="number"
+						placeholder="Enter new price"
+						className="w-[100%] p-[0.875rem] border border-[#D0D5DD] rounded-lg mb-[20px]"
+						required
+					/>
+				</div>
+
+				<div>
+					<label className="block font-semibold text-[#344054] text-[0.875rem] mb-[8px]">
+						Password
+					</label>
+					<input
+						type="password"
+						name="password"
+						placeholder="Enter password"
+						className="w-[100%] p-[0.875rem] border border-[#D0D5DD] rounded-lg mb-[20px]"
+						required
+					/>
+				</div>
 
 				<button
 					type="submit"
