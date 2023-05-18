@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
+import CsvExport from "../../../components/exportComponent/csvExport";
 
 export default function StationBilling() {
   const [priceModal, setPriceModal] = useState(false);
@@ -88,15 +89,7 @@ export default function StationBilling() {
     (el) => el.chargerType.toLowerCase() === "dc"
   );
 
-  //excel export
-  const handleExport = () => {
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.json_to_sheet(billingLog);
-
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-    XLSX.writeFile(wb, "priceChangeLog.xlsx");
-  };
+ 
 
   let column = [
     {
@@ -206,33 +199,11 @@ export default function StationBilling() {
           </section>
 
           <section className={`mb-[var(--marginBtwSection)]`}>
-			<div className="flex justify-between">
-            <h3 className={`mb-5`}>PRICE CHANGE LOG</h3>
-
             <div className="flex justify-between">
-              <div className=" bg-black text-white p-[0.5rem] rounded-md ">
-                <CSVLink
-                  data={billingLog}
-                  // headers={headers}
-                  filename="Transactions.csv"
-                  target="_blank"
-                >
-                  CSV Export
-                </CSVLink>
-              </div>
-              <div>
-                <button
-                  onClick={handleExport}
-                  className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]"
-                >
-                  Excel export
-                </button>
-              </div>
-              {/* <div>
-				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>
-			  </div> */}
+              <h3 className={`mb-5`}>PRICE CHANGE LOG</h3>
+
+              <CsvExport  data={billingLog} name={"priceChangeLog"}/>
             </div>
-			</div>
 
             <Table columns={column} dataSource={billingLog} pagination={true} />
           </section>

@@ -10,6 +10,7 @@ import Modal from "../../modals/modal";
 import TransactionDetails from "../../modals/transactionDetails";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
+import CsvExport from "../../exportComponent/csvExport";
 
 const ReportTransactions = ({ stationId }) => {
 	const [TModal, setModal] = useState(false);
@@ -39,14 +40,14 @@ const ReportTransactions = ({ stationId }) => {
 	}, []);
 
 	 //excel export
-	 const handleExport = () => {
-		let wb = XLSX.utils.book_new();
-		let ws = XLSX.utils.json_to_sheet(allTransactions);
+	//  const handleExport = () => {
+	// 	let wb = XLSX.utils.book_new();
+	// 	let ws = XLSX.utils.json_to_sheet(allTransactions);
 	
-		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+	// 	XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
 	
-		XLSX.writeFile(wb, "report.xlsx");
-	  };
+	// 	XLSX.writeFile(wb, "report.xlsx");
+	//   };
 
 
 	const Columns = [
@@ -143,8 +144,8 @@ const ReportTransactions = ({ stationId }) => {
 		<section>
 			<div className={`mb-[var(--marginBtwElements)] flex justify-between`}>
 				<h3> TRANSACTION LIST</h3>
-				<div className="flex justify-between">
-              <div className=" bg-black text-white p-[0.5rem] rounded-md">
+				{/* <div className="flex justify-between"> */}
+              {/* <div className="border border-solid border-gray-400  p-[0.5rem] rounded-md">
                 <CSVLink
                   data={allTransactions}
                   // headers={headers}
@@ -153,12 +154,15 @@ const ReportTransactions = ({ stationId }) => {
                 >
                   CSV Export
                 </CSVLink>
-              </div>
+              </div> */}
+			  {/* <CsvExport data={allTransactions} name={"report"}/>
               <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
+                <button onClick={handleExport} className="border border-solid border-gray-400 p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
               </div>
 			  
-			  </div>
+			  </div> */}
+
+			  <CsvExport data={allTransactions} name={"report"} />
 			</div>
 
 			<div>
