@@ -8,9 +8,9 @@ import activeDot from "../../../assets/svg/activeDot.svg";
 import eye from "../../../assets/svg/eye.svg";
 import Modal from "../../modals/modal";
 import TransactionDetails from "../../modals/transactionDetails";
-import { CSVLink } from "react-csv";
-import * as XLSX from "xlsx/xlsx.mjs";
 import CsvExport from "../../exportComponent/csvExport";
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
 const ReportTransactions = ({ stationId }) => {
 	const [TModal, setModal] = useState(false);
@@ -48,6 +48,20 @@ const ReportTransactions = ({ stationId }) => {
 	
 	// 	XLSX.writeFile(wb, "report.xlsx");
 	//   };
+
+		// pdf export 
+	const doc = new jsPDF('potrait','pt','a4')
+	
+
+	const exportPDF = () =>{
+
+		doc.html(document.querySelector('#report')).then(() => {
+			doc.save('report.pdf');
+		});
+		  
+		 
+	}
+
 
 
 	const Columns = [
@@ -144,28 +158,12 @@ const ReportTransactions = ({ stationId }) => {
 		<section>
 			<div className={`mb-[var(--marginBtwElements)] flex justify-between`}>
 				<h3> TRANSACTION LIST</h3>
-				{/* <div className="flex justify-between"> */}
-              {/* <div className="border border-solid border-gray-400  p-[0.5rem] rounded-md">
-                <CSVLink
-                  data={allTransactions}
-                  // headers={headers}
-                  filename="report.csv"
-                  target="_blank"
-                >
-                  CSV Export
-                </CSVLink>
-              </div> */}
-			  {/* <CsvExport data={allTransactions} name={"report"}/>
-              <div>
-                <button onClick={handleExport} className="border border-solid border-gray-400 p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
-              </div>
-			  
-			  </div> */}
+				<button onClick={exportPDF}>Pdf Export </button>
 
 			  <CsvExport data={allTransactions} name={"report"} />
 			</div>
 
-			<div>
+			<div id="report">
 				<Table
 					columns={Columns}
 					pagination={false}

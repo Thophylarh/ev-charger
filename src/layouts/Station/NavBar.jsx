@@ -135,6 +135,12 @@ export default function StationNavBar() {
 							</div>
 						</NavLink>
 
+
+						<NavLink
+							to={{
+								pathname: "/station/camera"
+							}}
+						>
 						<div
 							className={` ${
 								path === "/station/camera" ? activeLink : notActive
@@ -149,6 +155,7 @@ export default function StationNavBar() {
 							)} */}
 							<p>Live Camera</p>
 						</div>
+						</NavLink>
 					</div>
 				</div>
 
