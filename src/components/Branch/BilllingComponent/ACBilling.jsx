@@ -2,14 +2,14 @@ import React from "react";
 import { formatNumber } from "../../../utils/formatNumber";
 
 export default function ACBilling({ openModal, price }) {
-
-      let green = price?.filter((el) => el.billingType.toLowerCase() === "green");
+	let green = price?.filter((el) => el.billingType.toLowerCase() === "green");
 	let utility = price?.filter(
 		(el) => el.billingType.toLowerCase() === "utility"
 	);
 	let grid = price?.filter((el) => el.billingType.toLowerCase() === "grid");
 
-    
+	
+
 	return (
 		<div className={`mb-[var(--marginBtwElements)]`}>
 			<div>
@@ -22,8 +22,9 @@ export default function ACBilling({ openModal, price }) {
 					<div className="revenueBlock">
 						<h3>WHEN ON GRID</h3>
 
-                                    <h5>
-							NGN  {grid?.[0]?.costPerUnitCharge
+						<h5>
+							NGN{" "}
+							{grid?.[0]?.costPerUnitCharge
 								? formatNumber(grid?.[0]?.costPerUnitCharge)
 								: 0}
 							/KW
@@ -31,7 +32,9 @@ export default function ACBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) =>openModal("AC", "GRID")}
+							onClick={(e) =>
+								openModal("AC", "GRID", grid?.[0]?.costPerUnitCharge)
+							}
 						>
 							{" "}
 							Edit price{" "}
@@ -41,8 +44,9 @@ export default function ACBilling({ openModal, price }) {
 					<div className="revenueBlock">
 						<h3>WHEN ON UTILITY</h3>
 
-                                    <h5>
-							NGN {utility?.[0]?.costPerUnitCharge
+						<h5>
+							NGN{" "}
+							{utility?.[0]?.costPerUnitCharge
 								? formatNumber(utility?.[0]?.costPerUnitCharge)
 								: 0}
 							/KW
@@ -50,7 +54,13 @@ export default function ACBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) =>openModal("AC", "UTILITY")}
+							onClick={(e) =>
+								openModal(
+									"AC",
+									"UTILITY",
+									utility?.[0]?.costPerUnitCharge
+								)
+							}
 						>
 							{" "}
 							Edit price{" "}
@@ -60,8 +70,9 @@ export default function ACBilling({ openModal, price }) {
 					<div className="revenueBlock">
 						<h3>WHEN ON GREEN ENRGY</h3>
 
-                                    <h5>
-							NGN {green?.[0]?.costPerUnitCharge
+						<h5>
+							NGN{" "}
+							{green?.[0]?.costPerUnitCharge
 								? formatNumber(green?.[0]?.costPerUnitCharge)
 								: 0}
 							/KW
@@ -69,7 +80,9 @@ export default function ACBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) =>openModal("AC", "GREEN")}
+							onClick={(e) =>
+								openModal("AC", "GREEN", green?.[0]?.costPerUnitCharge)
+							}
 						>
 							{" "}
 							Edit price{" "}

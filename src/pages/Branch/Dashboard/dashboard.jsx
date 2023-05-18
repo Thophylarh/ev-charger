@@ -1,199 +1,315 @@
-import React, {useEffect, useState} from "react";
-// import Arrow from "../../assets/svg/arrow.svg";
-import Hero from "../../../components/Hero/hero"
-import ChargerStat from "../../../components/chargerStat/charger"
-import ListOfChargers from "../../../components/listOfChargers/listOfChargers";
-import Transactions from "../../../components/last10Transactions/transactions";
-// import FilteredHero from "../../../components/filteredHero/filteredHero"
+import React, { useEffect, useState } from "react";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 import axios from "../../../lib/axiosInterceptor";
-import {DatePicker} from "antd"
+import "./style.css";
+
+import ChargersCard from "../../../components/Company/ChargersCard";
+
+import { DatePicker, Table } from "antd";
 import moment from "moment";
+import { formatNumber } from "../../../utils/formatNumber";
+import activeDot from "../../../assets/svg/activeDot.svg";
+import eye from "../../../assets/svg/eye.svg";
+
+import StationDashboardOverview from "../../../components/Branch/DashboardComponents/Overview";
+import ChartOverview from "../../../components/Branch/DashboardComponents/ChartOverview";
+import Column from "../../../utils/columns";
+
+import Modal from "../../../components/modals/modal";
+import TransactionDetails from "../../../components/modals/transactionDetails";
+import Loader from "../../../components/Loader";
+import { toast } from "react-toastify";
+import { CSVLink } from "react-csv";
+import * as XLSX from "xlsx/xlsx.mjs";
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+
+export default function Dashboardd() {
+  const [transaction, setTransaction] = useState([]);
+  const [stationChargerList, setStationChargerList] = useState([]);
+  const [TModal, setModal] = useState(false);
+  const [transactionIdd, setTransactionIdd] = useState();
+  const [newDate, setNewDate] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [searchParams] = useSearchParams();
+
+  let stationId = searchParams.get("stationId");
+
+  let companyId = searchParams.get("companyId");
+
+  // API CALLS
+
+  //last 10 transactions
+  const getTransactions = async () => {
+    axios
+      .get(`/Transactions/get-last10-transactions/station/${stationId}/10`)
+      .then((res) => {
+        let index = 0;
+
+        res.data.forEach((el) => {
+          el.index = ++index;
+        });
+
+        setTransaction(res.data);
+      });
+  };
+
+  //get list of chargers in station
+  const getListOfChargers = () => {
+    setIsLoading(true);
+    axios
+      .get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
+      .then((res) => {
+        setStationChargerList(res.data);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 2000);
+      })
+      .catch((err) => {
+        toast.error(err);
+        setIsLoading(false);
+      });
+  };
+
+  // CUSTOM FUNCTIONS
+  const onSelectDate = (date, dateString) => {
+    setNewDate(dateString);
+  };
+
+  useEffect(() => {
+    getTransactions();
+    getListOfChargers();
+  }, []);
+
+// console.log(transaction)
+  //excel export
+  const handleExport = () => {
+    let wb = XLSX.utils.book_new();
+    let ws = XLSX.utils.json_to_sheet(transaction);
+
+    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+
+    XLSX.writeFile(wb, "stationTransactions.xlsx");
+  };
+
+  // const pdfData = transaction.map((trans)=>{
+	// return (
+	// 	[
+	// 		trans.id,
+	// 		trans.batteryStateOfChargeAtEnd,
+	// 		trans.batteryStateOfChargeAtStart
+
+	// 	]
+	// )
+  // })
+
+	//pdf export 
+	// const doc = new jsPDF()
+
+	// const exportPDF = () =>{
+
+	// 	autoTable(doc, {
+	// 		// head: [['Name', 'Email', 'Country']],
+	// 		body: transaction,
+	// 	  })
+		  
+	// 	  doc.save('transactions.pdf')
+	// }
+
+	
+	
 
 
-const Index = () => {
+  //table columns
+  const Columns = [
+    {
+      title: "#",
+      dataIndex: "index",
+      key: "index",
+    },
+    {
+      title: "Date",
+      dataIndex: "dateOfTransaction",
+      key: "dateOfTransaction",
+      render: (dateOfTransaction) => (
+        <p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+      ),
+    },
+    {
+      title: "Charger",
+      dataIndex: "chargerName",
+      key: "transactionId",
+    },
 
-const [data, setData] = useState("")
- const [totalChargers, setTotalChargers] = useState("")
-  const [noOfActiveChargers, setNoActiveChargers] = useState("")
-  const [noOfflineChargers, setNoOfflineChargers] = useState("")
-  const [totalEnergy, setTotalEnergy] = useState("")
-  const [stationChargerList, setStationChargerList] = useState([])
-  const [stationTransactions, setStationTransactions] = useState([])
-  const [revenue, setRevenue] = useState([])
-  const [stationgraphData, setstationGraphData] = useState([])
-  const [fRevenue, setFRevenue] = useState([])
-  const [fGraph, setFGraph] = useState([])
-  const [filtered, setfiltered] = useState(false)
+    {
+      title: "Charger Type",
+      dataIndex: "chargerType",
+      key: "Charger Type",
+      render: () => <p>CICE</p>,
+    },
+    {
+      title: "Amount",
+      dataIndex: "totalAmount",
+      key: "totalAmount",
+      render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+    },
+    {
+      title: "Balance",
+      dataIndex: "balance",
+      key: "balance",
+      render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+    },
+    {
+      title: "Energy",
+      dataIndex: "totalUnitChargedInEnergy",
+      key: "totalUnitChargedInEnergy",
+      render: (totalUnitChargedInEnergy) => (
+        <p>
+          {formatNumber(totalUnitChargedInEnergy)}
+          kWh
+        </p>
+      ),
+    },
 
-
-
-  //base url  
-const url = ""
-
-//TOKEN
-const token = localStorage.getItem("user-token")
-
-   const companyId = localStorage.getItem("id");
-    const stationId = localStorage.getItem("stationId");
-
-//get station details
-const getStationDetails = () =>{
-  axios.get(url +"/Stations/get-station-by-id/" + stationId, { headers:{ 'Authorization': `Bearer ${token}`}})
-  .then((res)=>{
-    setData(res.data[0])
-    // console.log(res.data)
-  })
-}
-
-  //total number of station chargers
-  const GetstationChargers = () =>{
-    axios.get(url + `/Chargers/get-total-station-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}})
-    .then((res) =>{
-      
-      setTotalChargers(res.data)
-
-    })
-  }
-
-   //total number of active chargers 
-  const GetactiveChargers = () =>{
-    axios.get(url + `/Chargers/get-station-active-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setNoActiveChargers(res.data)
-    })
-  }
-
-    // //total number of offline chargers 
-  const GetofflineChargers = () =>{
-    axios.get(url + `/Chargers/get-station-offline-charger-count/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setNoOfflineChargers(res.data)
-    })
-  }
-
-    // //total energy consumed
-  const GetTotalEnergy= () =>{
-    axios.get(url + `/Chargers/get-total-energy-consumed-by-station/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-      setTotalEnergy(res.data)
-    })
-  }
-
-   //get list of chargers in station
-   const getListOfChargers= () =>{
-    axios.get(url + `/Chargers/get-list-station-charger/${companyId}/${stationId}`,{ headers:{ 'Authorization': `Bearer ${token}`}} )
-    .then((res)=>{
-    
-      setStationChargerList(res.data)
-     
-    })
-  }
-
- //station transactions
-    const station = "station";
- 
-  const transactions = () =>{
-    const limit = 10;
-    axios.get(url +`/Transactions/get-last10-transactions/station/${stationId}/${limit}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
-    .then((res)=>{
-        
-      setStationTransactions(res.data)
-    })
-}
-
-//revenue for station 
-const Revenue = () =>{
-  axios.get(url +`/Transactions/get-revenue/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
-  .then((res)=>{
-    setRevenue(res.data)
-    
-    
-  })
-}
-
-//graph data - revenue by month for stations
-const revenuebymonth = () =>{
-   
-  axios.get(url +`/Transactions/get-group-transaction-by-month/station/${stationId}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
-  .then((res)=>{
-    console.log(res)
-    setstationGraphData(res.data)
-
-    
-    
-  })
-}
-
-//on select date filter 
-const  onSelectDate = async (date, dateString) =>{
-
- const month = moment(dateString).format("M")
- const year = moment(dateString).format("Y")
-
- axios.get(url +`/Transactions/get-revenue-by-month-year/station/${stationId}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
- .then((res)=>{
-   
- setFRevenue(res.data)
- setfiltered(true)
-})
-
-axios.get(url +`/Transactions/get-transaction-by-month-year/station/${stationId}/${month}/${year}`,  { headers:{ 'Authorization': `Bearer ${token}`}})
-.then((res)=>{
-  setFGraph(res.data)
-  console.log(res)
-})
-}
-   
- 
- 
-
-    
- 
-
-useEffect(()=>{
-  getStationDetails ();
-  GetstationChargers();
-  GetactiveChargers();
-  GetofflineChargers();
-  GetTotalEnergy();
-  getListOfChargers();
-  transactions();
-  Revenue();
-  revenuebymonth();
-}, [])
-
+    // {
+    //     title: "Charge Duration",
+    //     dataIndex: "totalUnitChargedInTime",
+    //     key: "totalUnitChargedInTime",
+    //     render: (totalUnitChargedInTime) => (
+    //         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
+    //     ),
+    // },
+    {
+      title: "Status",
+      dataIndex: "transactionStatus",
+      key: "transactionStatus",
+      render: (transactionStatus) => (
+        <button className="flex justify-between">
+          <img
+            src={activeDot}
+            alt="Transaction was completed"
+            className="pr-[0.25rem] mt-[6px]"
+          />
+          <p className="text-[#15833C] font-semibold text-xs leading-5">
+            Completed
+          </p>
+        </button>
+      ),
+    },
+    {
+      title: "",
+      dataIndex: "transactionId",
+      key: "",
+      render: (text, record) => (
+        <button
+          className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+          onClick={(e) => {
+            setModal(true);
+            setTransactionIdd(record.transactionId);
+          }}
+        >
+          <img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+          <p>View details</p>
+        </button>
+      ),
+    },
+  ];
 
   return (
-    <div className="w-full h-[100vh]  py-2 px-4 ">
-    <div className="w-full h-screen py-2 px-4 overflow-y-scroll">
-      <div>
-        <div className="flex justify-between items-center">
-          <div>
-          <h1 className="font-bold text-2xl">Hello, {data.StationName} </h1>
-           
-          </div>
-         
+    <>
+      {isLoading && (
+        <section>
+          <Loader />
+        </section>
+      )}
+      {!isLoading && (
+        <section>
+          <section className={`mb-[var(--marginBtwSection)]`}>
+            <div className={`flex justify-between items-center `}>
+              <div>
+                <h4 className="mb-[8px]">Hello, Sterling HQ</h4>
+                <p className="subHeader">
+                  Here is an overview and breakdown of your station energy
+                  revenue and consumption.
+                </p>
+              </div>
+              <div>
+                <DatePicker picker="month" onChange={onSelectDate} />
+              </div>
+            </div>
+          </section>
 
-          <div>
-          <DatePicker  picker="month" onChange={onSelectDate} />
-          
-          </div>
-        
-          
-        </div>
-        <p className="text-gray-400 font-normal text-sm">Explore your station dashboard here</p>
-        <div className="mt-[1rem]">
-        {/* {filtered? <FilteredHero fRevenue={fRevenue} graphData={fGraph}/>:  <Hero revenue={revenue} graphData={stationgraphData}/>  } */}
-        </div>
-        <ChargerStat total={totalChargers} ActiveChargers={noOfActiveChargers} OfflineChargers={noOfflineChargers} TotalEnergy={totalEnergy}/>
-        <ListOfChargers chargers={stationChargerList}/>
-        <Transactions transactions={stationTransactions}/>
-      </div>
-      
-    </div>
-    </div>
+          <StationDashboardOverview stationId={stationId} newDate={newDate} />
+
+          <ChartOverview newDate={newDate} />
+
+          <section className={`mb-[var(--marginBtwSection)]`}>
+            <div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
+              <h3>STATION CHARGERS</h3>
+
+              <NavLink
+                to={{
+                  pathname: "/station/evChargers",
+                  search: `?stationId=${stationId}&companyId=${companyId}`,
+                }}
+              >
+                <button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
+                  See all chargers
+                </button>
+              </NavLink>
+            </div>
+
+            <div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+              {stationChargerList.map((charger, index) => (
+                <ChargersCard charger={charger} key={index} />
+              ))}
+            </div>
+          </section>
+
+          <section className={`mb-[var(--marginBtwSection)]`}>
+            <div
+              className={`mb-[var(--marginBtwElements)] flex justify-between `}
+            >
+              <div>
+                <h3>LAST 10 TRANSACTIONS</h3>
+              </div>
+			  <div className="flex justify-between">
+              <div className=" bg-black text-white p-[0.5rem] rounded-md">
+                <CSVLink
+                  data={transaction}
+                  // headers={headers}
+                  filename="Transactions.csv"
+                  target="_blank"
+                >
+                  CSV Export
+                </CSVLink>
+              </div>
+              <div>
+                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
+              </div>
+			  {/* <div>
+				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>
+			  </div> */}
+			  </div>
+            </div>
+
+            <div>
+              <Table
+                columns={Columns}
+                pagination={false}
+                dataSource={transaction}
+				
+              />
+            </div>
+          </section>
+          {TModal && (
+            <Modal closeModal={setModal}>
+              <TransactionDetails transactionId={transactionIdd} />
+            </Modal>
+          )}
+        </section>
+      )}
+    </>
   );
-};
-
-export default Index;
+}

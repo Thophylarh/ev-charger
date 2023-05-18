@@ -28,7 +28,7 @@ export default function DCBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) => openModal("DC", "GRID")}
+							onClick={(e) => openModal("DC", "GRID", grid?.[0]?.costPerUnitCharge)}
 						>
 							{" "}
 							Edit price{" "}
@@ -48,7 +48,7 @@ export default function DCBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) => openModal("DC", "UTILITY")}
+							onClick={(e) => openModal("DC", "UTILITY",utility?.[0]?.costPerUnitCharge)}
 						>
 							{" "}
 							Edit price{" "}
@@ -68,7 +68,7 @@ export default function DCBilling({ openModal, price }) {
 
 						<button
 							className="text-[var(--blueLink)]"
-							onClick={(e) => openModal("DC", "GREEN")}
+							onClick={(e) => openModal("DC", "GREEN", green?.[0]?.costPerUnitCharge)}
 						>
 							{" "}
 							Edit price{" "}
