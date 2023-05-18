@@ -25,7 +25,8 @@ export default function CustomerList() {
         el.index = ++index;
       });
 
-      setCustomers(res.data);
+      setCustomers(res.data
+);
     });
   };
 

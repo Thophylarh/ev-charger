@@ -25,7 +25,7 @@ export default function ACBilling({ openModal, price }) {
 						<h5>
 							NGN{" "}
 							{grid?.[0]?.costPerUnitCharge
-								? formatNumber(grid?.[0]?.costPerUnitCharge)
+								? formatNumber(grid?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
 							/KW
 						</h5>
@@ -47,7 +47,7 @@ export default function ACBilling({ openModal, price }) {
 						<h5>
 							NGN{" "}
 							{utility?.[0]?.costPerUnitCharge
-								? formatNumber(utility?.[0]?.costPerUnitCharge)
+								? formatNumber(utility?.[0]?.costPerUnitCharge , false, 2)
 								: 0}
 							/KW
 						</h5>
@@ -73,7 +73,7 @@ export default function ACBilling({ openModal, price }) {
 						<h5>
 							NGN{" "}
 							{green?.[0]?.costPerUnitCharge
-								? formatNumber(green?.[0]?.costPerUnitCharge)
+								? formatNumber(green?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
 							/KW
 						</h5>
