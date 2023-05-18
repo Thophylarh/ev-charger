@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useSearchParams } from "react-router-dom";
 
 import axios from "../../../lib/axiosInterceptor";
@@ -22,78 +22,80 @@ import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
-import jsPDF from 'jspdf'
-import autoTable from 'jspdf-autotable'
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import CsvExport from "../../../components/exportComponent/csvExport";
 
 export default function Dashboardd() {
-  const [transaction, setTransaction] = useState([]);
-  const [stationChargerList, setStationChargerList] = useState([]);
-  const [TModal, setModal] = useState(false);
-  const [transactionIdd, setTransactionIdd] = useState();
-  const [newDate, setNewDate] = useState();
-  const [isLoading, setIsLoading] = useState(false);
-  const [searchParams] = useSearchParams();
+	const [transaction, setTransaction] = useState([]);
+	const [stationChargerList, setStationChargerList] = useState([]);
+	const [TModal, setModal] = useState(false);
+	const [transactionIdd, setTransactionIdd] = useState();
+	const [newDate, setNewDate] = useState();
+	const [isLoading, setIsLoading] = useState(false);
+	const [searchParams] = useSearchParams();
 
-  let stationId = searchParams.get("stationId");
+	let stationId = searchParams.get("stationId");
 
-  let companyId = searchParams.get("companyId");
+	let companyId = searchParams.get("companyId");
 
-  // API CALLS
+  const tableRef = useRef()
+	// API CALLS
 
-  //last 10 transactions
-  const getTransactions = async () => {
-    axios
-      .get(`/Transactions/get-last10-transactions/station/${stationId}/10`)
-      .then((res) => {
-        let index = 0;
+	//last 10 transactions
+	const getTransactions = async () => {
+		axios
+			.get(`/Transactions/get-last10-transactions/station/${stationId}/10`)
+			.then((res) => {
+				let index = 0;
 
-        res.data.forEach((el) => {
-          el.index = ++index;
-        });
+				res.data.forEach((el) => {
+					el.index = ++index;
+				});
 
-        setTransaction(res.data);
-      });
-  };
+				setTransaction(res.data);
+			});
+	};
 
-  //get list of chargers in station
-  const getListOfChargers = () => {
-    setIsLoading(true);
-    axios
-      .get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
-      .then((res) => {
-        setStationChargerList(res.data);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
-      })
-      .catch((err) => {
-        toast.error(err);
-        setIsLoading(false);
-      });
-  };
+	//get list of chargers in station
+	const getListOfChargers = () => {
+		setIsLoading(true);
+		axios
+			.get(`/Chargers/get-list-station-charger/${companyId}/${stationId}`)
+			.then((res) => {
+				setStationChargerList(res.data);
+				setTimeout(() => {
+					setIsLoading(false);
+				}, 2000);
+			})
+			.catch((err) => {
+				toast.error(err);
+				setIsLoading(false);
+			});
+	};
 
-  // CUSTOM FUNCTIONS
-  const onSelectDate = (date, dateString) => {
-    setNewDate(dateString);
-  };
+	// CUSTOM FUNCTIONS
+	const onSelectDate = (date, dateString) => {
+		setNewDate(dateString);
+	};
 
-  useEffect(() => {
-    getTransactions();
-    getListOfChargers();
-  }, []);
+	useEffect(() => {
+		getTransactions();
+		getListOfChargers();
+	}, []);
 
-// console.log(transaction)
-  //excel export
-  const handleExport = () => {
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.json_to_sheet(transaction);
+	// console.log(transaction)
+	//excel export
+	const handleExport = () => {
+		let wb = XLSX.utils.book_new();
+		let ws = XLSX.utils.json_to_sheet(transaction);
 
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
+		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
 
-    XLSX.writeFile(wb, "stationTransactions.xlsx");
-  };
+		XLSX.writeFile(wb, "stationTransactions.xlsx");
+	};
 
-  // const pdfData = transaction.map((trans)=>{
+	// const pdfData = transaction.map((trans)=>{
 	// return (
 	// 	[
 	// 		trans.id,
@@ -102,9 +104,9 @@ export default function Dashboardd() {
 
 	// 	]
 	// )
-  // })
+	// })
 
-	//pdf export 
+	//pdf export
 	// const doc = new jsPDF()
 
 	// const exportPDF = () =>{
@@ -113,203 +115,188 @@ export default function Dashboardd() {
 	// 		// head: [['Name', 'Email', 'Country']],
 	// 		body: transaction,
 	// 	  })
-		  
+
 	// 	  doc.save('transactions.pdf')
 	// }
 
-	
-	
+	//table columns
+	const Columns = [
+		{
+			title: "#",
+			dataIndex: "index",
+			key: "index",
+		},
+		{
+			title: "Date",
+			dataIndex: "dateOfTransaction",
+			key: "dateOfTransaction",
+			render: (dateOfTransaction) => (
+				<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+			),
+		},
+		{
+			title: "Charger",
+			dataIndex: "chargerName",
+			key: "transactionId",
+		},
 
+		{
+			title: "Charger Type",
+			dataIndex: "chargerType",
+			key: "Charger Type",
+			render: () => <p>CICE</p>,
+		},
+		{
+			title: "Amount",
+			dataIndex: "totalAmount",
+			key: "totalAmount",
+			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		},
+		{
+			title: "Balance",
+			dataIndex: "balance",
+			key: "balance",
+			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		},
+		{
+			title: "Energy",
+			dataIndex: "totalUnitChargedInEnergy",
+			key: "totalUnitChargedInEnergy",
+			render: (totalUnitChargedInEnergy) => (
+				<p>
+					{formatNumber(totalUnitChargedInEnergy)}
+					kWh
+				</p>
+			),
+		},
 
-  //table columns
-  const Columns = [
-    {
-      title: "#",
-      dataIndex: "index",
-      key: "index",
-    },
-    {
-      title: "Date",
-      dataIndex: "dateOfTransaction",
-      key: "dateOfTransaction",
-      render: (dateOfTransaction) => (
-        <p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
-      ),
-    },
-    {
-      title: "Charger",
-      dataIndex: "chargerName",
-      key: "transactionId",
-    },
+		// {
+		//     title: "Charge Duration",
+		//     dataIndex: "totalUnitChargedInTime",
+		//     key: "totalUnitChargedInTime",
+		//     render: (totalUnitChargedInTime) => (
+		//         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
+		//     ),
+		// },
+		{
+			title: "Status",
+			dataIndex: "transactionStatus",
+			key: "transactionStatus",
+			render: (transactionStatus) => (
+				<button className="flex justify-between">
+					<img
+						src={activeDot}
+						alt="Transaction was completed"
+						className="pr-[0.25rem] mt-[6px]"
+					/>
+					<p className="text-[#15833C] font-semibold text-xs leading-5">
+						Completed
+					</p>
+				</button>
+			),
+		},
+		{
+			title: "",
+			dataIndex: "transactionId",
+			key: "",
+			render: (text, record) => (
+				<button
+					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+					onClick={(e) => {
+						setModal(true);
+						setTransactionIdd(record.transactionId);
+					}}
+				>
+					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+					<p>View details</p>
+				</button>
+			),
+		},
+	];
 
-    {
-      title: "Charger Type",
-      dataIndex: "chargerType",
-      key: "Charger Type",
-      render: () => <p>CICE</p>,
-    },
-    {
-      title: "Amount",
-      dataIndex: "totalAmount",
-      key: "totalAmount",
-      render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-    },
-    {
-      title: "Balance",
-      dataIndex: "balance",
-      key: "balance",
-      render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-    },
-    {
-      title: "Energy",
-      dataIndex: "totalUnitChargedInEnergy",
-      key: "totalUnitChargedInEnergy",
-      render: (totalUnitChargedInEnergy) => (
-        <p>
-          {formatNumber(totalUnitChargedInEnergy)}
-          kWh
-        </p>
-      ),
-    },
+	return (
+		<>
+			{isLoading && (
+				<section>
+					<Loader />
+				</section>
+			)}
+			{!isLoading && (
+				<section>
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div className={`flex justify-between items-center `}>
+							<div>
+								<h4 className="mb-[8px]">Hello, Sterling HQ</h4>
+								<p className="subHeader">
+									Here is an overview and breakdown of your station energy
+									revenue and consumption.
+								</p>
+							</div>
+							<div>
+								<DatePicker picker="month" onChange={onSelectDate} />
+							</div>
+						</div>
+					</section>
 
-    // {
-    //     title: "Charge Duration",
-    //     dataIndex: "totalUnitChargedInTime",
-    //     key: "totalUnitChargedInTime",
-    //     render: (totalUnitChargedInTime) => (
-    //         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
-    //     ),
-    // },
-    {
-      title: "Status",
-      dataIndex: "transactionStatus",
-      key: "transactionStatus",
-      render: (transactionStatus) => (
-        <button className="flex justify-between">
-          <img
-            src={activeDot}
-            alt="Transaction was completed"
-            className="pr-[0.25rem] mt-[6px]"
-          />
-          <p className="text-[#15833C] font-semibold text-xs leading-5">
-            Completed
-          </p>
-        </button>
-      ),
-    },
-    {
-      title: "",
-      dataIndex: "transactionId",
-      key: "",
-      render: (text, record) => (
-        <button
-          className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
-          onClick={(e) => {
-            setModal(true);
-            setTransactionIdd(record.transactionId);
-          }}
-        >
-          <img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-          <p>View details</p>
-        </button>
-      ),
-    },
-  ];
+					<StationDashboardOverview stationId={stationId} newDate={newDate} />
 
-  return (
-    <>
-      {isLoading && (
-        <section>
-          <Loader />
-        </section>
-      )}
-      {!isLoading && (
-        <section>
-          <section className={`mb-[var(--marginBtwSection)]`}>
-            <div className={`flex justify-between items-center `}>
-              <div>
-                <h4 className="mb-[8px]">Hello, Sterling HQ</h4>
-                <p className="subHeader">
-                  Here is an overview and breakdown of your station energy
-                  revenue and consumption.
-                </p>
-              </div>
-              <div>
-                <DatePicker picker="month" onChange={onSelectDate} />
-              </div>
-            </div>
-          </section>
+					<ChartOverview newDate={newDate} />
 
-          <StationDashboardOverview stationId={stationId} newDate={newDate} />
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
+							<h3>STATION CHARGERS</h3>
 
-          <ChartOverview newDate={newDate} />
+							<NavLink
+								to={{
+									pathname: "/station/evChargers",
+									search: `?stationId=${stationId}&companyId=${companyId}`,
+								}}
+							>
+								<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
+									See all chargers
+								</button>
+							</NavLink>
+						</div>
 
-          <section className={`mb-[var(--marginBtwSection)]`}>
-            <div className="flex justify-between items-center mb-[var(--marginBtwElements)]">
-              <h3>STATION CHARGERS</h3>
+						<div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
+							{stationChargerList.map((charger, index) => (
+								<ChargersCard charger={charger} key={index} />
+							))}
+						</div>
+					</section>
 
-              <NavLink
-                to={{
-                  pathname: "/station/evChargers",
-                  search: `?stationId=${stationId}&companyId=${companyId}`,
-                }}
-              >
-                <button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
-                  See all chargers
-                </button>
-              </NavLink>
-            </div>
+					<section className={`mb-[var(--marginBtwSection)]`}>
+						<div
+							className={` flex items-center justify-between mb-1 `}
+						>
+							<div>
+								<h3>LAST 10 TRANSACTIONS</h3>
+							</div>
+							<div className="flex justify-between">
+								<CsvExport
+									data={transaction}
+									filename=" last 10 Transactions"
+                  tableRef={tableRef}
+								/>
+							</div>
+						</div>
 
-            <div className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
-              {stationChargerList.map((charger, index) => (
-                <ChargersCard charger={charger} key={index} />
-              ))}
-            </div>
-          </section>
-
-          <section className={`mb-[var(--marginBtwSection)]`}>
-            <div
-              className={`mb-[var(--marginBtwElements)] flex justify-between `}
-            >
-              <div>
-                <h3>LAST 10 TRANSACTIONS</h3>
-              </div>
-			  <div className="flex justify-between">
-              <div className=" bg-black text-white p-[0.5rem] rounded-md">
-                <CSVLink
-                  data={transaction}
-                  // headers={headers}
-                  filename="Transactions.csv"
-                  target="_blank"
-                >
-                  CSV Export
-                </CSVLink>
-              </div>
-              <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
-              </div>
-			  {/* <div>
-				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>
-			  </div> */}
-			  </div>
-            </div>
-
-            <div>
-              <Table
-                columns={Columns}
-                pagination={false}
-                dataSource={transaction}
-				
-              />
-            </div>
-          </section>
-          {TModal && (
-            <Modal closeModal={setModal}>
-              <TransactionDetails transactionId={transactionIdd} />
-            </Modal>
-          )}
-        </section>
-      )}
-    </>
-  );
+						<div     ref={tableRef}>
+							<Table
+								columns={Columns}
+								pagination={false}
+								dataSource={transaction}
+            
+							/>
+						</div>
+					</section>
+					{TModal && (
+						<Modal closeModal={setModal}>
+							<TransactionDetails transactionId={transactionIdd} />
+						</Modal>
+					)}
+				</section>
+			)}
+		</>
+	);
 }
