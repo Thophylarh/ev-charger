@@ -110,6 +110,8 @@ function App() {
 							<Route path="camera" element={<Camera />} />
 						</Route>
 
+						
+
 					</Route>
 
 				

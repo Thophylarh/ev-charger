@@ -1,5 +1,5 @@
 import { Table } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 import axios from "../../../lib/axiosInterceptor";
 
@@ -11,6 +11,8 @@ import CsvExport from "../../../components/exportComponent/csvExport";
 export default function CustomerList() {
   const [enrolled, setEnrolled] = useState(true);
   const [customers, setCustomers] = useState([]);
+
+  const tableRef = useRef();
 
   const id = localStorage.getItem("stationId");
   const compId = localStorage.getItem("id");
@@ -26,6 +28,8 @@ export default function CustomerList() {
       setCustomers(res.data);
     });
   };
+
+  
 
  
 
@@ -169,12 +173,12 @@ export default function CustomerList() {
           </div>
         </div>
   
-        <CsvExport data={customers} name={"customers"}/>
+        <CsvExport data={customers} name={"customers"} tableRef={tableRef}/>
         </div>
         
         
 
-        <Table columns={column} dataSource={customers} />
+        <Table columns={column} dataSource={customers} ref={tableRef}/>
       </section>
     </section>
   );

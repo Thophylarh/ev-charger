@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Table } from "antd";
+import { DatePicker } from "antd";
 import axios from "../../../lib/axiosInterceptor";
 import { formatNumber } from "../../../utils/formatNumber";
 import moment from "moment";
@@ -8,21 +9,37 @@ import activeDot from "../../../assets/svg/activeDot.svg";
 import eye from "../../../assets/svg/eye.svg";
 import Modal from "../../modals/modal";
 import TransactionDetails from "../../modals/transactionDetails";
-import { CSVLink } from "react-csv";
-import * as XLSX from "xlsx/xlsx.mjs";
 import CsvExport from "../../exportComponent/csvExport";
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
 
-const ReportTransactions = ({ stationId }) => {
+const { RangePicker } = DatePicker;
+
+const ReportTransactions = ({ stationId, selectedDate }) => {
 	const [TModal, setModal] = useState(false);
 	const [allTransactions, setAllTransactions] = useState([]);
 	const [transactionIdd, setTransactionIdd] = useState();
+	// const [selectedDate, setDate] = useState()
+
+
+	const tableRef = useRef()
 
 	//api call
 
 	//all station transactions
 	const CTransactions = () => {
+		let url;
+		if(selectedDate === "" || !selectedDate){
+			url = `/Transactions/get-all-transactions/station/${stationId}`;
+		}else{
+			// let splitDate = selectedDate.split(",")
+			// let start = selectedDate[0]
+			// let end = selectedDate[1]
+			
+			url= `/Transactions/get-all-transactions-by-date/station/${stationId}/${selectedDate[0]}/${selectedDate[1]}`;
+		}
 		axios
-			.get(`/Transactions/get-all-transactions/station/${stationId}`)
+			.get(url)
 			.then((res) => {
 				let index = 0;
 
@@ -34,10 +51,17 @@ const ReportTransactions = ({ stationId }) => {
 			});
 	};
 
+	
+	// //date picker function
+	// const selectDate = (date, dateString) =>{
+	// 	setDate(dateString)
+		
+	// }
+
 	//on mount get data
 	useEffect(() => {
 		CTransactions();
-	}, []);
+	}, [selectedDate]);
 
 	 //excel export
 	//  const handleExport = () => {
@@ -48,6 +72,21 @@ const ReportTransactions = ({ stationId }) => {
 	
 	// 	XLSX.writeFile(wb, "report.xlsx");
 	//   };
+
+		// pdf export 
+	const doc = new jsPDF('potrait','pt','a4')
+	
+
+	const exportPDF = () =>{
+
+		doc.html(document.querySelector('#report')).then(() => {
+			doc.save('report.pdf');
+		});
+		  
+		 
+	}
+
+	
 
 
 	const Columns = [
@@ -142,34 +181,20 @@ const ReportTransactions = ({ stationId }) => {
 
 	return (
 		<section>
-			<div className={`mb-[var(--marginBtwElements)] flex justify-between`}>
+			<div className={`mb-[var(--marginBtwElements)] align-center flex justify-between`}>
 				<h3> TRANSACTION LIST</h3>
-				{/* <div className="flex justify-between"> */}
-              {/* <div className="border border-solid border-gray-400  p-[0.5rem] rounded-md">
-                <CSVLink
-                  data={allTransactions}
-                  // headers={headers}
-                  filename="report.csv"
-                  target="_blank"
-                >
-                  CSV Export
-                </CSVLink>
-              </div> */}
-			  {/* <CsvExport data={allTransactions} name={"report"}/>
-              <div>
-                <button onClick={handleExport} className="border border-solid border-gray-400 p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
-              </div>
-			  
-			  </div> */}
+				{/* <RangePicker onChange={selectDate}/> */}
+				{/* <button onClick={exportPDF}>Pdf Export </button> */}
 
-			  <CsvExport data={allTransactions} name={"report"} />
+			  <CsvExport data={allTransactions} name={"report"} tableRef={tableRef} />
 			</div>
 
-			<div>
+			<div id="report">
 				<Table
 					columns={Columns}
 					pagination={false}
 					dataSource={allTransactions}
+					ref={tableRef}
 				/>
 			</div>
 			{TModal && (

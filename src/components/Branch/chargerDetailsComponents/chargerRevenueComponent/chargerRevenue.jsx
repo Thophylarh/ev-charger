@@ -29,7 +29,7 @@ const ChargerRevenue = ({chargerId, ChargerDetails}) =>{
     <div className="grid grid-cols-5 ">
         <div className="revenueBlock ">
             <h3>CHARGER REVENUE</h3>
-            <h6>NGN {formatNumber(ChargerRevenue.TotalRevenue, false)}</h6>
+            <h6>NGN {formatNumber(ChargerRevenue.totalRevenue, false) }</h6>
         </div>
 
         <div className="revenueBlock">

@@ -20,9 +20,12 @@ const CsvExport = ({ data, name, tableRef }) => {
 
 	// border border-solid border-gray-400 p-[0.5rem] rounded-md ml-[0.5rem]
 
+	//bg-black px-5 text-white py-3 h-[2.75rem] rounded
+
 	return (
-		<div className="flex justify-between text-sm">
-			<div className=" mr-2 bg-black px-5 text-white py-3 rounded cursor-pointer">
+		<div className="flex justify-between text-xs">
+			<div>
+			<div  className="mr-2 border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)] cursor-pointer">
 				<CSVLink
 					data={data}
 					// headers={headers}
@@ -32,10 +35,11 @@ const CsvExport = ({ data, name, tableRef }) => {
 					CSV Export
 				</CSVLink>
 			</div>
+			</div>
 			<div>
 				<button
 					onClick={handleExcelExport}
-					className="mr-2  bg-black px-5 text-white py-3 rounded  cursor-pointer"
+					className="mr-2 border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)] cursor-pointer"
 				>
 					Excel Export
 				</button>
@@ -44,7 +48,7 @@ const CsvExport = ({ data, name, tableRef }) => {
 			<div>
 				<ReactToPrint
 					trigger={() => (
-						<button className="bg-black px-5 text-white py-3 rounded  cursor-pointer">
+						<button className="mr-2 border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)] cursor-pointer">
 							Export PDF
 						</button>
 					)}
