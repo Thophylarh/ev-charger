@@ -25,6 +25,8 @@ export default function StationBilling() {
 	const [changeHIstory, setChangeHistory] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
+	const tableRef = useRef()
+
 	const [searchParams] = useSearchParams();
 
 	let companyId = searchParams.get("companyId");
@@ -205,35 +207,13 @@ export default function StationBilling() {
 					</section>
 
 					<section className={`mb-[var(--marginBtwSection)]`}>
-						<div className="flex justify-between">
+						<div className="flex justify-between items-center">
 							<h3 className={`mb-5`}>PRICE CHANGE LOG</h3>
-
-							<div className="flex justify-between">
-								<div className=" bg-black text-white p-[0.5rem] rounded-md ">
-									<CSVLink
-										data={billingLog}
-										// headers={headers}
-										filename="Transactions.csv"
-										target="_blank"
-									>
-										CSV Export
-									</CSVLink>
-								</div>
-								<div>
-									<button
-										onClick={handleExport}
-										className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]"
-									>
-										Excel export
-									</button>
-								</div>
-								{/* <div>
-				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>
-			  </div> */}
-							</div>
+							<CsvExport data={billingLog} name={"PriceChangeLog"} tableRef={tableRef} />
+							
 						</div>
 
-						<Table columns={column} dataSource={billingLog} pagination={true} />
+						<Table columns={column} dataSource={billingLog} pagination={true} ref={tableRef} />
 					</section>
 
 					{priceModal && (

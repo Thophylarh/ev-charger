@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 import { Table } from "antd";
 import axios from "../../lib/axiosInterceptor";
@@ -14,6 +14,8 @@ const Last10Transactions = (props) => {
   const [chargerTransactions, setchargerTransactions] = useState([]);
   const [TModal, setModal] = useState(false);
   const [transactionIdd, setTransactionIdd] = useState();
+
+  const tableRef = useRef()
 
   const id = props.chargerId;
 
@@ -130,17 +132,18 @@ const Last10Transactions = (props) => {
 
   return (
     <section>
-      <div className={`mb-[var(--marginBtwElements)] flex justify-between `}>
+      <div className={`mb-[var(--marginBtwElements)] items-center flex justify-between `}>
         <h3>LAST 10 TRANSACTIONS</h3>
 
-		<CsvExport data={chargerTransactions} name={"chargerTransactions"} />
+		<CsvExport data={chargerTransactions} name={"chargerTransactions"} tableRef={tableRef}  />
       </div>
 
-      <div>
+      <div   ref={tableRef}>
         <Table
           columns={Columns}
           pagination={false}
           dataSource={chargerTransactions}
+        
         />
       </div>
       {TModal && (
