@@ -275,7 +275,7 @@ export default function Dashboardd() {
                 <h3>LAST 10 TRANSACTIONS</h3>
               </div>
 			  <div className="flex justify-between">
-              <div className=" bg-black text-white p-[0.5rem] rounded-md">
+              <div className="border border-solid border-gray-400  p-[0.5rem] rounded-md">
                 <CSVLink
                   data={transaction}
                   // headers={headers}
@@ -286,7 +286,7 @@ export default function Dashboardd() {
                 </CSVLink>
               </div>
               <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
+                <button onClick={handleExport} className="border border-solid border-gray-400 p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
               </div>
 			  {/* <div>
 				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>

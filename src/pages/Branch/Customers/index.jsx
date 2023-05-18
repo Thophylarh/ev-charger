@@ -5,11 +5,8 @@ import axios from "../../../lib/axiosInterceptor";
 
 import eye from "../../../assets/svg/eye.svg";
 import { NavLink } from "react-router-dom";
+import CsvExport from "../../../components/exportComponent/csvExport";
 
-import { CSVLink } from "react-csv";
-import * as XLSX from "xlsx/xlsx.mjs";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
 
 export default function CustomerList() {
   const [enrolled, setEnrolled] = useState(true);
@@ -30,15 +27,7 @@ export default function CustomerList() {
     });
   };
 
-  //excel export
-  const handleExport = () => {
-    let wb = XLSX.utils.book_new();
-    let ws = XLSX.utils.json_to_sheet(customers);
-
-    XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-    XLSX.writeFile(wb, "customers.xlsx");
-  };
+ 
 
   useEffect(() => {
     getCustomers();
@@ -124,6 +113,7 @@ export default function CustomerList() {
   return (
     <section>
       <section className={`mb-[var(--marginBtwSection)]`}>
+       
         <div className={`flex justify-between items-center `}>
           <div>
             <h4 className="mb-[8px]">Customers</h4>
@@ -140,6 +130,7 @@ export default function CustomerList() {
       </section>
 
       <section className={`mb-[var(--marginBtwSection)]`}>
+        <div className="flex justify-between">
         <div
           className={`flex justify-between w-[24rem] h-[4rem] bg-[var(--grey10)] items-center`}
         >
@@ -176,30 +167,12 @@ export default function CustomerList() {
               NEW CUSTOMERS
             </h5>
           </div>
-          <div className="flex justify-between">
-            <div className=" bg-black text-white p-[0.5rem] rounded-md  ">
-              <CSVLink
-                data={customers}
-                // headers={headers}
-                filename="customers.csv"
-                target="_blank"
-              >
-                CSV Export
-              </CSVLink>
-            </div>
-            <div>
-              <button
-                onClick={handleExport}
-                className=" bg-black text-white p-[0.5rem] rounded-md"
-              >
-                Excel export
-              </button>
-            </div>
-            {/* <div>
-				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md"> Excel pdf</button>
-			  </div> */}
-          </div>
         </div>
+  
+        <CsvExport data={customers} name={"customers"}/>
+        </div>
+        
+        
 
         <Table columns={column} dataSource={customers} />
       </section>
