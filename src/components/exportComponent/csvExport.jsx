@@ -22,7 +22,7 @@ const CsvExport = ({ data, name, tableRef }) => {
 
 	return (
 		<div className="flex justify-between text-sm">
-			<div className=" mr-2 bg-black px-5 text-white py-3 rounded cursor-pointer">
+			<div className=" mr-2 bg-black px-5 text-white py-3 h-[2.75rem] rounded cursor-pointer">
 				<CSVLink
 					data={data}
 					// headers={headers}
