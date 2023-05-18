@@ -81,7 +81,7 @@ const EditPrice = ({ closeModal, details, setReloadPage }) => {
 			<form onSubmit={handleSubmit}>
 				<div>
 					<label className="block font-semibold text-[#344054] text-[0.875rem] mb-[8px]">
-						CURRENT PRICE
+					Current Price
 					</label>
 					<input
 						defaultValue={details.prevPrice}
@@ -99,7 +99,7 @@ const EditPrice = ({ closeModal, details, setReloadPage }) => {
 						name="price"
 						type="number"
 						step='any'
-						placeholder="Enter new price"
+						placeholder="0.00"
 						className="w-[100%] p-[0.875rem] border border-[#D0D5DD] rounded-lg mb-[20px]"
 						required
 					/>

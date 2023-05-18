@@ -47,7 +47,7 @@ export default function CustomerDetailsCard({ isActive }) {
 								className="mb-[1.25rem]"
 							/>
 						</div>
-						<h3 className="text-base text-[#66708550]">You don’t have a 3rd vehicle</h3>
+						<h3 className="text-base text-[#66708550]">You don’t have a vehicle at the moment</h3>
 					</div>
 				</div>
 			)}

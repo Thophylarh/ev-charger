@@ -1,8 +1,17 @@
-export const formatNumber = (number, naira) => {
-	let num = Number(number)
+export const formatNumber = (number, naira, decimalPlace) => {
+	let num = Number(number);
+
 	if (num) {
 		if (!naira) {
-			return num?.toLocaleString()
+			if (!decimalPlace) {
+				return num?.toLocaleString();
+			}
+			if (!naira && decimalPlace) {
+				return `${num?.toLocaleString("en", {
+					minimumFractionDigits: decimalPlace,
+					maximumFractionDigits: decimalPlace,
+				})}`;
+			}
 		} else {
 			return `₦${num?.toLocaleString(undefined, {
 				minimumFractionDigits: 2,

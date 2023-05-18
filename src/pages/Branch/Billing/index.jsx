@@ -181,7 +181,7 @@ export default function StationBilling() {
 					</section>
 
 					<section className={`mb-[var(--marginBtwSection)]`}>
-						<div className=" grid grid-cols-12  gap-4  ">
+						<div className=" grid grid-cols-12  gap-2  ">
 							<div className="  col-span-9">
 								<CICEBilling openModal={openModal} price={cicePrice} />
 
@@ -192,7 +192,7 @@ export default function StationBilling() {
 
 							<div className="  col-span-3 items-start   ">
 								<h3 className={` pl-4 mb-3`}>PRICE CHANGE HISTORY</h3>
-								<div className="p-4  max-h-[80vh] overflow-y-auto">
+								<div className="py-4 px-3  max-h-[80vh] overflow-y-auto">
 									<div className="h-[100%] ">
 										{/* CICE PRICE */}
 										{latestChange?.map((history, index) => (
