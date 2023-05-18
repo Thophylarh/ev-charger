@@ -9,7 +9,7 @@ import moment from "moment";
 
 function Hero(props) {
 	let revenue = props.revenue;
-	let TotalRevenue = revenue.TotalRevenue;
+	let TotalRevenue = revenue.totalRevenue;
 	let graphData = props.graphData;
 
 	let mappedGraph = graphData.map((data) => {

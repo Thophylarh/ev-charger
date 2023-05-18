@@ -21,11 +21,11 @@ export default function CustomerDetails() {
 
 	const getCustomerDetails =  () => {
 		axios.get(`customers/get-customer-by-id/${cusId}`).then((res) => {
-			let index = 0;
+			// let index = 0;
 
-			res?.data?.forEach((el) => {
-				el.index = ++index;
-			});
+			// res?.data?.forEach((el) => {
+			// 	el.index = ++index;
+			// });
 		console.log(res?.data);
 			setMoneySpent(res?.data[0]?.TotalAmountSpent);
 
@@ -173,9 +173,9 @@ export default function CustomerDetails() {
 					</div>
 				</section>
 
-				<section className={`mb-[var(--marginBtwSection)]`}>
+				{/* <section className={`mb-[var(--marginBtwSection)]`}>
 					<Table columns={column} dataSource={details} />
-				</section>
+				</section> */}
 			</section>
 		</section>
 	);

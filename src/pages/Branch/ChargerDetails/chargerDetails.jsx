@@ -15,6 +15,7 @@ import Loader from "../../../components/Loader";
 
 
 
+
 export default function Details() {
     const [chargersDetails, setChargerDetails] = useState([]);
     const [PowerModal, setPModal] = useState(false)
