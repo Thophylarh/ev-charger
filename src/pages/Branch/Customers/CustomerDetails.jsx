@@ -19,7 +19,7 @@ export default function CustomerDetails() {
 
 	let cusId = searchParams.get("cus");
 
-	const getCustomerDetails = async () => {
+	const getCustomerDetails =  () => {
 		axios.get(`customers/get-customer-by-id/${cusId}`).then((res) => {
 			let index = 0;
 

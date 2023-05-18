@@ -1,7 +1,10 @@
 import React from "react";
 import { formatDate } from "../../../utils/formatDate";
+import moment from "moment";
 
 export default function PriceChangeCard({history}) {
+
+	console.log(history)
 	return (
 		<div
 			key={history.id}
@@ -14,7 +17,8 @@ export default function PriceChangeCard({history}) {
 
 				<p className={`text-xs text-[var(--grey500)]`}>
 					{" "}
-					{formatDate(history.updatedAt)}
+					{moment(history.updatedAt).format('MMMM d, YYYY') }
+					
 				</p>
 			</div>
 

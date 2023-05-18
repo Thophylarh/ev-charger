@@ -154,7 +154,7 @@ const Last10Transactions = (props) => {
                 </CSVLink>
               </div>
               <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md">Excel export</button>
+                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
               </div>
 			  
 			  </div>

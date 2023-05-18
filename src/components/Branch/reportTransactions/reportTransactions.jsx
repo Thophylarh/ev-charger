@@ -142,7 +142,7 @@ const ReportTransactions = ({ stationId }) => {
 	return (
 		<section>
 			<div className={`mb-[var(--marginBtwElements)] flex justify-between`}>
-				<h3>LAST 10 TRANSACTIONS</h3>
+				<h3> TRANSACTION LIST</h3>
 				<div className="flex justify-between">
               <div className=" bg-black text-white p-[0.5rem] rounded-md">
                 <CSVLink
@@ -155,7 +155,7 @@ const ReportTransactions = ({ stationId }) => {
                 </CSVLink>
               </div>
               <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md">Excel export</button>
+                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
               </div>
 			  
 			  </div>

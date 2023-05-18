@@ -82,7 +82,7 @@ export default function Dashboardd() {
     getListOfChargers();
   }, []);
 
-
+// console.log(transaction)
   //excel export
   const handleExport = () => {
     let wb = XLSX.utils.book_new();
@@ -94,24 +94,30 @@ export default function Dashboardd() {
   };
 
   const pdfData = transaction.map((trans)=>{
-	return trans
+	return (
+		[
+			trans.id,
+			trans.batteryStateOfChargeAtEnd,
+			trans.batteryStateOfChargeAtStart
+
+		]
+	)
   })
 
 	//pdf export 
-	const doc = new jsPDF()
+	// const doc = new jsPDF()
 
-	const exportPDF = () =>{
+	// const exportPDF = () =>{
 
-		autoTable(doc, {
-			// head: [['Name', 'Email', 'Country']],
-			body: [
-			pdfData
-			],
-		  })
+	// 	autoTable(doc, {
+	// 		// head: [['Name', 'Email', 'Country']],
+	// 		body: transaction,
+	// 	  })
 		  
-		  doc.save('transactions.pdf')
-	}
+	// 	  doc.save('transactions.pdf')
+	// }
 
+	
 	
 
 
@@ -280,11 +286,11 @@ export default function Dashboardd() {
                 </CSVLink>
               </div>
               <div>
-                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md">Excel export</button>
+                <button onClick={handleExport} className=" bg-black text-white p-[0.5rem] rounded-md ml-[0.5rem]">Excel export</button>
               </div>
-			  <div>
-				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md"> Excel pdf</button>
-			  </div>
+			  {/* <div>
+				<button onClick={exportPDF} className=" bg-black text-white p-[0.5rem] rounded-md">PDF export</button>
+			  </div> */}
 			  </div>
             </div>
 
@@ -293,6 +299,7 @@ export default function Dashboardd() {
                 columns={Columns}
                 pagination={false}
                 dataSource={transaction}
+				
               />
             </div>
           </section>
