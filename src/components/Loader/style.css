@@ -6,8 +6,8 @@ div.pulse-wrapper {
     }
     
     div.pulse {
-      height: 50px;
-      width: 50px;
+      height: 90px;
+      width: 90px;
       
       border-radius: 50%;
       animation: pulse 1.5s infinite;
