@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
-import CsvExport from "../../../components/exportComponent/csvExport";
+import ExportFile from "../../../components/exportComponent/ExportFile";
 
 export default function StationBilling() {
 	const [reloadPage, setReloadPage] = useState(false);
@@ -25,7 +25,7 @@ export default function StationBilling() {
 	const [changeHIstory, setChangeHistory] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
-	const tableRef = useRef()
+	const tableRef = useRef();
 
 	const [searchParams] = useSearchParams();
 
@@ -209,11 +209,23 @@ export default function StationBilling() {
 					<section className={`mb-[var(--marginBtwSection)]`}>
 						<div className="flex justify-between items-center">
 							<h3 className={`mb-5`}>PRICE CHANGE LOG</h3>
-							<CsvExport data={billingLog} name={"PriceChangeLog"} tableRef={tableRef} />
-							
+							<ExportFile
+								data={billingLog}
+								name={"Price Change Log"}
+								tableRef={tableRef}
+							/>
 						</div>
 
-						<Table columns={column} dataSource={billingLog} pagination={true} ref={tableRef} />
+						<Table columns={column} dataSource={billingLog} pagination={true} />
+						<div style={{ position: "absolute", top: "-9999px" }}>
+							<div ref={tableRef}>
+								<Table
+									columns={column}
+									dataSource={billingLog}
+									pagination={false}
+								/>
+							</div>
+						</div>
 					</section>
 
 					{priceModal && (

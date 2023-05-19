@@ -14,17 +14,13 @@ import eye from "../../../assets/svg/eye.svg";
 
 import StationDashboardOverview from "../../../components/Branch/DashboardComponents/Overview";
 import ChartOverview from "../../../components/Branch/DashboardComponents/ChartOverview";
-import Column from "../../../utils/columns";
 
 import Modal from "../../../components/modals/modal";
 import TransactionDetails from "../../../components/modals/transactionDetails";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
-import { CSVLink } from "react-csv";
-import * as XLSX from "xlsx/xlsx.mjs";
-import jsPDF from "jspdf";
-import autoTable from "jspdf-autotable";
-import CsvExport from "../../../components/exportComponent/csvExport";
+import ExportFile from "../../../components/exportComponent/ExportFile";
+import ReactToPrint from "react-to-print";
 
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
@@ -39,7 +35,7 @@ export default function Dashboardd() {
 
 	let companyId = searchParams.get("companyId");
 
-  const tableRef = useRef()
+	const tableRef = useRef();
 	// API CALLS
 
 	//last 10 transactions
@@ -49,9 +45,7 @@ export default function Dashboardd() {
 			.then((res) => {
 				let index = 0;
 
-			
-
-				res.data.sort((a,b)=>b.id-a.id)
+				res.data.sort((a, b) => b.id - a.id);
 				res.data.forEach((el) => {
 					el.index = ++index;
 				});
@@ -86,41 +80,6 @@ export default function Dashboardd() {
 		getTransactions();
 		getListOfChargers();
 	}, []);
-
-	// console.log(transaction)
-	//excel export
-	const handleExport = () => {
-		let wb = XLSX.utils.book_new();
-		let ws = XLSX.utils.json_to_sheet(transaction);
-
-		XLSX.utils.book_append_sheet(wb, ws, "Sheet1");
-
-		XLSX.writeFile(wb, "stationTransactions.xlsx");
-	};
-
-	// const pdfData = transaction.map((trans)=>{
-	// return (
-	// 	[
-	// 		trans.id,
-	// 		trans.batteryStateOfChargeAtEnd,
-	// 		trans.batteryStateOfChargeAtStart
-
-	// 	]
-	// )
-	// })
-
-	//pdf export
-	// const doc = new jsPDF()
-
-	// const exportPDF = () =>{
-
-	// 	autoTable(doc, {
-	// 		// head: [['Name', 'Email', 'Country']],
-	// 		body: transaction,
-	// 	  })
-
-	// 	  doc.save('transactions.pdf')
-	// }
 
 	//table columns
 	const Columns = [
@@ -185,6 +144,7 @@ export default function Dashboardd() {
 			title: "Status",
 			dataIndex: "transactionStatus",
 			key: "transactionStatus",
+
 			render: (transactionStatus) => (
 				<button className="flex justify-between">
 					<img
@@ -200,8 +160,9 @@ export default function Dashboardd() {
 		},
 		{
 			title: "",
-			dataIndex: "transactionId",
-			key: "",
+			dataIndex: "action",
+			key: "action",
+
 			render: (text, record) => (
 				<button
 					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
@@ -216,6 +177,10 @@ export default function Dashboardd() {
 			),
 		},
 	];
+
+	const getColumnsToPrint = () => {
+		return Columns.filter((column) => column.key !== "action");
+	};
 
 	return (
 		<>
@@ -269,14 +234,12 @@ export default function Dashboardd() {
 					</section>
 
 					<section className={`mb-[var(--marginBtwSection)]`}>
-						<div
-							className={` flex items-center justify-between mb-1 `}
-						>
+						<div className={` flex items-center justify-between mb-1 `}>
 							<div>
 								<h3>LAST 10 TRANSACTIONS</h3>
 							</div>
 							<div className="flex justify-between">
-								<CsvExport
+								<ExportFile
 									data={transaction}
 									name="Last 10 Transactions"
                   					tableRef={tableRef}
@@ -284,13 +247,23 @@ export default function Dashboardd() {
 							</div>
 						</div>
 
-						<div     ref={tableRef}>
+						<div>
 							<Table
 								columns={Columns}
 								pagination={false}
 								dataSource={transaction}
-            
 							/>
+
+							<div style={{ position: "absolute", top: "-9999px" }}>
+								<div>
+								
+									<Table
+										ref={tableRef}
+										dataSource={transaction}
+										columns={getColumnsToPrint()}
+									/>
+								</div>
+							</div>
 						</div>
 					</section>
 					{TModal && (

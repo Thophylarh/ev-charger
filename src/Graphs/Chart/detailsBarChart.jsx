@@ -69,8 +69,8 @@ const BarChart = ({month, BmsData, ACData, dcRevenue}) => {
 					},
 					y: {
 						display: true,
-						min: 0,
-						max: 50000,
+						// min: 0,
+						// max: 50000,
 						grid:{
 							display: false,
 							color: "#eee",

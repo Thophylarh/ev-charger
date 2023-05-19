@@ -4,6 +4,7 @@ import { formatNumber } from "../../utils/formatNumber";
 
 const BarChart = ({ details }) => {
 	let months = details.map((el) => {
+		
 		if (el.day) {
 			return `${moment(el.month, "M").format("MMM")} ${el.day}`;
 		}
@@ -11,11 +12,11 @@ const BarChart = ({ details }) => {
 		return moment(el.month, "M").format("MMM");
 	});
 
-	let numbers = details.map((el) => {
-		return Math.max(el.acRevenue, el.dcRevenue, el.bmsRevenue);
-	});
+	// let numbers = details.map((el) => {
+	// 	return Math.max(el.acRevenue, el.dcRevenue, el.bmsRevenue);
+	// });
 
-	let highestNumber = Math.ceil(Math.max(...numbers));
+	// let highestNumber = Math.ceil(Math.max(...numbers));
 
 	return (
 		<Bar
@@ -84,8 +85,8 @@ const BarChart = ({ details }) => {
 					},
 					y: {
 						display: true,
-						min: 0,
-						max: highestNumber,
+						// min: 0,
+						// max: highestNumber,
 						grid: {
 							display: false,
 							color: "#eee",
