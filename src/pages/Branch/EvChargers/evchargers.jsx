@@ -103,7 +103,7 @@ export default function EvChargers() {
         <section className={`mb-[var(--marginBtwSection)]`}>
           <h4>Ev Chargers</h4>
           <p className="subHeader">
-            Monitor your charger revenue, status, and energy consumption
+            
           </p>
         </section>
   
