@@ -27,6 +27,7 @@ const Last10Transactions = (props) => {
 			.then((res) => {
 				let index = 0;
 
+				res.data?.sort((a,b)=>b?.id -a?.id)
 				res.data.forEach((el) => {
 					el.index = ++index;
 				});
