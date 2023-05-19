@@ -25,7 +25,7 @@ export default function PriceChangeCard({ history }) {
 
 			<div className={`flex justify-between items-center`}>
 				<div className="text-[var(--grey600)]">
-					<h6 className={` font-bold text-sm`}>
+					<h6 className={` font-bold text-sm ali`}>
 						{" "}
 						NGN {formatNumber(history.previousCostPerUnitCharge, false, 2)}/kw
 					</h6>
@@ -38,7 +38,7 @@ export default function PriceChangeCard({ history }) {
 				</p>
 
 				<div className="text-[var(--primaryGreen500)]">
-					<h6 className={` font-medium text-base`}>
+					<h6 className={` font-medium text-base ali`}>
 						NGN {formatNumber(history.costPerUnitCharge, false, 2)}/kw
 					</h6>
 					<p className={`text-xs`}>new price</p>
