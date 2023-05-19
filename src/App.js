@@ -15,7 +15,7 @@ import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 import Camera from "./pages/Branch/LiveFeed/camera";
 import Sales from "./pages/Branch/Sales/sales";
 import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
-import LiveCamera from "./pages/Branch/LiveFeed/camera"
+import LiveCamera from "./pages/Branch/LiveFeed/camera";
 
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
@@ -27,11 +27,11 @@ import Dashboardd from "./pages/Branch/Dashboard/dashboard";
 import StationLayout from "./layouts/Station/StationLayout";
 import EvChargers from "./pages/Branch/EvChargers/evchargers";
 import StationBilling from "./pages/Branch/Billing";
-import Details from "./pages/Branch/ChargerDetails/chargerDetails"
+import Details from "./pages/Branch/ChargerDetails/chargerDetails";
 import ReportSales from "./pages/Branch/ReportSales/reportSales";
 import SignUp from "./pages/customer/signup/signup";
 import CarInfo from "./pages/customer/carInformation/carInfo";
-import Wallet from "./pages/customer/Wallet/wallet"
+import Wallet from "./pages/customer/Wallet/wallet";
 import CustomerList from "./pages/Branch/Customers";
 import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
 
@@ -55,7 +55,7 @@ function App() {
 					{/* COMPANY ROUTES */}
 					<Route element={<LayoutsWithCompanyNavbar />}>
 						<Route element={<ProtectedRoutes />}>
-							<Route element={<CompanyDash />} path="/company" />
+							<Route element={<CompanyDash />} path="/company" index />
 						</Route>
 
 						<Route element={<ProtectedRoutes />}>
@@ -68,7 +68,6 @@ function App() {
 						</Route>
 
 						<Route element={<ProtectedRoutes />}>
-						
 							<Route element={<Billing />} path="/company/billing" />
 						</Route>
 					</Route>
@@ -79,7 +78,6 @@ function App() {
 
 					<Route path="/station" element={<StationLayout />}>
 						<Route element={<ProtectedRoutes />}>
-							{" "}
 							<Route element={<Dashboardd />} path="" />
 						</Route>
 						<Route element={<ProtectedRoutes />}>
@@ -87,7 +85,7 @@ function App() {
 						</Route>
 
 						<Route element={<ProtectedRoutes />}>
-						<Route  path="billing" element={<StationBilling />} />
+							<Route path="billing" element={<StationBilling />} />
 						</Route>
 						<Route element={<ProtectedRoutes />}>
 							<Route path="details" element={<Details />} />
@@ -96,11 +94,9 @@ function App() {
 							<Route path="report" element={<ReportSales />} />
 						</Route>
 
-						
 						<Route element={<ProtectedRoutes />}>
 							<Route path="customer/details" element={<CustomerDetails />} />
 						</Route>
-
 
 						<Route element={<ProtectedRoutes />}>
 							<Route path="customers" element={<CustomerList />} />
@@ -109,19 +105,14 @@ function App() {
 						<Route element={<ProtectedRoutes />}>
 							<Route path="camera" element={<Camera />} />
 						</Route>
-
-						
-
 					</Route>
 
-				
-					
 					<Route path="/station" element={<Station />}></Route>
 					<Route path="/changePassword" element={<ChangePassword />}></Route>
-					
-					<Route path="/signup" element={<SignUp/>}></Route>
-					<Route path="/carInformation" element={<CarInfo/>}></Route>
-					<Route path="/wallet" element={<Wallet/>}></Route>
+
+					<Route path="/signup" element={<SignUp />}></Route>
+					<Route path="/carInformation" element={<CarInfo />}></Route>
+					<Route path="/wallet" element={<Wallet />}></Route>
 
 					{/* station section */}
 					{/* <Route path="/station" element={<LayoutsWithNavbar />}>

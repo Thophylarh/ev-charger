@@ -5,7 +5,7 @@ import axios from "../../../lib/axiosInterceptor";
 
 import eye from "../../../assets/svg/eye.svg";
 import { NavLink } from "react-router-dom";
-import CsvExport from "../../../components/exportComponent/csvExport";
+import ExportFile from "../../../components/exportComponent/ExportFile";
 
 
 export default function CustomerList() {
@@ -96,8 +96,8 @@ export default function CustomerList() {
     },
     {
       title: "",
-      dataIndex: "",
-      key: "",
+			dataIndex: "action",
+			key: "action",
       render: (text, record) => (
         <NavLink
           to={{
@@ -114,6 +114,10 @@ export default function CustomerList() {
       width: "20%",
     },
   ];
+
+  const getColumnsToPrint = () => {
+		return column.filter((column) => column.key !== "action");
+	};
 
   return (
     <section>
@@ -152,7 +156,7 @@ export default function CustomerList() {
                 enrolled ? " text-black" : "text-[var(--grey500)]"
               }`}
             >
-              ENROLLED
+             PAYG
             </h5>
           </div>
 
@@ -174,12 +178,22 @@ export default function CustomerList() {
           </div>
         </div>
   
-        <CsvExport data={customers} name={"customers"} tableRef={tableRef}/>
+        <ExportFile data={customers} name={"customers"} tableRef={tableRef}/>
+
+        <div style={{ position: "absolute", top: "-9999px" }}>
+							<div ref={tableRef}>
+								<Table
+									columns={getColumnsToPrint()}
+									dataSource={customers}
+									pagination={false}
+								/>
+							</div>
+						</div>
         </div>
         
         
 
-        <Table columns={column} dataSource={customers} ref={tableRef}/>
+        <Table columns={column} dataSource={customers} />
       </section>
     </section>
   );
