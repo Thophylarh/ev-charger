@@ -278,8 +278,8 @@ export default function Dashboardd() {
 							<div className="flex justify-between">
 								<CsvExport
 									data={transaction}
-									filename=" last 10 Transactions"
-                  tableRef={tableRef}
+									name="Last 10 Transactions"
+                  					tableRef={tableRef}
 								/>
 							</div>
 						</div>

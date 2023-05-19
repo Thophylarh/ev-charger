@@ -53,7 +53,7 @@ const CsvExport = ({ data, name, tableRef }) => {
 						</button>
 					)}
 					content={() => tableRef.current}
-          documentTitle={name}
+         			 documentTitle={"Last 10"}
 				/>
 			</div>
 		</div>

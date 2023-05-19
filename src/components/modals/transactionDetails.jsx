@@ -9,6 +9,7 @@ import { renderStatus } from "../../utils/renderStatus";
 import Loader from "../Loader";
 import { toast } from "react-toastify";
 import SecondLoader from "../Loader/secondLoader";
+import { chargerType } from "../../utils/chargerType";
 
 const TDetails = ({ transactionId }) => {
 	const [details, setDetails] = useState();
@@ -72,7 +73,7 @@ const TDetails = ({ transactionId }) => {
 							<h6 className="text-[1rem] text-[#667084]">Charger Type: </h6>
 
 							<h3 className="text-[1rem] text-[#667084] font-semibold">
-								{details?.chargerType?.toUpperCase()}
+								{chargerType(details?.chargerType?.toUpperCase()) }
 							</h3>
 						</div>
 						<div className="flex justify-between items-center mb-[1rem] ">
