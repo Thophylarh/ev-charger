@@ -37,6 +37,7 @@ import Sidebar from "./components/Sidebar/sidebar";
 //Customer
 import CarInfo from "./pages/customer/carInformation/carInfo";
 import Wallet from "./pages/customer/Wallet/wallet";
+import CusLogin from "./pages/customer/customerLogin/CLogin"
 
 function App() {
 	return (
@@ -122,6 +123,7 @@ function App() {
 					<Route path="/signup" element={<SignUp />}></Route>
 					<Route path="/carInformation" element={<CarInfo />}></Route>
 					<Route path="/wallet" element={<Wallet />}></Route>
+					<Route path="/Login" element={<CusLogin/>}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
