@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getToken } from "../utils/getToken";
 
-let token = getToken();
 const instance = axios.create({
 	baseURL: "http://evapi.estations.com",
 	headers: {
@@ -16,9 +15,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
 	(config) => {
-		if (token) {
-			config.headers["Authorization"] = `Bearer ${token}`;
-		}
+		let token = getToken();
+		console.log(token);
+		config.headers["Authorization"] = `Bearer ${token}`;
+		
+
 		return config;
 	},
 	(error) => {
@@ -34,8 +35,7 @@ instance.interceptors.response.use(
 		const originalRequest = error.config;
 
 		if (error.response.status === 401) {
-		
-			localStorage.clear()
+			localStorage.clear();
 			window.location.href = "/";
 			return Promise.reject(error);
 		}

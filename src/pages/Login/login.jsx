@@ -65,12 +65,10 @@ const Login = () => {
 				}
 			)
 			.then((res) => {
+				localStorage.setItem("user-token", res.data.token);
+				localStorage.setItem("id", res.data.id);
 				setIsLoading(false);
 
-				const response = res.data;
-				console.log(response);
-				window.localStorage.setItem("user-token", res.data.token);
-				window.localStorage.setItem("id", res.data.id);
 				const passwordFirstLoginStatus = res.data.passwordFirstLoginStatus;
 				setEmail("");
 				setPassWord("");
@@ -84,7 +82,7 @@ const Login = () => {
 			.catch((err) => {
 				console.log(err);
 
-				toast.error(err.message);
+				toast.error(err.response.data.title);
 				setIsLoading(false);
 				// if (err.response.data.status === 400) {
 
@@ -97,7 +95,6 @@ const Login = () => {
 
 	const style = {
 		background: `linear-gradient(0deg, rgba(16, 24, 40, 0.89), rgba(16, 24, 40, 0.89)), url(${loginScreen})`,
-
 	};
 	return (
 		<section className=" h-[100vh] flex bg-no-repeat bg-cover" style={style}>
