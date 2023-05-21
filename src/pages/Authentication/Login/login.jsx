@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import StationCharge from "../../assets/images/station-charge.png";
-import Star from "../../assets/svg/star.svg";
-import Padlock from "../../assets/svg/padlock.svg";
-import loginScreen from "../../assets/images/cameraImg.png";
-import Email from "../../assets/svg/email.svg";
-import Dot from "../../assets/svg/activeDot.svg";
-import GreyDot from "../../assets/svg/greyDot.svg";
-import Logo from "../../assets/svg/logo.svg";
+import StationCharge from "../../../assets/images/station-charge.png";
+import Star from "../../../assets/svg/star.svg";
+import Padlock from "../../../assets/svg/padlock.svg";
+import loginScreen from "../../../assets/images/cameraImg.png";
+import Email from "../../../assets/svg/email.svg";
+import Dot from "../../../assets/svg/activeDot.svg";
+import GreyDot from "../../../assets/svg/greyDot.svg";
+import Logo from "../../../assets/svg/logo.svg";
 import "./style.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
-import { getToken } from "../../utils/getToken";
+import { getToken } from "../../../utils/getToken";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 

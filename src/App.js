@@ -1,9 +1,27 @@
 import React from "react";
-import Login from "./pages/Login/login";
-import Sidebar from "./components/Sidebar/sidebar";
-import SpecificCharger from "./pages/Branch/ChargerDetails/specificCharger";
-import EvCharger from "./pages/Branch/EvChargers/evCharger";
-import ChangePassword from "./pages/changePassword/changePassword";
+
+import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//Authentication
+import SignUp from "./pages/customer/signup/signup";
+import Login from "./pages/Authentication/Login/login";
+import ChangePassword from "./pages/Authentication/changePassword/changePassword";
+
+//Station
+import StationLayout from "./layouts/Station/StationLayout";
+import Dashboardd from "./pages/Branch/Dashboard/dashboard";
+import EvChargers from "./pages/Branch/EvChargers/evchargers";
+import StationBilling from "./pages/Branch/Billing";
+import CustomerList from "./pages/Branch/Customers";
+import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
+import Details from "./pages/Branch/ChargerDetails/chargerDetails";
+import ReportSales from "./pages/Branch/ReportSales/reportSales";
+import Camera from "./pages/Branch/LiveFeed/camera";
+
+//Company
 import Station from "./components/station/station";
 import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations";
 import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
@@ -11,29 +29,14 @@ import CompanySideBar from "./components/Company/companySidebar/companySidebar";
 import CompanyReport from "./pages/CompanyDashboard/Report/report";
 import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 
-// import Chargers from "./components/Chargers/chargers";
-import Camera from "./pages/Branch/LiveFeed/camera";
-import Sales from "./pages/Branch/Sales/sales";
-import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
-import LiveCamera from "./pages/Branch/LiveFeed/camera";
-
+//Components
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
+import Sidebar from "./components/Sidebar/sidebar";
 
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import CompanyLayout from "./layouts/Station/StationLayout";
-import Dashboardd from "./pages/Branch/Dashboard/dashboard";
-import StationLayout from "./layouts/Station/StationLayout";
-import EvChargers from "./pages/Branch/EvChargers/evchargers";
-import StationBilling from "./pages/Branch/Billing";
-import Details from "./pages/Branch/ChargerDetails/chargerDetails";
-import ReportSales from "./pages/Branch/ReportSales/reportSales";
-import SignUp from "./pages/customer/signup/signup";
+//Customer
 import CarInfo from "./pages/customer/carInformation/carInfo";
 import Wallet from "./pages/customer/Wallet/wallet";
-import CustomerList from "./pages/Branch/Customers";
-import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
 
 function App() {
 	return (
@@ -45,7 +48,7 @@ function App() {
 						path="/"
 						element={
 							<AuthRoutes>
-								<Login />{" "}
+								<Login />
 							</AuthRoutes>
 						}
 					/>
@@ -73,8 +76,6 @@ function App() {
 					</Route>
 
 					{/* STATION ROUTES */}
-
-					{/* NEW */}
 
 					<Route path="/station" element={<StationLayout />}>
 						<Route element={<ProtectedRoutes />}>
@@ -108,41 +109,19 @@ function App() {
 					</Route>
 
 					<Route path="/station" element={<Station />}></Route>
-					<Route path="/changePassword" element={<ChangePassword />}></Route>
-
-					<Route path="/signup" element={<SignUp />}></Route>
-					<Route path="/carInformation" element={<CarInfo />}></Route>
-					<Route path="/wallet" element={<Wallet />}></Route>
-
-					{/* station section */}
-					{/* <Route path="/station" element={<LayoutsWithNavbar />}>
 					<Route
-						path="/station"
+						path="/changePassword"
 						element={
-							<Protected>
-								<Dashboard />
-							</Protected>
+							<AuthRoutes>
+								<ChangePassword />
+							</AuthRoutes>
 						}
 					></Route>
 
-					<Route path="/station/evChargers" element={<EvCharger />}></Route>
-					<Route
-						path="/station/chargerDetails"
-						element={<SpecificCharger />}
-					></Route>
-					<Route path="/station/billing" element={<StationBilling />}></Route>
-					<Route path="/station/sales" element={<Sales />}></Route>
-					<Route path="/station/chargers" element={<Chargers />}></Route>
-					<Route path="/station/camera" element={<Camera />}></Route>
-				</Route> */}
-
-					{/* //company side */}
-					{/* <Route path="/companyDash" element={<LayoutsWithCompanyNavbar/>}>
-        <Route path="/companyDash" element={<CompanyDash/>}></Route>
-        <Route path="/companyDash/myStations" element={<ListOfStations />}></Route>
-        <Route path="/companyDash/report" element={<CompanyReport/>}></Route>
-        <Route path="/companyDash/billing" element={<Billing/>}></Route>
-        </Route> */}
+					{/* CUSTOMER ROUTES */}
+					<Route path="/signup" element={<SignUp />}></Route>
+					<Route path="/carInformation" element={<CarInfo />}></Route>
+					<Route path="/wallet" element={<Wallet />}></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
