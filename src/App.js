@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //Authentication
-import SignUp from "./pages/customer/signup/signup";
+import SignUp from "./pages/Customer/signup/signup";
 import Login from "./pages/Authentication/Login/login";
 import ChangePassword from "./pages/Authentication/changePassword/changePassword";
 
@@ -35,8 +35,8 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import Sidebar from "./components/Sidebar/sidebar";
 
 //Customer
-import CarInfo from "./pages/customer/carInformation/carInfo";
-import Wallet from "./pages/customer/Wallet/wallet";
+import CarInfo from "./pages/Customer/carInformation/carInfo";
+import Wallet from "./pages/Customer/Wallet/wallet";
 
 function App() {
 	return (
