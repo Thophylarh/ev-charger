@@ -41,6 +41,8 @@ import CusLogin from "./pages/Customer/customerLogin/CLogin";
 import CustomerDashboard from "./pages/Customer/Dashboard";
 import CustomerLayout from "./pages/Customer/masterlayout";
 import StationLocator from "./pages/Customer/StationLocator";
+import Vehicles from "./pages/Customer/vehicleDetails/vehicleDetails";
+import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
 
 function App() {
 	return (
@@ -142,6 +144,32 @@ function App() {
 						element={
 							<CustomerLayout title="Station Locator">
 								<StationLocator />
+							</CustomerLayout>
+						}
+					></Route>
+					<Route
+						path="/home"
+						element={
+							<CustomerLayout title="Dashboard">
+								<CustomerDashboard />
+							</CustomerLayout>
+						}
+					></Route>
+
+					<Route
+						path="/vehicleDetails"
+						element={
+							<CustomerLayout title="Vehicles">
+								<Vehicles />
+							</CustomerLayout>
+						}
+					></Route>
+
+					<Route
+						path="/myVehicles"
+						element={
+							<CustomerLayout title="Vehicles">
+								<MyVehicles />
 							</CustomerLayout>
 						}
 					></Route>
