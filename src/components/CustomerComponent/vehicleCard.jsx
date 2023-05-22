@@ -6,7 +6,7 @@ const VehicleCard = () =>{
 
     return(
         <section className="GBorder mb-[20px] ">
-            <div className="p-[1px] bg-gradient-to-tr from-[#6DDCFF] to-[#7F60F9] rounded-lg">
+            <div className="p-[1px] bg-gradient-to-tr from-[#6DDCFF] via-[#6DDCFF] to-[#7F60F9] rounded-lg">
         <section className="w-full h-full p-[16px] bg-white ">
             <img src={ActiveCar} alt="Car" />
 
