@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //Authentication
-import SignUp from "./pages/customer/signup/signup";
+import SignUp from "./pages/Customer/signup/signup";
 import Login from "./pages/Authentication/Login/login";
 import ChangePassword from "./pages/Authentication/changePassword/changePassword";
 
@@ -35,9 +35,11 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import Sidebar from "./components/Sidebar/sidebar";
 
 //Customer
-import CarInfo from "./pages/customer/carInformation/carInfo";
-import Wallet from "./pages/customer/Wallet/wallet";
-import CusLogin from "./pages/customer/customerLogin/CLogin"
+import CarInfo from "./pages/Customer/carInformation/carInfo";
+import Wallet from "./pages/Customer/Wallet/wallet";
+import CusLogin from "./pages/Customer/customerLogin/CLogin";
+import CustomerDashboard from "./pages/Customer/Dashboard";
+import CustomerLayout from "./pages/Customer/masterlayout";
 
 function App() {
 	return (
@@ -123,7 +125,17 @@ function App() {
 					<Route path="/signup" element={<SignUp />}></Route>
 					<Route path="/carInformation" element={<CarInfo />}></Route>
 					<Route path="/wallet" element={<Wallet />}></Route>
-					<Route path="/Login" element={<CusLogin/>}></Route>
+					<Route path="/Login" element={<CusLogin />}></Route>
+
+					<Route
+						path="/home"
+						element={
+							<CustomerLayout title="Dashboard">
+							
+								<CustomerDashboard />
+							</CustomerLayout>
+						}
+					></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
