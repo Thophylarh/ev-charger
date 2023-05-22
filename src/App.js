@@ -40,6 +40,7 @@ import Wallet from "./pages/Customer/Wallet/wallet";
 import CusLogin from "./pages/Customer/customerLogin/CLogin";
 import CustomerDashboard from "./pages/Customer/Dashboard";
 import CustomerLayout from "./pages/Customer/masterlayout";
+import StationLocator from "./pages/Customer/StationLocator";
 
 function App() {
 	return (
@@ -131,8 +132,16 @@ function App() {
 						path="/home"
 						element={
 							<CustomerLayout title="Dashboard">
-							
 								<CustomerDashboard />
+							</CustomerLayout>
+						}
+					></Route>
+
+					<Route
+						path="/station-locator"
+						element={
+							<CustomerLayout title="Station Locator">
+								<StationLocator />
 							</CustomerLayout>
 						}
 					></Route>
