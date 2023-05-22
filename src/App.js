@@ -40,7 +40,8 @@ import Wallet from "./pages/customer/Wallet/wallet";
 import CusLogin from "./pages/customer/customerLogin/CLogin";
 import CustomerDashboard from "./pages/customer/Dashboard";
 import CustomerLayout from "./pages/customer/masterlayout";
-import Vehicles from "./pages/customer/vehicles/vehicles";
+import Vehicles from "./pages/customer/vehicleDetails/vehicleDetails";
+import MyVehicles from "./pages/customer/myVehicles/myVehicles";
 
 function App() {
   return (
@@ -138,10 +139,19 @@ function App() {
           ></Route>
 
           <Route
-            path="/vehicles"
+            path="/vehicleDetails"
             element={
               <CustomerLayout title="Vehicles">
-                <Vehicles/>
+                <Vehicles />
+              </CustomerLayout>
+            }
+          ></Route>
+
+          <Route
+            path="/myVehicles"
+            element={
+              <CustomerLayout title="Vehicles">
+                <MyVehicles/>
               </CustomerLayout>
             }
           ></Route>
