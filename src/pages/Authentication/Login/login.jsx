@@ -7,6 +7,7 @@ import Email from "../../../assets/svg/email.svg";
 import Dot from "../../../assets/svg/activeDot.svg";
 import GreyDot from "../../../assets/svg/greyDot.svg";
 import Logo from "../../../assets/svg/logo.svg";
+import Show from "../../../assets/svg/showEye.svg";
 import "./style.css";
 import axios from "axios";
 import { useNavigate } from "react-router";
@@ -17,11 +18,17 @@ import { toast } from "react-toastify";
 const Login = () => {
 	const Navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const [emailAddress, setEmail] = useState("");
 	const [password, setPassWord] = useState("");
 	const [user, setUser] = useState("");
 	const [inputType, setInputType] = useState("password");
 	let token = getToken();
+
+	useEffect(() => {
+	  showPassword ? setInputType('text') : setInputType('password')
+	}, [showPassword])
+	
 
 	// toggle password
 	const toggle = () => {
@@ -155,26 +162,41 @@ const Login = () => {
 									Password
 								</label>
 								<div
-									className="flex  items-
-         start "
+									className=" flex items-center justify-between mt-1 p-3 bg-white border
+									shadow-sm border-slate-300
+									 placeholder-slate-400
+									  focus:outline-none focus:border-
+									   sky-500 focus:ring-sky-500 block
+									    w-96 rounded-md sm:text-sm
+									     focus:ring-1 "
 								>
-									<img className="w-[1rem] icon" src={Padlock}></img>
-									<input
-										required
-										type={inputType}
-										name="password"
-										placeholder="enter your password"
-										className="mt-1 p-3 bg-white border
-             shadow-sm border-slate-300
-              placeholder-slate-400
-               focus:outline-none focus:border-
-                sky-500 focus:ring-sky-500 block
-                 w-96 rounded-md sm:text-sm
-                  focus:ring-1 input-field"
-										onChange={(event) => {
-											setPassWord(event.target.value);
+									
+										<img
+											className="w-[1rem] mr-[6%] "
+											src={Padlock}
+											alt="Enter  password"
+										/>
+										<input
+											required
+											type={inputType}
+											name="password"
+											placeholder="enter your password"
+											className="w-[100%] outline-none"
+											onChange={(event) => {
+												setPassWord(event.target.value);
+											}}
+											value={password}
+										/>
+								
+
+									<img
+										className=" flex justify-end cursor-pointer w-[1.5rem]"
+										src={Show}
+										alt="view password"
+										onClick={() => {
+											setShowPassword((showPassword) => !showPassword);
+											console.log(showPassword);
 										}}
-										value={password}
 									/>
 								</div>
 							</div>
