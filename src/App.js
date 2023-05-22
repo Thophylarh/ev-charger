@@ -38,6 +38,8 @@ import Sidebar from "./components/Sidebar/sidebar";
 import CarInfo from "./pages/Customer/carInformation/carInfo";
 import Wallet from "./pages/Customer/Wallet/wallet";
 import CusLogin from "./pages/Customer/customerLogin/CLogin";
+import CustomerDashboard from "./pages/Customer/Dashboard";
+import CustomerLayout from "./pages/Customer/masterlayout";
 
 function App() {
 	return (
@@ -124,6 +126,16 @@ function App() {
 					<Route path="/carInformation" element={<CarInfo />}></Route>
 					<Route path="/wallet" element={<Wallet />}></Route>
 					<Route path="/Login" element={<CusLogin />}></Route>
+
+					<Route
+						path="/home"
+						element={
+							<CustomerLayout title="Dashboard">
+							
+								<CustomerDashboard />
+							</CustomerLayout>
+						}
+					></Route>
 				</Routes>
 			</BrowserRouter>
 		</div>
