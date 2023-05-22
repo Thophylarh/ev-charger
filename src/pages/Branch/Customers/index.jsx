@@ -173,7 +173,7 @@ export default function CustomerList() {
                 !enrolled ? " text-black" : "text-[var(--grey500)]"
               }`}
             >
-              NEW CUSTOMERS
+           PAYG
             </h5>
           </div>
         </div>
