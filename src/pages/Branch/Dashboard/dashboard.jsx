@@ -220,7 +220,7 @@ export default function Dashboardd() {
 									search: `?stationId=${stationId}&companyId=${companyId}`,
 								}}
 							>
-								<button className="border-2  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
+								<button className="border-[0.5px]  border-gray-400 text-xs p-[0.5rem] rounded-md text-[var(--grey700)]">
 									See all chargers
 								</button>
 							</NavLink>

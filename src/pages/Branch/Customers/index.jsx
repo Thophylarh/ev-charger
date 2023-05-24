@@ -156,7 +156,7 @@ export default function CustomerList() {
                 enrolled ? " text-black" : "text-[var(--grey500)]"
               }`}
             >
-             PAYG
+             Enrolled
             </h5>
           </div>
 
