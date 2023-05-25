@@ -116,6 +116,15 @@ export default function StationBilling() {
 		},
 
 		{
+			title: "Updated By",
+			dataIndex: "updatedBy",
+			key: "updatedBy",
+			render: (text, record) => {
+				return record.updatedBy.emailAddress;
+			},
+		},
+
+		{
 			title: "Time updated",
 			dataIndex: "createdAt",
 			key: "createdAt",
@@ -123,6 +132,8 @@ export default function StationBilling() {
 				return moment(record.createdAt).format("MMM DD, YYYY. h:mm A");
 			},
 		},
+
+	
 
 		{
 			title: "Charger Type",
