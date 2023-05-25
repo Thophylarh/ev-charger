@@ -104,7 +104,7 @@ const Login = () => {
 		background: `linear-gradient(0deg, rgba(16, 24, 40, 0.89), rgba(16, 24, 40, 0.89)), url(${loginScreen})`,
 	};
 	return (
-		<section className=" h-[100vh] flex bg-no-repeat bg-cover" style={style}>
+		<section className=" h-[100vh] flex bg-no-repeat bg-cover" style={style} >
 			<div className="w-[40%] bg-white h-[90%] my-auto mx-auto py-[2.5rem] px-[2rem] ">
 				<div className=" flex flex-col justify-center">
 					<div className="text-center mb-[1rem] ">
