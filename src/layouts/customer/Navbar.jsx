@@ -7,7 +7,7 @@ import Profile from "../../assets/svg/profileNav.svg";
 import ActiveProfile from "../../assets/svg/activeProfile.svg";
 import Station from "../../assets/svg/stationLocation.svg";
 import ActiveStation from "../../assets/svg/activeStation.svg";
-import InactiveHome from "../../assets/svg/inActiveHome.svg";
+import InactiveHome from "../../assets/svg/inActiveHome.svg" ; 
 import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const CNav = () => {
