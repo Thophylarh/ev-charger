@@ -46,184 +46,192 @@ import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
 import Profile from "./pages/Customer/CustomerProfile";
 
 function App() {
-	return (
-		<div>
-			<BrowserRouter>
-				<ToastContainer />
-				<Routes>
-					<Route
-						path="/"
-						element={
-							<AuthRoutes>
-								<Login />
-							</AuthRoutes>
-						}
-					/>
+  return (
+    <div>
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AuthRoutes>
+                <Login />
+              </AuthRoutes>
+            }
+          />
 
-					{/* PROTECTED ROUTES */}
+          {/* PROTECTED ROUTES */}
 
-					{/* COMPANY ROUTES */}
-					<Route element={<LayoutsWithCompanyNavbar />}>
-						<Route element={<ProtectedRoutes />}>
-							<Route element={<CompanyDash />} path="/company" index />
-						</Route>
+          {/* COMPANY ROUTES */}
+          <Route element={<LayoutsWithCompanyNavbar />}>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<CompanyDash />} path="/company" index />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route element={<ListOfStations />} path="/company/myStations" />
-						</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<ListOfStations />} path="/company/myStations" />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							{" "}
-							<Route element={<CompanyReport />} path="/company/report" />{" "}
-						</Route>
+            <Route element={<ProtectedRoutes />}>
+              {" "}
+              <Route element={<CompanyReport />} path="/company/report" />{" "}
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route element={<Billing />} path="/company/billing" />
-						</Route>
-					</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<Billing />} path="/company/billing" />
+            </Route>
+          </Route>
 
-					{/* STATION ROUTES */}
+          {/* STATION ROUTES */}
 
-					<Route path="/station" element={<StationLayout />}>
-						<Route element={<ProtectedRoutes />}>
-							<Route element={<Dashboardd />} path="" />
-						</Route>
-						<Route element={<ProtectedRoutes />}>
-							<Route path="evChargers" element={<EvChargers />} />
-						</Route>
+          <Route path="/station" element={<StationLayout />}>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<Dashboardd />} path="" />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="evChargers" element={<EvChargers />} />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route path="billing" element={<StationBilling />} />
-						</Route>
-						<Route element={<ProtectedRoutes />}>
-							<Route path="details" element={<Details />} />
-						</Route>
-						<Route element={<ProtectedRoutes />}>
-							<Route path="report" element={<ReportSales />} />
-						</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="billing" element={<StationBilling />} />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="details" element={<Details />} />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="report" element={<ReportSales />} />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route path="customer/details" element={<CustomerDetails />} />
-						</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="customer/details" element={<CustomerDetails />} />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route path="customers" element={<CustomerList />} />
-						</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="customers" element={<CustomerList />} />
+            </Route>
 
-						<Route element={<ProtectedRoutes />}>
-							<Route path="camera" element={<Camera />} />
-						</Route>
-					</Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="camera" element={<Camera />} />
+            </Route>
+          </Route>
 
-					<Route path="/station" element={<Station />}></Route>
-					<Route
-						path="/changePassword"
-						element={
-							<AuthRoutes>
-								<ChangePassword />
-							</AuthRoutes>
-						}
-					></Route>
+          <Route path="/station" element={<Station />}></Route>
+          <Route
+            path="/changePassword"
+            element={
+              <AuthRoutes>
+                <ChangePassword />
+              </AuthRoutes>
+            }
+          ></Route>
 
-					{/* CUSTOMER ROUTES */}
-					<Route path="/signup" element={<SignUp />}></Route>
-					<Route path="/carInformation" element={<CarInfo />}></Route>
-					<Route path="/wallet" element={<Wallet />}></Route>
-					<Route path="/Login" element={<CusLogin />}></Route>
+          {/* CUSTOMER ROUTES */}
+          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/carInformation" element={<CarInfo />}></Route>
+          {/* <Route path="/wallet" element={<Wallet />}></Route> */}
+          <Route path="/Login" element={<CusLogin />}></Route>
 
-					<Route
-						path="/home"
-						element={
-							<CustomerLayout title="Dashboard">
-								<CustomerDashboard />
-							</CustomerLayout>
-						}
-					></Route>
+          <Route
+            path="/home"
+            element={
+              <CustomerLayout title="Dashboard">
+                <CustomerDashboard />
+              </CustomerLayout>
+            }
+          ></Route>
 
-					<Route
-						path="/station-locator"
-						element={
-							<CustomerLayout title="Station Locator">
-								<StationLocator />
-							</CustomerLayout>
-						}
-					></Route>
-				
+          <Route
+            path="/station-locator"
+            element={
+              <CustomerLayout title="Station Locator">
+                <StationLocator />
+              </CustomerLayout>
+            }
+          ></Route>
 
-					<Route
-						path="/vehicleDetails"
-						element={
-							<CustomerLayout title="Vehicles">
-								<Vehicles />
-							</CustomerLayout>
-						}
-					></Route>
+          <Route
+            path="/wallet"
+            element={
+              <CustomerLayout title="Fund your Ev wallet to get you on board">
+                <Wallet />
+              </CustomerLayout>
+            }
+          ></Route>
 
-					<Route
-						path="/myVehicles"
-						element={
-							<CustomerLayout title="Vehicles">
-								<MyVehicles />
-							</CustomerLayout>
-						}
-					></Route>
+          <Route
+            path="/vehicleDetails"
+            element={
+              <CustomerLayout title="Vehicles">
+                <Vehicles />
+              </CustomerLayout>
+            }
+          ></Route>
 
-						<Route
-						path="/profile"
-						element={
-							<CustomerLayout title="My Profile">
-								<Profile/>
-							</CustomerLayout>
-						}
-					></Route>
-				</Routes>
-			</BrowserRouter>
-		</div>
-	);
+          <Route
+            path="/myVehicles"
+            element={
+              <CustomerLayout title="Vehicles">
+                <MyVehicles />
+              </CustomerLayout>
+            }
+          ></Route>
+
+          <Route
+            path="/profile"
+            element={
+              <CustomerLayout title="My Profile">
+                <Profile />
+              </CustomerLayout>
+            }
+          ></Route>
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
 }
 
 function LayoutsWithNavbar() {
-	return (
-		<div
-			className="flex flex-row bg-neutral-100 h- 
+  return (
+    <div
+      className="flex flex-row bg-neutral-100 h- 
     screen w-screen top-0 left-0 fixed "
-		>
-			<div
-				className="bg-black h-screen w-[15%]  left- 
+    >
+      <div
+        className="bg-black h-screen w-[15%]  left- 
     0 top-0 "
-			>
-				<Sidebar />
-			</div>
-			<div
-				className="mx-2 h-screen w-[85%] overflow-y- 
+      >
+        <Sidebar />
+      </div>
+      <div
+        className="mx-2 h-screen w-[85%] overflow-y- 
     scroll"
-			>
-				<Outlet />
-			</div>
-		</div>
-	);
+      >
+        <Outlet />
+      </div>
+    </div>
+  );
 }
 
 function LayoutsWithCompanyNavbar() {
-	return (
-		<div
-			className="flex flex-row bg-neutral-100 h- 
+  return (
+    <div
+      className="flex flex-row bg-neutral-100 h- 
     screen w-screen top-0 left-0 fixed "
-		>
-			<div
-				className="bg-black h-screen w-[15%]  left- 
+    >
+      <div
+        className="bg-black h-screen w-[15%]  left- 
     0 top-0 "
-			>
-				<CompanySideBar />
-			</div>
-			<div
-				className="mx-2 h-screen w-[85%] overflow-y- 
+      >
+        <CompanySideBar />
+      </div>
+      <div
+        className="mx-2 h-screen w-[85%] overflow-y- 
     scroll"
-			>
-				<Outlet />
-			</div>
-		</div>
-	);
+      >
+        <Outlet />
+      </div>
+    </div>
+  );
 }
 
 export default App;

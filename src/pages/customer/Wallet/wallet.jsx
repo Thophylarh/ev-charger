@@ -9,15 +9,15 @@ const CarInfo = () =>{
 return (
    
        
-       <section className="bg-black h-[100vh]  py-[1rem]">
-        <section className={`w-[90%] mx-auto mb-[var(--marginBtwSection)]  h-[15%]`}>
+       <section className=" h-[100vh]  py-[1rem]">
+        {/* <section className={`w-[90%] mx-auto mb-[var(--marginBtwSection)]  h-[15%]`}>
         <div>
         <img src={logo} className={`mb-[var(--marginBtwElements)] `}></img>
         <p className="desc">
         Fund your Ev wallet to get you on board
         </p>
         </div>
-        </section>
+        </section> */}
 
         <section className="bg-white h-[85%] rounded-3xl pt-[1.5rem]">
 
