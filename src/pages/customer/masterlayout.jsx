@@ -1,10 +1,13 @@
 import React from "react";
+import CustomerNav from "../../layouts/customer/Navbar";
 
 import logo from "../../assets/svg/logo.svg";
 
 export default function CustomerLayout({ children, title }) {
 	
 	return (
+		<>
+		<CustomerNav/>
 		<section className="mobileBody top h-[100vh] ">
 			<div className="w-[90%] mx-auto py-5">
 				<div className="flex items-center">
@@ -19,5 +22,6 @@ export default function CustomerLayout({ children, title }) {
 				{children}
 			</section>
 		</section>
+		</>
 	);
 }
