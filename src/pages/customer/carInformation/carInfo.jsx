@@ -14,6 +14,35 @@ const CarInfo = () => {
 	let customerCode = searchParams.get("cus");
 	let carrCode = searchParams.get("vehicleCode");
 
+	const createVA = () => {
+		let data = JSON.parse(localStorage.getItem("VA"));
+
+		console.log(data, "va data");
+		axios
+			.post(
+				`http://evapi.estations.com/customers/create-virtual-account`,
+				data,
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: false,
+				}
+			)
+			.then((res) => {
+				console.log(res.data, "va success");
+				setIsLoading(false);
+				toast.success("Account created successfully");
+				navigate({
+					pathname: "/wallet",
+					search: `?walletId=${res.data?.walletId}`,
+				});
+			})
+			.catch((err) => {
+				setIsLoading(false);
+				console.log(err);
+				toast.error(err.message);
+			});
+	};
+
 	const registerCar = (e) => {
 		e.preventDefault();
 		setIsLoading(true);
@@ -60,13 +89,9 @@ const CarInfo = () => {
 				withCredentials: false,
 			})
 			.then((res) => {
-				console.log(res.data);
-				setIsLoading(false);
-				toast.success("Account created successfully");
-				navigate({
-					pathname: "/wallet",
-					// search: `?cus=&vehicleCode=abcdef12345`,
-				});
+				console.log(res.data, "vehicle success");
+
+				createVA();
 			})
 			.catch((err) => {
 				setIsLoading(false);

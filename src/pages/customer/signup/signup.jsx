@@ -28,6 +28,7 @@ const SignUp = () => {
 		let email = e.target.email?.value;
 		let phone = e.target.phone?.value;
 		let password = e.target.password?.value;
+		let bvn = e.target.bvn?.value;
 
 		if (!firstName) {
 			toast.error("Enter your first name");
@@ -44,12 +45,19 @@ const SignUp = () => {
 			setIsLoading(false);
 			return;
 		}
-		
-		// if (!phone) {
-		// 	toast.error("Enter your phone number");
-		// 	setIsLoading(false);
-		// 	return;
-		// }
+
+		if (!phone) {
+			toast.error("Enter your phone number");
+			setIsLoading(false);
+			return;
+		}
+
+		if (!bvn) {
+			toast.error("Enter your BVN");
+			setIsLoading(false);
+			return;
+		}
+
 		if (!password) {
 			toast.error("Enter password");
 			setIsLoading(false);
@@ -68,7 +76,14 @@ const SignUp = () => {
 			totalAmountSpent: 0,
 			totalEnergyCharged: 0,
 		};
-		
+		let va = {
+			firstname: firstName,
+			lastname: lastName,
+			emailAddress: email,
+			phonenumber: phone,
+			bvn,
+		};
+		localStorage.setItem("VA", JSON.stringify(va));
 
 		axios
 			.post(`http://evapi.estations.com/Customers/create-customer`, data, {
@@ -78,12 +93,11 @@ const SignUp = () => {
 			.then((res) => {
 				console.log(res.data);
 				setIsLoading(false);
-				let cusCode =  res?.data?.customerCode
+				let cusCode = res?.data?.customerCode;
 				navigate({
-					pathname: '/carInformation',
+					pathname: "/carInformation",
 					search: `?cus=${cusCode}&vehicleCode=abcdef12345`,
-				    });
-			
+				});
 			})
 			.catch((err) => {
 				setIsLoading(false);
@@ -159,6 +173,19 @@ const SignUp = () => {
 							type="phone"
 							name="phone"
 							placeholder="Phone number"
+							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
+						></input>
+					</div>
+
+					<div className="mb-[20px]">
+						<label className="flex block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
+							<p>BVN</p> <p className="text-[#EB3540]">*</p>
+						</label>
+
+						<input
+							type="number"
+							name="bvn"
+							placeholder="BVN"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
 					</div>
