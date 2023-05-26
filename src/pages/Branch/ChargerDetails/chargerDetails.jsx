@@ -33,7 +33,7 @@ export default function Details() {
     axios
       .get( `/Chargers/get-charger-by-id/${chargerId}`)
       .then((res) => {
-        console.log(res)
+        // console.log(res)
         setChargerDetails(res.data[0]);
         setTimeout(()=>{
 					setIsLoading(false)

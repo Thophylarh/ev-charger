@@ -6,7 +6,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 //Authentication
-import SignUp from "./pages/Customer/signup/signup";
+import SignUp from "./pages/customer/signup/signup";
 import Login from "./pages/Authentication/Login/login";
 import ChangePassword from "./pages/Authentication/changePassword/changePassword";
 
@@ -35,15 +35,16 @@ import AuthRoutes from "./routeGuard/AuthRoutes";
 import Sidebar from "./components/Sidebar/sidebar";
 
 //Customer
-import CarInfo from "./pages/Customer/carInformation/carInfo";
-import Wallet from "./pages/Customer/Wallet/wallet";
-import CusLogin from "./pages/Customer/customerLogin/CLogin";
-import CustomerDashboard from "./pages/Customer/Dashboard";
-import CustomerLayout from "./pages/Customer/masterlayout";
-import StationLocator from "./pages/Customer/StationLocator";
-import Vehicles from "./pages/Customer/vehicleDetails/vehicleDetails";
-import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
-import Profile from "./pages/Customer/CustomerProfile";
+import CarInfo from "./pages/customer/carInformation/carInfo";
+import Wallet from "./pages/customer/Wallet/wallet";
+import CusLogin from "./pages/customer/customerLogin/CLogin";
+import CustomerDashboard from "./pages/customer/Dashboard";
+import CustomerLayout from "./pages/customer/masterlayout";
+import StationLocator from "./pages/customer/StationLocator";
+import Vehicles from "./pages/customer/vehicleDetails/vehicleDetails";
+import MyVehicles from "./pages/customer/myVehicles/myVehicles";
+import Profile from "./pages/customer/CustomerProfile";
+import AWallet from "./pages/customer/Awallet/Awallet";
 
 function App() {
   return (
@@ -128,7 +129,7 @@ function App() {
           {/* CUSTOMER ROUTES */}
           <Route path="/signup" element={<SignUp />}></Route>
           <Route path="/carInformation" element={<CarInfo />}></Route>
-          {/* <Route path="/wallet" element={<Wallet />}></Route> */}
+          <Route path="/wallet" element={<Wallet/>}></Route>
           <Route path="/Login" element={<CusLogin />}></Route>
 
           <Route
@@ -149,14 +150,7 @@ function App() {
             }
           ></Route>
 
-          <Route
-            path="/wallet"
-            element={
-              <CustomerLayout title="Fund your Ev wallet to get you on board">
-                <Wallet />
-              </CustomerLayout>
-            }
-          ></Route>
+         
 
           <Route
             path="/vehicleDetails"
@@ -181,6 +175,15 @@ function App() {
             element={
               <CustomerLayout title="My Profile">
                 <Profile />
+              </CustomerLayout>
+            }
+          ></Route>
+
+          <Route
+            path="/AWallet"
+            element={
+              <CustomerLayout title="My Wallet">
+                <AWallet/>
               </CustomerLayout>
             }
           ></Route>
