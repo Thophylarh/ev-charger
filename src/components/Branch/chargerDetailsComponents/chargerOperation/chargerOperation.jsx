@@ -2,18 +2,24 @@ import React, {useState, useEffect} from "react";
 import BarChart from "../../../../Graphs/Chart/detailsBarChart";
 
 import OperationHours from "../../../../assets/svg/operationHours.svg";
+
 import BillingType from "../../../../assets/svg/billingType.svg"
 import RunningTime from   "../../../../assets/svg/runningTime.svg";
 import OperationModal from "../../../modals/operationModal";
+import ShiftModal from "../../../modals/addNewShift";
 import Modal from "../../../modals/modal"
 import { secondToHours } from "../../../../utils/secondtoHours";
 
 import axios from "../../../../lib/axiosInterceptor"
 import moment from "moment";
+import NewShift from "../../../modals/addNewShift";
 
 
 const ChargerOperation = ({chargerId, ChargerDetails}) =>{
     const [OModal, setOModal] = useState(false)
+    const [SModal, setSModal] = useState(false)
+    const [Time, setTime ] = useState()
+
     const [chartData, setChartData]= useState([])
 
      //charger graph 
@@ -68,9 +74,9 @@ const ChargerOperation = ({chargerId, ChargerDetails}) =>{
                     OPERATION HOURS
                 </h2>
 
-                <h4 className="mb-[var(--marginBtwElements)] ">12:00am - 8:00pm</h4>
+                <h4 className="mb-[var(--marginBtwElements)] ">{ChargerDetails.OperationalHours}</h4>
 
-                <h3 className="text-[#007EF2] cursor-pointer" onClick={(e)=>{setOModal(true)}}>EDIT</h3>
+                <h3 className="text-[#007EF2] cursor-pointer" onClick={(e)=>{setSModal(true)}}>Change Hours</h3>
                 </div>
                 <div>
                     <img src={OperationHours} alt="Operation Hours" />
@@ -107,11 +113,18 @@ const ChargerOperation = ({chargerId, ChargerDetails}) =>{
             </div>
         </div>
     </div>
-    {
+    {/* {
         OModal && <Modal closeModal={setOModal}>
-            <OperationModal/>
+            <OperationModal shift={setSModal}/>
+        </Modal>
+    } */}
+
+        {
+        SModal && <Modal closeModal={setSModal}>
+           <NewShift shift={setSModal} setTime={setTime}/>
         </Modal>
     }
+
 </section>
     )
 }

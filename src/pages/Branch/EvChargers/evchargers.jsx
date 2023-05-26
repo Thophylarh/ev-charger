@@ -159,7 +159,7 @@ export default function EvChargers() {
           </div>
           <div  className="bg-[var(--grey50)] p-[1.25rem] grid grid-cols-3 gap-4">
           {stationChargerList.map((charger) => (
-              <ChargersCard  key={charger.Id} charger={charger}  />
+              <ChargersCard  key={charger.Id} station={stationId} company={companyId} charger={charger}  />
             ))
             }
             

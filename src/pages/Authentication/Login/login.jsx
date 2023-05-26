@@ -31,13 +31,13 @@ const Login = () => {
 	
 
 	// toggle password
-	const toggle = () => {
-		if (inputType === "password") {
-			setInputType("text");
-		} else if (inputType === "text") {
-			setInputType("password");
-		}
-	};
+	// const toggle = () => {
+	// 	if (inputType === "password") {
+	// 		setInputType("text");
+	// 	} else if (inputType === "text") {
+	// 		setInputType("password");
+	// 	}
+	// };
 
 	// login function
 	const url = "http://evapi.estations.com";

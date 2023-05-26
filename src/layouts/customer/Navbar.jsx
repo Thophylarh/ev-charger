@@ -47,7 +47,7 @@ const CNav = () => {
 
 				<NavLink
 					to={{
-						pathname: "/wallet",
+						pathname: "/AWallet",
 					}}
 				>
 					<div>
@@ -56,7 +56,7 @@ const CNav = () => {
 							alt="home icon"
 							className="w-[1.875rem] mx-auto"
 						/>
-						<h4 className={` ${path === "/wallet" ? Active : notActive}`}>
+						<h4 className={` ${path === "/AWallet" ? Active : notActive}`}>
 							Wallet
 						</h4>
 					</div>
