@@ -1,7 +1,7 @@
 import check from "../../assets/svg/check.svg"
 import PlusInBox from "../../assets/svg/plusInBox.svg";
 
-const OperationModal = () =>{
+const OperationModal = ({shift}) =>{
 
     return(
         <>
@@ -68,7 +68,7 @@ const OperationModal = () =>{
       </div>
 
       <div className="pt-[1rem]">
-        <button className="border border-1 border-solid flex  w-[10rem]  p-[0.5rem] rounded-md ">
+        <button className="border border-1 border-solid flex  w-[10rem]  p-[0.5rem] rounded-md " onClick={()=>{shift(true)}}>
           <img src={PlusInBox} className="pr-[0.5rem]"></img>Add new shift
         </button>
       </div>

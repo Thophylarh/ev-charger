@@ -6,9 +6,10 @@ import DeactivatedStatus from "../../../assets/svg/deactivatedStatus.svg"
 import moment from "moment/moment";
 import { useNavigate } from "react-router";
 
-export default function ChargersCard(props) {
+export default function ChargersCard({charger, station, company}) {
 	const Navigate = useNavigate();
-	let charger = props.charger
+	
+
 
 	const viewCharger = (id, e) =>{
       
@@ -17,7 +18,7 @@ export default function ChargersCard(props) {
         // Navigate("/station")
         Navigate({
           pathname: '/station/details',
-          search: `?chargerId=${id}`,
+          search: `?stationId=${station}&companyId=${company}&chargerId=${id}`,
         });
       }
 	
