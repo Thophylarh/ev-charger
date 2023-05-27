@@ -106,7 +106,7 @@ export default function Details() {
 
         <ChargerRevenue chargerId={chargerId} ChargerDetails={chargersDetails}/>
 
-        <ChargerOperation chargerId={chargerId} ChargerDetails={chargersDetails}/>
+        <ChargerOperation chargerId={chargerId} ChargerDetails={chargersDetails} GetChargerDetails={GetChargerDetails}/>
 
         <Last10Transactions chargerId={chargerId}/>
 

@@ -1,10 +1,35 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import VehicleCard from "../../../components/CustomerComponent/vehicleCard";
+import axios from "../../../lib/axiosInterceptor";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 
 
 const MyVehicles = () =>{
+	const [searchParams] = useSearchParams();
+	const [cDetails, setCDetails] = useState();
+	const [Vehicles, setVehicles] = useState([])
+
+	let customerId = searchParams.get("customerId");
+
+	//get customer details
+	const getDetails = () =>{
+		axios
+		.get(`/Customers/get-customer-by-id/${customerId}`)
+		.then((res)=>{
+			console.log(res)
+			setCDetails(res.data.customerDetails)
+			setVehicles(res.data.vehicleDetails)
+
+		}
+		)
+	}
+
+	useEffect(() => {
+		getDetails();
+	}, []);
+
 
     let style2 = {
 		backgroundImage: `url(${InactiveCar})`,
@@ -22,7 +47,7 @@ const MyVehicles = () =>{
 						My vehicles
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">2</h5>
+					<h5 className="text-[1.125rem]   mb-3">{cDetails?.NumberOfVehiclesOnFile}</h5>
 				</div>
 
 				<div
@@ -32,15 +57,17 @@ const MyVehicles = () =>{
 						Money spent
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">NGN 20,000.00</h5>
+					<h5 className="text-[1.125rem]   mb-3">NGN {cDetails?.TotalAmountSpent}.00</h5>
 
-					<p className="text-xs text-[var(--grey600)] font-bold">3,000.00 KW</p>
+					<p className="text-xs text-[var(--grey600)] font-bold">{cDetails?.TotalEnergyCharged} KW</p>
 				</div>
 			</section>
 
-          
-                <VehicleCard/>
-                <VehicleCard/>
+				{Vehicles?.map((vehicle)=>(
+					<VehicleCard vehicle={vehicle}/>
+				))}
+                {/* <VehicleCard/>
+                <VehicleCard/> */}
 
             
             

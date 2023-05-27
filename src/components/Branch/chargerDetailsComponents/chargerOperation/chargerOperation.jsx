@@ -15,7 +15,7 @@ import moment from "moment";
 import NewShift from "../../../modals/addNewShift";
 
 
-const ChargerOperation = ({chargerId, ChargerDetails}) =>{
+const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
     const [OModal, setOModal] = useState(false)
     const [SModal, setSModal] = useState(false)
     const [Time, setTime ] = useState()
@@ -121,7 +121,7 @@ const ChargerOperation = ({chargerId, ChargerDetails}) =>{
 
         {
         SModal && <Modal closeModal={setSModal}>
-           <NewShift shift={setSModal} setTime={setTime}/>
+           <NewShift shift={setSModal} setTime={setTime} Details={GetChargerDetails}/>
         </Modal>
     }
 

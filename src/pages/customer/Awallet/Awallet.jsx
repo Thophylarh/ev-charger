@@ -1,8 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import lines from "../../../assets/svg/yellowlines.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
+import axios from "../../../lib/axiosInterceptor";
+import { NavLink, useSearchParams } from "react-router-dom";
+
 
 const AWallet = () => {
+	const [searchParams] = useSearchParams();
+	const [cDetails, setCDetails] = useState();
+
+	let customerId = searchParams.get("customerId");
+
+	//get customer details
+	const getDetails = () =>{
+		axios
+		.get(`/Customers/get-customer-by-id/${customerId}`)
+		.then((res)=>{
+			console.log(res)
+			setCDetails(res.data.customerDetails)
+		}
+		)
+	}
+
+	useEffect(() => {
+		getDetails();
+	}, []);
+
     let style = {
 		background: `url(${lines})`,
 	};
@@ -13,7 +36,7 @@ const AWallet = () => {
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
 					<h5 className="text-[1.5rem]  text-white  mb-4">
-						NGN 0.<sup>00</sup>
+						NGN {cDetails?.WalletBalance}.<sup>00</sup>
 					</h5>
 
 					<button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
