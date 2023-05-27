@@ -1,37 +1,43 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import lines from "../../../assets/svg/yellowlines.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useSearchParams } from "react-router-dom";
 
-
 const AWallet = () => {
 	const [searchParams] = useSearchParams();
 	const [cDetails, setCDetails] = useState();
+	const [transactions, setTransactions] = useState([]);
 
 	let customerId = searchParams.get("customerId");
 
 	//get customer details
-	const getDetails = () =>{
+	const getDetails = () => {
+		axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
+			console.log(res);
+			setCDetails(res.data.customerDetails);
+		});
+	};
+
+	const getTransactionHistory = () => {
 		axios
-		.get(`/Customers/get-customer-by-id/${customerId}`)
-		.then((res)=>{
-			console.log(res)
-			setCDetails(res.data.customerDetails)
-		}
-		)
-	}
+			.get(`/Customers/get-customer-transactions/${customerId}`)
+			.then((res) => {
+				setTransactions(res.data);
+			});
+	};
 
 	useEffect(() => {
 		getDetails();
 	}, []);
 
-    let style = {
+	let style = {
 		background: `url(${lines})`,
 	};
 
-    return ( <div className="w-[90%] mx-auto py-5">
-        <section className="bg-black rounded-2xl  text-white flex justify-between mb-[var(--marginBtwSection)]">
+	return (
+		<div className="w-[90%] mx-auto py-5">
+			<section className="bg-black rounded-2xl  text-white flex justify-between mb-[var(--marginBtwSection)]">
 				<div className="px-4 py-7">
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
@@ -49,16 +55,31 @@ const AWallet = () => {
 				</div> */}
 			</section>
 
-            <div>
-                <h3 className="mb-[1.25rem] font-semibold text-[1rem] text-[#101828]">Transaction history</h3>
-					<TransactionCard/>
-					<TransactionCard/>
-                    <TransactionCard/>
-					<TransactionCard/>
-                    
-				</div>
-    </div> );
-}
+			<div>
+				<h3 className="mb-[1.25rem] font-semibold text-[1rem] text-[#101828]">
+					Transaction history
+				</h3>
+				{transactions?.length > 0 &&
+					transactions?.map((data) => {
+						return (
+							<div>
+								<TransactionCard />
+							</div>
+						);
+					})}
+
+				{transactions?.length < 1 && (
+					<div>
+						<h3 className="text-base text-center mt-10 w-[70%] mx-auto">
+							{" "}
+							You have made no transaction at the moment
+						</h3>
+					</div>
+				)}
+			</div>
+		</div>
+	);
+};
 
 const PlusIcon = () => {
 	return (
@@ -97,5 +118,4 @@ const PlusIcon = () => {
 	);
 };
 
- 
 export default AWallet;
