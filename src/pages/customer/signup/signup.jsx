@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 
 import { DatePicker } from "antd";
 import axios from "axios";
@@ -14,6 +15,11 @@ const SignUp = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [DOB, setDOB] = useState();
 
+	const [searchParams] = useSearchParams();
+
+	let phone = searchParams.get("phoneNumber");
+	let VehicleCode = searchParams.get("VehicleCode");
+
 	const onDateChange = async (date, dateString) => {
 		console.log(dateString);
 		setDOB(dateString);
@@ -26,7 +32,6 @@ const SignUp = () => {
 		let firstName = e.target.firstName?.value;
 		let lastName = e.target.lastName?.value;
 		let email = e.target.email?.value;
-		let phone = e.target.phone?.value;
 		let password = e.target.password?.value;
 		let bvn = e.target.bvn?.value;
 
@@ -46,11 +51,11 @@ const SignUp = () => {
 			return;
 		}
 
-		if (!phone) {
-			toast.error("Enter your phone number");
-			setIsLoading(false);
-			return;
-		}
+		// if (!phone) {
+		// 	toast.error("Enter your phone number");
+		// 	setIsLoading(false);
+		// 	return;
+		// }
 
 		if (!bvn) {
 			toast.error("Enter your BVN");
@@ -94,9 +99,10 @@ const SignUp = () => {
 				console.log(res.data);
 				setIsLoading(false);
 				let cusCode = res?.data?.customerCode;
+				localStorage.setItem("wall", res.data.walletId);
 				navigate({
 					pathname: "/carInformation",
-					search: `?cus=${cusCode}&vehicleCode=abcdef12345`,
+					search: `?cus=${cusCode}&vehicleCode=${VehicleCode}`,
 				});
 			})
 			.catch((err) => {
@@ -170,10 +176,11 @@ const SignUp = () => {
 						</label>
 
 						<input
-							type="phone"
-							name="phone"
 							placeholder="Phone number"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
+							value={phone}
+							readOnly={true}
+							disabled
 						></input>
 					</div>
 

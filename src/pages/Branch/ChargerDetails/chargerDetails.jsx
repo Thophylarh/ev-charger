@@ -24,8 +24,8 @@ export default function Details() {
 
     const [searchParams] = useSearchParams();
 
+   
     let chargerId = searchParams.get("chargerId");
-
  //charger details
   const GetChargerDetails = () => {
     setIsLoading(true)
@@ -104,11 +104,11 @@ export default function Details() {
 
       </section>
 
-        <ChargerRevenue chargerId={chargerId} ChargerDetails={chargersDetails}/>
+        <ChargerRevenue  ChargerDetails={chargersDetails}/>
 
         <ChargerOperation chargerId={chargerId} ChargerDetails={chargersDetails}/>
 
-        <Last10Transactions chargerId={chargerId}/>
+        <Last10Transactions />
 
         { PowerModal && ( <Modal closeModal={setPModal}>
          <ChargerPower closeModal={setPModal} chargerId={chargerId} GetChargerDetails={GetChargerDetails}/>
