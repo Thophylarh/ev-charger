@@ -25,12 +25,15 @@ const CNav = () => {
 
 	const notActive = "text-white opacity-40 font-normal text-sm mt-[10px]";
 
+	const Cid = localStorage.getItem("customerId");
+
 	return (
 		<nav className="bg-[#111111] h-[5rem] fixed bottom-0 left-0 z-50 w-full">
 			<section className="mx-auto py-[0.75rem] flex justify-around">
 				<NavLink
 					to={{
 						pathname: "/home",
+						search: `?customerId=${Cid}`
 					}}
 				>
 					<div>
@@ -48,6 +51,7 @@ const CNav = () => {
 				<NavLink
 					to={{
 						pathname: "/AWallet",
+						search: `?customerId=${Cid}`
 					}}
 				>
 					<div>
@@ -65,6 +69,7 @@ const CNav = () => {
 				<NavLink
 					to={{
 						pathname: "/myVehicles",
+						search: `?customerId=${Cid}`
 					}}
 				>
 					<div>

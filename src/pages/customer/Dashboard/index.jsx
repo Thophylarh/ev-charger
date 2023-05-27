@@ -1,9 +1,31 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import lines from "../../../assets/svg/yellowlines.svg";
 import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
+import axios from "../../../lib/axiosInterceptor";
+import { NavLink, useSearchParams } from "react-router-dom";
 
 export default function CustomerDashboard() {
+	const [searchParams] = useSearchParams();
+	const [cDetails, setCDetails] = useState();
+
+	let customerId = searchParams.get("customerId");
+
+	//get customer details
+	const getDetails = () =>{
+		axios
+		.get(`/Customers/get-customer-by-id/${customerId}`)
+		.then((res)=>{
+			console.log(res)
+			setCDetails(res.data.customerDetails)
+		}
+		)
+	}
+
+	useEffect(() => {
+		getDetails();
+	}, []);
+
 	let style = {
 		background: `url(${lines})`,
 	};
@@ -17,9 +39,9 @@ export default function CustomerDashboard() {
 		<section className="w-[90%] mx-auto py-5">
 			<div className={`mb-[var(--marginBtwSection)]`}>
 				<p className="text-base text-[--grey900] mb-1 font-black">
-					Hi Akinromade
+					Hi {cDetails?.Firstname}
 				</p>
-				<p className="text-xs text-[--grey500]  ">Explore your EV dashboard</p>
+				<p className="text-xs text-[--grey500]">Explore your EV dashboard</p>
 			</div>
 
 			<section className="bg-black rounded-2xl  text-white flex justify-between mb-[var(--marginBtwSection)]">
@@ -27,7 +49,7 @@ export default function CustomerDashboard() {
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
 					<h5 className="text-[1.5rem]  text-white  mb-4">
-						NGN 0.<sup>00</sup>
+						NGN {cDetails?.WalletBalance}.<sup>00</sup>
 					</h5>
 
 					<button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
@@ -49,7 +71,7 @@ export default function CustomerDashboard() {
 						My vehicles
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">2</h5>
+					<h5 className="text-[1.125rem]   mb-3">{cDetails?.NumberOfVehiclesOnFile}</h5>
 				</div>
 
 				<div
@@ -59,9 +81,9 @@ export default function CustomerDashboard() {
 						Money spent
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">NGN 20,000.00</h5>
+					<h5 className="text-[1.125rem]   mb-3">NGN {cDetails?.TotalAmountSpent}</h5>
 
-					<p className="text-xs text-[var(--grey600)] font-bold">3,000.00 KW</p>
+					<p className="text-xs text-[var(--grey600)] font-bold">{cDetails?.TotalEnergyCharged} KW</p>
 				</div>
 			</section>
 

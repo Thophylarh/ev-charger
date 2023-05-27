@@ -1,7 +1,7 @@
 import React from "react";
 import ActiveCar from "../../assets/svg/activeCar.svg";
 
-const VehicleCard = () => {
+const VehicleCard = ({vehicle}) => {
 	return (
 		<section className=" mb-[20px] ">
 			<div className="p-[1px] border-2 border-[#6DDCFF]  rounded-lg">
@@ -9,7 +9,7 @@ const VehicleCard = () => {
 					<img src={ActiveCar} alt="Car" />
 
 					<div className="mt-[12px] flex justify-between mb-[12px]">
-						<h2 className="text-[#667085] font-semibold text-xs">TESLA X</h2>
+						<h2 className="text-[#667085] font-semibold text-xs">{vehicle?.VehicleName?.toUpperCase()}</h2>
 						<h2 className="text-[#667085] font-semibold text-xs">
 							782 - IKD - LAG
 						</h2>

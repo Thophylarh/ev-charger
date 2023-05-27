@@ -4,11 +4,12 @@ import ForwardArrow from "../../assets/svg/forwardArrow.svg";
 import BackArrow from "../../assets/svg/backArrow+Circle.svg";
 import axios from "../../lib/axiosInterceptor";
 import Show from "../../assets/svg/showEye.svg";
+import { TimePicker } from "antd";
 
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 
-const NewShift = ({ shift, setTime }) => {
+const NewShift = ({ shift, setTime, Details }) => {
   const [searchParams] = useSearchParams();
 
   const [showPassword, setShowPassword] = useState(false);
@@ -16,6 +17,12 @@ const NewShift = ({ shift, setTime }) => {
   const [inputType, setInputType] = useState("password");
 
   const [isLoading, setIsLoading] = useState(false);
+
+  const [openTime, setOpenTime] = useState()
+
+  const [closeTime, setCloseTime] = useState()
+
+
 
   let chargerId = searchParams.get("chargerId");
 
@@ -28,7 +35,7 @@ const NewShift = ({ shift, setTime }) => {
   }, [showPassword]);
 
   const EditHours = (password, OperationHours) => {
-    // console.log(OperationHours)
+  
 
     let data = {
       id: chargerId,
@@ -40,7 +47,10 @@ const NewShift = ({ shift, setTime }) => {
     axios
       .post(`/Chargers/update-operational-hour?password=${password}`, data)
       .then((res) => {
+        Details();
+
         toast.success("Operation Hours updated successfully");
+        
         shift(false);
       })
       .catch((err) => {
@@ -53,29 +63,29 @@ const NewShift = ({ shift, setTime }) => {
     // setIsLoading(true);
     let password = e.target.password?.value;
 
-    let from = e.target.from?.value;
+    // let from = e.target.from?.value;
 
-    let to = e.target.to?.value;
+    // let to = e.target.to?.value;
 
-    let time = from + " " + to;
+    let time = openTime + " " + closeTime;
 
-    let ChosenTime = from + " " + "-" + " " + to;
+    // let ChosenTime = openTime + " " + "-" + " " + closeTime;
 
     let OperationHours = time.toString();
 
-    // console.log(password)
+    console.log(OperationHours)
 
-    if (!from) {
-      toast.error("Please enter start time");
-      // setIsLoading(false);
-      return;
-    }
+    // if (!from) {
+    //   toast.error("Please enter start time");
+    //   // setIsLoading(false);
+    //   return;
+    // }
 
-    if (!to) {
-      toast.error("Please enter end time");
-      // setIsLoading(false);
-      return;
-    }
+    // if (!to) {
+    //   toast.error("Please enter end time");
+    //   // setIsLoading(false);
+    //   return;
+    // }
 
     if (!password) {
       toast.error("Please enter your password");
@@ -84,13 +94,12 @@ const NewShift = ({ shift, setTime }) => {
     }
 
     EditHours(password, OperationHours);
-    setTime(ChosenTime);
-    // setBilling(password, price);
-    // setReloadPage(true);
-
-    // setBmsGreen(price);
-    // setOldPrice(0);
+    // setTime(ChosenTime);
+  
   };
+
+
+const format = 'HH:mm';
 
   return (
     <div>
@@ -114,33 +123,38 @@ const NewShift = ({ shift, setTime }) => {
         {/* //back arrow */}
         <img src={BackArrow} alt="" onClick={() => shift(false)} />
       </div>
+
+
       <div>
+
         <form onSubmit={handleSubmit}>
           <div className="mt-[1.5rem] mb-[2rem] flex justify-between">
             <div>
               <label className="block text-base text-[#344054] font-semibold leading-5 py-[0.25rem]">
                 Opening hours
               </label>
-              <input
+              {/* <input
                 type="time"
                 placeholder=""
                 name="from"
                 required
                 className="w-[10rem] h-[3rem] border border-solid border-1 border-[#D0D5DD] px-[1rem] py-[0.75rem] rounded-lg"
-              />
+              /> */}
+              <TimePicker onChange={(time, timeString)=>{setOpenTime(timeString)}} format={format}/>
             </div>
 
             <div>
               <label className="block text-base text-[#344054] font-semibold leading-5 py-[0.25rem]">
                 Closing hours
               </label>
-              <input
+              {/* <input
                 type="time"
                 placeholder=""
                 name="to"
                 required
                 className="w-[10rem] h-[3rem] border border-solid border-1 border-[#D0D5DD] px-[1rem] py-[0.75rem] rounded-lg"
-              />
+              /> */}
+               <TimePicker onChange={(time, timeString)=>{setCloseTime(timeString)}}format={format}/>
             </div>
           </div>
 

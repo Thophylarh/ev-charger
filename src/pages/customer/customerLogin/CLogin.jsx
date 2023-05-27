@@ -1,9 +1,85 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 import logo from "../../../assets/svg/logo.svg";
 import Show from "../../../assets/svg/showEye.svg";
+import axios from "axios";
+import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
+import { useNavigate } from "react-router";
 
 const Clogin = () => {
+	const Navigate = useNavigate();
+
+	const [phone, setPhone ] = useState()
+
+	const [password, setPassWord] = useState()
+
+	const [showPassword, setShowPassword] = useState(false);
+
+	const [inputType, setInputType] = useState("password");
+
+	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		showPassword ? setInputType("text") : setInputType("password");
+	  }, [showPassword]);
+
+	const url = "http://evapi.estations.com";
+
+	const handleSubmit = (e) =>{
+		e.preventDefault();
+		
+		if (!phone) {
+			toast.error("Enter phone number");
+			return;
+		  }
+	  
+		  if (!password) {
+			toast.error("Enter password");
+	  
+			return;
+		  }
+
+		  setIsLoading(true);
+
+		  axios
+		  .post(
+			url +
+			  "/Customers/login?phoneNumber=" +
+			  phone +
+			  "&password=" +
+			  password,
+			{},
+			{
+			  headers: { "Content-Type": "application/json" },
+			  withCredentials: false,
+			}
+		  )
+		  .then((res)=>{
+			localStorage.setItem("user-token", res.data.token);
+			localStorage.setItem("customerId", res.data.id);
+			setIsLoading(false);
+			setPhone("");
+			setPassWord("");
+			Navigate("/home");
+			Navigate({
+				pathname: '/home',
+				search: `?customerId=${res.data.id}`
+			  })
+			toast.success("Welcome");
+		  }
+
+		  )
+		  .catch((err) => {
+			console.log(err);
+	
+			toast.error(err.response.data.title);
+			setIsLoading(false);
+			
+		  });
+	}
+
+
 	return (
 	<section className="mobileBody">
         	<section className="top h-[100vh] p-[8px]">
@@ -19,15 +95,18 @@ const Clogin = () => {
 				</p>
 
 				<section className="mt-[4rem]">
-					<form>
+					<form onSubmit={handleSubmit}>
 						<div className="mb-[20px]">
 							<label className="block text-grey-700 text-[14px] font-semibold mb-[8px]">
 								Phone number:
 							</label>
 							<input
 								type="text"
+								name="phoneNo"
 								placeholder="Enter your phone number "
 								className="border p-[14px] rounded-lg w-[100%]"
+								value={phone}
+								onChange={(event)=>{setPhone(event.target.value)}}
 							/>
 						</div>
 
@@ -37,12 +116,20 @@ const Clogin = () => {
 							</label>
 							<div>
 								<div className="flex justify-end">
-									<img src={Show} className="eye"></img>
+									<img src={Show} className="eye"
+									 onClick={() => {
+										setShowPassword((showPassword) => !showPassword);
+										
+									  }}
+									></img>
 								</div>
 								<input
-									type="password"
+									type={inputType}
+									name="password"
+									value={password}
 									placeholder="Enter your password"
 									className="border p-[14px] rounded-lg w-[100%]"
+									onChange={(event)=>{setPassWord(event.target.value)}}
 								/>
 							</div>
 						</div>
