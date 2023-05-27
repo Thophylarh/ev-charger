@@ -9,6 +9,7 @@ import eye from "../../assets/svg/eye.svg";
 import Modal from "../modals/modal";
 import TransactionDetails from "../modals/transactionDetails";
 import ExportFile from "../exportComponent/ExportFile";
+import { useSearchParams } from "react-router-dom";
 
 const Last10Transactions = (props) => {
 	const [chargerTransactions, setchargerTransactions] = useState([]);
@@ -17,7 +18,11 @@ const Last10Transactions = (props) => {
 
 	const tableRef = useRef();
 
-	const id = props.chargerId;
+	// const id = props.chargerId;
+
+	const [searchParams] = useSearchParams();
+
+	let id = searchParams.get("chargerId");
 
 	// transactions for specific charger
 	const transactions = () => {

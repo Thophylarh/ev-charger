@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 
 const CarInfo = () => {
 	const [isLoading, setIsLoading] = useState(false);
+
 	const [searchParams] = useSearchParams();
 	const navigate = useNavigate();
 
@@ -16,6 +17,8 @@ const CarInfo = () => {
 
 	const createVA = () => {
 		let data = JSON.parse(localStorage.getItem("VA"));
+		data.walletId = localStorage.getItem("wall");
+		data.isPermanent = true;
 
 		console.log(data, "va data");
 		axios
@@ -31,9 +34,11 @@ const CarInfo = () => {
 				console.log(res.data, "va success");
 				setIsLoading(false);
 				toast.success("Account created successfully");
+
+				localStorage.setItem("wallet", JSON.stringify(res.data));
 				navigate({
 					pathname: "/wallet",
-					search: `?walletId=${res.data?.walletId}`,
+					// search: `?walletId=${res.data?.walletId}`,
 				});
 			})
 			.catch((err) => {
