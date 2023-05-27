@@ -26,7 +26,7 @@ const CarInfo = () => {
 
 		let data = {
 			transactionReference: paymentResponse?.tx_ref.walletId,
-			accountNumber: walletDetails?.data?.account_name,
+			accountNumber: walletDetails?.data?.account_number,
 			amount: paymentResponse?.amount,
 			transactionType: "credit",
 			transactionSource: "card",

@@ -1,30 +1,109 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import logo from "../../../assets/svg/logo.svg";
 import lines from "../../../assets/svg/yellowlines.svg";
 import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink,useNavigate, useSearchParams } from "react-router-dom";
+
 
 export default function CustomerDashboard() {
 	const [searchParams] = useSearchParams();
 	const [cDetails, setCDetails] = useState();
-
+	const [transactions, setTransactions] = useState([]);
 	let customerId = searchParams.get("customerId");
 
+	const [walletDetails, setWalletDetails] = useState(
+		JSON.parse(localStorage.getItem("wallet"))
+	);
+
+	const [fundAmount, setFundAmount] = useState(0);
+	let personalnfo = JSON.parse(localStorage.getItem("VA"));
+
+	const navigate = useNavigate();
+
 	//get customer details
-	const getDetails = () =>{
+	const getDetails = () => {
+		axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
+			setCDetails(res.data.customerDetails);
+			console.log(res.data.customerDetails)
+		});
+	};
+
+	//get customer details
+	const getTransactionHistory = () => {
 		axios
-		.get(`/Customers/get-customer-by-id/${customerId}`)
-		.then((res)=>{
-			console.log(res)
-			setCDetails(res.data.customerDetails)
-		}
-		)
-	}
+			.get(`/Customers/get-customer-transactions/${customerId}`)
+			.then((res) => {
+				setTransactions(res.data);
+			});
+	};
 
 	useEffect(() => {
 		getDetails();
+		getTransactionHistory();
 	}, []);
+
+
+	//PAYMENT PROCESS
+	const finalizeWalletProcess = () => {
+		let paymentResponse = JSON.parse(localStorage.getItem("flutter"));
+		let walletId = localStorage.getItem("wall");
+
+		let data = {
+			transactionReference: paymentResponse?.tx_ref.walletId,
+			accountNumber: walletDetails?.data?.account_number,
+			amount: paymentResponse?.amount,
+			transactionType: "credit",
+			transactionSource: "card",
+			walletId,
+		};
+
+		axios
+			.post(
+				`http://evapi.estations.com/Wallets/create-wallet-transaction`,
+				data,
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: false,
+				}
+			)
+			.then((res) => {
+				console.log(res.data);
+				// setIsLoading(false);
+				// toast.success("Account created successfully");
+
+				// localStorage.setItem("wallet", JSON.stringify(res.data));
+				navigate({
+					pathname: "/home",
+					// search: `?walletId=${res.data?.walletId}`,
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const config = {
+		public_key: "FLWPUBK_TEST-e2bd742a5bbb3f5dc00ace692ba05139-X",
+		tx_ref: Date.now(),
+		amount: fundAmount,
+		currency: "NGN",
+		payment_options: "card,mobilemoney,ussd",
+		customer: {
+			email: personalnfo?.emailAddress,
+			phone_number: personalnfo?.phonenumber,
+			name: `${personalnfo?.lastname} ${personalnfo?.firstname}`,
+		},
+		customizations: {
+			title: "Ev charger",
+			description: "Fund wallet",
+			logo: logo,
+		},
+	};
+
+
+	//END OF PAYMENT PROCESS
 
 	let style = {
 		background: `url(${lines})`,
@@ -48,7 +127,7 @@ export default function CustomerDashboard() {
 				<div className="px-4 py-7">
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
-					<h5 className="text-[1.5rem]  text-white  mb-4">
+					<h5 className="text-[1.25rem] w-full  text-white  mb-4">
 						NGN {cDetails?.WalletBalance}.<sup>00</sup>
 					</h5>
 
@@ -71,7 +150,9 @@ export default function CustomerDashboard() {
 						My vehicles
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">{cDetails?.NumberOfVehiclesOnFile}</h5>
+					<h5 className="text-[1.125rem]   mb-3">
+						{cDetails?.NumberOfVehiclesOnFile}
+					</h5>
 				</div>
 
 				<div
@@ -81,19 +162,36 @@ export default function CustomerDashboard() {
 						Money spent
 					</p>
 
-					<h5 className="text-[1.125rem]   mb-3">NGN {cDetails?.TotalAmountSpent}</h5>
+					<h5 className="text-[1.125rem]   mb-3">
+						NGN {cDetails?.TotalAmountSpent}
+					</h5>
 
-					<p className="text-xs text-[var(--grey600)] font-bold">{cDetails?.TotalEnergyCharged} KW</p>
+					<p className="text-xs text-[var(--grey600)] font-bold">
+						{cDetails?.TotalEnergyCharged} KW
+					</p>
 				</div>
 			</section>
 
 			<section className="mb-[var(--marginBtwSection)]">
 				<h5 className="font-semibold mb-3">Transaction history</h5>
 
-				<div>
-					<TransactionCard/>
-					<TransactionCard/>
-				</div>
+				{transactions?.length > 0 &&
+					transactions?.map((data) => {
+						return (
+							<div>
+								<TransactionCard />
+							</div>
+						);
+					})}
+
+				{transactions?.length < 1 && (
+					<div>
+						<h3 className="text-base text-center mt-10 w-[70%] mx-auto">
+							{" "}
+							You have made no transaction at the moment
+						</h3>
+					</div>
+				)}
 			</section>
 		</section>
 	);
