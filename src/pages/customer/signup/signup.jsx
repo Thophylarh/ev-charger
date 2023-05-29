@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 import { DatePicker } from "antd";
@@ -8,21 +8,44 @@ import { toast } from "react-toastify";
 import logo from "../../../assets/svg/logo.svg";
 import "../signup/style.css";
 import { ClipLoader } from "react-spinners";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
 const SignUp = () => {
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
+	const [VehicleCode, setVehicleCode] = useState();
 	const [DOB, setDOB] = useState();
 
-	const [searchParams] = useSearchParams();
+	const {phone} = useParams()
+	// const [searchParams] = useSearchParams();
 
-	let phone = searchParams.get("phoneNumber");
-	let VehicleCode = searchParams.get("VehicleCode");
+	// let phone = searchParams.get("phoneNumber");
+	// let VehicleCode = searchParams.get("VehicleCode");
 
 	const onDateChange = async (date, dateString) => {
 		console.log(dateString);
 		setDOB(dateString);
+	};
+
+	const getVehicleCode = () => {
+		axios
+			.get(
+				`http://evapi.estations.com/Customers/get-customer-vehicle-by-phonenumber/${phone}`,
+				{
+					headers: { "Content-Type": "application/json" },
+					withCredentials: false,
+				}
+			)
+			.then((res) => {
+			
+				setVehicleCode(res.data.vehicleCode)
+				// setIsLoading(false);
+			})
+			.catch((err) => {
+				setIsLoading(false);
+				console.log(err);
+				toast.error(err.response.data);
+			});
 	};
 
 	const customerSignUp = (e) => {
@@ -112,6 +135,9 @@ const SignUp = () => {
 			});
 	};
 
+	useEffect(() => {
+		getVehicleCode();
+	}, []);
 	return (
 		<section className="bg-black h-[100vh]  py-[1rem]">
 			<section

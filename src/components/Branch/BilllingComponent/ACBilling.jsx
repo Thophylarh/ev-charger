@@ -27,7 +27,7 @@ export default function ACBilling({ openModal, price }) {
 							{grid?.[0]?.costPerUnitCharge
 								? formatNumber(grid?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button
@@ -49,7 +49,7 @@ export default function ACBilling({ openModal, price }) {
 							{utility?.[0]?.costPerUnitCharge
 								? formatNumber(utility?.[0]?.costPerUnitCharge , false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button
@@ -75,7 +75,7 @@ export default function ACBilling({ openModal, price }) {
 							{green?.[0]?.costPerUnitCharge
 								? formatNumber(green?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button

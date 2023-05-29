@@ -4,8 +4,7 @@ import lines from "../../../assets/svg/yellowlines.svg";
 import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
-import { NavLink,useNavigate, useSearchParams } from "react-router-dom";
-
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 
 export default function CustomerDashboard() {
 	const [searchParams] = useSearchParams();
@@ -26,7 +25,7 @@ export default function CustomerDashboard() {
 	const getDetails = () => {
 		axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
 			setCDetails(res.data.customerDetails);
-			console.log(res.data.customerDetails)
+			console.log(res.data.customerDetails);
 		});
 	};
 
@@ -44,8 +43,15 @@ export default function CustomerDashboard() {
 		getTransactionHistory();
 	}, []);
 
-
 	//PAYMENT PROCESS
+
+	const fundWallet = () => {
+		let person = prompt("Please enter an amount:", "");
+		if (person) {
+			console.log("skjdk");
+		}
+	};
+
 	const finalizeWalletProcess = () => {
 		let paymentResponse = JSON.parse(localStorage.getItem("flutter"));
 		let walletId = localStorage.getItem("wall");
@@ -102,7 +108,6 @@ export default function CustomerDashboard() {
 		},
 	};
 
-
 	//END OF PAYMENT PROCESS
 
 	let style = {
@@ -131,9 +136,14 @@ export default function CustomerDashboard() {
 						NGN {cDetails?.WalletBalance}.<sup>00</sup>
 					</h5>
 
-					<button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
-						<PlusIcon /> Fund wallet
-					</button>
+					<NavLink to="/wallet">
+						<button
+							
+							className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center"
+						>
+							<PlusIcon /> Fund wallet
+						</button>
+					</NavLink>
 				</div>
 
 				<div className="h-[100%] w-[50%]">
