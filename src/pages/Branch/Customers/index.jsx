@@ -32,6 +32,7 @@ export default function CustomerList() {
 	const getCustomers = async () => {
 		refresh && setIsLoading(true);
 		axios.get(`/customers`).then((res) => {
+			console.log(res)
 			let index = 0;
 
 			res.data.forEach((el) => {
