@@ -64,10 +64,9 @@ const MyVehicles = () =>{
 			</section>
 
 				{Vehicles?.map((vehicle)=>(
-					<VehicleCard vehicle={vehicle}/>
+					<VehicleCard key={vehicle.id} vehicle={vehicle}/>
 				))}
-                {/* <VehicleCard/>
-                <VehicleCard/> */}
+              
 
             
             
