@@ -45,9 +45,12 @@ const AWallet = () => {
 						NGN {cDetails?.WalletBalance}.<sup>00</sup>
 					</h5>
 
-					<button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
-						<PlusIcon /> Fund wallet
-					</button>
+					<NavLink to="/wallet">
+						{" "}
+						<button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
+							<PlusIcon /> Fund wallet
+						</button>
+					</NavLink>
 				</div>
 
 				{/* <div className="h-[100%] w-[50%]">

@@ -12,7 +12,7 @@ export default function CICEBilling({ openModal, price }) {
 		<div className={`mb-[var(--marginBtwElements)]`}>
 			<div>
 				<h3 className={`text-[var(--goldColor)] mb-[0.5rem]`}>
-					CICE PRICE/KW SUMMARY
+					CICE PRICE/KWhh SUMMARY
 				</h3>
 			</div>
 			<div>
@@ -25,7 +25,7 @@ export default function CICEBilling({ openModal, price }) {
 							{grid?.[0]?.costPerUnitCharge
 								? formatNumber(grid?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button
@@ -47,7 +47,7 @@ export default function CICEBilling({ openModal, price }) {
 							{utility?.[0]?.costPerUnitCharge
 								? formatNumber(utility?.[0]?.costPerUnitCharge , false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button
@@ -73,7 +73,7 @@ export default function CICEBilling({ openModal, price }) {
 							{green?.[0]?.costPerUnitCharge
 								? formatNumber(green?.[0]?.costPerUnitCharge, false, 2)
 								: 0}
-							/KW
+							/KWh
 						</h5>
 
 						<button

@@ -5,6 +5,7 @@ import axios from "axios";
 
 import logo from "../../../assets/svg/logo.svg";
 import { toast } from "react-toastify";
+import { ClipLoader } from "react-spinners";
 
 const CarInfo = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -159,8 +160,26 @@ const CarInfo = () => {
 						></input>
 					</div>
 
-					<button className="bg-black w-[100%] py-[16px] text-white rounded-lg mb-[4rem]">
-						Continue
+					<button
+						type="submit"
+						className={` p-4 rounded-lg mb-[4rem] flex  w-[100%] text- 
+                 center text-white  text- 
+                  normal text-sm 
+                  font-semibold tracking-widest text- 
+                   white uppercase transition ease-in- 
+                    out  ${
+											isLoading
+												? "bg-slate-500 cursor-not-allowed"
+												: "bg-black cursor-pointer"
+										} border border- 
+                     transparent active:bg-gray-900 
+                      false justify-center 
+                       hover:scale-105 duration-300`}
+						disabled={isLoading ? true : false}
+					>
+						{" "}
+						{isLoading ? <ClipLoader color="white" size={15} /> : "Continue"}
+						
 					</button>
 				</form>
 			</section>
