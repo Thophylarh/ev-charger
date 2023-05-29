@@ -15,7 +15,7 @@ const VehicleCard = ({vehicle}) => {
 	}
 
 	return (
-		<section className=" mb-[20px] " onClick={(e)=>{viewVehicle(vehicle.Id)}}>
+		<section className=" mb-[20px] " onClick={(e)=>{viewVehicle(vehicle.VehicleCode, e)}}>
 			<div className="p-[1px] border-2 border-[#6DDCFF]  rounded-lg">
 				<section className="w-full h-full p-[16px] bg-white ">
 					<img src={ActiveCar} alt="Car" />
