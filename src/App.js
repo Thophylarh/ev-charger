@@ -127,7 +127,7 @@ function App() {
           ></Route>
 
           {/* CUSTOMER ROUTES */}
-          <Route path="/signup" element={<SignUp />}></Route>
+          <Route path="/reg/:phone" element={<SignUp />}></Route>
           <Route path="/carInformation" element={<CarInfo />}></Route>
           <Route path="/wallet" element={<Wallet/>}></Route>
           <Route path="/Login" element={<CusLogin />}></Route>
