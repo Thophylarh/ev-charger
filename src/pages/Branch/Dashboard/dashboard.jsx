@@ -30,6 +30,7 @@ export default function Dashboardd() {
 	const [newDate, setNewDate] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams] = useSearchParams();
+	const [stationName, setStationName] = useState("")
 
 	let stationId = searchParams.get("stationId");
 
@@ -37,6 +38,15 @@ export default function Dashboardd() {
 
 	const tableRef = useRef();
 	// API CALLS
+
+	//station details 
+	const GetDetails = () =>{
+		axios.get(`/Stations/get-station-by-id/${stationId}`)
+		.then((res)=>{
+			setStationName(res?.data[0]?.StationName)
+
+		})
+	}
 
 	//last 10 transactions
 	const getTransactions = async () => {
@@ -79,6 +89,7 @@ export default function Dashboardd() {
 	useEffect(() => {
 		getTransactions();
 		getListOfChargers();
+		GetDetails();
 	}, []);
 
 	//table columns
@@ -194,7 +205,7 @@ export default function Dashboardd() {
 					<section className={`mb-[var(--marginBtwSection)]`}>
 						<div className={`flex justify-between items-center `}>
 							<div>
-								<h4 className="mb-[8px]">Hello, Sterling HQ</h4>
+								<h4 className="mb-[8px]">Hello, {stationName}</h4>
 								<p className="subHeader">
 									Here is an overview and breakdown of your station energy
 									revenue and consumption.

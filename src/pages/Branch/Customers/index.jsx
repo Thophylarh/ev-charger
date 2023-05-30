@@ -103,8 +103,8 @@ export default function CustomerList() {
 
 		{
 			title: "Phone number",
-			dataIndex: "phonenumber			",
-			key: "phonenumber			",
+			dataIndex: "phonenumber",
+			key: "phonenumber",
 			width: "15%",
 		},
 

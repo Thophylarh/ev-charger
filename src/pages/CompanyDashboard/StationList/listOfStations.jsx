@@ -81,7 +81,7 @@ const ListOfStations = () => {
                         <td>{station.StationName}</td>
                         <td>₦{station.Revenue?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</td>
                         <td>{station.EnergyConsumed?.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}kWh</td>
-                        <td>{station.Location}</td>
+                        <td>{station.LocationDetails.CityOrTown}</td>
                         <td>{station.Chargers}</td>
                         <td><button  onClick={(e)=>{viewStations(station.Id, e)}}
                         className="h-[31px] w-[96px] rounded-md text-[#475467] font-semibold text-xs leading-5 border border-solid border-1 border-[#475467]" 
