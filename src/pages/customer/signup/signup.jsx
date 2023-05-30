@@ -9,18 +9,32 @@ import logo from "../../../assets/svg/logo.svg";
 import "../signup/style.css";
 import { ClipLoader } from "react-spinners";
 import { useNavigate, useParams } from "react-router";
+import Show from "../../../assets/svg/showEye.svg";
 
 const SignUp = () => {
 	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
 	const [VehicleCode, setVehicleCode] = useState();
 	const [DOB, setDOB] = useState();
+	const [showPassword, setShowPassword] = useState(false);
+	const [inputType, setInputType] = useState("password");
+	const [showBvn, setShowBvn] = useState(false);
+	const [BvninputType, setBvnInputType] = useState("number");
+
 
 	const {phone} = useParams()
 	// const [searchParams] = useSearchParams();
 
 	// let phone = searchParams.get("phoneNumber");
 	// let VehicleCode = searchParams.get("VehicleCode");
+
+	useEffect(() => {
+		showPassword ? setInputType("text") : setInputType("password");
+	  }, [showPassword]);
+
+	  useEffect(() => {
+		showBvn ? setBvnInputType("number") : setBvnInputType("password");
+	  }, [showBvn]);
 
 	const onDateChange = async (date, dateString) => {
 		console.log(dateString);
@@ -44,7 +58,7 @@ const SignUp = () => {
 			.catch((err) => {
 				setIsLoading(false);
 				console.log(err);
-				toast.error(err.response.data);
+				// toast.error(err.response.data);
 			});
 	};
 
@@ -215,12 +229,22 @@ const SignUp = () => {
 							<p>BVN</p> <p className="text-[#EB3540]">*</p>
 						</label>
 
+						<div>
+						<div className="flex justify-end">
+									<img src={Show} className="eye"
+									 onClick={() => {
+										setShowBvn((showPassword) => !showPassword);
+										
+									  }}
+									></img>
+								</div>
 						<input
-							type="number"
+							type={BvninputType}
 							name="bvn"
 							placeholder="BVN"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
+						</div>
 					</div>
 
 					<div className="mb-[20px]">
@@ -246,13 +270,23 @@ const SignUp = () => {
 						<label className="block text-[#344054] text-[0.875rem] font-semibold mb-[0.25rem]">
 							Password
 						</label>
-
+						<div>
+						<div className="flex justify-end">
+									<img src={Show} className="eye"
+									 onClick={() => {
+										setShowPassword((showPassword) => !showPassword);
+										
+									  }}
+									></img>
+								</div>
+						
 						<input
-							type="text"
+							type={inputType}
 							name="password"
 							placeholder="Enter your password"
 							className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
 						></input>
+						</div>
 					</div>
 
 					<button

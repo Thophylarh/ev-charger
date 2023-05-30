@@ -7,15 +7,17 @@ const VehicleCard = ({vehicle}) => {
 
 	const Cid = localStorage.getItem("customerId");
 
-	const viewVehicle = (id, e) =>{
+	const viewVehicle = ( e, id , code) =>{
+		
 		Navigate({
 			pathname: '/vehicleDetails',
-			search: `?customerId=${Cid}&vehicleId=${id}`,
+			search: `?vehicleCode=${code}&vehicleId=${id}`,
 		  });
 	}
 
 	return (
-		<section className=" mb-[20px] " onClick={(e)=>{viewVehicle(vehicle.VehicleCode, e)}}>
+		<section className=" mb-[20px] " onClick={(e)=>{viewVehicle(e, vehicle.Id, vehicle.VehicleCode
+			)}}>
 			<div className="p-[1px] border-2 border-[#6DDCFF]  rounded-lg">
 				<section className="w-full h-full p-[16px] bg-white ">
 					<img src={ActiveCar} alt="Car" />
