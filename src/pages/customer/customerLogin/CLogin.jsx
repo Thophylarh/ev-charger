@@ -61,7 +61,7 @@ const Clogin = () => {
 			setIsLoading(false);
 			setPhone("");
 			setPassWord("");
-			Navigate("/home");
+			
 			Navigate({
 				pathname: '/home',
 				search: `?customerId=${res.data.id}`
