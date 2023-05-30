@@ -5,6 +5,8 @@ import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
+import { formatNumber } from "../../../utils/formatNumber";
+
 
 export default function CustomerDashboard() {
 	const [searchParams] = useSearchParams();
@@ -129,11 +131,11 @@ export default function CustomerDashboard() {
 			</div>
 
 			<section className="bg-black rounded-2xl  text-white flex justify-between mb-[var(--marginBtwSection)]">
-				<div className="px-4 py-7">
+				<div className="px-4 py-7 w-[90%]">
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
 					<h5 className="text-[1.25rem] w-full  text-white  mb-4">
-						NGN {cDetails?.WalletBalance}.<sup>00</sup>
+						NGN {formatNumber(cDetails?.WalletBalance, false, 0)}.<sup>00</sup>
 					</h5>
 
 					<NavLink to="/wallet">
