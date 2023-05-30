@@ -47,6 +47,9 @@ import Profile from "./pages/Customer/CustomerProfile";
 import AWallet from "./pages/Customer/Awallet/Awallet";
 
 function App() {
+
+ 
+
   return (
     <div>
       <BrowserRouter>

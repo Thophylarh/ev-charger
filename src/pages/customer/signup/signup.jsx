@@ -117,6 +117,7 @@ const SignUp = () => {
 			numberOfVehiclesOnFile: 0,
 			totalAmountSpent: 0,
 			totalEnergyCharged: 0,
+			bvn
 		};
 		let va = {
 			firstname: firstName,
