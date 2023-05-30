@@ -3,6 +3,7 @@ import lines from "../../../assets/svg/yellowlines.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useSearchParams } from "react-router-dom";
+import {formatNumber} from "../../../utils/formatNumber.js"
 
 const AWallet = () => {
 	const [searchParams] = useSearchParams();
@@ -42,7 +43,7 @@ const AWallet = () => {
 					<p className="text-sm  text-white  mb-4">Wallet balance</p>
 
 					<h5 className="text-[1.5rem]  text-white  mb-4">
-						NGN {cDetails?.WalletBalance}.<sup>00</sup>
+						NGN {formatNumber(cDetails?.WalletBalance, false, 0)}.<sup>00</sup>
 					</h5>
 
 					<NavLink to="/wallet">

@@ -50,6 +50,7 @@ const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
 
  })
 
+ 
 
   useEffect(() => {
     chargerGraph();
