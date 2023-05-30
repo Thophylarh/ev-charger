@@ -118,6 +118,13 @@ export default function CustomerDashboard() {
     backgroundPosition: "120% bottom",
   };
 
+  let fundwallet = () => {
+    navigate({
+      pathname: "/wallet",
+      search: `?customerId=${customerId}`,
+    });
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -142,11 +149,11 @@ export default function CustomerDashboard() {
                 <sup>00</sup>
               </h5>
 
-              <NavLink to="/wallet">
-                <button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
+
+                <button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center"    onClick={fundwallet}>
                   <PlusIcon /> Fund wallet
                 </button>
-              </NavLink>
+            
             </div>
 
             <div className="h-[100%] w-[50%]">

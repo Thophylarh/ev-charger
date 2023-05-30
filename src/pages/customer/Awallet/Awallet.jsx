@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import lines from "../../../assets/svg/yellowlines.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
 
 const AWallet = () => {
@@ -12,7 +12,7 @@ const AWallet = () => {
 
   const [isLoading, setIsLoading] = useState(false);
   let customerId = searchParams.get("customerId");
-
+  let navigate = useNavigate();
   //get customer details
   const getDetails = () => {
     setIsLoading(true);
@@ -40,6 +40,13 @@ const AWallet = () => {
     background: `url(${lines})`,
   };
 
+  let fundwallet = () => {
+    navigate({
+      pathname: "/wallet",
+      search: `?customerId=${customerId}`,
+    });
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -54,12 +61,12 @@ const AWallet = () => {
                 NGN {cDetails?.WalletBalance}.<sup>00</sup>
               </h5>
 
-              <NavLink to="/wallet">
-                {" "}
-                <button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
-                  <PlusIcon /> Fund wallet
-                </button>
-              </NavLink>
+              <button
+                className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center"
+                onClick={fundwallet}
+              >
+                <PlusIcon /> Fund wallet
+              </button>
             </div>
 
             {/* <div className="h-[100%] w-[50%]">
