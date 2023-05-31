@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import lines from "../../../assets/svg/yellowlines.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
 import { formatNumber } from "../../../utils/formatNumber";
 
@@ -11,9 +11,11 @@ const AWallet = () => {
   const [cDetails, setCDetails] = useState();
   const [transactions, setTransactions] = useState([]);
 
+  const [enrolled, setEnrolled] = useState(true);
+
   const [isLoading, setIsLoading] = useState(false);
   let customerId = searchParams.get("customerId");
-
+  let navigate = useNavigate();
   //get customer details
   const getDetails = () => {
     setIsLoading(true);
@@ -41,6 +43,13 @@ const AWallet = () => {
     background: `url(${lines})`,
   };
 
+  let fundwallet = () => {
+    navigate({
+      pathname: "/wallet",
+      search: `?customerId=${customerId}`,
+    });
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -55,12 +64,12 @@ const AWallet = () => {
                 NGN {formatNumber(cDetails?.WalletBalance)}.<sup>00</sup>
               </h5>
 
-              <NavLink to="/wallet">
-                {" "}
-                <button className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center">
-                  <PlusIcon /> Fund wallet
-                </button>
-              </NavLink>
+              <button
+                className="border p-2 rounded-lg text-sm border-[#B27203] text-[#B27203] flex items-center"
+                onClick={fundwallet}
+              >
+                <PlusIcon /> Fund wallet
+              </button>
             </div>
 
             {/* <div className="h-[100%] w-[50%]">
@@ -72,6 +81,45 @@ const AWallet = () => {
             <h3 className="mb-[1.25rem] font-semibold text-[1rem] text-[#101828]">
               Transaction history
             </h3>
+
+            <section
+              className={`bg-[var(--grey10)] h-[4rem]   flex justify-between`}
+            >
+              <div
+                className={`w-[50%]  h-[100%] cursor-pointer  ${
+                  enrolled
+                    ? " border-b-4 border-black "
+                    : " border-b-4 border-[#E2E2E2)]"
+                }  text-center font-semibold`}
+                onClick={() => setEnrolled(true)}
+              >
+                <h1
+                  className={` text-sm pt-[1.25rem] ${
+                    enrolled ? " text-black" : "text-[var(--grey500)]"
+                  }`}
+                >
+                  Charge History
+                </h1>
+              </div>
+
+              <div
+                className={`w-[50%] cursor-pointer   h-[100%]  ${
+                  !enrolled
+                    ? " border-b-4 border-black "
+                    : " border-b-4 border-[#E2E2E2)]"
+                } text-center font-semibold`}
+                onClick={() => setEnrolled(false)}
+              >
+                <h1
+                  className={`text-sm pt-[1.25rem] ${
+                    !enrolled ? " text-black" : "text-[var(--grey500)]"
+                  }`}
+                >
+                  Top-up History
+                </h1>
+              </div>
+            </section>
+
             {transactions?.length > 0 &&
               transactions?.map((data) => {
                 return (

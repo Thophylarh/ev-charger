@@ -23,7 +23,7 @@ const CNav = () => {
 
   const Active = "text-white font-normal text-xs mt-[10px]";
 
-  const notActive = "text-white opacity-40 font-normal text-sm mt-[10px]";
+  const notActive = "text-white opacity-40 font-normal text-xs mt-[10px]";
 
   const Cid = localStorage.getItem("customerId");
 
