@@ -1,5 +1,6 @@
 import PlusInBox from "../../assets/svg/plusInBox.svg";
 import Modal from "./modal";
+import { ClipLoader } from "react-spinners";
 
 const OperationHours = () => {
   return (

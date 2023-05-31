@@ -31,6 +31,7 @@ import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
 
 //Components
 import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
+import ProtectedCustomerRoutes from "./routeGuard/ProtectedCustomerRoutes";
 import AuthRoutes from "./routeGuard/AuthRoutes";
 import Sidebar from "./components/Sidebar/sidebar";
 
@@ -130,11 +131,13 @@ function App() {
           ></Route>
 
           {/* CUSTOMER ROUTES */}
+
           <Route path="/reg/:phone" element={<SignUp />}></Route>
           <Route path="/carInformation" element={<CarInfo />}></Route>
           <Route path="/wallet" element={<Wallet/>}></Route>
           <Route path="/Login" element={<CusLogin />}></Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/home"
             element={
@@ -143,7 +146,9 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/station-locator"
             element={
@@ -152,9 +157,11 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
 
          
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/vehicleDetails"
             element={
@@ -163,7 +170,9 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/myVehicles"
             element={
@@ -172,7 +181,9 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/profile"
             element={
@@ -181,7 +192,9 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/AWallet"
             element={
@@ -190,6 +203,7 @@ function App() {
               </CustomerLayout>
             }
           ></Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
