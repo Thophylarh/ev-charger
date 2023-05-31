@@ -14,7 +14,6 @@ export default function StationAccordion({ station }) {
     }
   });
 
-  console.log(chargerType);
 
   return (
     <div className="mt-5 mx-auto w-[95%] border-b-[1px] border-grey-100 pb-4 ">
@@ -66,7 +65,9 @@ export default function StationAccordion({ station }) {
               <p className="text-sm text-[var(--grey600)] ">Charger types:</p>
               <p className="text-sm text-[var(--grey600)] font-bold">
                 {chargerType?.length > 0 &&
-                  chargerType?.map((type) => <span>{type}</span>)}
+                  chargerType?.map((type, index) => (
+                    <span key={index}>{type}</span>
+                  ))}
                 {chargerType?.length < 1 && "---"}
               </p>
             </div>
@@ -84,8 +85,8 @@ export default function StationAccordion({ station }) {
               <p className="text-sm text-[var(--grey600)] ">Price:</p>
               <p className="text-sm text-[var(--grey600)] font-bold">
                 {chargerType?.length > 0 &&
-                  ` NGN${formatNumber(priceRange[0])}/kw - NGN
-                ${formatNumber(priceRange[1])}/kw`}
+                  ` NGN${formatNumber(priceRange[0])}/kwh - NGN
+                ${formatNumber(priceRange[1])}/kwh`}
                 {chargerType?.length < 1 && "---"}
               </p>
             </div>
