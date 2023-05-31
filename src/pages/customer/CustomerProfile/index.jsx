@@ -6,8 +6,11 @@ import LocationIcon from "../../../assets/svg/profileLocation.svg"
 import Password from "../../../assets/svg/password-key.svg"
 import Email from "../../../assets/svg/email-bell.svg"
 import Logout from  "../../../assets/svg/profile-logout.svg"
+import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="pt-[1.5rem] w-[90%] mx-auto">
 
@@ -80,7 +83,14 @@ const Profile = () => {
         </div>
         <hr></hr>    
 
-        <div className="flex  mt-[1.5rem] mb-[1rem]">
+        <div
+         className="flex  mt-[1.5rem] mb-[1rem]" 
+         onClick={() => {
+							localStorage.clear("user-token");
+							navigate({
+								pathname: "/login",
+							});
+						}}>
             <img src={Logout} alt="location" />
             <h5 className="font-medium text-sm text-[#EB3540] ml-[1.25rem]">Logout</h5>
            
