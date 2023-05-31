@@ -137,10 +137,26 @@ const Clogin = () => {
 						<p className="font-normal text-[12px] text-[#B27203] flex justify-end mb-[28px]">
 							Forgot password?
 						</p>
-
-						<button className="border py-[16px] w-[100%] bg-black rounded-lg text-white">
-							Sign in
+						
+						<div>
+						<button 
+						className={`border py-[16px] w-[100%] bg-black rounded-lg text-white 
+						 ${
+							isLoading
+							  ? "bg-slate-500 cursor-not-allowed"
+							  : "bg-black cursor-pointer"
+						  }`
+						 }
+						disabled={isLoading ? true : false}>
+							{isLoading ? (
+                      <ClipLoader color="white" size={15} />
+                    ) : (
+                      "Sign in"
+                    )}
+							
 						</button>
+						
+					</div>
 					</form>
 				</section>
 			</section>

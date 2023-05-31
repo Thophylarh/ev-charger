@@ -47,6 +47,7 @@ const NewShift = ({ shift, setTime, Details }) => {
     axios
       .post(`/Chargers/update-operational-hour?password=${password}`, data)
       .then((res) => {
+        setIsLoading(false);
         Details();
 
         toast.success("Operation Hours updated successfully");
@@ -60,16 +61,13 @@ const NewShift = ({ shift, setTime, Details }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // setIsLoading(true);
+    setIsLoading(true);
     let password = e.target.password?.value;
 
-    // let from = e.target.from?.value;
-
-    // let to = e.target.to?.value;
 
     let time = openTime + " " + closeTime;
 
-    // let ChosenTime = openTime + " " + "-" + " " + closeTime;
+   
 
     let OperationHours = time.toString();
 

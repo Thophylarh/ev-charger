@@ -4,6 +4,7 @@ import TransactionCard from "../../../components/CustomerComponent/TransactionCa
 import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
+import { formatNumber } from "../../../utils/formatNumber";
 
 const AWallet = () => {
   const [searchParams] = useSearchParams();
