@@ -52,14 +52,15 @@ const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
 
   const formatHours = ( hours) =>{
     // e.preventDefault();
-   let arr = hours?.split(" ")
+   let from = hours?.split(" ")[0]
+
+   let to = hours?.split(" ")[1]
+
+   let timeRange = from + "-" + to
+
    
 
-     const newHours = arr[0] + "-" + arr[1]
-
-     console.log(newHours)
-
-     return newHours
+     return timeRange
 
   }
 
@@ -86,7 +87,7 @@ const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
                     OPERATION HOURS
                 </h2>
 
-                <h4 className="mb-[var(--marginBtwElements)] ">{formatHours(ChargerDetails.OperationalHours)}</h4>
+                <h4 className="mb-[var(--marginBtwElements)] ">{formatHours(ChargerDetails?.OperationalHours)}</h4>
 
                 <h3 className="text-[#007EF2] cursor-pointer" onClick={(e)=>{setSModal(true)}}>Change Hours</h3>
                 </div>
