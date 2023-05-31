@@ -10,6 +10,20 @@ export default function StationLocator() {
   const [location, setLocation] = useState(null);
   const [stations, setStations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [address, setAddress] = useState("");
+
+  const getAddressFromCoordinates = async (latitude, longitude) => {
+    try {
+      const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+      );
+      const data = await response.json();
+
+      setAddress(`${data.address.city}, ${data.address.state}`);
+    } catch (error) {
+      console.log("Error getting address:", error);
+    }
+  };
 
   function success(position) {
     const latitude = position.coords.latitude;
@@ -20,9 +34,9 @@ export default function StationLocator() {
     });
 
     if (latitude && longitude) {
-      //   getStationLocator();
+      //  getStationLocator();
     }
-    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    getAddressFromCoordinates(latitude, longitude);
   }
 
   function error() {
@@ -52,6 +66,29 @@ export default function StationLocator() {
 
   useEffect(() => {
     if (navigator.geolocation) {
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then(function (result) {
+          if (result.state === "granted") {
+            //If granted then you can directly call your function here
+            navigator.geolocation.getCurrentPosition(success, error);
+          } else if (result.state === "prompt") {
+            //If prompt then the user will be asked to give permission
+            navigator.geolocation.getCurrentPosition(success, error);
+          } else if (result.state === "denied") {
+            //If denied then you have to show instructions to enable location
+            toast.info(
+              "Kindly enable your location so we can show the stations closer to you"
+            );
+          }
+        });
+    } else {
+      console.log("Geolocation is not supported by this browser.");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(success, error);
     } else {
       console.log("Geolocation not supported");
@@ -72,7 +109,7 @@ export default function StationLocator() {
             <div className="flex items-center">
               <img src={locationIcon} alt="Stations Locations" />
               <h6 className={`ml-2 text-sm text-[--grey900] font-bold`}>
-                Sterling Hq marina
+                {address}
               </h6>
             </div>
 
@@ -81,44 +118,6 @@ export default function StationLocator() {
                 Change location
               </p>
             </div>
-          </section>
-
-          <section
-            className={`bg-[var(--grey10)] h-[4rem]   flex justify-between`}
-          >
-            <div
-              className={`w-[100%]  h-[100%] cursor-pointer  ${
-                enrolled
-                  ? " border-b-4 border-black "
-                  : " border-b-4 border-[#E2E2E2)]"
-              }  text-center font-semibold`}
-              onClick={() => setEnrolled(true)}
-            >
-              <h1
-                className={` text-sm pt-[1.25rem] ${
-                  enrolled ? " text-black" : "text-[var(--grey500)]"
-                }`}
-              >
-                List View
-              </h1>
-            </div>
-            {/* 
-				<div
-					className={`w-[50%] cursor-pointer   h-[100%]  ${
-						!enrolled
-							? " border-b-4 border-black "
-							: " border-b-4 border-[#E2E2E2)]"
-					} text-center font-semibold`}
-					onClick={() => setEnrolled(false)}
-				>
-					<h1
-						className={`text-sm pt-[1.25rem] ${
-							!enrolled ? " text-black" : "text-[var(--grey500)]"
-						}`}
-					>
-						Map View
-					</h1>
-				</div> */}
           </section>
 
           <section>

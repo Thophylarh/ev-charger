@@ -48,7 +48,7 @@ const CarInfo = () => {
   };
 
   useEffect(() => {
-    getDetails();
+    customerId && getDetails();
   }, [customerId]);
 
   const finalizeWalletProcess = () => {
