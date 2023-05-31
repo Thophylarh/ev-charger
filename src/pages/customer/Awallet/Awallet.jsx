@@ -8,18 +8,42 @@ import Loader from "../../../components/Loader";
 const AWallet = () => {
   const [searchParams] = useSearchParams();
   const [cDetails, setCDetails] = useState();
+  const [walletId, setWalletId] = useState();
   const [transactions, setTransactions] = useState([]);
-
-  const [enrolled, setEnrolled] = useState(true);
-
+  const [historyStatus, sethistoryStatus] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
+  const [walletBalance, setwalletBalance] = useState();
   let customerId = searchParams.get("customerId");
+
   let navigate = useNavigate();
   //get customer details
   const getDetails = () => {
     setIsLoading(true);
     axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
       setCDetails(res.data.customerDetails);
+
+      // let balance = String(res?.data?.walletDetails?.WalletBalance);
+    
+      // console.log(balance?.includes("."));
+
+      // if (balance) {
+      //   walletBalance = balance?.split(".");
+      // } else {
+
+      //   walletBalance[0] = balance;
+      //   walletBalance[1] = "00";
+      // }
+
+      // if (String(res?.data?.walletDetails?.WalletBalance).includes(".")) {
+      //   balance = res?.data?.walletDetails?.WalletBalance?.split(".");
+      // } else {
+      //   balance[0] = balance = res?.data?.walletDetails?.WalletBalance;
+      //   balance[1] = "00";
+      // }
+
+    setwalletBalance( res.data?.walletDetails?.WalletBalance)
+      
+      setWalletId(res.data?.walletDetails?.WalletId);
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -34,9 +58,19 @@ const AWallet = () => {
       });
   };
 
+  const getTopUpHistory = () => {
+    axios.get(`/wallets/get-wallet-transactions/${walletId}`).then((res) => {
+      setTransactions(res.data);
+    });
+  };
+
   useEffect(() => {
     getDetails();
   }, []);
+
+  useEffect(() => {
+    historyStatus ? getTransactionHistory() : getTopUpHistory();
+  }, [historyStatus]);
 
   let style = {
     background: `url(${lines})`,
@@ -60,7 +94,7 @@ const AWallet = () => {
               <p className="text-sm  text-white  mb-4">Wallet balance</p>
 
               <h5 className="text-[1.5rem]  text-white  mb-4">
-                NGN {cDetails?.WalletBalance}.<sup>00</sup>
+                NGN {walletBalance}.<sup>00</sup>
               </h5>
 
               <button
@@ -86,15 +120,15 @@ const AWallet = () => {
             >
               <div
                 className={`w-[50%]  h-[100%] cursor-pointer  ${
-                  enrolled
+                  historyStatus
                     ? " border-b-4 border-black "
                     : " border-b-4 border-[#E2E2E2)]"
                 }  text-center font-semibold`}
-                onClick={() => setEnrolled(true)}
+                onClick={() => sethistoryStatus(true)}
               >
                 <h1
                   className={` text-sm pt-[1.25rem] ${
-                    enrolled ? " text-black" : "text-[var(--grey500)]"
+                    historyStatus ? " text-black" : "text-[var(--grey500)]"
                   }`}
                 >
                   Charge History
@@ -103,15 +137,15 @@ const AWallet = () => {
 
               <div
                 className={`w-[50%] cursor-pointer   h-[100%]  ${
-                  !enrolled
+                  !historyStatus
                     ? " border-b-4 border-black "
                     : " border-b-4 border-[#E2E2E2)]"
                 } text-center font-semibold`}
-                onClick={() => setEnrolled(false)}
+                onClick={() => sethistoryStatus(false)}
               >
                 <h1
                   className={`text-sm pt-[1.25rem] ${
-                    !enrolled ? " text-black" : "text-[var(--grey500)]"
+                    !historyStatus ? " text-black" : "text-[var(--grey500)]"
                   }`}
                 >
                   Top-up History
