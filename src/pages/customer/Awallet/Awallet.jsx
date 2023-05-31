@@ -4,6 +4,7 @@ import TransactionCard from "../../../components/CustomerComponent/TransactionCa
 import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
+import { formatNumber } from "../../../utils/formatNumber";
 
 const AWallet = () => {
   const [searchParams] = useSearchParams();
@@ -60,7 +61,7 @@ const AWallet = () => {
               <p className="text-sm  text-white  mb-4">Wallet balance</p>
 
               <h5 className="text-[1.5rem]  text-white  mb-4">
-                NGN {cDetails?.WalletBalance}.<sup>00</sup>
+                NGN {formatNumber(cDetails?.WalletBalance)}.<sup>00</sup>
               </h5>
 
               <button

@@ -11,6 +11,7 @@ import Loader from "../../../components/Loader";
 const Vehicles = () => {
   const [searchParams] = useSearchParams();
   const [vehicleDetails, setVehicleDetails] = useState();
+  const [Vtransactions, setVTransactions] = useState();
 
   const [isLoading, setIsLoading] = useState(false);
   let vehicleId = searchParams.get("vehicleId");
@@ -40,7 +41,7 @@ const Vehicles = () => {
         `/Customers/get-customer-vehicle-transactions/${vehicleId}/${vehicleCode}`
       )
       .then((res) => {
-        console.log(res);
+        setVTransactions(res.data)
       });
   };
 
@@ -94,8 +95,22 @@ const Vehicles = () => {
 
           <section className="mt-[20px]">
             <h3 className="mb-[12px]">Charge history</h3>
+            {Vtransactions?.length > 0 && (
+              Vtransactions.map((Vtransaction)=>{
+                <TransactionCard VTransaction={Vtransaction}/>
+              })
+            )}
 
-            <TransactionCard />
+            {Vtransactions?.length < 1 && (
+               <div>
+               <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
+                 {" "}
+                 You have made no transaction at the moment
+               </h3>
+             </div>
+            )}
+
+            
           </section>
         </section>
       )}
