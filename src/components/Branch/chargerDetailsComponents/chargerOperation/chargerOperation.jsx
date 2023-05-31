@@ -50,7 +50,19 @@ const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
 
  })
 
- 
+  const formatHours = ( hours) =>{
+    // e.preventDefault();
+   let from = hours?.split(" ")[0]
+
+   let to = hours?.split(" ")[1]
+
+   let timeRange = from + "-" + to
+
+   
+
+     return timeRange
+
+  }
 
   useEffect(() => {
     chargerGraph();
@@ -75,7 +87,7 @@ const ChargerOperation = ({chargerId, ChargerDetails, GetChargerDetails}) =>{
                     OPERATION HOURS
                 </h2>
 
-                <h4 className="mb-[var(--marginBtwElements)] ">{ChargerDetails.OperationalHours}</h4>
+                <h4 className="mb-[var(--marginBtwElements)] ">{formatHours(ChargerDetails?.OperationalHours)}</h4>
 
                 <h3 className="text-[#007EF2] cursor-pointer" onClick={(e)=>{setSModal(true)}}>Change Hours</h3>
                 </div>
