@@ -46,6 +46,7 @@ import Vehicles from "./pages/Customer/vehicleDetails/vehicleDetails";
 import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
 import Profile from "./pages/Customer/CustomerProfile";
 import AWallet from "./pages/Customer/Awallet/Awallet";
+import AddVehicle from "./pages/Customer/AddVehicle/index";
 
 function App() {
 
@@ -189,6 +190,17 @@ function App() {
             element={
               <CustomerLayout title="My Profile">
                 <Profile />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/addVehicle"
+            element={
+              <CustomerLayout title="Add Vehicle">
+                <AddVehicle/>
               </CustomerLayout>
             }
           ></Route>

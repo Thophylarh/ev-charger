@@ -1,21 +1,35 @@
 import React, { useState, useEffect } from "react";
 import InactiveCar from "../../../assets/svg/inactiveCar.svg";
 import VehicleCard from "../../../components/CustomerComponent/vehicleCard";
+import addPlus from "../../../assets/svg/addPlus.svg"
 import axios from "../../../lib/axiosInterceptor";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink, useSearchParams, useNavigate } from "react-router-dom";
 import Loader from "../../../components/Loader";
 
 export default function VehicleList({cDetails, Vehicles, isLoading}) {
+  const navigate = useNavigate();
+
     let style2 = {
         backgroundImage: `url(${InactiveCar})`,
         backgroundPosition: "120% bottom",
       };
+
+      const addVehicle = () =>{
+        navigate({
+            pathname: '/addVehicle'
+          });
+    
+      }
+
   return (
     <>
       {isLoading && <Loader />}
 
       {!isLoading && (
         <div className="w-[90%] mx-auto pt-[28px]">
+            <div onClick={addVehicle}>
+              <img src={addPlus} alt="add vehicle"></img> <p>Add Vehicle</p> 
+            </div>
           <section className="grid grid-cols-12 gap-2 mb-[var(--marginBtwSection)]">
             <div
               style={style2}
