@@ -70,13 +70,13 @@ const CNav = () => {
         >
           <div>
             <img
-              src={` ${path === "/myVehicles" ? ActiveVan : Van}`}
+              src={` ${path === "/vehicleDetails" || path === "/myVehicles" ? ActiveVan : Van}`}
               alt="home icon"
               className="w-[1.7] mx-auto"
             />
             <h4
               className={`mt-[6px] ${
-                path === "/myVehicles" ? Active : notActive
+                path === "/vehicleDetails" || path === "/myVehicles" ? Active : notActive
               }`}
             >
               Vehicles
