@@ -4,50 +4,10 @@ import TransactionCard from "../../../components/CustomerComponent/TransactionCa
 import axios from "../../../lib/axiosInterceptor";
 import { useSearchParams } from "react-router-dom";
 
-
 import Loader from "../../../components/Loader";
 
-const VehicleComponent = () => {
+const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
   const [searchParams] = useSearchParams();
-  const [vehicleDetails, setVehicleDetails] = useState();
-  const [Vtransactions, setVTransactions] = useState();
-
-  const [isLoading, setIsLoading] = useState(false);
-  let vehicleId = searchParams.get("vehicleId");
-
-  let vehicleCode = searchParams.get("vehicleCode");
-
-  //vehicle details
-  const getDetails = () => {
-    setIsLoading(true);
-    axios
-      .get(
-        `/Customers/get-customer-vehicle-details-by-vehiclecode/${vehicleCode}`
-      )
-      .then((res) => {
-        // console.log(res)
-        setVehicleDetails(res.data.vehicleDetails[0]);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 2000);
-      });
-  };
-
-  //vehicle transactions
-  const transactions = () => {
-    axios
-      .get(
-        `/Customers/get-customer-vehicle-transactions/${vehicleId}/${vehicleCode}`
-      )
-      .then((res) => {
-        setVTransactions(res.data)
-      });
-  };
-
-  useEffect(() => {
-    getDetails();
-    transactions();
-  }, []);
 
   return (
     <>
@@ -94,22 +54,19 @@ const VehicleComponent = () => {
 
           <section className="mt-[20px]">
             <h3 className="mb-[12px]">Charge history</h3>
-            {Vtransactions?.length > 0 && (
-              Vtransactions.map((Vtransaction)=>{
-                <TransactionCard VTransaction={Vtransaction}/>
-              })
-            )}
+            {Vtransactions?.length > 0 &&
+              Vtransactions.map((Vtransaction) => {
+                <TransactionCard VTransaction={Vtransaction} />;
+              })}
 
             {Vtransactions?.length < 1 && (
-               <div>
-               <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
-                 {" "}
-                 You have made no transaction at the moment
-               </h3>
-             </div>
+              <div>
+                <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
+                  {" "}
+                  You have made no transaction at the moment
+                </h3>
+              </div>
             )}
-
-            
           </section>
         </section>
       )}
