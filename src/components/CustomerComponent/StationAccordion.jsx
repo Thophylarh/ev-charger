@@ -76,7 +76,7 @@ export default function StationAccordion({ station }) {
               <p className="text-sm text-[var(--grey600)] ">Availability:</p>
               <p className="text-sm text-[var(--grey600)] font-bold">
                 {chargerType?.length > 0 &&
-                  `${station?.chargingStatus?.notCharging} Idle charger(s)`}{" "}
+                  `${station?.chargingStatus?.notCharging} available charger(s)`}{" "}
                 {chargerType?.length < 1 && "---"}
               </p>
             </div>
