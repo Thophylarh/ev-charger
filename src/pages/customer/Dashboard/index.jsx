@@ -124,6 +124,15 @@ export default function CustomerDashboard() {
     });
   };
 
+  const openVehicles = () =>{
+    navigate({
+      
+        pathname: "/myVehicles",
+        search: `?customerId=${customerId}`,
+    
+    });
+  }
+
   return (
     <>
       {isLoading && <Loader />}
@@ -165,6 +174,7 @@ export default function CustomerDashboard() {
             <div
               style={style2}
               className={` bg-no-repeat col-span-5 bg-[var(--grey50)] w-[100%] rounded-2xl py-4 px-4`}
+              onClick={openVehicles}
             >
               <p className="text-xs mb-3 text-[var(--grey900)] font-medium">
                 My vehicles

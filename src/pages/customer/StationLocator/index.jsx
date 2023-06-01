@@ -19,7 +19,8 @@ export default function StationLocator() {
       );
       const data = await response.json();
 
-      setAddress(`${data.address.city}, ${data.address.state}`);
+      setAddress(`${data.address.city ? data.address.city : ""}, ${data.address.state}`);
+      
     } catch (error) {
       console.log("Error getting address:", error);
     }
