@@ -2,13 +2,23 @@ import React, { useState, useEffect } from "react";
 import ActiveCar from "../../../assets/svg/activeCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
 import axios from "../../../lib/axiosInterceptor";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams, useNavigate  } from "react-router-dom";
+import addPlus from "../../../assets/svg/addPlus.svg"
 
 import Loader from "../../../components/Loader";
 
 const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
   const [searchParams] = useSearchParams();
   console.log(Vtransactions)
+
+  const navigate = useNavigate();
+
+  const addVehicle = () =>{
+    navigate({
+        pathname: '/addVehicle'
+      });
+
+  }
 
   return (
     <>
@@ -17,6 +27,11 @@ const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
       {!isLoading && (
         <section className="w-[90%] mx-auto pt-[28px]">
           {/* <VehicleCard vehicle={vehicleDetails}/> */}
+          <div className="flex justify-end w-100% mb-[1rem]">
+          <div className="flex justify-between text-center" onClick={addVehicle}>
+              <img src={addPlus} alt="add vehicle"></img> <p className="text-[#15833C] ml-[0.5rem]">Add Vehicle</p> 
+            </div>
+            </div>
 
           <section className=" mb-[20px] ">
             <div className="p-[1px] border-2 border-[#6DDCFF]  rounded-lg">
