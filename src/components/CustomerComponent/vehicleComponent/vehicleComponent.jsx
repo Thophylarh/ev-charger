@@ -8,6 +8,7 @@ import Loader from "../../../components/Loader";
 
 const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
   const [searchParams] = useSearchParams();
+  console.log(Vtransactions)
 
   return (
     <>
@@ -59,7 +60,7 @@ const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
                 <TransactionCard VTransaction={Vtransaction} />;
               })}
 
-            {Vtransactions?.length < 1 && (
+            {(Vtransactions?.length < 1 || !Vtransactions)  && (
               <div>
                 <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
                   {" "}

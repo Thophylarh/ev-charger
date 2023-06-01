@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { getToken } from "../../../utils/getToken";
+import { toast } from "react-toastify";
 const CarInfo = () => {
   const [searchParams] = useSearchParams();
   const [walletDetails, setWalletDetails] = useState(
@@ -76,8 +77,8 @@ const CarInfo = () => {
       .then((res) => {
         console.log(res.data);
         navigate({
-          pathname: "/login",
-          // search: `?walletId=${res.data?.walletId}`,
+          pathname: "/home",
+         search: `?customerId=${res.data?.customerId}`,
         });
       })
       .catch((err) => {
@@ -118,7 +119,7 @@ const CarInfo = () => {
       <section className="bg-white h-[85%] rounded-3xl pt-[1.5rem]">
         <section className="bg-black text-white w-[90%] mx-auto rounded-xl mb-[1rem]">
           <div className="pt-[1.5rem] pb-[2.5rem] pl-[1.5rem]">
-            <h4 className={`text-[#FCFCFD]  mb-[var(--marginBtwElements)]`}>
+            <h4 className={`text-[#FCFCFD] text-base font-semibold mb-[var(--marginBtwElements)]`}>
               WALLET BALANCE
             </h4>
 
@@ -212,9 +213,22 @@ const CarInfo = () => {
                   handleFlutterPayment({
                     callback: (response) => {
                       console.log(response);
-                      localStorage.setItem("flutter", JSON.stringify(response));
-                      finalizeWalletProcess();
-                      closePaymentModal(); // this will close the modal programmatically
+                  
+
+                      if(response.status === 'successful'){
+                        localStorage.setItem("flutter", JSON.stringify(response));
+                        finalizeWalletProcess();
+                        closePaymentModal(); // this will close the modal programmatically
+                      }
+
+                      if(response.status !== 'successful'){
+                        navigate({
+                          pathname: "/wallet",
+                        });
+                        toast.error(response.status)
+                        closePaymentModal();
+                      }
+
                     },
                     onClose: () => {},
                   });

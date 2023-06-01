@@ -17,7 +17,7 @@ export default function CustomerDashboard() {
   const [walletId, setWalletId] = useState();
   const [showTopupHistory, setshowTopupHistory] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [topupHistory, setTopupHistory] = useState([]);
+  const [topupHistory, setTopupHistory] = useState(null);
 
   const navigate = useNavigate();
   let customerId = searchParams.get("customerId");
@@ -215,9 +215,9 @@ export default function CustomerDashboard() {
               </div>
             )}
 
-            {showTopupHistory && (
+            {showTopupHistory  && (
               <div>
-                {topupHistory?.length > 0 &&
+                {topupHistory?.length > 0 && 
                   topupHistory?.map((data, index) => {
                     return (
                       <div key={index}>
@@ -234,6 +234,10 @@ export default function CustomerDashboard() {
                     </h3>
                   </div>
                 )}
+
+                {
+                  !topupHistory &&  <div><p className="text-center mt-10">Loading...</p></div>
+                }
               </div>
             )}
           </section>
