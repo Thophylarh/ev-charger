@@ -5,12 +5,13 @@ import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
 import { formatNumber } from "../../../utils/formatNumber";
+import WalletTopUpCard from "../../../components/CustomerComponent/WalletTopUpCard";
 
 const AWallet = () => {
   const [searchParams] = useSearchParams();
   const [cDetails, setCDetails] = useState();
   const [walletId, setWalletId] = useState();
-  const [transactions, setTransactions] = useState([]);
+  const [topupHistory, setTopupHistory] = useState([]);
   const [historyStatus, sethistoryStatus] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [walletBalance, setwalletBalance] = useState();
@@ -24,7 +25,7 @@ const AWallet = () => {
       setCDetails(res.data.customerDetails);
 
       // let balance = String(res?.data?.walletDetails?.WalletBalance);
-    
+
       // console.log(balance?.includes("."));
 
       // if (balance) {
@@ -42,36 +43,26 @@ const AWallet = () => {
       //   balance[1] = "00";
       // }
 
-    setwalletBalance( res.data?.walletDetails?.WalletBalance)
-      
-      setWalletId(res.data?.walletDetails?.WalletId);
+      setwalletBalance(res.data?.walletDetails?.WalletBalance);
+
+      setWalletId(res.data?.walletDetails.WalletId);
+
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
     });
   };
 
-  const getTransactionHistory = () => {
-    axios
-      .get(`/Customers/get-customer-transactions/${customerId}`)
-      .then((res) => {
-        setTransactions(res.data);
-      });
-  };
-
   const getTopUpHistory = () => {
     axios.get(`/wallets/get-wallet-transactions/${walletId}`).then((res) => {
-      setTransactions(res.data);
+      setTopupHistory(res.data);
     });
   };
 
   useEffect(() => {
     getDetails();
-  }, []);
-
-  useEffect(() => {
-    historyStatus ? getTransactionHistory() : getTopUpHistory();
-  }, [historyStatus]);
+    getTopUpHistory();
+  }, [walletId]);
 
   let style = {
     background: `url(${lines})`,
@@ -113,10 +104,10 @@ const AWallet = () => {
 
           <div>
             <h3 className="mb-[1.25rem] font-semibold text-[1rem] text-[#101828]">
-              Transaction history
+              Top-up History
             </h3>
 
-            <section
+            {/* <section
               className={`bg-[var(--grey10)] h-[4rem]   flex justify-between`}
             >
               <div
@@ -152,18 +143,18 @@ const AWallet = () => {
                   Top-up History
                 </h1>
               </div>
-            </section>
+            </section> */}
 
-            {transactions?.length > 0 &&
-              transactions?.map((data) => {
+            {topupHistory?.length > 0 &&
+              topupHistory?.map((data, index) => {
                 return (
-                  <div>
-                    <TransactionCard />
+                  <div key={index}>
+                    <WalletTopUpCard history={data} />
                   </div>
                 );
               })}
 
-            {transactions?.length < 1 && (
+            {topupHistory?.length < 1 && (
               <div>
                 <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
                   {" "}

@@ -7,28 +7,28 @@ import axios from "../../../lib/axiosInterceptor";
 import { NavLink, useNavigate, useSearchParams } from "react-router-dom";
 import { formatNumber } from "../../../utils/formatNumber";
 import Loader from "../../../components/Loader";
+import WalletTopUpCard from "../../../components/CustomerComponent/WalletTopUpCard";
 
 export default function CustomerDashboard() {
   const [searchParams] = useSearchParams();
   const [cDetails, setCDetails] = useState();
   const [transactions, setTransactions] = useState([]);
-  let customerId = searchParams.get("customerId");
-  const [walletDetails, setWalletDetails] = useState(
-    JSON.parse(localStorage.getItem("wallet"))
-  );
-  const [enrolled, setEnrolled] = useState(true);
 
-  const [fundAmount, setFundAmount] = useState(0);
+  const [walletId, setWalletId] = useState();
+  const [showTopupHistory, setshowTopupHistory] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  let personalnfo = JSON.parse(localStorage.getItem("VA"));
+  const [topupHistory, setTopupHistory] = useState([]);
 
   const navigate = useNavigate();
+  let customerId = searchParams.get("customerId");
 
   //get customer details
   const getDetails = () => {
     setIsLoading(true);
     axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
       setCDetails(res.data.customerDetails);
+
+      setWalletId(res.data.walletDetails.WalletId);
       setTimeout(() => {
         setIsLoading(false);
       }, 2000);
@@ -46,71 +46,21 @@ export default function CustomerDashboard() {
 
   useEffect(() => {
     getDetails();
-    getTransactionHistory();
   }, []);
 
-  //PAYMENT PROCESS
+  useEffect(() => {
+    !showTopupHistory ? getTransactionHistory() : getTopUpHistory();
+  }, [showTopupHistory]);
 
-  const finalizeWalletProcess = () => {
-    let paymentResponse = JSON.parse(localStorage.getItem("flutter"));
-    let walletId = localStorage.getItem("wall");
-
-    let data = {
-      transactionReference: paymentResponse?.tx_ref.walletId,
-      accountNumber: walletDetails?.data?.account_number,
-      amount: paymentResponse?.amount,
-      transactionType: "credit",
-      transactionSource: "card",
-      walletId,
-    };
-
-    axios
-      .post(
-        `http://evapi.estations.com/Wallets/create-wallet-transaction`,
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: false,
-        }
-      )
-      .then((res) => {
-        // setIsLoading(false);
-        // toast.success("Account created successfully");
-
-        // localStorage.setItem("wallet", JSON.stringify(res.data));
-        navigate({
-          pathname: "/home",
-          // search: `?walletId=${res.data?.walletId}`,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  const getTopUpHistory = () => {
+    axios.get(`/wallets/get-wallet-transactions/${walletId}`).then((res) => {
+      setTopupHistory(res.data);
+    });
   };
 
-  const config = {
-    public_key: "FLWPUBK_TEST-e2bd742a5bbb3f5dc00ace692ba05139-X",
-    tx_ref: Date.now(),
-    amount: fundAmount,
-    currency: "NGN",
-    payment_options: "card,mobilemoney,ussd",
-    customer: {
-      email: personalnfo?.emailAddress,
-      phone_number: personalnfo?.phonenumber,
-      name: `${personalnfo?.lastname} ${personalnfo?.firstname}`,
-    },
-    customizations: {
-      title: "Ev charger",
-      description: "Fund wallet",
-      logo: logo,
-    },
-  };
-
-  //END OF PAYMENT PROCESS
-
-  let style = {
-    background: `url(${lines})`,
-  };
+  // let style = {
+  //   background: `url(${lines})`,
+  // };
 
   let style2 = {
     backgroundImage: `url(${InactiveCar})`,
@@ -199,16 +149,16 @@ export default function CustomerDashboard() {
               className={`bg-[var(--grey10)] h-[4rem]   flex justify-between`}
             >
               <div
-                className={`w-[50%]  h-[100%] cursor-pointer  ${
-                  enrolled
+                className={`w-[50%]  h-[100%] cursor-pointer ${
+                  !showTopupHistory
                     ? " border-b-4 border-black "
                     : " border-b-4 border-[#E2E2E2)]"
                 }  text-center font-semibold`}
-                onClick={() => setEnrolled(true)}
+                onClick={() => setshowTopupHistory(false)}
               >
                 <h1
                   className={` text-sm pt-[1.25rem] ${
-                    enrolled ? " text-black" : "text-[var(--grey500)]"
+                    !showTopupHistory ? " text-black" : "text-[var(--grey500)]"
                   }`}
                 >
                   Charge History
@@ -217,15 +167,15 @@ export default function CustomerDashboard() {
 
               <div
                 className={`w-[50%] cursor-pointer   h-[100%]  ${
-                  !enrolled
+                  showTopupHistory
                     ? " border-b-4 border-black "
                     : " border-b-4 border-[#E2E2E2)]"
                 } text-center font-semibold`}
-                onClick={() => setEnrolled(false)}
+                onClick={() => setshowTopupHistory(true)}
               >
                 <h1
                   className={`text-sm pt-[1.25rem] ${
-                    !enrolled ? " text-black" : "text-[var(--grey500)]"
+                    showTopupHistory ? " text-black" : "text-[var(--grey500)]"
                   }`}
                 >
                   Top-up History
@@ -233,21 +183,47 @@ export default function CustomerDashboard() {
               </div>
             </section>
 
-            {transactions?.length > 0 &&
-              transactions?.map((data) => {
-                return (
-                  <div>
-                    <TransactionCard />
-                  </div>
-                );
-              })}
-
-            {transactions?.length < 1 && (
+            {!showTopupHistory && (
               <div>
-                <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
-                  {" "}
-                  You have made no transaction at the moment
-                </h3>
+                {transactions?.length > 0 &&
+                  transactions?.map((data, index) => {
+                    return (
+                      <div key={index}>
+                        <TransactionCard />
+                      </div>
+                    );
+                  })}
+
+                {transactions?.length < 1 && (
+                  <div>
+                    <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
+                      {" "}
+                      You have made no transaction at the moment
+                    </h3>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {showTopupHistory && (
+              <div>
+                {topupHistory?.length > 0 &&
+                  topupHistory?.map((data, index) => {
+                    return (
+                      <div key={index}>
+                        <WalletTopUpCard history={data} />
+                      </div>
+                    );
+                  })}
+
+                {topupHistory?.length < 1 && (
+                  <div>
+                    <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
+                      {" "}
+                      You have made no Top up at the moment
+                    </h3>
+                  </div>
+                )}
               </div>
             )}
           </section>
