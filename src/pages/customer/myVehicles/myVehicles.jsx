@@ -6,6 +6,7 @@ import { NavLink, useSearchParams } from "react-router-dom";
 import Loader from "../../../components/Loader";
 import VehicleList from "../../../components/CustomerComponent/vehicleComponent/vehicleList";
 import VehicleComponent from "../../../components/CustomerComponent/vehicleComponent/vehicleComponent";
+import AddVehicle from "../AddVehicle";
 
 const MyVehicles = () => {
   const [searchParams] = useSearchParams();
@@ -98,6 +99,9 @@ const MyVehicles = () => {
               Vtransactions={Vtransactions}
               isLoading={isLoading}
             />
+          )}
+          {Vehicles?.length === 0 && (
+            <AddVehicle/>
           )}
         </>
       )}

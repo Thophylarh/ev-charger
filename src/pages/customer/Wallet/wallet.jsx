@@ -75,11 +75,23 @@ const CarInfo = () => {
         }
       )
       .then((res) => {
-        console.log(res.data);
-        navigate({
-          pathname: "/home",
-         search: `?customerId=${res.data?.customerId}`,
-        });
+        console.log(res.data.statusCode)
+
+        if (res?.data.statusCode === 200){
+          navigate({
+            pathname: "/success",
+            search: `?walletId=${res.data?.walletId}`,
+          });
+        }else {
+          navigate({
+            pathname: "/failed",
+            // search: `?walletId=${res.data?.walletId}`,
+          });
+        }
+        // navigate({
+        //   pathname: "/login",
+        //   // search: `?walletId=${res.data?.walletId}`,
+        // });
       })
       .catch((err) => {
         console.log(err);

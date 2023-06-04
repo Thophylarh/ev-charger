@@ -8,6 +8,7 @@ import ActiveProfile from "../../assets/svg/activeProfile.svg";
 import Station from "../../assets/svg/stationLocation.svg";
 import ActiveStation from "../../assets/svg/activeStation.svg";
 import InactiveHome from "../../assets/svg/inActiveHome.svg";
+import activeWallet from "../../assets/svg/activeWallet.svg"
 import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
 
 const CNav = () => {
@@ -55,7 +56,7 @@ const CNav = () => {
           }}
         >
           <div>
-            <img src={Wallet} alt="home icon" className="w-[1.7] mx-auto" />
+            <img src={`${path === "/AWallet" ? activeWallet : Wallet  }`} alt="home icon" className="w-[1.7] mx-auto" />
             <h4 className={` ${path === "/AWallet" ? Active : notActive}`}>
               Wallet
             </h4>
