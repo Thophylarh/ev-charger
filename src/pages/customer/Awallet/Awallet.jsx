@@ -95,7 +95,7 @@ const AWallet = () => {
               <p className="text-sm  text-white  mb-4">Wallet balance</p>
 
               <h5 className="text-[1.5rem]  text-white  mb-4">
-                NGN {walletBalance}.<sup>00</sup>
+                NGN { formatNumber(walletBalance, false, 0)}.<sup>00</sup>
               </h5>
 
               <button
