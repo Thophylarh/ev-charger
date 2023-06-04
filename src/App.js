@@ -47,6 +47,8 @@ import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
 import Profile from "./pages/Customer/CustomerProfile";
 import AWallet from "./pages/Customer/Awallet/Awallet";
 import AddVehicle from "./pages/Customer/AddVehicle/index";
+import Success from "./pages/Customer/transactionStatus/success";
+import Failed from "./pages/Customer/transactionStatus/failed";
 
 function App() {
 
@@ -134,6 +136,8 @@ function App() {
           {/* CUSTOMER ROUTES */}
 
           <Route path="/reg/:phone" element={<SignUp />}></Route>
+          <Route path="/success" element={<Success/>}></Route>
+          <Route path="/failed" element={<Failed/>}></Route>
           <Route path="/carInformation" element={<CarInfo />}></Route>
           <Route path="/wallet" element={<Wallet/>}></Route>
           <Route path="/Login" element={<CusLogin />}></Route>
@@ -216,6 +220,9 @@ function App() {
             }
           ></Route>
           </Route>
+
+         
+          
         </Routes>
       </BrowserRouter>
     </div>

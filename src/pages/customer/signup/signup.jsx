@@ -21,6 +21,8 @@ const SignUp = () => {
   const [BvninputType, setBvnInputType] = useState("number");
 
   const { phone } = useParams();
+
+  
   // const [searchParams] = useSearchParams();
 
   // let phone = searchParams.get("phoneNumber");
@@ -94,6 +96,11 @@ const SignUp = () => {
     let email = e.target.email?.value;
     let password = e.target.password?.value;
     let bvn = e.target.bvn?.value;
+
+    localStorage.setItem("Refresh", password )
+    localStorage.setItem("phone", phone)
+
+
 
     if (!firstName) {
       toast.error("Enter your first name");
