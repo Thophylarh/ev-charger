@@ -275,7 +275,8 @@ const SignUp = () => {
                   onClick={() => {
                     setShowBvn((showPassword) => !showPassword);
                   }}
-                ></img>
+                  alt="show password"
+                />
               </div>
               <input
                 type={BvninputType}

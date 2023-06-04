@@ -3,6 +3,7 @@ import locationIcon from "../../../assets/svg/locationIcon.svg";
 import StationAccordion from "../../../components/CustomerComponent/StationAccordion";
 import { toast } from "react-toastify";
 import axios from "../../../lib/axiosInterceptor";
+//import axios from "axios";
 import Loader from "../../../components/Loader";
 
 export default function StationLocator() {
@@ -11,6 +12,7 @@ export default function StationLocator() {
   const [stations, setStations] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState("");
+  const [addresses, setAddresses] = useState([]);
 
   const getAddressFromCoordinates = async (latitude, longitude) => {
     try {
@@ -19,12 +21,33 @@ export default function StationLocator() {
       );
       const data = await response.json();
 
-
-
-      setAddress(`${data.address.city ? `${data.address.city} ${data.address.state}` : "Unknown"}`);
-      
+      setAddress(
+        `${
+          data.address.city
+            ? `${data.address.city} ${data.address.state}`
+            : "Unknown"
+        }`
+      );
     } catch (error) {
-      console.log("Error getting address:", error);
+      // console.log("Error getting address:", error);
+    }
+  };
+
+ 
+  const handleMapClick = async (latitude, longitude) => {
+    const apiKey = "AIzaSyBIKQn3828L3arRXm_ImxCR5EB3VFit4_8";
+
+    try {
+      axios
+        .get(
+          `https://maps.googleapis.com/maps/api/geocode/json?address=ikorodu+agric,+oluwakemi&key=${apiKey}`
+        )
+        .then((res) => {
+          console.log(res.data.results);
+          // res.json()
+        });
+    } catch (error) {
+      //  console.log('Error:', error);
     }
   };
 
@@ -40,6 +63,7 @@ export default function StationLocator() {
       //  getStationLocator();
     }
     getAddressFromCoordinates(latitude, longitude);
+    // handleMapClick(latitude, longitude);
   }
 
   function error() {
@@ -63,7 +87,7 @@ export default function StationLocator() {
         }, 2000);
       })
       .catch((err) => {
-        console.log(err.response.data);
+        // console.log(err.response.data);
       });
   };
 
@@ -122,6 +146,13 @@ export default function StationLocator() {
               </p>
             </div>
           </section>
+
+          <div>
+            {" "}
+            {addresses?.map((address) => (
+              <p>{}</p>
+            ))}
+          </div>
 
           <section>
             {stations?.map((station, index) => (
