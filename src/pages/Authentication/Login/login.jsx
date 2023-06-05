@@ -39,7 +39,7 @@ const Login = () => {
   // };
 
   // login function
-  const url = "http://evapi.estations.com";
+  const url = "https://evapi.estations.com";
 
   const handleSubmit = (e) => {
     e.preventDefault();

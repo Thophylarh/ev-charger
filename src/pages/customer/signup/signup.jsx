@@ -69,7 +69,7 @@ const SignUp = () => {
   const getVehicleCode = () => {
     axios
       .get(
-        `http://evapi.estations.com/Customers/get-customer-vehicle-by-phonenumber/${phone}`,
+        `https://evapi.estations.com/Customers/get-customer-vehicle-by-phonenumber/${phone}`,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: false,

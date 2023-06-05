@@ -2,7 +2,7 @@ import axios from "axios";
 import { getToken } from "../utils/getToken";
 
 const instance = axios.create({
-	baseURL: "http://evapi.estations.com",
+	baseURL: "https://evapi.estations.com",
 	headers: {
 		// "Content-Type": "application/json",
 		"Access-Control-Allow-Origin": "*",

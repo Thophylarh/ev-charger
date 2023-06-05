@@ -24,7 +24,7 @@ const CarInfo = () => {
     console.log(data, "va data");
     axios
       .post(
-        `http://evapi.estations.com/customers/create-virtual-account`,
+        `https://evapi.estations.com/customers/create-virtual-account`,
         data,
         {
           headers: { "Content-Type": "application/json" },
