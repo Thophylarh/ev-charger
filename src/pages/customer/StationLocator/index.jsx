@@ -22,6 +22,8 @@ export default function StationLocator() {
   
 
   const getAddressFromCoordinates = async (latitude, longitude) => {
+
+    console.log(latitude + "," + longitude)
     try {
       const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
@@ -30,7 +32,7 @@ export default function StationLocator() {
 
       setAddress(`${data.address.suburb
         ? data.address.suburb
-        : ""}, ${data.address.state}`);
+        : data.address.village}, ${data.address.state} `);
 
       
       

@@ -24,7 +24,7 @@ const ChangePassword = () => {
 
     const token = localStorage.getItem("user-token")
     const id = localStorage.getItem("id")
-    const url = "http://evapi.estations.com";
+    const url = "https://evapi.estations.com";
     
     const handleSubmit = (e)=>{
         e.preventDefault();
