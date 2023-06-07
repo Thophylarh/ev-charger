@@ -1,7 +1,9 @@
 import React from "react";
 import Car from "../../assets/svg/cartransactionIcon.svg";
+import { convertTime } from "../../utils/convertTime";
+import { formatNumber } from "../../utils/formatNumber";
 
-export default function TransactionCard() {
+export default function TransactionCard({data}) {
 	return (
 		<div className="">
 			<div className=" flex justify-between items-center py-4  border-b-[1px] border-grey-100">
@@ -10,14 +12,14 @@ export default function TransactionCard() {
 
 					<div>
 						<h5 className="text-[var(--grey900)] text-xs font-semibold mb-2">TESLA X</h5>
-						<p className="text-[var(--grey700)] text-xs font-medium ">NGN 20,000.00 </p>
+						<p className="text-[var(--grey700)] text-xs font-medium ">NGN {formatNumber(data?.amountPaidByUser) }</p>
 					</div>
 				</div>
 
 				<div className="text-[var(--grey700)] text-xs ">
-					<p className="mb-2 ">Today</p>
+					<p className="mb-2 ">{convertTime(data?.createdAt) }</p>
 
-					<p className="font-medium">500kw</p>
+					<p className="font-medium text-right">{data?.totalUnitChargedInEnergy}KWH</p>
 				</div>
 			</div>
 		</div>

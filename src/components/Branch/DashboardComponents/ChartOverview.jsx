@@ -128,7 +128,7 @@ export default function ChartOverview({newDate}) {
 
 							<h5>
 								{formatNumber(totalEnergyConsumed, false)}
-								<sup className="text-xs">KW</sup>
+								<sup className="text-xs">KWH</sup>
 							</h5>
 						</div>
 

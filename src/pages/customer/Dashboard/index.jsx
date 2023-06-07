@@ -11,26 +11,34 @@ import Loader from "../../../components/Loader";
 export default function CustomerDashboard() {
   const [searchParams] = useSearchParams();
   const [cDetails, setCDetails] = useState();
+  const [WDetails, setWDetails] = useState();
   const [transactions, setTransactions] = useState([]);
   let customerId = searchParams.get("customerId");
-  const [walletDetails, setWalletDetails] = useState(
-    JSON.parse(localStorage.getItem("wallet"))
-  );
+  // const [WADetails, setWalletDetails] = useState(
+  //   JSON.parse(localStorage.getItem("wallet"))
+  // );
   const [enrolled, setEnrolled] = useState(true);
 
   const [fundAmount, setFundAmount] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+
   let personalnfo = JSON.parse(localStorage.getItem("VA"));
 
   const navigate = useNavigate();
+
+
 
   //get customer details
   const getDetails = () => {
     setIsLoading(true);
     axios.get(`/Customers/get-customer-by-id/${customerId}`).then((res) => {
       setCDetails(res.data.customerDetails);
+      setWDetails(res.data.walletDetails);
+      
       setTimeout(() => {
         setIsLoading(false);
+      
+
       }, 2000);
     });
   };
@@ -49,6 +57,21 @@ export default function CustomerDashboard() {
     getTransactionHistory();
   }, []);
 
+
+  const va = {
+    firstname: cDetails?.Firstname,
+      lastname: cDetails?.Lastname,
+      emailAddress: cDetails?.EmailAddress,
+      phonenumber: cDetails?.Phonenumber,
+  }
+
+  const walletID = WDetails?.WalletId
+
+  localStorage.setItem("VA", JSON.stringify(va));
+
+  localStorage.setItem("wall", walletID);
+
+  
   //PAYMENT PROCESS
 
   const finalizeWalletProcess = () => {
@@ -57,7 +80,7 @@ export default function CustomerDashboard() {
 
     let data = {
       transactionReference: paymentResponse?.tx_ref.walletId,
-      accountNumber: walletDetails?.data?.account_number,
+      accountNumber: WDetails?.data?.account_number,
       amount: paymentResponse?.amount,
       transactionType: "credit",
       transactionSource: "card",
@@ -66,7 +89,7 @@ export default function CustomerDashboard() {
 
     axios
       .post(
-        `http://evapi.estations.com/Wallets/create-wallet-transaction`,
+        `https://evapi.estations.com/Wallets/create-wallet-transaction`,
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -153,8 +176,8 @@ export default function CustomerDashboard() {
               <p className="text-sm  text-white  mb-4">Wallet balance</p>
 
               <h5 className="text-[1.25rem] w-full  text-white  mb-4">
-                NGN {formatNumber(cDetails?.WalletBalance, false, 0)}.
-                <sup>00</sup>
+                NGN {formatNumber(cDetails?.WalletBalance, false, 0)}
+                
               </h5>
 
               <button
@@ -205,7 +228,7 @@ export default function CustomerDashboard() {
           <section className="mb-[var(--marginBtwSection)]">
             <h5 className="font-semibold mb-3">Transaction history</h5>
 
-            <section
+            {/* <section
               className={`bg-[var(--grey10)] h-[4rem]   flex justify-between`}
             >
               <div
@@ -241,13 +264,13 @@ export default function CustomerDashboard() {
                   Top-up History
                 </h1>
               </div>
-            </section>
+            </section> */}
 
             {transactions?.length > 0 &&
               transactions?.map((data) => {
                 return (
                   <div>
-                    <TransactionCard />
+                    <TransactionCard data={data}/>
                   </div>
                 );
               })}

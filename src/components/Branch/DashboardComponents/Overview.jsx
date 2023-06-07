@@ -66,7 +66,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 						<sup>{CICERevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>{formatNumber(CICEEnergy?.[0], false) }KW</p>
+					<p>{formatNumber(CICEEnergy?.[0], false) }KWH</p>
 				</div>
 
 				<div className="revenueBlock">
@@ -77,7 +77,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 						<sup>{ACRevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>{formatNumber(AcEnergy?.[1], false) } KW</p>
+					<p>{formatNumber(AcEnergy?.[1], false) } KWH</p>
 				</div>
 
 				<div className="revenueBlock">
@@ -88,7 +88,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 						<sup>{DCRevenue?.[1]}</sup>{" "}
 					</h5>
 
-					<p>{formatNumber(DcEnergy?.[1], false) }KW</p>
+					<p>{formatNumber(DcEnergy?.[1], false) } KWH</p>
 				</div>
 
 				<div className="totalRevenueBlock text-white pl-[1.25rem]">

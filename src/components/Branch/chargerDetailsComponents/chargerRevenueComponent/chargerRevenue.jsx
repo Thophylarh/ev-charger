@@ -51,7 +51,7 @@ const ChargerRevenue = ({ ChargerDetails }) => {
 				<div className="totalRevenueBlock ">
 					<h3>ENERGY CONSUMPTION</h3>
 					<h5>
-						{formatNumber(ChargerDetails.EnergyConsumed, false)} <sup>kw</sup>{" "}
+						{formatNumber(ChargerDetails.EnergyConsumed, false)} <sup>KWH</sup>{" "}
 					</h5>
 				</div>
 			</div>

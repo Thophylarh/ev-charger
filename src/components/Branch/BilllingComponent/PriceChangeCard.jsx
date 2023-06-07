@@ -27,7 +27,7 @@ export default function PriceChangeCard({ history }) {
 				<div className="text-[var(--grey600)]">
 					<h6 className={` font-bold text-sm ali`}>
 						{" "}
-						NGN {formatNumber(history.previousCostPerUnitCharge, false, 2)}/kw
+						NGN {formatNumber(history.previousCostPerUnitCharge, false, 2)}/KWH
 					</h6>
 					<p className={`text-xs`}>Old price</p>
 				</div>
@@ -39,7 +39,7 @@ export default function PriceChangeCard({ history }) {
 
 				<div className="text-[var(--primaryGreen500)]">
 					<h6 className={` font-medium text-base ali`}>
-						NGN {formatNumber(history.costPerUnitCharge, false, 2)}/kw
+						NGN {formatNumber(history.costPerUnitCharge, false, 2)}/KWH
 					</h6>
 					<p className={`text-xs`}>new price</p>
 				</div>

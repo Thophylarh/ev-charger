@@ -90,7 +90,7 @@ const ChangeLocation = ({setSearch, setLocationData, getStationLocator, getAddre
         <input 
         id="autocomplete"
         // value={city}
-        className="w-[70%] border border-black border-2 rounded-lg pl-[10px] py-[0.75rem]"
+        className="w-[70%] border border-black border-2 rounded-lg pl-[10px] py-[0.5rem]"
          placeholder="Enter location"
          value={city}
          onChange={(event)=>{setCity(event.target.value)}}

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ActiveCar from "../../../assets/svg/activeCar.svg";
 import TransactionCard from "../../../components/CustomerComponent/TransactionCard";
+import VehicleTransactionCard from "../../../components/CustomerComponent/vehicleTransactionCard";
 import axios from "../../../lib/axiosInterceptor";
 import { useSearchParams, useNavigate  } from "react-router-dom";
 import addPlus from "../../../assets/svg/addPlus.svg"
@@ -8,6 +9,7 @@ import addPlus from "../../../assets/svg/addPlus.svg"
 import Loader from "../../../components/Loader";
 
 const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
+  console.log(Vtransactions)
   const [searchParams] = useSearchParams();
 
   const navigate = useNavigate();
@@ -43,7 +45,6 @@ const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
                   </h2>
                   <h2 className="text-[#667085] font-semibold text-xs">
                     {vehicleDetails?.PlateNumber}
-                    {console.log(vehicleDetails)}
                   </h2>
                 </div>
                 <hr />
@@ -68,13 +69,20 @@ const VehicleComponent = ({ vehicleDetails, Vtransactions, isLoading }) => {
           </section>
 
           <section className="mt-[20px]">
-            <h3 className="mb-[12px]">Charge history</h3>
-            {Vtransactions?.length > 0 &&
-              Vtransactions.map((Vtransaction) => {
-                <TransactionCard VTransaction={Vtransaction} />;
-              })}
 
-            {Vtransactions?.length < 1 && (
+            <h3 className="mb-[12px]">Charge history</h3>
+            { Vtransactions && Vtransactions?.length > 0 &&
+            Vtransactions.map((Vtransaction) => (
+              // <TransactionCard data={Vtransaction} />;
+              <VehicleTransactionCard data={Vtransaction}/>
+            ))
+             }
+
+
+
+        
+
+            {Vtransactions && Vtransactions?.length < 1 && (
               <div>
                 <h3 className="text-sm text-center mt-10 w-[70%] mx-auto">
                   {" "}

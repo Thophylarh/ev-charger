@@ -90,7 +90,7 @@ const Last10Transactions = (props) => {
 			render: (totalUnitChargedInEnergy) => (
 				<p>
 					{formatNumber(totalUnitChargedInEnergy)}
-					kWh
+					KWH
 				</p>
 			),
 		},

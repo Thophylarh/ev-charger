@@ -10,6 +10,7 @@ import axios from "axios";
 
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { getToken } from "../../../utils/getToken";
+import { formatNumber } from "../../../utils/formatNumber";
 const CarInfo = () => {
   const [searchParams] = useSearchParams();
   const [walletDetails, setWalletDetails] = useState(
@@ -30,7 +31,7 @@ const CarInfo = () => {
     setIsLoading(true);
     axios
       .get(
-        `http://evapi.estations.com/Customers/get-customer-by-id/${customerId}`,
+        `https://evapi.estations.com/Customers/get-customer-by-id/${customerId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -48,7 +49,9 @@ const CarInfo = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true)
     customerId && getDetails();
+    setIsLoading(false)
   }, [customerId]);
 
   const finalizeWalletProcess = () => {
@@ -66,7 +69,7 @@ const CarInfo = () => {
 
     axios
       .post(
-        `http://evapi.estations.com/Wallets/create-wallet-transaction`,
+        `https://evapi.estations.com/Wallets/create-wallet-transaction`,
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -115,6 +118,8 @@ const CarInfo = () => {
     },
   };
 
+  console.log(config)
+
   const handleFlutterPayment = useFlutterwave(config);
   return (
     <section className=" h-[100vh] bg-black  py-[1rem]">
@@ -135,7 +140,7 @@ const CarInfo = () => {
             </h4>
 
             <h4 className="text-white font-black">
-              NGN {customerId ? cDetails?.walletDetails?.WalletBalance : "0"}
+              NGN {customerId ? formatNumber(cDetails?.walletDetails?.WalletBalance)  : "0"}
             </h4>
           </div>
         </section>

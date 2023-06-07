@@ -90,7 +90,7 @@ const CarInfo = () => {
     };
 
     axios
-      .post(`http://evapi.estations.com/customers/add-customer-vehicle`, data, {
+      .post(`https://evapi.estations.com/customers/add-customer-vehicle`, data, {
         headers: { "Content-Type": "application/json" },
         withCredentials: false,
       })

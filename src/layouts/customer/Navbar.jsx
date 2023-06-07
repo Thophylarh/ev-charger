@@ -107,6 +107,7 @@ const CNav = () => {
         <NavLink
           to={{
             pathname: "/profile",
+            search: `?customerId=${Cid}`,
           }}
         >
           <div>

@@ -10,7 +10,7 @@ const ChangePassword = () => {
     const [isvalid, setIsvalid] =  useState(false)
     
 
-    const validate= () =>{
+    const validate = () =>{
         if (password1 === confirmPassword){
             setIsvalid(true)
             setPassWord(password1)

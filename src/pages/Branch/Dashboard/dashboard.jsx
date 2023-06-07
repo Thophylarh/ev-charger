@@ -137,8 +137,8 @@ export default function Dashboardd() {
 			key: "totalUnitChargedInEnergy",
 			render: (totalUnitChargedInEnergy) => (
 				<p>
-					{formatNumber(totalUnitChargedInEnergy)}
-					kWh
+					{formatNumber(totalUnitChargedInEnergy)} 
+					KWH
 				</p>
 			),
 		},

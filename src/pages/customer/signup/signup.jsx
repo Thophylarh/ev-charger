@@ -41,7 +41,7 @@ const SignUp = () => {
     console.log(data, "va data");
     axios
       .post(
-        `http://evapi.estations.com/customers/create-virtual-account`,
+        `https://evapi.estations.com/customers/create-virtual-account`,
         data,
         {
           headers: { "Content-Type": "application/json" },
@@ -159,7 +159,7 @@ const SignUp = () => {
     localStorage.setItem("VA", JSON.stringify(va));
 
     axios
-      .post(`http://evapi.estations.com/Customers/create-customer`, data, {
+      .post(`https://evapi.estations.com/Customers/create-customer`, data, {
         headers: { "Content-Type": "application/json" },
         withCredentials: false,
       })
@@ -264,8 +264,8 @@ const SignUp = () => {
               placeholder="Phone number"
               className=" w-[100%] border border-[1px] border-[#D0D5DD] p-[16px] rounded-lg"
               value={phone}
-              readOnly={true}
-              disabled
+              readOnly={false}
+             
             ></input>
           </div>
 

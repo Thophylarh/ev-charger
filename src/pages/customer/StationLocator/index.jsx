@@ -32,7 +32,7 @@ export default function StationLocator() {
 
       setAddress(`${data.address.suburb
         ? data.address.suburb
-        : data.address.village}, ${data.address.state} `);
+        : data.address.road } , ${data.address.state} `);
 
       
       

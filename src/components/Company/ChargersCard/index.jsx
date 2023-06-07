@@ -71,7 +71,7 @@ export default function ChargersCard({charger, station, company}) {
 								{charger.EnergyConsumed?.toLocaleString(undefined, {
 								minimumFractionDigits: 2,
 								maximumFractionDigits: 2,
-							})}<sup>Kw</sup>
+							})}<sup>KWH</sup>
 							</h5>
 						</div>
 

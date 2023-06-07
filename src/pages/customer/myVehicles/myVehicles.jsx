@@ -29,13 +29,17 @@ const MyVehicles = () => {
       setCDetails(res.data.customerDetails);
       setVehicles(res.data.vehicleDetails);
 
-      console.log(  res.data.vehicleDetails)
+    
       if (res.data.vehicleDetails?.length === 1) {
+        console.log(  res.data.vehicleDetails?.[0]?.VehicleCode
+          , "go")
         transactions(
-          res.data.vehicleDetails?.VehicleId,
-          res.data.VehicleDetails?.VehicleCode
+          res?.data?.vehicleDetails?.[0]?.Id,
+          res?.data?.vehicleDetails?.[0]?.VehicleCode
+
         );
-        getVehicleDetails();
+        // console.log(res?.data?.VehicleDetails?.VehicleCode)
+        getVehicleDetails(res?.data?.vehicleDetails?.[0]?.VehicleCode);
       }
 
    
@@ -47,9 +51,15 @@ const MyVehicles = () => {
 
   //vehicle transactions
   const transactions = (vehicleId, vehicleCode) => {
+
+    // const vehicleId = Vehicles?.Id;
+    // const vehicleCode = Vehicles?.VehicleCode;
+
+    console.log(vehicleId, "veh")
+ 
     axios
       .get(
-        `/Customers/get-customer-vehicle-transactions/${vehicleId}/${vehicleCode}`
+        `/Customers/get-customer-vehicle-transactions/${customerId}/${vehicleCode}`
       )
       .then((res) => {
         setVTransactions(res.data);
@@ -57,11 +67,11 @@ const MyVehicles = () => {
   };
 
   //vehicle details
-  const getVehicleDetails = () => {
+  const getVehicleDetails = (code) => {
     setIsLoading(true);
     axios
       .get(
-        `/Customers/get-customer-vehicle-details-by-vehiclecode/${Vehicles?.VehicleCode}`
+        `/Customers/get-customer-vehicle-details-by-vehiclecode/${code}`
       )
       .then((res) => {
         setVehicleDetails(res.data.vehicleDetails[0]);
@@ -73,6 +83,7 @@ const MyVehicles = () => {
 
   useEffect(() => {
     getDetails();
+   
   }, []);
 
   let style2 = {

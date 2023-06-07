@@ -14,7 +14,7 @@ const Success = () => {
     const phone = localStorage.getItem("phone")
     const Refresh = localStorage.getItem("Refresh")
 
-    const url = "http://evapi.estations.com";
+    const url = "https://evapi.estations.com";
 
     const handleSubmit = (e) =>{
 		e.preventDefault();
@@ -79,7 +79,7 @@ const Success = () => {
         <img src={tickSquare} alt="tick square" className=""/>
         </div>
 
-        <h6 className="text-[#15833C] text-[1rem] font-medium mt-[1.5rem]">NGN 5,000.00</h6>
+        {/* <h6 className="text-[#15833C] text-[1rem] font-medium mt-[1.5rem]">NGN 5,000.00</h6> */}
 
         <p className="font-normal text-[#475467] font-[0.75rem] mt-[1rem]">Your Top up has been added to your wallet </p>
 

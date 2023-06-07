@@ -49,6 +49,8 @@ import AWallet from "./pages/Customer/Awallet/Awallet";
 import AddVehicle from "./pages/Customer/AddVehicle/index";
 import Success from "./pages/Customer/transactionStatus/success";
 import Failed from "./pages/Customer/transactionStatus/failed";
+import ChangeUserPassword from "./pages/Customer/changePassword/changePassword";
+import ProfileData from "./pages/Customer/profileData/profileData";
 
 function App() {
 
@@ -199,12 +201,24 @@ function App() {
           ></Route>
           </Route>
 
+            
           <Route element={<ProtectedCustomerRoutes />}>
           <Route
             path="/addVehicle"
             element={
               <CustomerLayout title="Add Vehicle">
                 <AddVehicle/>
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/changeUserPassword"
+            element={
+              <CustomerLayout title="Change Password">
+                <ChangeUserPassword/>
               </CustomerLayout>
             }
           ></Route>
@@ -221,6 +235,16 @@ function App() {
           ></Route>
           </Route>
 
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/profileData"
+            element={
+              <CustomerLayout title="Profile Data">
+                <ProfileData/>
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
          
           
         </Routes>

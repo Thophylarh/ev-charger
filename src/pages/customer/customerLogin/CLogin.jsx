@@ -58,6 +58,8 @@ const Clogin = () => {
 		  .then((res)=>{
 			localStorage.setItem("user-token", res.data.token);
 			localStorage.setItem("customerId", res.data.id);
+			localStorage.setItem("Refresh", password )
+			localStorage.setItem("phone", phone)
 			setIsLoading(false);
 			setPhone("");
 			setPassWord("");
@@ -79,6 +81,12 @@ const Clogin = () => {
 		  });
 	}
 
+	const signIn = () =>{
+		Navigate({
+			pathname: '/reg/:phone',
+			
+		  })
+	}
 
 	return (
 	<section className="mobileBody">
@@ -158,7 +166,10 @@ const Clogin = () => {
 						
 					</div>
 					</form>
+
+					<div className="mt-[1rem] text-center">Don't have an account? <a className="text-[#B27203]" onClick={signIn}>Sign up</a></div>
 				</section>
+
 			</section>
 		</section>
     </section>

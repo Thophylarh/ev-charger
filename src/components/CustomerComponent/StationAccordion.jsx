@@ -61,6 +61,17 @@ export default function StationAccordion({ station }) {
               open ? "opacity-0" : "opacity-100"
             } ${open ? "delay-200 h-0" : " duration-900 h-full"}`}
           >
+
+            <div className={`flex items-center  justify-between mb-3 `}>
+              <p className="text-sm text-[var(--grey600)] ">Address:</p>
+              <p className="text-sm text-[var(--grey600)] font-bold">
+                {chargerType?.length > 0 &&
+                 `${station?.station?.address }` + ", " + `${station?.station?.cityOrTown}`
+                 }
+                {chargerType?.length < 1 && "---"}
+              </p>
+            </div>
+
             <div className={`flex items-center  justify-between mb-3 `}>
               <p className="text-sm text-[var(--grey600)] ">Charger types:</p>
               <p className="text-sm text-[var(--grey600)] font-bold">
