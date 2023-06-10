@@ -7,6 +7,8 @@ import Password from "../../../assets/svg/password-key.svg";
 import Email from "../../../assets/svg/email-bell.svg";
 import Logout from "../../../assets/svg/profile-logout.svg";
 import NextPage from "../../../assets/svg/nextPage.svg";
+import PopUpModal from "../../../components/modals/popUpModals/popup.jsx"
+import EmailPopUp from "../../../components/modals/emailConfim.jsx"
 
 
 import {
@@ -18,9 +20,16 @@ import {
 } from "react-router-dom";
 import axios from "../../../lib/axiosInterceptor";
 import Loader from "../../../components/Loader";
+import Modal from "../../../components/modals/modal";
 
 const Profile = () => {
   const [CDetails, setCDetails] = useState();
+
+  const [checked, setChecked] = useState(null);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [popUp , setPopUp] = useState(false)
 
   const navigate = useNavigate();
 
@@ -45,10 +54,53 @@ const Profile = () => {
       })
   }
 
+  //changePassword 
+  const changePassword = () =>{
+    navigate({
+      pathname: '/changeUserPassword',
+      search: `id=${customerId}`
+    })
+  }
+
+  const locations = () =>{
+    navigate({
+      pathname: '/myLocations',
+      search: `id=${customerId}`
+    })
+  }
+    // //handle checkbox
+
+  const handleCheck = () =>{
+    
+    setChecked(!checked);
+   
+  
+  }
+
+  
+  const emailN = !CDetails?.EmailNotificationStatus
+
+   const ENotifications = () =>{
+    setIsLoading(true)
+    
+   
+    axios.post(`/Customers/update-email-notification?id=${customerId}&isEmailNotification=${emailN}`).then((res)=>{
+      console.log(res)
+      setTimeout(() => {
+        setIsLoading(false);
+        
+
+      }, 2000);
+      window.location.reload(false)
+    
+    })
+  }
+
   useEffect(() => {
     getDetails();
   }, []);
   return (
+    <>
     <section className="pt-[1.5rem] w-[90%] mx-auto">
       <section>
         <div className="flex justify-center">
@@ -95,7 +147,7 @@ const Profile = () => {
         </div>
         <hr></hr>    
 
-        <div className="flex w-[95%] justify-between mt-[1.5rem] mb-[1rem]">
+        <div className="flex w-[95%] justify-between mt-[1.5rem] mb-[1rem]" onClick={locations}>
 
            <div className="flex">
             <img src={LocationIcon} alt="location" />
@@ -117,7 +169,7 @@ const Profile = () => {
 
         <div className="flex w-[95%] justify-between  mt-[1.5rem] mb-[1rem]">
 
-        <div className="flex">
+        <div className="flex" onClick={changePassword}>
             <img src={Password} alt="profile data" />
             <h5 className="font-medium text-sm text-[#101828] ml-[1.25rem]">Change password</h5>
             </div>
@@ -129,29 +181,26 @@ const Profile = () => {
         </div>
         <hr></hr>    
 
-        <div className="flex justify-between w-[95%]  mt-[1.5rem] mb-[1rem]">
-          <div className="flex ">
+        <div className="flex justify-between mt-[1.5rem] mb-[1rem]">
+          <div className="flex w-[80%]">
             <img src={Email} alt="location" />
             <h5 className="font-medium text-sm text-[#101828] ml-[1.25rem]">Email notifications</h5>
             </div>
 
-            <div> 
-            <img src={NextPage} alt="open details"/>
-            </div>
          
-            {/* <div className="w-[20%]">
+            <div className="w-[10%]">
                     <label className="relative inline-flex items-center cursor-pointer">
                       <input
                         type="checkbox"
                         checked={CDetails?.EmailNotificationStatus === true}
                         className="sr-only peer"
                         name="toggle"
-                        // onChange={handleCheck}
+                        onChange={(e)=>{setPopUp(true)}}
                       />
 
                       <div className="w-11 h-6 bg-gray-200 rounded-full peer  dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-[#7F56D9]"></div>
                     </label>
-                  </div> */}
+                  </div>
                 
            
         </div>
@@ -185,7 +234,16 @@ const Profile = () => {
         
       </section>
     </section>
+    <section>
+    {popUp && (
+      <PopUpModal closeModal={setPopUp}>
+       <EmailPopUp closeModal={setPopUp} CDetails={CDetails} ENotifications={ENotifications}/>
+      </PopUpModal>
+     )}
+     </section>
+     </>
   );
+  
 };
 
 export default Profile;

@@ -4,6 +4,7 @@ import { Navigate, NavLink, useLocation, useNavigate, useSearchParams } from "re
 import Show from "../../../assets/svg/showEye.svg";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import backArrow from "../../../assets/svg/backArrow+Circle.svg";
 
 
 const ChangePassword = () => {
@@ -15,20 +16,26 @@ const ChangePassword = () => {
 
     const [showPassword, setShowPassword] = useState(false);
 
+	
+
 	const [inputType, setInputType] = useState("password");
 
+
+
     const [isLoading, setIsLoading] = useState(false);
+
+	
 
     
 	const [password1, setPassWord] = useState()
 
-    const [confirmPassword, setConfirmPassword] = useState()
+    
 
     useEffect(() => {
 		showPassword ? setInputType("text") : setInputType("password");
 	  }, [showPassword]);
 
-	  const url = "https://evapi.estations.com";
+	 
   
 	  const handleSubmit = (e) =>{
 		e.preventDefault();
@@ -53,8 +60,21 @@ const ChangePassword = () => {
 		  )
 	  }
 
+	  
+  const ReturnToProfile = () => {
+    navigate({
+      pathname: "/profile",
+      search: `?customerId=${id}`,
+    });
+  };
+
     return (<section>
-        <section className="w-[90%] mx-auto mt-[5rem]">
+        <section className="w-[90%] mx-auto ">
+
+		<div onClick={ReturnToProfile} className="mt-[12px] mb-[24px]">
+        <img src={backArrow} alt="back to profile " />
+      </div>
+
         <form onSubmit={handleSubmit}>
            
 						<div className="mb-[12px]">
@@ -79,6 +99,10 @@ const ChangePassword = () => {
 									onChange={(event)=>{setPassWord(event.target.value)}}
 								/>
 							</div>
+
+							
+							
+							
 						</div>
 						
 						<div>
@@ -94,7 +118,7 @@ const ChangePassword = () => {
 							{isLoading ? (
                       <ClipLoader color="white" size={15} />
                     ) : (
-                      "Sign in"
+                      "change Password"
                     )}
 							
 						</button>

@@ -7,7 +7,6 @@ import ChargerOperation from "../../../components/Branch/chargerDetailsComponent
 import Last10Transactions from "../../../components/last10Transactions/last10Transactions";
 import { useSearchParams } from "react-router-dom";
 import axios from "../../../lib/axiosInterceptor";
-
 import Modal from "../../../components/modals/modal"
 import ChargerPower from "../../../components/modals/powerOffCharger"
 import PowerOnCharger from "../../../components/modals/powerOnCharger"

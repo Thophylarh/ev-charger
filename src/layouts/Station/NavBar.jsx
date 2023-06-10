@@ -33,6 +33,7 @@ export default function StationNavBar() {
 					<NavLink
 						to={{
 							pathname: "/company",
+							search: `?companyid=${compId}`
 						}}
 					>
 						<div className="mr-[1.5rem]">
@@ -136,11 +137,12 @@ export default function StationNavBar() {
 						</NavLink>
 
 
-						<NavLink
+						{/* <NavLink
 							to={{
 								pathname: "/station/camera"
 							}}
-						>
+						> */}
+						<a href="/camera" target="_blank">
 						<div
 							className={` ${
 								path === "/station/camera" ? activeLink : notActive
@@ -155,7 +157,8 @@ export default function StationNavBar() {
 							)} */}
 							<p>Live Camera</p>
 						</div>
-						</NavLink>
+						</a>
+						{/* </NavLink> */}
 					</div>
 				</div>
 

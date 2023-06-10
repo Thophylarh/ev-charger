@@ -43,9 +43,13 @@ const ChangePassword = () => {
     }
 
     return ( <div className="grid place-items-center h-screen">
+
         <h1 className="text-black font-medium text-4xl mt-[3rem] pb-[0.75rem]">Change Password </h1>
+
         <form onSubmit={handleSubmit}>
+
           <label>Enter new password</label>
+
           <input type="password"
            placeholder="Enter password" 
            value={password1}
@@ -59,7 +63,9 @@ const ChangePassword = () => {
                         focus:ring-1 input-field"
                          required/>
 
+
           <label>Confirm Password</label>
+
           <input type="password" 
           placeholder="Confirm password"  
           value={confirmPassword} 
@@ -67,7 +73,7 @@ const ChangePassword = () => {
             setConfirmPassword(e.target.value)
            
         }}
-        onBlur={ validate}
+        onBlur={validate}
         
           className="mt-1 p-3 bg-white border 
                    shadow-sm border-slate-300 

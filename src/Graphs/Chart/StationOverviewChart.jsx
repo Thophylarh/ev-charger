@@ -67,7 +67,7 @@ const BarChart = ({ details }) => {
 						},
 					},
 					title: {
-						display: false,
+						display: true,
 						text: "REVENUE BREAK DOWN",
 					},
 				},
@@ -93,7 +93,7 @@ const BarChart = ({ details }) => {
 							borderDash: [8, 4],
 						},
 						ticks: {
-							stepSize: 10000,
+							stepSize: 20000,
 
 							autoSkip: false,
 							callback: function (value) {

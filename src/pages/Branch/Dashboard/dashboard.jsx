@@ -22,6 +22,20 @@ import { toast } from "react-toastify";
 import ExportFile from "../../../components/exportComponent/ExportFile";
 import ReactToPrint from "react-to-print";
 
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css"; 
+import { chargerType } from "../../../utils/chargerType";
+
+
 export default function Dashboardd() {
 	const [transaction, setTransaction] = useState([]);
 	const [stationChargerList, setStationChargerList] = useState([]);
@@ -31,6 +45,12 @@ export default function Dashboardd() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams] = useSearchParams();
 	const [stationName, setStationName] = useState("")
+
+	const [filters, setFilters] = useState({
+		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		
+	});
+	const [globalFilterValue, setGlobalFilterValue] = useState('')
 
 	let stationId = searchParams.get("stationId");
 
@@ -44,7 +64,7 @@ export default function Dashboardd() {
 		axios.get(`/Stations/get-station-by-id/${stationId}`)
 		.then((res)=>{
 			setStationName(res?.data[0]?.StationName)
-
+			
 		})
 	}
 
@@ -92,56 +112,77 @@ export default function Dashboardd() {
 		GetDetails();
 	}, []);
 
-	//table columns
-	const Columns = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-		},
-		{
-			title: "Date",
-			dataIndex: "dateOfTransaction",
-			key: "dateOfTransaction",
-			render: (dateOfTransaction) => (
-				<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
-			),
-		},
-		{
-			title: "Charger",
-			dataIndex: "chargerName",
-			key: "transactionId",
-		},
+	const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
-		{
-			title: "Charger Type",
-			dataIndex: "chargerType",
-			key: "Charger Type",
-			render: () => <p>CICE</p>,
-		},
-		{
-			title: "Amount",
-			dataIndex: "totalAmount",
-			key: "totalAmount",
-			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-		},
-		{
-			title: "Balance",
-			dataIndex: "balance",
-			key: "balance",
-			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-		},
-		{
-			title: "Energy",
-			dataIndex: "totalUnitChargedInEnergy",
-			key: "totalUnitChargedInEnergy",
-			render: (totalUnitChargedInEnergy) => (
-				<p>
-					{formatNumber(totalUnitChargedInEnergy)} 
-					KWH
-				</p>
-			),
-		},
+	console.log(transactionIdd)
+
+	//table columns
+	// const Columns = [
+	// 	{
+	// 		title: "#",
+	// 		dataIndex: "index",
+	// 		key: "index",
+	// 	},
+	// 	{
+	// 		title: "Date",
+	// 		dataIndex: "dateOfTransaction",
+	// 		key: "dateOfTransaction",
+	// 		render: (dateOfTransaction) => (
+	// 			<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+	// 		),
+			// sorter: {
+			// 	compare: (a, b) => a.dateOfTransaction - b.dateOfTransaction,
+			// 	multiple: 3,
+			//   },
+		// },
+		// {
+		// 	title: "Charger",
+		// 	dataIndex: "chargerName",
+		// 	key: "transactionId",
+		// },
+
+		// {
+		// 	title: "Charger Type",
+		// 	dataIndex: "chargerType",
+		// 	key: "Charger Type",
+		// 	render: () => <p>CICE</p>,
+		// },
+		// {
+		// 	title: "Amount",
+		// 	dataIndex: "totalAmount",
+		// 	key: "totalAmount",
+		// 	render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		// 	sorter: {
+		// 		compare: (a, b) => a.totalAmount - b.totalAmount,
+		// 		multiple: 3,
+		// 	  },
+		// },
+		// {
+		// 	title: "Balance",
+		// 	dataIndex: "balance",
+		// 	key: "balance",
+		// 	render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+		// 	sorter: {
+		// 		compare: (a, b) => a.balance - b.balance,
+		// 		multiple: 3,
+		// 	  },
+		// },
+		// {
+		// 	title: "Energy",
+		// 	dataIndex: "totalUnitChargedInEnergy",
+		// 	key: "totalUnitChargedInEnergy",
+		// 	render: (totalUnitChargedInEnergy) => (
+		// 		<p>
+		// 			{formatNumber(totalUnitChargedInEnergy)} 
+		// 			KWH
+		// 		</p>
+		// 	),
+		// 	sorter: {
+		// 		compare: (a, b) => a.totalUnitChargedInEnergy - b.totalUnitChargedInEnergy,
+		// 		multiple: 3,
+		// 	  },
+		// },
 
 		// {
 		//     title: "Charge Duration",
@@ -151,47 +192,110 @@ export default function Dashboardd() {
 		//         <p>{formatNumber(totalUnitChargedInTime / 60)} hour(s)</p>
 		//     ),
 		// },
-		{
-			title: "Status",
-			dataIndex: "transactionStatus",
-			key: "transactionStatus",
+	// 	{
+	// 		title: "Status",
+	// 		dataIndex: "transactionStatus",
+	// 		key: "transactionStatus",
 
-			render: (transactionStatus) => (
-				<button className="flex justify-between">
-					<img
-						src={activeDot}
-						alt="Transaction was completed"
-						className="pr-[0.25rem] mt-[6px]"
-					/>
-					<p className="text-[#15833C] font-semibold text-xs leading-5">
-						Completed
-					</p>
-				</button>
-			),
-		},
-		{
-			title: "",
-			dataIndex: "action",
-			key: "action",
+	// 		render: (transactionStatus) => (
+	// 			<button className="flex justify-between">
+	// 				<img
+	// 					src={activeDot}
+	// 					alt="Transaction was completed"
+	// 					className="pr-[0.25rem] mt-[6px]"
+	// 				/>
+	// 				<p className="text-[#15833C] font-semibold text-xs leading-5">
+	// 					Completed
+	// 				</p>
+	// 			</button>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "",
+	// 		dataIndex: "action",
+	// 		key: "action",
 
-			render: (text, record) => (
-				<button
-					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
-					onClick={(e) => {
-						setModal(true);
-						setTransactionIdd(record.transactionId);
-					}}
-				>
-					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-					<p>View details</p>
-				</button>
-			),
-		},
-	];
+	// 		render: (text, record) => (
+	// 			<button
+	// 				className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+	// 				onClick={(e) => {
+	// 					setModal(true);
+	// 					setTransactionIdd(record.transactionId);
+	// 				}}
+	// 			>
+	// 				<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+	// 				<p>View details</p>
+	// 			</button>
+	// 		),
+	// 	},
+	// ];
 
-	const getColumnsToPrint = () => {
-		return Columns.filter((column) => column.key !== "action");
+	// const getColumnsToPrint = () => {
+	// 	return Columns.filter((column) => column.key !== "action");
+	// };
+
+	const onGlobalFilterChange = (e) => {
+		const value = e.target.value;
+		let _filters = { ...filters };
+	
+		_filters['global'].value = value;
+	
+		setFilters(_filters);
+		setGlobalFilterValue(value);
 	};
+	
+	  const renderHeader = () => {
+		return (
+			<div className="flex justify-content-end">
+				<span className="p-input-icon-left">
+					<i className="pi pi-search" />
+					<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+				</span>
+			</div>
+		);
+	};
+
+	const header = renderHeader();
+
+	const Status = (transaction) =>{
+		return (<button className="flex justify-between">
+					<img src={activeDot} alt="Active" className="pr-[0.25rem] mt-[6px]" />
+					<p className="text-[#15833C] font-semibold text-xs leading-5">
+					{transaction.transactionStatus}
+					</p>
+					</button>)
+	  }
+	
+	  const action = (transaction) =>{
+		return (<button
+						className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+							onClick={(e) => {
+								setModal(true);
+								console.log(transaction?.transactionId
+									)
+							setTransactionIdd(transaction?.transactionId);
+							}}
+						>
+						<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+							<p>View details</p>
+						</button>)
+	  }
+
+	  const getDate = (chargerTransactions) =>{
+		return (<p>{ moment(chargerTransactions.dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>)
+	  }
+
+	  const ChargerType = (chargerTransactions) =>{
+		return (<p>{chargerType( chargerTransactions.chargerType) }</p>)
+	  }
+
+	  const totalAmount = (chargerTransactions) =>{
+		return (<p>{formatNumber( chargerTransactions.totalAmount, true)}</p>)
+	  }
+
+	  const Energy = (chargerTransactions) =>{
+		return (<p>{formatNumber(chargerTransactions.totalUnitChargedInEnergy, false)} KWH</p>)
+	  }
 
 	return (
 		<>
@@ -259,23 +363,36 @@ export default function Dashboardd() {
 						</div>
 
 						<div>
-							<Table
+							{/* <Table
 								columns={Columns}
-								pagination={false}
-								dataSource={transaction}
-							/>
-
-							<div style={{ position: "absolute", top: "-9999px" }}>
-								<div>
 								
-									<Table
-										ref={tableRef}
-										dataSource={transaction}
-										columns={getColumnsToPrint()}
-									/>
-								</div>
+								dataSource={transaction}
+							/> */}
+
+							<div >
+							<DataTable
+          value={transaction}
+          tableStyle={{ minWidth: "100%" }}
+		  stripedRows
+		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} filterDisplay="row"
+		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
+		  globalFilterFields={['dateOfTransaction', 'chargerName', 'ChargerType', 'totalUnitChargedInEnergy', 'status', 'totalAmount']} header={header} emptyMessage="No transactions found.">
+			
+			<Column field="index" header="#"  ></Column>
+          <Column field="dateOfTransaction" header="Date" sortable body={getDate}></Column>
+          <Column field="chargerName"  header="Charger"   sortable ></Column>
+          <Column field="chargerType" header="Charger Type" sortable body={ChargerType}></Column>
+          <Column field="totalAmount" header="Amount"  sortable body={totalAmount}></Column>
+		  {/* <Column field="Balance" header="Balance" sortable body={balance}></Column> */}
+          <Column field="totalUnitChargedInEnergy" header="Energy"  sortable body={Energy}></Column>
+          <Column field="Status" header="Status"  body={Status} ></Column>
+		  <Column field="Action" header="Action"  body={action} ></Column>
+        </DataTable>
+      </div>
 							</div>
-						</div>
+						
 					</section>
 					{TModal && (
 						<Modal closeModal={setModal}>

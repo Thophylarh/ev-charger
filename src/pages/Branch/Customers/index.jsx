@@ -1,4 +1,4 @@
-import { Table } from "antd";
+
 import React, { useEffect, useState, useRef } from "react";
 
 import axios from "../../../lib/axiosInterceptor";
@@ -15,6 +15,22 @@ import Modal from "../../../components/modals/modal";
 import TransactionDetails from "../../../components/modals/transactionDetails";
 import Loader from "../../../components/Loader";
 
+import Highlighter from 'react-highlight-words';
+
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css"; 
+import { chargerType } from "../../../utils/chargerType";
+
+
 export default function CustomerList() {
 	const [enrolled, setEnrolled] = useState(true);
 	const [customers, setCustomers] = useState([]);
@@ -22,6 +38,12 @@ export default function CustomerList() {
 	const [TModal, setModal] = useState(false);
 	const [transactionIdd, setTransactionIdd] = useState();
 	const [isLoading, setIsLoading] = useState(false);
+
+	const [filters, setFilters] = useState({
+		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		
+	});
+	const [globalFilterValue, setGlobalFilterValue] = useState('')
 
 	const tableRef = useRef();
 
@@ -65,179 +87,197 @@ export default function CustomerList() {
 		enrolled ? getCustomers() : getPAYG();
 	}, [enrolled]);
 
-	let column = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-			width: "2%",
-		},
+	
 
-		{
-			title: "First name",
-			dataIndex: "firstname",
-			key: "firstname",
-			width: "10%",
-		},
+	const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
-		{
-			title: "Last name",
-			dataIndex: "lastname",
-			key: "lastname",
-			width: "10%",
-		},
+	const onGlobalFilterChange = (e) => {
+		const value = e.target.value;
+		let _filters = { ...filters };
+	
+		_filters['global'].value = value;
+	
+		setFilters(_filters);
+		setGlobalFilterValue(value);
+	};
+	
+	  const renderHeader = () => {
+		return (
+			<div className="flex justify-content-end">
+				<span className="p-input-icon-left">
+					<i className="pi pi-search" />
+					<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+				</span>
+			</div>
+		);
+	};
 
-		{
-			title: "Email address",
-			dataIndex: "emailAddress",
-			key: "emailAddress",
-			width: "10%",
-		},
+	const header = renderHeader();
 
-		{
-			title: "Money  Spent",
-			dataIndex: "totalAmountSpent",
-			key: "totalAmountSpent",
-			width: "15%",
-		},
-
-		{
-			title: "Phone number",
-			dataIndex: "phonenumber",
-			key: "phonenumber",
-			width: "15%",
-		},
-
-		{
-			title: "Number of Vehicles",
-			dataIndex: "numberOfVehiclesOnFile",
-			key: "numberOfVehiclesOnFile",
-			width: "10%",
-		},
-
-		{
-			title: "Energy consumed",
-			dataIndex: "totalEnergyCharged",
-			key: "totalEnergyCharged",
-			width: "10%",
-		},
-		{
-			title: "",
-			dataIndex: "action",
-			key: "action",
-			render: (text, record) => (
-				<NavLink
-					to={{
-						pathname: "/station/customer/details",
-						search: `?cus=${record.id}&stationId=${id}&companyId=${compId}`,
-					}}
-				>
-					<button className="flex justify-between bg-black text-white p-[0.5rem] rounded-md ">
+	
+	
+	  const action = (chargerTransactions) =>{
+		return (<button
+						className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+							onClick={(e) => {
+								setModal(true);
+							setTransactionIdd(chargerTransactions.transactionId);
+							}}
+						>
 						<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-						<p>View details</p>
-					</button>
-				</NavLink>
-			),
-			width: "20%",
-		},
-	];
+							<p>View details</p>
+						</button>)
+	  }
 
-	//table columns
-	const PAYGcolumn = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-		},
-		{
-			title: "Date",
-			dataIndex: "dateOfTransaction",
-			key: "dateOfTransaction",
-			render: (dateOfTransaction) => (
-				<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
-			),
-		},
-		{
-			title: "Charger",
-			dataIndex: "chargerName",
-			key: "transactionId",
-		},
 
-		{
-			title: "Charger Type",
-			dataIndex: "chargerType",
-			key: "Charger Type",
-			render: () => <p>CICE</p>,
-		},
-		{
-			title: "Amount",
-			dataIndex: "totalAmount",
-			key: "totalAmount",
-			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-		},
-		{
-			title: "Balance",
-			dataIndex: "balance",
-			key: "balance",
-			render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
-		},
-		{
-			title: "Energy",
-			dataIndex: "totalUnitChargedInEnergy",
-			key: "totalUnitChargedInEnergy",
-			render: (totalUnitChargedInEnergy) => (
-				<p>
-					{formatNumber(totalUnitChargedInEnergy)}
-					kWh
-				</p>
-			),
-		},
+	  const totalAmount = (customers) =>{
+		return (<p>{formatNumber( customers.totalAmountSpent, true)}</p>)
+	  }
 
-		{
-			title: "Status",
-			dataIndex: "transactionStatus",
-			key: "transactionStatus",
+	  const Energy = (customers) =>{
+		return (<p>{formatNumber(customers.totalEnergyCharged, false)} KWH</p>)
+	  }
 
-			render: (transactionStatus) => (
-				<button className="flex justify-between">
-					<img
-						src={activeDot}
-						alt="Transaction was completed"
-						className="pr-[0.25rem] mt-[6px]"
-					/>
+	  const getDate = (PAYG) =>{
+		return (<p>{ moment(PAYG.dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>)
+	  }
+
+	  const ChargerType = (PAYG) =>{
+		return (<p>{chargerType(PAYG.chargerType) }</p>)
+	  }
+
+	  const Status = (PAYG) =>{
+		return (<button className="flex justify-between">
+					<img src={activeDot} alt="Active" className="pr-[0.25rem] mt-[6px]" />
 					<p className="text-[#15833C] font-semibold text-xs leading-5">
-						Completed
+					{PAYG.transactionStatus}
 					</p>
-				</button>
-			),
-		},
-		{
-			title: "",
-			dataIndex: "action",
-			key: "action",
+					</button>)
+	  }
 
-			render: (text, record) => (
-				<button
-					className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
-					onClick={(e) => {
-						setModal(true);
-						setTransactionIdd(record.transactionId);
-					}}
-				>
-					<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
-					<p>View details</p>
-				</button>
-			),
-		},
-	];
+	  const actionPAYG = (PAYG) =>{
+		return (<button
+						className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+							onClick={(e) => {
+								setModal(true);
+							setTransactionIdd(PAYG.transactionId);
+							}}
+						>
+						<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+							<p>View details</p>
+						</button>)
+	  }
+	  
+	
+	//table columns
+	// const PAYGcolumn = [
+	// 	{
+	// 		title: "#",
+	// 		dataIndex: "index",
+	// 		key: "index",
+	// 	},
+	// 	{
+	// 		title: "Date",
+	// 		dataIndex: "dateOfTransaction",
+	// 		key: "dateOfTransaction",
+	// 		render: (dateOfTransaction) => (
+	// 			<p>{moment(dateOfTransaction).format(" MMMM DD YYYY HH:mm")}</p>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "Charger",
+	// 		dataIndex: "chargerName",
+	// 		key: "transactionId",
+	// 	},
 
-	const getColumnsToPrint = () => {
-		return column.filter((column) => column.key !== "action");
-	};
+	// 	{
+	// 		title: "Charger Type",
+	// 		dataIndex: "chargerType",
+	// 		key: "Charger Type",
+	// 		render: () => <p>CICE</p>,
+	// 	},
+	// 	{
+	// 		title: "Amount",
+	// 		dataIndex: "totalAmount",
+	// 		key: "totalAmount",
+	// 		render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+	// 		sorter: {
+	// 			compare: (a, b) => a.totalAmount - b.totalAmount,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
+	// 	{
+	// 		title: "Balance",
+	// 		dataIndex: "balance",
+	// 		key: "balance",
+	// 		render: (totalAmount) => <p>{formatNumber(totalAmount, true)}</p>,
+	// 		sorter: {
+	// 			compare: (a, b) => a.balance - b.balance,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
+	// 	{
+	// 		title: "Energy",
+	// 		dataIndex: "totalUnitChargedInEnergy",
+	// 		key: "totalUnitChargedInEnergy",
+	// 		render: (totalUnitChargedInEnergy) => (
+	// 			<p>
+	// 				{formatNumber(totalUnitChargedInEnergy)}
+	// 				kWh
+	// 			</p>
+	// 		),
+	// 		sorter: {
+	// 			compare: (a, b) => a.totalUnitChargedInEnergy - b.totalUnitChargedInEnergy,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
 
-	const getPAYGColumnsToPrint = () => {
-		return PAYGcolumn.filter((column) => column.key !== "action");
-	};
+	// 	{
+	// 		title: "Status",
+	// 		dataIndex: "transactionStatus",
+	// 		key: "transactionStatus",
+
+	// 		render: (transactionStatus) => (
+	// 			<button className="flex justify-between">
+	// 				<img
+	// 					src={activeDot}
+	// 					alt="Transaction was completed"
+	// 					className="pr-[0.25rem] mt-[6px]"
+	// 				/>
+	// 				<p className="text-[#15833C] font-semibold text-xs leading-5">
+	// 					Completed
+	// 				</p>
+	// 			</button>
+	// 		),
+	// 	},
+	// 	{
+	// 		title: "",
+	// 		dataIndex: "action",
+	// 		key: "action",
+
+	// 		render: (text, record) => (
+	// 			<button
+	// 				className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
+	// 				onClick={(e) => {
+	// 					setModal(true);
+	// 					setTransactionIdd(record.transactionId);
+	// 				}}
+	// 			>
+	// 				<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
+	// 				<p>View details</p>
+	// 			</button>
+	// 		),
+	// 	},
+	// ];
+
+	// const getColumnsToPrint = () => {
+	// 	return column.filter((column) => column.key !== "action");
+	// };
+
+	// const getPAYGColumnsToPrint = () => {
+	// 	return PAYGcolumn.filter((column) => column.key !== "action");
+	// };
 
 	return (
 		<>
@@ -309,45 +349,63 @@ export default function CustomerList() {
 
 						{enrolled && (
 							<>
-								<div
-									style={
-										enrolled
-											? { position: "absolute", top: "-9999px" }
-											: { display: "none" }
-									}
-								>
-									<div ref={tableRef}>
-										<Table
-											columns={getColumnsToPrint()}
-											dataSource={customers}
-											pagination={false}
-										/>
+								<div>
+									<div >
+									<DataTable
+          value={customers}
+          tableStyle={{ minWidth: "100%" }}
+		  stripedRows
+		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} filterDisplay="row"
+		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
+		  globalFilterFields={['firstname', 'lastname', 'emailAddress', 'totalAmountSpent', 'totalEnergyCharged',]} header={header} emptyMessage="No transactions found.">
+			
+			<Column field="index" header="#"  ></Column>
+          {/* <Column field="dateOfTransaction"  header="Date"   sortable ></Column> */}
+          <Column field="lastname" header="Last Name" sortable ></Column>
+          <Column field="emailAddress" header="Email"  sortable ></Column>
+		  <Column field="totalAmountSpent" header="Money spent" sortable body={totalAmount}></Column>
+          <Column field="totalEnergyCharged" header="Energy"  sortable body={Energy}></Column>
+          
+		  <Column field="Action" header="Action"  body={action} ></Column>
+        </DataTable>
 									</div>
 								</div>
 
-								<Table columns={column} dataSource={customers} />
+								
 							</>
 						)}
 
 						{!enrolled && (
 							<>
 								<div
-									style={
-										!enrolled
-											? { position: "absolute", top: "-9999px" }
-											: { display: "none" }
-									}
+									
 								>
-									<div ref={tableRef}>
-										<Table
-											columns={getPAYGColumnsToPrint()}
-											dataSource={PAYG}
-											pagination={false}
-										/>
+									<div>
+									<DataTable
+          value={PAYG}
+          tableStyle={{ minWidth: "100%" }}
+		  stripedRows
+		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} filterDisplay="row"
+		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
+		  globalFilterFields={['dateOfTransaction', 'chargerName', 'chargerType', 'totalAmount', 'totalUnitChargedInEnergy', 'transactionStatus']} header={header} emptyMessage="No transactions found.">
+			
+			<Column field="index" header="#"  ></Column>
+          <Column field="dateOfTransaction"  header="Date"  sortable body={getDate} ></Column>
+          <Column field="chargerName" header="Charger" sortable ></Column>
+          <Column field="chargerType" header="Charger Type"  sortable body={ChargerType}></Column>
+		  <Column field="totalAmount" header="Money spent" sortable body={totalAmount}></Column>
+		  <Column field="totalUnitChargedInEnergy" header="Energy"  sortable body={Energy}></Column>
+		  <Column field="transactionStatus" header="Status"  body={Status}  ></Column>
+		  <Column field="action" header="action" body={actionPAYG}  ></Column>
+        </DataTable>
 									</div>
 								</div>
 
-								<Table columns={PAYGcolumn} dataSource={PAYG} />
+								{/* <Table columns={PAYGcolumn} dataSource={PAYG} /> */}
 							</>
 						)}
 

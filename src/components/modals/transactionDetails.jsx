@@ -15,6 +15,8 @@ const TDetails = ({ transactionId }) => {
 	const [details, setDetails] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 
+	
+
 	const getTransactionDetails = () => {
 		setIsLoading(true);
 		axios
@@ -152,20 +154,20 @@ const TDetails = ({ transactionId }) => {
 						<div className="flex justify-between items-center mb-[1rem] ">
 							<h6 className="text-[1rem] text-[#667084]">Status:</h6>
 
-							<div>{renderStatus(details?.transactionStatus)}</div>
+							<div>{details?.transactionStatus}</div>
 						</div>
 						<div className="flex justify-between items-center mb-[1rem] ">
 							<h6 className="text-[1rem] text-[#667084]">Customer:</h6>
 
 							<h3 className={`text-[1rem] font-semibold text-[#667084]`}>
-								{details?.customer}
+								{details?.customerDetails?.customerName}
 							</h3>
 						</div>
 						<div className="flex justify-between items-center mb-[1rem] ">
 							<h6 className="text-[1rem] text-[#667084]">Vehicle type:</h6>
 
 							<h3 className={`text-[1rem] font-semibold text-[#667084]`}>
-								{details?.car}
+								{details?.vehicleName}
 							</h3>
 						</div>
 						<div className="flex justify-between items-center mb-[1rem] ">
@@ -173,7 +175,7 @@ const TDetails = ({ transactionId }) => {
 
 							<h3 className={`text-[1rem] font-semibold text-[#667084]`}>
 								{" "}
-								{details?.carmodel}
+								{details?.vehicleType}
 							</h3>
 						</div>
 					</div>

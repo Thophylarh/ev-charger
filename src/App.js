@@ -24,7 +24,7 @@ import Camera from "./pages/Branch/LiveFeed/camera";
 //Company
 import Station from "./components/station/station";
 import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations";
-import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
+import CompanyDash from "./pages/CompanyDashboard/Dashboad/CDashboard";
 import CompanySideBar from "./components/Company/companySidebar/companySidebar";
 import CompanyReport from "./pages/CompanyDashboard/Report/report";
 import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
@@ -51,6 +51,8 @@ import Success from "./pages/Customer/transactionStatus/success";
 import Failed from "./pages/Customer/transactionStatus/failed";
 import ChangeUserPassword from "./pages/Customer/changePassword/changePassword";
 import ProfileData from "./pages/Customer/profileData/profileData";
+import MyLocations from "./pages/Customer/myLocations/myLocations";
+
 
 function App() {
 
@@ -245,6 +247,17 @@ function App() {
             }
           ></Route>
           </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/myLocations"
+            element={
+              <CustomerLayout title="My Locations ">
+                <MyLocations/>
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
          
           
         </Routes>
@@ -278,7 +291,7 @@ function LayoutsWithNavbar() {
 function LayoutsWithCompanyNavbar() {
   return (
     <div
-      className="flex flex-row bg-neutral-100 h- 
+      className="flex flex-row bg-white h- 
     screen w-screen top-0 left-0 fixed "
     >
       <div
@@ -288,7 +301,7 @@ function LayoutsWithCompanyNavbar() {
         <CompanySideBar />
       </div>
       <div
-        className="mx-2 h-screen w-[85%] overflow-y- 
+        className=" h-[100vh] w-[85%] overflow-y- 
     scroll"
       >
         <Outlet />

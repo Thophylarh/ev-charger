@@ -81,7 +81,12 @@ const Login = () => {
         if (passwordFirstLoginStatus == 0) {
           Navigate("/changePassword");
         } else {
-          Navigate("/company");
+          Navigate(
+            {
+              pathname: "/company",
+              search: `?companyid=${res?.data?.id}`
+              }
+          );
         }
         toast.success("Welcome");
       })

@@ -53,55 +53,67 @@ export default function CustomerDetails() {
 
 	console.log(details);
 
-	let column = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-		},
+	// let column = [
+	// 	{
+	// 		title: "#",
+	// 		dataIndex: "index",
+	// 		key: "index",
+	// 	},
 
-		{
-			title: "First name",
-			dataIndex: "firstname",
-			key: "firstname",
-		},
+	// 	{
+	// 		title: "First name",
+	// 		dataIndex: "firstname",
+	// 		key: "firstname",
+	// 	},
 
-		{
-			title: "Last name",
-			dataIndex: "lastname",
-			key: "lastname",
-		},
+	// 	{
+	// 		title: "Last name",
+	// 		dataIndex: "lastname",
+	// 		key: "lastname",
+	// 	},
 
-		{
-			title: "Email address",
-			dataIndex: "emailAddress",
-			key: "emailAddress",
-		},
+	// 	{
+	// 		title: "Email address",
+	// 		dataIndex: "emailAddress",
+	// 		key: "emailAddress",
+	// 	},
 
-		{
-			title: "Money  Spent",
-			dataIndex: "totalAmountSpent",
-			key: "totalAmountSpent",
-		},
+	// 	{
+	// 		title: "Money  Spent",
+	// 		dataIndex: "totalAmountSpent",
+	// 		key: "totalAmountSpent",
+	// 		sorter: {
+	// 			compare: (a, b) => a.totalAmountSpent - b.totalAmountSpent,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
 
-		{
-			title: "Phone number",
-			dataIndex: "phone",
-			key: "phone",
-		},
+	// 	{
+	// 		title: "Phone number",
+	// 		dataIndex: "phone",
+	// 		key: "phone",
+	// 	},
 
-		{
-			title: "Number of Vehicles",
-			dataIndex: "numberOfVehiclesOnFile",
-			key: "numberOfVehiclesOnFile",
-		},
+	// 	{
+	// 		title: "Number of Vehicles",
+	// 		dataIndex: "numberOfVehiclesOnFile",
+	// 		key: "numberOfVehiclesOnFile",
+	// 		sorter: {
+	// 			compare: (a, b) => a.numberOfVehiclesOnFile - b.numberOfVehiclesOnFile,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
 
-		{
-			title: "Energy consumed",
-			dataIndex: "totalEnergyCharged",
-			key: "totalEnergyCharged",
-		},
-	];
+	// 	{
+	// 		title: "Energy consumed",
+	// 		dataIndex: "totalEnergyCharged",
+	// 		key: "totalEnergyCharged",
+	// 		sorter: {
+	// 			compare: (a, b) => a.totalEnergyCharged - b.totalEnergyCharged,
+	// 			multiple: 3,
+	// 		  },
+	// 	},
+	// ];
 
 	return (
 		<>

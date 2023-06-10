@@ -68,10 +68,7 @@ const EditProfileData = () => {
     setIsLoading(true)
 
     axios
-      .post(`https://evapi.estations.com/Customers/update`, data, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: false,
-      })
+      .post(`/Customers/update`, data)
       .then((res) => {
         console.log(res);
         setIsLoading(false);

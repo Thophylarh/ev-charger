@@ -10,14 +10,20 @@ import { NavLink } from "react-router-dom";
 
 
 const CompanySidebar = () => {
-
+const id = localStorage.getItem("id")
  
  
   return (
     <div>
       <div className="link-cover mt-[6rem] ">
         <div>
-        <NavLink to="/company"  end> 
+        <NavLink 
+        to={{
+          pathname: "/company",
+          search: `?companyid=${id}`
+        }}
+        
+        end> 
         {({isActive}) => 
           (isActive ? 
             <div className="flex items-center m-4 bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl"  >

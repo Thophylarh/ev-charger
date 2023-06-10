@@ -17,6 +17,20 @@ import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
 import ExportFile from "../../../components/exportComponent/ExportFile";
 
+
+import { FilterMatchMode, FilterOperator } from 'primereact/api';
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Button } from 'primereact/button';
+import { InputText } from 'primereact/inputtext';
+
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css"; 
+import { chargerType } from "../../../utils/chargerType";
+
 export default function StationBilling() {
 	const [reloadPage, setReloadPage] = useState(false);
 	const [priceModal, setPriceModal] = useState(false);
@@ -24,6 +38,12 @@ export default function StationBilling() {
 	const [details, setDetails] = useState();
 	const [changeHIstory, setChangeHistory] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	const [filters, setFilters] = useState({
+		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+		
+	});
+	const [globalFilterValue, setGlobalFilterValue] = useState('')
 
 	const tableRef = useRef();
 
@@ -108,66 +128,111 @@ export default function StationBilling() {
 		XLSX.writeFile(wb, "priceChangeLog.xlsx");
 	};
 
-	let column = [
-		{
-			title: "#",
-			dataIndex: "index",
-			key: "index",
-		},
+	const paginatorLeft = <Button type="button" icon="pi pi-refresh" text />;
+    const paginatorRight = <Button type="button" icon="pi pi-download" text />;
 
-		{
-			title: "Updated By",
-			dataIndex: "updatedBy",
-			key: "updatedBy",
-			render: (text, record) => {
-				return record.updatedBy.emailAddress;
-			},
-		},
+	const onGlobalFilterChange = (e) => {
+		const value = e.target.value;
+		let _filters = { ...filters };
+	
+		_filters['global'].value = value;
+	
+		setFilters(_filters);
+		setGlobalFilterValue(value);
+	};
+	
+	  const renderHeader = () => {
+		return (
+			<div className="flex justify-content-end">
+				<span className="p-input-icon-left">
+					<i className="pi pi-search" />
+					<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
+				</span>
+			</div>
+		);
+	};
 
-		{
-			title: "Time updated",
-			dataIndex: "createdAt",
-			key: "createdAt",
-			render: (text, record) => {
-				return moment(record.createdAt).format("MMM DD, YYYY. h:mm A");
-			},
-		},
+	const header = renderHeader();
+
+	const updatedBY = (billingLog) =>{
+		return (
+			<p>{billingLog.updatedBy.emailAddress}</p>
+		)
+	}
+
+	const createdAt = (billingLog) =>{
+		return(
+			<p>{ moment(billingLog.createdAt).format("MMM DD, YYYY. h:mm A")}</p>
+		)
+	}
+
+	const PriceChange = (billingLog) =>{
+		return (<p>{formatNumber( billingLog.costPerUnitCharge, true)}</p>)
+	  }
+
+	  const previous = (billingLog) =>{
+		return (<p>{formatNumber( billingLog.previousCostPerUnitCharge, true)}</p>)
+	  }
+	// let column = [
+	// 	{
+	// 		title: "#",
+	// 		dataIndex: "index",
+	// 		key: "index",
+	// 	},
+
+	// 	{
+	// 		title: "Updated By",
+	// 		dataIndex: "updatedBy",
+	// 		key: "updatedBy",
+	// 		render: (text, record) => {
+	// 			return record.updatedBy.emailAddress;
+	// 		},
+	// 	},
+
+	// 	{
+	// 		title: "Time updated",
+	// 		dataIndex: "createdAt",
+	// 		key: "createdAt",
+	// 		render: (text, record) => {
+	// 			return moment(record.createdAt).format("MMM DD, YYYY. h:mm A");
+	// 		},
+	// 	},
 
 	
 
-		{
-			title: "Charger Type",
-			dataIndex: "chargerType",
-			key: "chargerType",
-			render: (text, record) => {
-				return record.chargerType.toUpperCase();
-			},
-		},
+	// 	{
+	// 		title: "Charger Type",
+	// 		dataIndex: "chargerType",
+	// 		key: "chargerType",
+	// 		render: (text, record) => {
+	// 			return record.chargerType.toUpperCase();
+	// 		},
+	// 	},
 
-		{
-			title: "Billing Type",
-			dataIndex: "billingType",
-			key: "billingType",
-		},
+	// 	{
+	// 		title: "Billing Type",
+	// 		dataIndex: "billingType",
+	// 		key: "billingType",
+	// 	},
 
-		{
-			title: "Previous Price",
-			dataIndex: "previousCostPerUnitCharge",
-			key: "previousCostPerUnitCharge",
-			render: (text, record) => {
-				return formatNumber(record.previousCostPerUnitCharge, true);
-			},
-		},
+	// 	{
+	// 		title: "Previous Price",
+	// 		dataIndex: "previousCostPerUnitCharge",
+	// 		key: "previousCostPerUnitCharge",
+	// 		render: (text, record) => {
+	// 			return formatNumber(record.previousCostPerUnitCharge, true);
+	// 		},
+	// 	},
 
-		{
-			title: " Price Change",
-			dataIndex: "costPerUnitCharge",
-			key: "costPerUnitCharge",
-			render: (text, record) => {
-				return formatNumber(record.costPerUnitCharge, true);
-			},
-		},
-	];
+	// 	{
+	// 		title: " Price Change",
+	// 		dataIndex: "costPerUnitCharge",
+	// 		key: "costPerUnitCharge",
+	// 		render: (text, record) => {
+	// 			return formatNumber(record.costPerUnitCharge, true);
+	// 		},
+	// 	},
+	// ];
 
 	return (
 		<>
@@ -227,15 +292,28 @@ export default function StationBilling() {
 							/>
 						</div>
 
-						<Table columns={column} dataSource={billingLog} pagination={true} />
-						<div style={{ position: "absolute", top: "-9999px" }}>
-							<div ref={tableRef}>
-								<Table
-									columns={column}
-									dataSource={billingLog}
-									pagination={false}
-								/>
-							</div>
+						
+						<div>
+							
+						<DataTable
+          value={billingLog}
+          tableStyle={{ minWidth: "100%" }}
+		  stripedRows
+		  paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} filterDisplay="row"
+		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
+		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
+		  globalFilterFields={['emailAddress', 'createdAt', 'chargerType', 'billingType', 'previousCostPerUnitCharge', 'costPerUnitCharge']} header={header} emptyMessage="No logs found.">
+			
+			<Column field="index" header="#"  ></Column>
+          <Column field="emailAddress" header="Updated By" sortable body={updatedBY} ></Column>
+          <Column field="createdAt"  header="Created At"   sortable body={createdAt}></Column>
+          <Column field="chargerType" header="Charger Type" sortable ></Column>
+          <Column field="billingType" header="Billing Type"  sortable ></Column>
+           <Column field="previousCostPerUnitCharge" header="Previous price"  sortable body={previous} ></Column>
+          <Column field="costPerUnitCharge" header="priceChange" sortable body={PriceChange}></Column>
+		  
+        </DataTable> 
 						</div>
 					</section>
 
