@@ -57,7 +57,7 @@ export default function StationDashboardOverview({ stationId, newDate }) {
 
 	return (
 		<section className={`mb-[var(--marginBtwSection)]`}>
-			<div className=" grid grid-cols-4  ">
+			<div className=" grid grid-cols-4 gap-4 ">
 				<div className="revenueBlock">
 					<h3>CICE REVENUE</h3>
 

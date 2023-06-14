@@ -2,9 +2,15 @@ import Profit from "../../../assets/svg/profit.png";
 import React, {useState, useEffect} from "react";
 import axios from "../../../lib/axiosInterceptor";
 import { formatNumber } from "../../../utils/formatNumber";
+import { splitNumber } from "../../../utils/splitNumber";
 
 const Overview = ({id, newDate}) => {
     const [TestRevenue, setTestRevenue] = useState()
+	const [TotalRevenue, setTotalRevenue] = useState()
+	const [CiceRevenue, setCiceRevenue] = useState()
+	const [AcRevenue, setAcRevenue] = useState()
+	const [DcRevenue, setDcRevenue] = useState()
+
     const getRevenueOverview =  () => {
         
 		let finalUrl;
@@ -20,6 +26,10 @@ const Overview = ({id, newDate}) => {
 			.get(finalUrl)
 			.then((res) => {
 				setTestRevenue(res.data);
+				setAcRevenue(splitNumber(res?.data?.acRevenue));
+				setTotalRevenue(splitNumber(res?.data?.totalRevenue))
+				setDcRevenue(splitNumber(res?.data?.dcRevenue))
+				setCiceRevenue(splitNumber(res?.data?.bmsRevenue))
 				// setfiltered(true);
 			});
 	};
@@ -37,8 +47,8 @@ const Overview = ({id, newDate}) => {
                     <div className="pl-[16px]"> 
 					<h3 className="text-[#98A2B3] text-[12px] font-medium mb-[1rem]">TOTAL REVENUE</h3>
                     <h5 className="text-[#101828] text-[24px] font-bold mb-[1rem]">
-                     {formatNumber(TestRevenue?.totalRevenue, true)}
-                    {/* <sup>00</sup> */}
+                    NGN {formatNumber(TotalRevenue?.[0], false)}.
+                    <sup>{TotalRevenue?.[1]}</sup>
                     </h5>
 
                     <div className="flex gap-x-2"><p> {formatNumber(TestRevenue?.percentageDifference)}%</p>
@@ -55,18 +65,18 @@ const Overview = ({id, newDate}) => {
                 <div className="pl-[16px] "> 
 					<h3 className="text-[#98A2B3] text-[12px] font-medium mb-[1rem]">TOTAL CICE REVENUE</h3>
                     <h5 className="text-[#101828] text-[24px] font-bold mb-[1rem]">
-                      {formatNumber(TestRevenue?.bmsRevenue, true)}
+                      NGN {formatNumber(CiceRevenue?.[0], false)}.
 
-                    {/* <sup>00</sup> */}
+                    <sup>{CiceRevenue?.[1]}</sup>
                     </h5>
 
-                    <div className="flex gap-x-2"><p>22%</p>
+                    {/* <div className="flex gap-x-2"><p>22%</p>
                     <img
 								src={Profit}
 								alt="profit indicator"
 								className="mr-[0.25rem] mt-[0.25rem] w-[0.6rem] h-[0.6875rem]"
 							/>
-                    </div>
+                    </div> */}
 					</div>
 				</div>
 
@@ -74,17 +84,17 @@ const Overview = ({id, newDate}) => {
                 <div className="pl-[16px] ">
 					<h3 className="text-[#98A2B3] text-[12px] font-medium mb-[1rem]">TOTAL AC REVENUE</h3>
                     <h5 className="text-[#101828] text-[24px] font-bold mb-[1rem]">
-                     {formatNumber(TestRevenue?.acRevenue, true)}
-                    {/* <sup>00</sup> */}
+                     NGN {formatNumber(AcRevenue?.[0], false)}.
+                    <sup>{AcRevenue?.[1]}</sup>
                     </h5>
 
-                    <div className="flex gap-x-2"><p>22%</p>
+                    {/* <div className="flex gap-x-2"><p>22%</p>
                     <img
 								src={Profit}
 								alt="profit indicator"
 								className="mr-[0.25rem] mt-[0.25rem] w-[0.6rem] h-[0.6875rem]"
 							/>
-                    </div>
+                    </div> */}
 
 					</div>
 				</div>
@@ -94,17 +104,17 @@ const Overview = ({id, newDate}) => {
                 <div className="pl-[16px] ">
 					<h3 className="text-[#98A2B3] text-[12px] font-medium mb-[1rem]">TOTAL DC REVENUE</h3>
                     <h5 className="text-[#101828] text-[24px] font-bold mb-[1rem]">
-                    {formatNumber(TestRevenue?.dcRevenue, true)}
-                    {/* <sup>00</sup> */}
+                    NGN {formatNumber(DcRevenue?.[0], false)}.
+                    <sup>{DcRevenue?.[1]}</sup>
                     </h5>
-
+{/* 
                     <div className="flex gap-x-2"><p>22%</p>
                     <img
 								src={Profit}
 								alt="profit indicator"
 								className="mr-[0.25rem] mt-[0.25rem] w-[0.6rem] h-[0.6875rem]"
 							/>
-                    </div>
+                    </div> */}
 
 					</div>
 				</div>

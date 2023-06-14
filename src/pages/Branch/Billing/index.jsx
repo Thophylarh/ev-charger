@@ -49,6 +49,13 @@ export default function StationBilling() {
 
 	const [searchParams] = useSearchParams();
 
+	const [sizeOptions] = useState([
+		{ label: "Small", value: "small" },
+		{ label: "Normal", value: "normal" },
+		{ label: "Large", value: "large" },
+	  ]);
+	  const [size, setSize] = useState(sizeOptions[0].value);
+
 	let companyId = searchParams.get("companyId");
 	let stationId = searchParams.get("stationId");
 	//billing log
@@ -298,9 +305,9 @@ export default function StationBilling() {
 						<DataTable
           value={billingLog}
           tableStyle={{ minWidth: "100%" }}
-		  stripedRows
+		  removableSort
 		  paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
-		  filters={filters} filterDisplay="row"
+		  filters={filters} 
 		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
 		  globalFilterFields={['emailAddress', 'createdAt', 'chargerType', 'billingType', 'previousCostPerUnitCharge', 'costPerUnitCharge']} header={header} emptyMessage="No logs found.">

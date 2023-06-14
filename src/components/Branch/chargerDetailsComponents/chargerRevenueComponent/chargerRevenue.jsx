@@ -5,6 +5,7 @@ import { lastCharged } from "../../../../utils/lastCharged";
 import { chargerType } from "../../../../utils/chargerType";
 import "./style.css";
 import { useSearchParams } from "react-router-dom";
+import { splitNumber } from "../../../../utils/splitNumber";
 
 const ChargerRevenue = ({ ChargerDetails }) => {
 	const [ChargerRevenue, setChargerRevenue] = useState([]);
@@ -17,7 +18,8 @@ const ChargerRevenue = ({ ChargerDetails }) => {
 	const Revenue = () => {
 		axios.get(`/Transactions/get-revenue/charger/${chargerId}`).then((res) => {
 			// console.log(res)
-			setChargerRevenue(res.data);
+			setChargerRevenue(splitNumber(res.data.totalRevenue));
+			// setACRevenue(splitNumber(res.data.acRevenue));
 		});
 	};
 
@@ -27,10 +29,13 @@ const ChargerRevenue = ({ ChargerDetails }) => {
 
 	return (
 		<section className="mb-[var(--marginBtwSection)]">
-			<div className="grid grid-cols-5 ">
+			<div className="grid grid-cols-5">
 				<div className="revenueBlock ">
 					<h3>CHARGER REVENUE</h3>
-					<h6>NGN {formatNumber(ChargerRevenue.totalRevenue, false)}</h6>
+					<h6>NGN {formatNumber(ChargerRevenue?.[0], false)}.
+					<sup>{ChargerRevenue?.[1]}</sup>
+					</h6>
+					
 				</div>
 
 				<div className="revenueBlock">

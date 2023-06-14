@@ -8,8 +8,6 @@ import { useNavigate } from "react-router";
 
 export default function ChargersCard({charger, station, company}) {
 	const Navigate = useNavigate();
-	
-
 
 	const viewCharger = (id, e) =>{
       

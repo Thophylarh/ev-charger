@@ -3,7 +3,7 @@ import React from "react";
 import ActiveCar from "../../../assets/svg/activeCar.svg";
 import InActiveCar from "../../../assets/svg/inactiveCar.svg";
 
-export default function CustomerDetailsCard({ isActive }) {
+export default function CustomerDetailsCard({ isActive, vehicle }) {
 	return (
 		<div
 			className={`cursor-pointer bg-white py-[1.5rem] px-[1.75rem]  border border-[1px] border-[var(--grey100)]`}
@@ -14,16 +14,16 @@ export default function CustomerDetailsCard({ isActive }) {
 						<img src={ActiveCar} alt="Active cars" />
 					</div>
 					<div className="flex justify-between items-center mb-[0.75rem] border-b-[1px] border-grey-100 pb-4">
-						<h3> TESLA X</h3>
+						<h3>{vehicle?.VehicleName}</h3>
 
-						<h3>782 - IKD - LAG</h3>
+						<h3>{vehicle?.PlateNumber}</h3>
 					</div>
 
 					<div className="flex justify-between items-center mb-[0.75rem] ">
 						<h3 className="text-sm ">Money spent:</h3>
 
 						<h5 className="text-sm font-bold">
-							NGN 560,000,000.<sup>00</sup>
+							NGN {vehicle?.AmountSpent}.<sup>00</sup>
 						</h5>
 					</div>
 
@@ -31,7 +31,7 @@ export default function CustomerDetailsCard({ isActive }) {
 						<h3 className="text-sm ">Energy consumed:</h3>
 
 						<h5 className="text-sm font-bold">
-							560.00<sup>Kw</sup>
+							{vehicle?.EnergyConsumed}<sup>KWH</sup>
 						</h5>
 					</div>
 				</div>

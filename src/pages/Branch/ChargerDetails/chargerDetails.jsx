@@ -11,11 +11,15 @@ import Modal from "../../../components/modals/modal"
 import ChargerPower from "../../../components/modals/powerOffCharger"
 import PowerOnCharger from "../../../components/modals/powerOnCharger"
 import Loader from "../../../components/Loader";
+import { useNavigate } from "react-router";
+
 
 
 
 
 export default function Details() {
+  const Navigate = useNavigate();
+
     const [chargersDetails, setChargerDetails] = useState([]);
     const [PowerModal, setPModal] = useState(false)
     const [powerOn, setPowerOn] = useState(false)
@@ -24,6 +28,9 @@ export default function Details() {
     const [searchParams] = useSearchParams();
 
    
+    let stationId = searchParams.get("stationId");
+
+    let companyId = searchParams.get("companyId");
     let chargerId = searchParams.get("chargerId");
  //charger details
   const GetChargerDetails = () => {
@@ -60,7 +67,10 @@ export default function Details() {
         <div className="flex justify-between mb-[0.5rem]">
           <div className="flex justify-between ">
 
-            <h4 className="pr-[12px]">EV Chargers</h4>
+            <h4 className="pr-[12px] cursor-pointer" onClick={()=>{Navigate({
+               pathname: '/station/evChargers',
+               search: `?stationId=${stationId}&companyId=${companyId}`,
+            })}}>EV Chargers</h4>
 
             <img
               src={ForwardArrow}

@@ -59,6 +59,15 @@ const ChartOverview = ({id, newDate}) => {
 		
 	}, []);
 
+	useEffect(() => {
+		
+		getRevenueGraph();
+	
+		
+	}, [newDate]);
+
+
+
     return ( <section>
         <section className={`mb-[var(--marginBtwSection)] max-h-[257.5rem] mt-[24px]`}>
 			<div className="grid grid-cols-12 gap-4 h-[100%]">

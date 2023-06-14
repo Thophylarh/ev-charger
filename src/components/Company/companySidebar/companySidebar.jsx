@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Dshboard from "../../../assets/svg/dshboardA.svg";
 import DshboardB from "../../../assets/svg/dshboardb.svg";
 import Document from "../../../assets/svg/document.png";
@@ -6,12 +6,28 @@ import DocumentB from "../../../assets/svg/documentB.svg"
 import Sales from "../../../assets/svg/sales.svg";
 // import Arrow from "../../../assets/svg/arrow.svg";
 import { NavLink } from "react-router-dom";
+import axios from "../../../lib/axiosInterceptor";
 
 
 
 const CompanySidebar = () => {
+	
+	const [stations, setStations ] = useState()
+
 const id = localStorage.getItem("id")
+
+//station number 
+const StationDeatils = () =>{
+  axios.get("/Stations/get-station-by-company/" + id)
+      .then((res)=>{
+    console.log(res?.data?.length)
+    setStations(res?.data?.length)
+      })
+}
  
+useEffect(() => {
+  StationDeatils();
+}, []);
  
   return (
     <div>
@@ -65,8 +81,9 @@ const id = localStorage.getItem("id")
 
          isActive ?
           
-            <div className="flex items-center mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl" >
-              <div>
+            <div className="flex justify-between mx-4 my-8 text-white bg-[#101828] h-[2.5rem] w-[11rem] pl-[0.5rem] rounded-xl" >
+              <div className="flex items-center ">
+              <div >
                
                 <img className="w-[18px] h-[18px] mr-3" src={DocumentB} alt="" />
               </div>
@@ -75,9 +92,15 @@ const id = localStorage.getItem("id")
                 <p className="text-[#1DB954] text-sm">My stations</p>
                
               </div>
+              </div>
+
+              <div className="my-[8px] mx-[8px] text-[#111827]">
+              <div className="bg-[#1DB954] rounded-full w-[25px]  text-center">{stations}</div>
+              </div>
             </div>
             : 
-            <div className="flex items-center mx-4 my-8 text-white" >
+            <div className="flex justify-between items-center mx-4 my-8 text-white" >
+            <div className="flex items-center ">
             <div>
              
               <img className="w-[18px] h-[18px] mr-3" src={Document} alt="" /> 
@@ -87,6 +110,10 @@ const id = localStorage.getItem("id")
               <p className= "text-sm text-white">My stations</p>
              
             </div>
+            </div>
+             <div className="my-[8px] mx-[8px] text-white">
+             <div className="bg-[#111827] rounded-full w-[25px]  text-center">{stations}</div>
+             </div>
           </div>
         )}
             </NavLink>

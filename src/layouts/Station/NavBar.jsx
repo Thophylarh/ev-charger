@@ -70,7 +70,7 @@ export default function StationNavBar() {
 						>
 							<div
 								className={` ${
-									path === "/station/evChargers" ? activeLink : notActive
+									path === "/station/evChargers" || path === "/station/details" ? activeLink : notActive
 								}`}
 							>
 								{/* {path === "/station/evChargers" && (

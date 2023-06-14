@@ -17,6 +17,7 @@ export default function CustomerDetails() {
 	const [details, setDetails] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 	const [moneySpent, setMoneySpent] = useState("");
+	const [vehicles, setVehicles] = useState()
 
 	const [searchParams] = useSearchParams();
 
@@ -37,6 +38,7 @@ export default function CustomerDetails() {
 				setMoneySpent(res?.data?.customerDetails?.TotalAmountSpent);
 
 				setDetails(res?.data?.customerDetails);
+				setVehicles(res?.data?.vehicleDetails)
 				setTimeout(() => {
 					setIsLoading(false);
 				}, 2000);
@@ -192,7 +194,7 @@ export default function CustomerDetails() {
 						</section>
 
 						<section className={`mb-[var(--marginBtwSection)]`}>
-							{details?.vehicleDetails?.length > 1 && (
+							{/* {details?.vehicleDetails?.length > 1 && (
 								<div className="justify-end flex mb-2">
 									<NavLink
 										to={{
@@ -201,14 +203,37 @@ export default function CustomerDetails() {
 										}}
 									>
 										<button className="border-2  border-gray-400 text-sm p-[0.5rem] rounded-md text-[var(--grey700)]">
-											See all Vehcles
+											See all Vehicles
 										</button>
 									</NavLink>
 								</div>
-							)}
+							)} */}
 
 							<div className="bg-[var(--grey50)] p-[1.25rem] ">
-								{details?.vehicleDetails?.length > 1 ? (
+								{vehicles?.map((vehicle)=>(
+									<div className="grid grid-cols-3 gap-4">
+									<CustomerDetailsCard isActive={true} vehicle={vehicle}/>
+									{vehicles?.length === 1 && (
+									<>
+									
+											<CustomerDetailsCard isActive={false} />
+											<CustomerDetailsCard isActive={false} />
+										
+									</>
+								)}
+								{vehicles?.length === 2 && (
+									<>
+									
+											<CustomerDetailsCard isActive={false} />
+											
+										
+									</>
+								)}
+									</div>
+								))}
+
+							
+								{/* {details?.vehicleDetails?.length == 1 ? (
 									<>
 										<div className="grid grid-cols-3 gap-4">
 											<CustomerDetailsCard isActive={true} />
@@ -216,8 +241,8 @@ export default function CustomerDetails() {
 										</div>
 									</>
 								) : (
-									<CustomerDetailsCard isActive={false} />
-								)}
+									<CustomerDetailsCard isActive={true} />
+								)} */}
 							</div>
 						</section>
 

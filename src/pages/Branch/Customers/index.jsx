@@ -15,6 +15,8 @@ import Modal from "../../../components/modals/modal";
 import TransactionDetails from "../../../components/modals/transactionDetails";
 import Loader from "../../../components/Loader";
 
+import { useNavigate } from "react-router";
+
 import Highlighter from 'react-highlight-words';
 
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
@@ -39,6 +41,8 @@ export default function CustomerList() {
 	const [transactionIdd, setTransactionIdd] = useState();
 	const [isLoading, setIsLoading] = useState(false);
 
+	const Navigate = useNavigate();
+
 	const [filters, setFilters] = useState({
 		global: { value: null, matchMode: FilterMatchMode.CONTAINS },
 		
@@ -46,6 +50,13 @@ export default function CustomerList() {
 	const [globalFilterValue, setGlobalFilterValue] = useState('')
 
 	const tableRef = useRef();
+
+	const [sizeOptions] = useState([
+		{ label: "Small", value: "small" },
+		{ label: "Normal", value: "normal" },
+		{ label: "Large", value: "large" },
+	  ]);
+	  const [size, setSize] = useState(sizeOptions[0].value);
 
 	const id = localStorage.getItem("stationId");
 	const compId = localStorage.getItem("id");
@@ -115,14 +126,17 @@ export default function CustomerList() {
 
 	const header = renderHeader();
 
+
 	
 	
-	  const action = (chargerTransactions) =>{
+	  const action = (customers) =>{
 		return (<button
 						className="flex justify-between bg-black text-white p-[0.5rem] rounded-md"
 							onClick={(e) => {
-								setModal(true);
-							setTransactionIdd(chargerTransactions.transactionId);
+							Navigate({
+								pathname: '/station/customer/details',
+								search: `?cus=${customers.id}`
+							})
 							}}
 						>
 						<img src={eye} alt="" className="mt-[0.25rem] pr-[0.25rem]" />
@@ -354,12 +368,14 @@ export default function CustomerList() {
 									<DataTable
           value={customers}
           tableStyle={{ minWidth: "100%" }}
-		  stripedRows
-		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
-		  filters={filters} filterDisplay="row"
+		  
+		  paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} 
+		  removableSort
+		  size={size}
 		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
-		  globalFilterFields={['firstname', 'lastname', 'emailAddress', 'totalAmountSpent', 'totalEnergyCharged',]} header={header} emptyMessage="No transactions found.">
+		  globalFilterFields={['firstname', 'lastname', 'emailAddress', 'totalAmountSpent', 'totalEnergyCharged',]} header={header} emptyMessage="No customers found.">
 			
 			<Column field="index" header="#"  ></Column>
           {/* <Column field="dateOfTransaction"  header="Date"   sortable ></Column> */}
@@ -386,9 +402,10 @@ export default function CustomerList() {
 									<DataTable
           value={PAYG}
           tableStyle={{ minWidth: "100%" }}
-		  stripedRows
-		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
-		  filters={filters} filterDisplay="row"
+		  size={size}
+		  paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters} 
+		  removableSort
 		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
 		  globalFilterFields={['dateOfTransaction', 'chargerName', 'chargerType', 'totalAmount', 'totalUnitChargedInEnergy', 'transactionStatus']} header={header} emptyMessage="No transactions found.">

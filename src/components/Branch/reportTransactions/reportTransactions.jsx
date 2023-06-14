@@ -43,6 +43,13 @@ const ReportTransactions = ({ stationId, selectedDate }) => {
 
 	const tableRef = useRef();
 
+	const [sizeOptions] = useState([
+		{ label: "Small", value: "small" },
+		{ label: "Normal", value: "normal" },
+		{ label: "Large", value: "large" },
+	  ]);
+	  const [size, setSize] = useState(sizeOptions[0].value);
+
 	//api call
 
 	//all station transactions
@@ -296,9 +303,10 @@ const ReportTransactions = ({ stationId, selectedDate }) => {
 					<DataTable
           value={allTransactions}
           tableStyle={{ minWidth: "100%" }}
-		  stripedRows
-		  paginator rows={5} rowsPerPageOptions={[5, 10, 25, 50]}
-		  filters={filters} filterDisplay="row"
+		  size={size}
+		  removableSort
+		  paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]}
+		  filters={filters}
 		  paginatorTemplate="RowsPerPageDropdown FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink"
 		  currentPageReportTemplate="{first} to {last} of {totalRecords}" paginatorLeft={paginatorLeft} paginatorRight={paginatorRight}
 		  globalFilterFields={['dateOfTransaction', 'chargerName', 'ChargerType', 'totalUnitChargedInEnergy', 'status', 'totalAmount']} header={header} emptyMessage="No transactions found.">
