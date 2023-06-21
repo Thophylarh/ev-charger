@@ -137,7 +137,7 @@ const [globalFilterValue, setGlobalFilterValue] = useState('')
 
   const renderHeader = () => {
 	return (
-		<div className="flex justify-content-end">
+		<div className="flex justify-end">
 			<span className="p-input-icon-left">
 				<i className="pi pi-search" />
 				<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />

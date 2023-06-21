@@ -133,7 +133,7 @@ export default function Dashboardd() {
   const renderHeader = () => {
     return (
 		<>
-      <div className="flex  justify-content-end">
+      <div className="flex justify-end">
         <span className="p-input-icon-left">
           <i className="pi pi-search" />
           <InputText
@@ -143,11 +143,7 @@ export default function Dashboardd() {
           />
         </span>
       </div>
-	  {/* <div className="flex align-items-center justify-content-end gap-2">
-	  <Button type="button" icon="pi pi-file" rounded onClick={() => exportCSV(false)} data-pr-tooltip="CSV" />
-	  <Button type="button" icon="pi pi-file-excel" severity="success" rounded  data-pr-tooltip="XLS" />
-	  <Button type="button" icon="pi pi-file-pdf" severity="warning" rounded  data-pr-tooltip="PDF" />
-  </div> */}
+	
   </>
     );
   };

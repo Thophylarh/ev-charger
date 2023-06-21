@@ -129,10 +129,10 @@ export default function StationNavBar() {
 						>
 							<div
 								className={` ${
-									path === "/station/customers" ? activeLink : notActive
+									path === "/station/customers" || path === "/station/customer/details" ? activeLink : notActive
 								}`}
 							>
-								<p className="mr-[0.5rem] ">Customer </p>
+								<p className="mr-[0.5rem]">Customer </p>
 							</div>
 						</NavLink>
 

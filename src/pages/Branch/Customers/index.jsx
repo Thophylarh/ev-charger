@@ -115,7 +115,7 @@ export default function CustomerList() {
 	
 	  const renderHeader = () => {
 		return (
-			<div className="flex justify-content-end">
+			<div className="flex justify-end">
 				<span className="p-input-icon-left">
 					<i className="pi pi-search" />
 					<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -135,7 +135,7 @@ export default function CustomerList() {
 							onClick={(e) => {
 							Navigate({
 								pathname: '/station/customer/details',
-								search: `?cus=${customers.id}`
+								search: `?cus=${customers.id}&stationId=${id}&companyId=${compId}`
 							})
 							}}
 						>

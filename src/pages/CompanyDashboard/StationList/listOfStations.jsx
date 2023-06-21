@@ -17,11 +17,13 @@ import "primereact/resources/themes/lara-light-indigo/theme.css";
 import "primereact/resources/primereact.min.css";
 
 import { formatNumber } from "../../../utils/formatNumber";
+import Loader from "../../../components/Loader";
 
 
 const ListOfStations = () => {
     const Navigate = useNavigate();
     const [stations, setStations] = useState([])
+    const [loading, setLoading] = useState(false)
 
     const [sizeOptions] = useState([
       { label: "Small", value: "small" },
@@ -44,11 +46,15 @@ const ListOfStations = () => {
 
     //get stations under a company 
     const getData = ( ) =>{
+      setLoading(true)
         axios.get( "/Stations/get-station-by-company/" + companyId)
         .then((res)=>{
         //   console.log(res.data, "this is the data")
           setStations(res.data)
-          console.log(stations)
+          console.log(res.data)
+          setTimeout(() => {
+            setLoading(false);
+          }, 2000);
         })
       }
      
@@ -137,7 +143,14 @@ const ListOfStations = () => {
 
       const headers = renderHeader();
 
-    return ( <div className="py-[1.5rem] px-[1.5rem] ">
+    return ( 
+    <>
+    {loading && (
+      <Loader/>
+    )}
+
+    {!loading && (
+    <div className="py-[1.5rem] px-[1.5rem] ">
         <div className="flex justify-between items-center">
           <div>
             <h1 className="font-bold text-2xl leading-7 pb-[0.5rem]">My Stations</h1>
@@ -252,7 +265,9 @@ const ListOfStations = () => {
 
         
         
-    </div> );
+    </div>
+    )}
+    </> );
 }
  
 export default ListOfStations;

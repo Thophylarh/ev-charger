@@ -72,6 +72,13 @@ export default function StationAccordion({ station }) {
               </p>
             </div>
 
+            <div className={`flex items-center  justify-between `}>
+              <p className="text-sm text-[var(--grey600)] ">Directions:</p>
+              <button className="bg-black py-[8px] text-white rounded-lg px-[4px]">
+                Go to Maps
+              </button>
+            </div>
+
             <div className={`flex items-center  justify-between mb-3 `}>
               <p className="text-sm text-[var(--grey600)] ">Charger types:</p>
               <p className="text-sm text-[var(--grey600)] font-bold">
@@ -101,6 +108,9 @@ export default function StationAccordion({ station }) {
                 {chargerType?.length < 1 && "---"}
               </p>
             </div>
+
+           
+            
           </div>
         </div>
       </div>

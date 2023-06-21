@@ -77,7 +77,8 @@ const BarChart = ({month, BmsData, ACData, dcRevenue}) => {
 							borderDash: [8, 4],
 						},
 						ticks: {
-							stepSize: 5000,
+							// min: 0,
+							// stepSize: 100000,
 
 							autoSkip: false,
 							callback: function (value) {

@@ -1,18 +1,16 @@
 import React from "react";
-import { formatNumber } from "../../../utils/formatNumber";
 
-export default function CICEBilling({ openModal, price }) {
-	let green = price?.filter((el) => el.billingType.toLowerCase() === "green");
-	let utility = price?.filter(
-		(el) => el.billingType.toLowerCase() === "utility"
-	);
-	let grid = price?.filter((el) => el.billingType.toLowerCase() === "grid");
+
+export default function CICEBilling({ openModal  }) {
+
+
+	
 
 	return (
 		<div className={`mb-[var(--marginBtwElements)]`}>
 			<div>
-				<h3 className={`text-[var(--goldColor)] mb-[0.5rem]`}>
-					CICE PRICE/KWH SUMMARY
+				<h3 className={`text-[var(--primaryGreen500)] mb-[0.5rem]`}>
+					CICE PRICESUMMARY
 				</h3>
 			</div>
 			<div>
@@ -21,17 +19,13 @@ export default function CICEBilling({ openModal, price }) {
 						<h3>WHEN ON GRID</h3>
 
 						<h5>
-							NGN{" "}
-							{grid?.[0]?.costPerUnitCharge
-								? formatNumber(grid?.[0]?.costPerUnitCharge, false, 2)
-								: 0}
-							/KWH
+							200
 						</h5>
 
 						<button
 							className="text-[var(--blueLink)]"
 							onClick={(e) =>
-								openModal("CICE", "GRID", grid?.[0]?.costPerUnitCharge)
+								openModal("CICE", "GRID", 200)
 							}
 						>
 							{" "}
@@ -44,9 +38,7 @@ export default function CICEBilling({ openModal, price }) {
 
 						<h5>
 							NGN{" "}
-							{utility?.[0]?.costPerUnitCharge
-								? formatNumber(utility?.[0]?.costPerUnitCharge , false, 2)
-								: 0}
+							
 							/KWH
 						</h5>
 
@@ -56,7 +48,7 @@ export default function CICEBilling({ openModal, price }) {
 								openModal(
 									"CICE",
 									"UTILITY",
-									utility?.[0]?.costPerUnitCharge
+									200
 								)
 							}
 						>
@@ -70,20 +62,14 @@ export default function CICEBilling({ openModal, price }) {
 
 						<h5>
 							NGN{" "}
-							{green?.[0]?.costPerUnitCharge
-								? formatNumber(green?.[0]?.costPerUnitCharge, false, 2)
-								: 0}
+						
 							/KWH
 						</h5>
 
 						<button
 							className="text-[var(--blueLink)]"
 							onClick={(e) =>
-								openModal(
-									"CICE",
-									"GREEN",
-									green?.[0]?.costPerUnitCharge
-								)
+								openModal("CICE", "GREEN", 200)
 							}
 						>
 							{" "}

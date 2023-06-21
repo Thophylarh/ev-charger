@@ -111,12 +111,12 @@ const Profile = () => {
               className="w-[5.625rem] h-[5.625rem]"
             />
           </div>
-
+{/* 
           <img
             src={profileCamera}
             alt="change profile picture"
             className="mt-[4rem]"
-          />
+          /> */}
         </div>
       </section>
 

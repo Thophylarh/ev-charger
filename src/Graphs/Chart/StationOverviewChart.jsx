@@ -93,7 +93,7 @@ const BarChart = ({ details }) => {
 							borderDash: [8, 4],
 						},
 						ticks: {
-							stepSize: 20000,
+							// stepSize: 200000,
 
 							autoSkip: false,
 							callback: function (value) {

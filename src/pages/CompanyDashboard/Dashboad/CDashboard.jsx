@@ -21,6 +21,7 @@ import { chargerType } from "../../../utils/chargerType";
 import { formatNumber } from "../../../utils/formatNumber";
 import { convertTime } from "../../../utils/convertTime";
 import ExportFile from "../../../components/exportComponent/ExportFile";
+import Loader from "../../../components/Loader";
 
 const CompanyDashBoard = () => {
     const [searchParams] = useSearchParams();
@@ -33,6 +34,8 @@ const CompanyDashBoard = () => {
     const [newDate, setNewDate] = useState();
 
     const [stations, setStations] = useState([])
+
+    const [loading, setLoading] = useState(false)
 
     const id = searchParams.get("companyid")
 
@@ -64,7 +67,7 @@ const CompanyDashBoard = () => {
     const renderHeader = () => {
       return (
       <>
-        <div className="flex  justify-content-end">
+        <div className="flex justify-end">
           <span className="p-input-icon-left">
             <i className="pi pi-search" />
             <InputText
@@ -125,10 +128,14 @@ const CompanyDashBoard = () => {
     
 	//get company details
 	const getData = () => {
+    setLoading(true)
 		axios
 			.get("/Companies/get-company-by-id/" + id)
 			.then((res) => {
 				setName(res?.data?.companyName)
+        setTimeout(() => {
+          setLoading(false);
+        }, 2000);
 			});
 
             //get Station number 
@@ -143,6 +150,14 @@ const CompanyDashBoard = () => {
   const headers = renderHeader();
 
   return (
+    <>
+    {loading && (
+      <section>
+        <Loader/>
+      </section>
+    )}
+
+    {!loading && (
     <section>
     <section className="w-[95%] py-[1rem] mx-auto h-[100vh] overflow-y-scroll ">
       <section>
@@ -237,6 +252,8 @@ const CompanyDashBoard = () => {
     </section>
 
     </section>
+    )}
+    </>
   );
 };
 

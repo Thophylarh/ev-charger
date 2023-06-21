@@ -21,6 +21,7 @@ import "primereact/resources/primereact.min.css";
 import { formatNumber } from "../../../utils/formatNumber";
 import { formatDate } from "../../../utils/formatDate";
 import ExportFile from "../../../components/exportComponent/ExportFile";
+import Loader from "../../../components/Loader";
 
 const Report = () =>{
     const { RangePicker } = DatePicker;
@@ -28,6 +29,8 @@ const Report = () =>{
     const [Transactions, setCompanyTransactions] = useState([])
 
     const [selectedDate, setDate] = useState()
+
+    const [loading, setLoading] = useState(false)
     
     const [sizeOptions] = useState([
       { label: "Small", value: "small" },
@@ -59,7 +62,7 @@ const Report = () =>{
     const renderHeader = () => {
       return (
       <>
-        <div className="flex  justify-content-end">
+        <div className="flex justify-end">
           <span className="p-input-icon-left">
             <i className="pi pi-search" />
             <InputText
@@ -99,6 +102,8 @@ const Report = () =>{
 
 			url = `/Transactions/get-all-transactions-by-date/company/${id}/${selectedDate[0]}/${selectedDate[1]}`;
 		}
+
+    setLoading(true)
    
     axios.get(url)
     .then((res)=>{
@@ -112,6 +117,9 @@ const Report = () =>{
       
       console.log(res)
       setCompanyTransactions(res.data)
+      setTimeout(() => {
+        setLoading(false);
+      }, 2000);
     })
   }
 
@@ -163,6 +171,13 @@ const Report = () =>{
   const headers = renderHeader();
   return (
     <>
+    {loading && (
+      <Loader/>
+    )}
+
+    {!loading && (
+
+    
     <section className=" h-[100vh] overflow-y-scroll">
     <div className="flex justify-between m-4">
     <div>
@@ -262,6 +277,7 @@ const Report = () =>{
           
         </div>
         </section>
+        )}
     </>
     )
 }

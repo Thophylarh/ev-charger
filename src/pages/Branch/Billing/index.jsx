@@ -15,7 +15,7 @@ import { toast } from "react-toastify";
 import Loader from "../../../components/Loader";
 import { CSVLink } from "react-csv";
 import * as XLSX from "xlsx/xlsx.mjs";
-import ExportFile from "../../../components/exportComponent/ExportFile";
+import ExportFile from "../../../components/exportComponent/ExportFile"
 
 
 import { FilterMatchMode, FilterOperator } from 'primereact/api';
@@ -150,7 +150,7 @@ export default function StationBilling() {
 	
 	  const renderHeader = () => {
 		return (
-			<div className="flex justify-content-end">
+			<div className="flex justify-end">
 				<span className="p-input-icon-left">
 					<i className="pi pi-search" />
 					<InputText value={globalFilterValue} onChange={onGlobalFilterChange} placeholder="Keyword Search" />
@@ -180,66 +180,7 @@ export default function StationBilling() {
 	  const previous = (billingLog) =>{
 		return (<p>{formatNumber( billingLog.previousCostPerUnitCharge, true)}</p>)
 	  }
-	// let column = [
-	// 	{
-	// 		title: "#",
-	// 		dataIndex: "index",
-	// 		key: "index",
-	// 	},
-
-	// 	{
-	// 		title: "Updated By",
-	// 		dataIndex: "updatedBy",
-	// 		key: "updatedBy",
-	// 		render: (text, record) => {
-	// 			return record.updatedBy.emailAddress;
-	// 		},
-	// 	},
-
-	// 	{
-	// 		title: "Time updated",
-	// 		dataIndex: "createdAt",
-	// 		key: "createdAt",
-	// 		render: (text, record) => {
-	// 			return moment(record.createdAt).format("MMM DD, YYYY. h:mm A");
-	// 		},
-	// 	},
-
 	
-
-	// 	{
-	// 		title: "Charger Type",
-	// 		dataIndex: "chargerType",
-	// 		key: "chargerType",
-	// 		render: (text, record) => {
-	// 			return record.chargerType.toUpperCase();
-	// 		},
-	// 	},
-
-	// 	{
-	// 		title: "Billing Type",
-	// 		dataIndex: "billingType",
-	// 		key: "billingType",
-	// 	},
-
-	// 	{
-	// 		title: "Previous Price",
-	// 		dataIndex: "previousCostPerUnitCharge",
-	// 		key: "previousCostPerUnitCharge",
-	// 		render: (text, record) => {
-	// 			return formatNumber(record.previousCostPerUnitCharge, true);
-	// 		},
-	// 	},
-
-	// 	{
-	// 		title: " Price Change",
-	// 		dataIndex: "costPerUnitCharge",
-	// 		key: "costPerUnitCharge",
-	// 		render: (text, record) => {
-	// 			return formatNumber(record.costPerUnitCharge, true);
-	// 		},
-	// 	},
-	// ];
 
 	return (
 		<>
