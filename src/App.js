@@ -1,20 +1,275 @@
-import React from 'react';
-import Login from './components/Login/login'
-import Layout from './components/Layout/layout'
-import {Routes, Route, BrowserRouter} from "react-router-dom"
+import React from "react";
 
-import './App.css';
+import { Outlet, Routes, Route, BrowserRouter } from "react-router-dom";
+
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+//Authentication
+import SignUp from "./pages/Customer/signup/signup";
+import Login from "./pages/Authentication/Login/login";
+import ChangePassword from "./pages/Authentication/changePassword/changePassword";
+
+//Station
+import StationLayout from "./layouts/Station/StationLayout";
+import Dashboardd from "./pages/Branch/Dashboard/dashboard";
+import EvChargers from "./pages/Branch/EvChargers/evchargers";
+import StationBilling from "./pages/Branch/Billing";
+import CustomerList from "./pages/Branch/Customers";
+import CustomerDetails from "./pages/Branch/Customers/CustomerDetails";
+import Details from "./pages/Branch/ChargerDetails/chargerDetails";
+import ReportSales from "./pages/Branch/ReportSales/reportSales";
+import Camera from "./pages/Branch/LiveFeed/camera";
+
+//Company
+import Station from "./components/station/station";
+import ListOfStations from "./pages/CompanyDashboard/StationList/listOfStations";
+import CompanyDash from "./pages/CompanyDashboard/Dashboad/companyDash";
+import CompanySideBar from "./components/Company/companySidebar/companySidebar";
+import CompanyReport from "./pages/CompanyDashboard/Report/report";
+import Billing from "./pages/CompanyDashboard/companyBilling/Cbilling";
+
+//Components
+import ProtectedRoutes from "./routeGuard/ProtectedRoutes";
+import ProtectedCustomerRoutes from "./routeGuard/ProtectedCustomerRoutes";
+import AuthRoutes from "./routeGuard/AuthRoutes";
+import Sidebar from "./components/Sidebar/sidebar";
+
+//Customer
+import CarInfo from "./pages/Customer/carInformation/carInfo";
+import Wallet from "./pages/Customer/Wallet/wallet";
+import CusLogin from "./pages/Customer/customerLogin/CLogin";
+import CustomerDashboard from "./pages/Customer/Dashboard";
+import CustomerLayout from "./pages/Customer/masterlayout";
+import StationLocator from "./pages/Customer/StationLocator";
+import Vehicles from "./pages/Customer/vehicleDetails/vehicleDetails";
+import MyVehicles from "./pages/Customer/myVehicles/myVehicles";
+import Profile from "./pages/Customer/CustomerProfile";
+import AWallet from "./pages/Customer/Awallet/Awallet";
+import AddVehicle from "./pages/Customer/AddVehicle/index";
+import Success from "./pages/Customer/transactionStatus/success";
+import Failed from "./pages/Customer/transactionStatus/failed";
 
 function App() {
+
+ 
+
   return (
-    
-    <BrowserRouter>
-      <Routes>
-      <Route path="/layout" element={<Layout/>} />
-      <Route path="/" element={<Login/> } />
-      </Routes>
-    </BrowserRouter>
-    
+    <div>
+      <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <AuthRoutes>
+                <Login />
+              </AuthRoutes>
+            }
+          />
+
+          {/* PROTECTED ROUTES */}
+
+          {/* COMPANY ROUTES */}
+          <Route element={<LayoutsWithCompanyNavbar />}>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<CompanyDash />} path="/company" index />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<ListOfStations />} path="/company/myStations" />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              {" "}
+              <Route element={<CompanyReport />} path="/company/report" />{" "}
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<Billing />} path="/company/billing" />
+            </Route>
+          </Route>
+
+          {/* STATION ROUTES */}
+
+          <Route path="/station" element={<StationLayout />}>
+            <Route element={<ProtectedRoutes />}>
+              <Route element={<Dashboardd />} path="" />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="evChargers" element={<EvChargers />} />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="billing" element={<StationBilling />} />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="details" element={<Details />} />
+            </Route>
+            <Route element={<ProtectedRoutes />}>
+              <Route path="report" element={<ReportSales />} />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="customer/details" element={<CustomerDetails />} />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="customers" element={<CustomerList />} />
+            </Route>
+
+            <Route element={<ProtectedRoutes />}>
+              <Route path="camera" element={<Camera />} />
+            </Route>
+          </Route>
+
+          <Route path="/station" element={<Station />}></Route>
+          <Route
+            path="/changePassword"
+            element={
+              <AuthRoutes>
+                <ChangePassword />
+              </AuthRoutes>
+            }
+          ></Route>
+
+          {/* CUSTOMER ROUTES */}
+
+          <Route path="/reg/:phone" element={<SignUp />}></Route>
+          <Route path="/success" element={<Success/>}></Route>
+          <Route path="/failed" element={<Failed/>}></Route>
+          <Route path="/carInformation" element={<CarInfo />}></Route>
+          <Route path="/wallet" element={<Wallet/>}></Route>
+          <Route path="/Login" element={<CusLogin />}></Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/home"
+            element={
+              <CustomerLayout title="Dashboard">
+                <CustomerDashboard />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/station-locator"
+            element={
+              <CustomerLayout title="Station Locator">
+                <StationLocator />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+         
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/vehicleDetails"
+            element={
+              <CustomerLayout title="Vehicles">
+                <Vehicles />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/myVehicles"
+            element={
+              <CustomerLayout title="Vehicles">
+                <MyVehicles />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/profile"
+            element={
+              <CustomerLayout title="My Profile">
+                <Profile />
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/addVehicle"
+            element={
+              <CustomerLayout title="Add Vehicle">
+                <AddVehicle/>
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+          <Route element={<ProtectedCustomerRoutes />}>
+          <Route
+            path="/AWallet"
+            element={
+              <CustomerLayout title="My Wallet">
+                <AWallet/>
+              </CustomerLayout>
+            }
+          ></Route>
+          </Route>
+
+         
+          
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+}
+
+function LayoutsWithNavbar() {
+  return (
+    <div
+      className="flex flex-row bg-neutral-100 h- 
+    screen w-screen top-0 left-0 fixed "
+    >
+      <div
+        className="bg-black h-screen w-[15%]  left- 
+    0 top-0 "
+      >
+        <Sidebar />
+      </div>
+      <div
+        className="mx-2 h-screen w-[85%] overflow-y- 
+    scroll"
+      >
+        <Outlet />
+      </div>
+    </div>
+  );
+}
+
+function LayoutsWithCompanyNavbar() {
+  return (
+    <div
+      className="flex flex-row bg-neutral-100 h- 
+    screen w-screen top-0 left-0 fixed "
+    >
+      <div
+        className="bg-black h-screen w-[15%]  left- 
+    0 top-0 "
+      >
+        <CompanySideBar />
+      </div>
+      <div
+        className="mx-2 h-screen w-[85%] overflow-y- 
+    scroll"
+      >
+        <Outlet />
+      </div>
+    </div>
   );
 }
 

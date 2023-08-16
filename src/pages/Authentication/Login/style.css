@@ -1,0 +1,26 @@
+.input-icons  {
+    position: absolute;
+    margin-bottom: 10px;
+}
+  
+
+  
+.icon {
+    position: absolute;
+    padding: 20px 10px ;
+    min-width: 40px;
+   
+    
+    
+}
+  
+.input-field {
+    text-align: left;
+    padding-left: 50px;
+  
+}
+
+.stationCharge{
+    background-image: url("../../../assets/svg/rings.svg");
+    background-size: 40rem;
+}
