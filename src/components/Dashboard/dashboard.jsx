@@ -20,6 +20,7 @@ const index = () => {
         </div>
         <p className="text-gray-400 font-thin font-sm pb-2">Explore your station dashboard here</p>
         <div>
+
          <Hero/>
         </div>
         <ChargerStat/>
